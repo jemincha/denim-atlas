@@ -4,7 +4,7 @@
 
 사진 속 데님의 색·톤·페이딩·워싱·실루엣을 기준으로, 다른 상품에서도 비슷한 외관을 찾는 모델을 연구합니다.
 
-**Status — October 23, 2026:** remote model execution is verified; real-data fine-tuning and retrieval evaluation have not started. The recorded results establish an executable research setup, not improved denim retrieval quality.
+**Status — October 24, 2026:** remote model execution and a locally tested fixed-pool evaluator are ready; real-data fine-tuning and retrieval evaluation have not started. The recorded results establish an executable research setup, not improved denim retrieval quality.
 
 ## From the original idea to this study
 
@@ -62,7 +62,7 @@ The final trainable-layer scope, ranking objective, batch size and augmentations
 - Planned primary metric: nDCG@5, gain `2^grade - 1`. Report per-query results, paired uncertainty by independent groups and seed sensitivity where compute permits.
 - Analyze errors by color, fading, silhouette, viewpoint and background. Fixed-pool results do not establish full-catalog retrieval quality.
 
-These are experiment requirements, not completed experiments. The earlier evaluation CLI is missing from the recovered tree and must be restored or reimplemented before real evaluation.
+These are experiment requirements, not completed experiments. A new [fixed-pool evaluator and benchmark contract](docs/EVALUATION.md) now implement nDCG@5, strict candidate validation and product/duplicate/original-image split checks. Human labels and real baseline rankings are still pending.
 
 ## Model selection and acquisition
 
@@ -95,6 +95,7 @@ These checks ran on Kaggle. Evidence JSON was recovered from saved outputs; mode
 | Backward memory | 2.166 GiB peak allocated memory; batch 2, FP32 parameters, FP16 autocast and GradScaler | [Backward report](docs/verification/backward_check_20261023.json) |
 | Checkpoint handling | Saved/reloaded visual weights, optimizer, scaler and Torch RNG in the same kernel; a modified parameter and learning rate were restored | [Backward report](docs/verification/backward_check_20261023.json) |
 | Local importer | Five fixture-based tests passed | [Tests](tests/test_deepfashion2.py) |
+| Local evaluator | Twelve tests passed, including hand-computed metrics, split leakage and CLI output protection | [Tests](tests/test_evaluate.py) |
 
 The model inputs were two synthetic solid-color images. These checks establish execution and gradients only. Peak allocated memory excludes non-PyTorch allocations and does not determine a safe real-data batch size. The checkpoint test does not establish deterministic resumption after an interrupted job. Two GPUs do not provide one pooled VRAM space.
 
@@ -132,11 +133,13 @@ See [the next remote data run](docs/NEXT_DATA_RUN.md). Private images, access pa
 
 ### Lightweight local checks
 
-The importer tests use Python's standard library. The checked local runtime is Python 3.12; a fresh-environment installation has not been validated.
+Importer and evaluation tests use Python's standard library. The checked local runtime is Python 3.12; a fresh-environment installation has not been validated.
 
 ```sh
 python -m unittest discover -s tests -v
 ```
+
+For real judgments and method rankings, use `python scripts/evaluate.py --benchmark benchmark.json --rankings b0-rankings.json --output b0-report.json`. See [input formats, rubric and metric limits](docs/EVALUATION.md). No GPU or external dependencies are needed for evaluation.
 
 ### Remote GPU checks
 
@@ -165,7 +168,8 @@ After authorized DeepFashion2 acquisition and usage-scope review, run [prepare_d
 - [ ] Verify dataset access, image-use scope and usable denim photographs.
 - [ ] Confirm denim/crops, review product/duplicate groups and freeze research splits.
 - [ ] Collect cross-product relevance judgments, with independent subset review where feasible.
-- [ ] Restore/implement evaluation, run frozen baselines and inspect failures.
+- [x] Implement fixed-pool evaluation and split-leakage tests.
+- [ ] Run frozen baselines on real judgments and inspect failures.
 - [ ] Choose the adaptation recipe and complete a real denim fine-tuning run.
 - [ ] Compare on held-out groups, quantify uncertainty and document failure cases.
 - [ ] Package permitted artifacts, environment specifications and a reproducible report.
@@ -177,16 +181,17 @@ Technical completion requires actual adaptation, a reproducible checkpoint/infer
 ```text
 scripts/                  Remote execution checks and metadata preparation
 notebooks/                Notebooks reconstructed from saved rendered code
-tests/                    Local annotation-parser fixture tests
+tests/                    Local annotation-parser and evaluation tests
 docs/verification/        Recorded environment and metadata-audit JSON
 docs/NEXT_DATA_RUN.md      Next data-processing procedure
+docs/EVALUATION.md         Benchmark schema, judgment rubric and evaluator
 docs/RECOVERY.md           Recovery scope and source versions
 PROJECT_STATE.md          Current working status
 ```
 
 The original local workspace became empty for an unknown reason. Core scripts and recorded results were partially recovered from private Kaggle versions. Notebooks were reconstructed from displayed code and deliberately have empty execution counts/outputs; recorded measurements are separate JSON files.
 
-Earlier planning documents, the evaluation CLI and a legacy application PoC are missing from this tree. This repository does not claim to contain or have retested those components. See [recovery provenance](docs/RECOVERY.md) for source versions and limits, and [project state](PROJECT_STATE.md) for current work.
+Earlier planning documents, the original evaluation CLI and a legacy application PoC were not recovered. The current evaluator is a new implementation with its own tests. This repository does not claim to contain or have retested the missing components. See [recovery provenance](docs/RECOVERY.md) for source versions and limits, and [project state](PROJECT_STATE.md) for current work.
 
 ## References
 

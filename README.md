@@ -4,7 +4,7 @@
 
 사진 속 데님의 색·톤·페이딩·워싱·실루엣을 기준으로, 다른 상품에서도 비슷한 외관을 찾는 모델을 연구합니다.
 
-**Status — October 24, 2026:** remote model execution and a locally tested fixed-pool evaluator are ready; real-data fine-tuning and retrieval evaluation have not started. The recorded results establish an executable research setup, not improved denim retrieval quality.
+**Status — October 24, 2026:** remote model execution is verified; fixed-pool evaluation and B0/B1 ranking pass local synthetic tests. A pinned remote feature extractor is prepared but not yet run. Real-data fine-tuning and retrieval evaluation have not started.
 
 ## From the original idea to this study
 
@@ -48,7 +48,7 @@ flowchart LR
 |---|---|---|
 | Generic `timm/ViT-B-16-SigLIP` (224) | General-purpose comparator | Selected; not executed |
 | B0: frozen Marqo fashionSigLIP | Main starting checkpoint | Synthetic inference verified; denim ranking untested |
-| B1: B0 plus color reranking | Test whether a simple color signal explains gains | Planned |
+| B1: B0 plus color reranking | Test whether a simple color signal explains gains | Mean-RGB control implemented; synthetic ranking tests only |
 | FT: image-encoder fine-tuning from B0 | Main adaptation experiment | Planned; no denim training run |
 
 The final trainable-layer scope, ranking objective, batch size and augmentations will be chosen after inspecting real data and baseline errors. Training only a new projection head would be reported as head adaptation, not image-encoder fine-tuning. The current synthetic loss is only a gradient check.
@@ -96,6 +96,7 @@ These checks ran on Kaggle. Evidence JSON was recovered from saved outputs; mode
 | Checkpoint handling | Saved/reloaded visual weights, optimizer, scaler and Torch RNG in the same kernel; a modified parameter and learning rate were restored | [Backward report](docs/verification/backward_check_20261023.json) |
 | Local importer | Five fixture-based tests passed | [Tests](tests/test_deepfashion2.py) |
 | Local evaluator | Twelve tests passed, including hand-computed metrics, split leakage and CLI output protection | [Tests](tests/test_evaluate.py) |
+| Local B0/B1 pipeline | Six tests passed: scoring, grade-independent ordering, crop checks, RGB statistics and CLI-to-evaluation flow | [Tests](tests/test_baselines.py) |
 
 The model inputs were two synthetic solid-color images. These checks establish execution and gradients only. Peak allocated memory excludes non-PyTorch allocations and does not determine a safe real-data batch size. The checkpoint test does not establish deterministic resumption after an interrupted job. Two GPUs do not provide one pooled VRAM space.
 
@@ -133,13 +134,15 @@ See [the next remote data run](docs/NEXT_DATA_RUN.md). Private images, access pa
 
 ### Lightweight local checks
 
-Importer and evaluation tests use Python's standard library. The checked local runtime is Python 3.12; a fresh-environment installation has not been validated.
+Importer, evaluation and ranking tests use Python's standard library. One optional image-statistics test uses Pillow and is skipped if unavailable (it passed locally with Pillow 11.0.0). The checked local runtime is Python 3.12; a fresh-environment installation has not been validated.
 
 ```sh
 python -m unittest discover -s tests -v
 ```
 
 For real judgments and method rankings, use `python scripts/evaluate.py --benchmark benchmark.json --rankings b0-rankings.json --output b0-report.json`. See [input formats, rubric and metric limits](docs/EVALUATION.md). No GPU or external dependencies are needed for evaluation.
+
+The [B0/B1 runbook](docs/BASELINES.md) connects reviewed crops → remote frozen features → deterministic rankings → evaluator reports. `scripts/extract_features.py` pins the verified Marqo revision and weight checksum; it has not yet been executed on remote CUDA. `scripts/run_baselines.py` computes cosine B0 and a weighted mean-RGB B1 control from feature JSON. Choose the color weight on validation only, then freeze it before test evaluation. No real images or retrieval results are bundled.
 
 ### Remote GPU checks
 
@@ -169,6 +172,8 @@ After authorized DeepFashion2 acquisition and usage-scope review, run [prepare_d
 - [ ] Confirm denim/crops, review product/duplicate groups and freeze research splits.
 - [ ] Collect cross-product relevance judgments, with independent subset review where feasible.
 - [x] Implement fixed-pool evaluation and split-leakage tests.
+- [x] Implement B0/B1 scoring and test the ranking-to-evaluation flow with synthetic vectors.
+- [ ] Execute the new frozen-feature extractor on remote CUDA with reviewed images.
 - [ ] Run frozen baselines on real judgments and inspect failures.
 - [ ] Choose the adaptation recipe and complete a real denim fine-tuning run.
 - [ ] Compare on held-out groups, quantify uncertainty and document failure cases.
@@ -185,6 +190,7 @@ tests/                    Local annotation-parser and evaluation tests
 docs/verification/        Recorded environment and metadata-audit JSON
 docs/NEXT_DATA_RUN.md      Next data-processing procedure
 docs/EVALUATION.md         Benchmark schema, judgment rubric and evaluator
+docs/BASELINES.md          Reviewed-crop extraction and B0/B1 runbook
 docs/RECOVERY.md           Recovery scope and source versions
 PROJECT_STATE.md          Current working status
 ```

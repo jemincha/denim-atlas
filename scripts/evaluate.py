@@ -60,7 +60,7 @@ def ndcg_at_5(grades):
     return dcg(grades) / ideal if ideal else None
 
 
-def evaluate(benchmark, rankings):
+def validate_benchmark(benchmark):
     if (not isinstance(benchmark, dict) or type(benchmark.get('schema_version')) is not int
             or benchmark['schema_version'] != 1):
         raise ValueError('Expected benchmark schema_version 1')
@@ -68,8 +68,6 @@ def evaluate(benchmark, rankings):
     pools = benchmark.get('pools')
     if not isinstance(pools, list) or not pools:
         raise ValueError('pools must be a nonempty list')
-    if not isinstance(rankings, dict):
-        raise ValueError('Rankings must map query IDs to full candidate permutations')
     judgments = {}
     for pool in pools:
         if not isinstance(pool, dict):
@@ -101,6 +99,13 @@ def evaluate(benchmark, rankings):
                 raise ValueError('Query and candidate must belong to the same research split')
             grades[candidate_id] = grade
         judgments[query_id] = grades
+    return assets, judgments
+
+
+def evaluate(benchmark, rankings):
+    assets, judgments = validate_benchmark(benchmark)
+    if not isinstance(rankings, dict):
+        raise ValueError('Rankings must map query IDs to full candidate permutations')
     if set(rankings) != set(judgments):
         raise ValueError('Ranking query set must exactly match the benchmark')
     results = []

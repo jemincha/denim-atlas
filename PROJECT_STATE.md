@@ -8,5 +8,7 @@
 - Recovered from saved Kaggle rendered code: four Python scripts, two reconstructed notebooks and four exact parsed JSON reports. This is a partial recovery. Previous evaluator, tests, original planning documents and legacy PoC have not been recovered.
 - Next: prepare/test annotation import while waiting for dataset access, then inspect real trousers/jeans, crop and group before constructing judgment pools. Model execution stays remote.
 - Prepared scripts/prepare_deepfashion2.py and docs/NEXT_DATA_RUN.md. Five local fixture tests pass; no actual DeepFashion2 annotations have been processed. Source pair/style grouping is conservative screening metadata, not appearance relevance or verified identity.
-- The user's supplied Gmail link was opened and identified as Kaggle `New Badge Received` / Python Coder badge, not a dataset-access message. A direct Gmail `DeepFashion2` search showed no matching mail. Do not equate a badge email with dataset approval.
-- No images, weights, passwords, personal address or signatures belong in Git. No GitHub publication or external contact has been performed.
+- Dataset-access mail is still unverified; a Kaggle notification is not evidence of dataset approval.
+- GitHub destination: https://github.com/jemincha/denim-atlas (private, as requested). Its remote commit history is the authoritative publication record. No dataset-maintainer contact has been sent.
+- README now documents the original concept, scope decisions, research design, model acquisition, measured checks, data limits, reproducibility and remaining milestones.
+- No private images, weights, passwords, personal addresses or signatures belong in Git.

@@ -1,0 +1,13 @@
+__pycache__/
+*.pyc
+.venv/
+.code-review-graph/
+data/private/
+data/references/
+runs/
+checkpoints/
+.env
+*.pt
+*.pth
+*.safetensors
+*.zip

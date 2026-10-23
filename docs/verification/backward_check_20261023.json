@@ -1,0 +1,23 @@
+{
+  "recorded_at_utc": "2026-10-23T07:00:36.971083+00:00",
+  "revision": "c56244cc94f92419e8369fa71efdaf403b124ce8",
+  "device": "Tesla T4",
+  "batch_shape": [
+    2,
+    3,
+    224,
+    224
+  ],
+  "precision": "fp32 parameters, fp16 autocast and GradScaler",
+  "trainable_parameters": 92884224,
+  "synthetic_loss": 0.00003659361391328275,
+  "step_seconds": 0.679518078000001,
+  "peak_allocated_gib": 2.165898323059082,
+  "backward_verified": true,
+  "checkpoint_roundtrip_verified": true,
+  "checkpoint_bytes": 1114843358,
+  "checkpoint": "denim_synthetic_smoke_20261023T070035140709Z.pt",
+  "resume_scope": "same-kernel visual weights, AdamW, scaler, torch RNG; not interrupted-job determinism",
+  "denim_training_run": false,
+  "denim_quality_evaluated": false
+}

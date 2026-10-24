@@ -4,15 +4,15 @@
 
 사진 속 데님의 색·톤·페이딩·워싱·실루엣을 비교하는 작은 ML 연구 과제입니다. 개인 취향, 원래 원단 색 복원, 모바일 앱은 현재 범위에 포함하지 않습니다.
 
-## Current snapshot — October 24, 2026
+## Current snapshot — October 25, 2026
 
 | Area | Verified state |
 |---|---|
 | Model / compute | Marqo fashionSigLIP inference, synthetic backward and checkpoint checks passed on Kaggle T4 |
 | Evaluation | Fixed-pool nDCG@5, strict candidate validation and product/duplicate/image split checks implemented |
 | Baselines | Cosine B0 and mean-RGB control B1 implemented; ranking-to-evaluation CLI tested on synthetic vectors |
-| Local tests | 23 passed on Python 3.12; one optional Pillow test also passed |
-| Data | DeepFashion2 form submitted; access mail unverified. Fashionpedia audit is metadata only |
+| Local tests | 26 passed on Python 3.12, including acquisition screening; optional Pillow check also passed |
+| Data | 900 screening images verified on Kaggle: ABO 600 + GLAMI 300; visual review/labels pending. DeepFashion application sent; DeepFashion2 access still unverified |
 | Real retrieval results / fine-tuning | **Not run** |
 
 The checks establish software execution, not useful denim retrieval or an improvement from fine-tuning. The new reviewed-crop CUDA extractor is prepared but has not yet run remotely.
@@ -42,6 +42,7 @@ Obtain usage-permitted real images, confirm denim/crops and groups, freeze split
 - [Benchmark schema, human-judgment rubric and evaluation](docs/EVALUATION.md)
 - [Remote feature extraction and B0/B1 runbook](docs/BASELINES.md)
 - [Dataset access checks and contingency](docs/DATA_ACCESS.md)
+- [Alternative datasets: acquisition and application record](docs/DATASET_SEARCH.md)
 - [Next DeepFashion2 import](docs/NEXT_DATA_RUN.md)
 - [External-feedback audit: addressed and outstanding](docs/FEEDBACK_AUDIT.md)
 - [Current project state](PROJECT_STATE.md) · [Recovery provenance](docs/RECOVERY.md)

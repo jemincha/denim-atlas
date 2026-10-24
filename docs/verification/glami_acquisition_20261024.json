@@ -1,0 +1,14 @@
+{
+  "complete": true,
+  "source": "https://huggingface.co/datasets/glami/glami-1m/",
+  "revision": "befda45d8d4e8b8082bb8a1912d1f9eb9483991c",
+  "license": "apache-2.0 (official dataset card)",
+  "candidate_rows": 7276,
+  "downloaded_verified_images": 300,
+  "image_bytes": 2494479,
+  "output": "/kaggle/working/glami_jeans_20261024T150212Z",
+  "confirmed_denim": 0,
+  "training_ready": 0,
+  "selection": "First 300 unique IDs: pants category plus jeans/denim in title or description; screening only",
+  "notes": "Range reads from official ZIP; no complete-archive checksum claim. Source splits are not research splits."
+}

@@ -1,0 +1,24 @@
+{
+  "complete": true,
+  "source": "https://amazon-berkeley-objects.s3.amazonaws.com/index.html",
+  "license": "CC-BY-4.0",
+  "source_sha256": {
+    "LICENSE-CC-BY-4.0.txt": "419896aea50c15d6e40c5b4baf4bd346f78223b9a354c7357ad00262afdc08ec",
+    "README.md": "3f42e33f6636704b5670b6a198b0403b2f885cebe459d9620f84e7323a61bc71",
+    "listings/README.md": "2a1c8c84dbe2e4f419db28be538fc353f22bff3540cbd48fc534497d74b12193",
+    "images/README.md": "343b342427abca798202af0a6fa583bce33f022847026e7ada48978d109687a5",
+    "archives/abo-listings.tar": "b7f7ceacb328fa5ab6e143b88e1f948443a877cfc95b67ff09c8ebabd50644e3",
+    "images/metadata/images.csv.gz": "915263ef354d7a5d3503e899e610082f510c0011cccd5b4dc4f4c5efa86ef539"
+  },
+  "listing_count": 147702,
+  "candidate_listing_count": 589,
+  "candidate_unique_images": 875,
+  "attempted_images": 600,
+  "downloaded_verified_images": 600,
+  "failed_images": 0,
+  "image_bytes": 133060612,
+  "confirmed_denim": 0,
+  "training_ready": 0,
+  "output": "/kaggle/working/abo_jeans_20261024T141251Z",
+  "notes": "Title-screened pilot only. No crops, relevance labels or research splits inferred."
+}

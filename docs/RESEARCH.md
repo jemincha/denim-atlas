@@ -1,5 +1,7 @@
 # Denim Atlas
 
+Detailed setup narrative recorded October 24, 2026. See the [current README](../README.md) and [dataset acquisition record](DATASET_SEARCH.md) for subsequent real-image acquisition and application status. Older data-availability statements below describe the setup stage, not the current inventory.
+
 **Fine-tuning a vision encoder for visible denim appearance similarity across different products.**
 
 사진 속 데님의 색·톤·페이딩·워싱·실루엣을 기준으로, 다른 상품에서도 비슷한 외관을 찾는 모델을 연구합니다.

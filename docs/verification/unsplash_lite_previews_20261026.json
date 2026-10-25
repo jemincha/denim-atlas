@@ -1,0 +1,18 @@
+{
+  "complete": true,
+  "preview_images": 24,
+  "preview_bytes": 2163607,
+  "selection": "first 24 by SHA256(photo_id), from 293 textual candidates",
+  "visual_review": "Codex reviewed all 24 thumbnails",
+  "training_ready": 0,
+  "crop_review_candidate_indices": [
+    8,
+    12,
+    14,
+    15,
+    16,
+    20
+  ],
+  "independent_products_verified": false,
+  "human_relevance_labels": 0
+}

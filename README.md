@@ -4,17 +4,22 @@
 
 사진 속 데님의 색·톤·페이딩·워싱·실루엣을 비교하는 작은 ML 연구 과제입니다. 개인 취향, 원래 원단 색 복원, 모바일 앱은 현재 범위에 포함하지 않습니다.
 
-## Current snapshot — October 25, 2026
+## Current snapshot — October 26, 2026
 
 | Area | Verified state |
 |---|---|
 | Model / compute | Marqo fashionSigLIP inference, synthetic backward and checkpoint checks passed on Kaggle T4 |
 | Evaluation | Fixed-pool nDCG@5, strict candidate validation and product/duplicate/image split checks implemented |
 | Baselines | Cosine B0 and mean-RGB control B1 implemented; ranking-to-evaluation CLI tested on synthetic vectors |
-| Local tests | 28 passed on Python 3.12, including audit hashes, duplicate detection and path boundaries |
+| Local tests | 32 passed on Python 3.12, including audit hashes, license/URL screening and numbered TSV joins |
 | Data | 900 images audited and thumbnail-inspected; ABO 600 excluded as unsuitable. GLAMI 24 clear denim crops visually reviewed by Codex; remaining crop/group review pending |
 | Real-image execution | 24 reviewed GLAMI crops encoded on T4; 768-D features and exploratory B0/B1 neighbor boards saved |
 | Research quality / fine-tuning | **Not measured / not run**; human judgments and independent product groups pending |
+
+Wearing-photo supply follow-up: a bounded Commons pilot acquired 24 attributed
+CC0/CC BY previews. A user-authorized Unsplash Lite audit processed 25,000 photo
+records, found 293 text candidates and privately inspected 24 previews on Kaggle.
+Neither new pilot is training-ready. See [wearing-photo evidence and limits](docs/WEARING_DATA_PILOT.md).
 
 The frozen extractor now runs on real denim. A 24-image exploratory pool establishes execution, not retrieval quality or an improvement from fine-tuning. DeepFashion applications remain separate access requests.
 

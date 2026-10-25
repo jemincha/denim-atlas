@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "complete": true,
+  "keyword_rows": 909055,
+  "photo_rows": 25000,
+  "keyword_matched_photos": 260,
+  "description_matched_photos": 60,
+  "candidate_photos": 293,
+  "archive_bytes": 320024071,
+  "archive_sha256": "aa0fcb859040ed64e93817d1d878d0c6f861763283261ba1a6aa5d8d4af6aec6",
+  "packaged_terms_sha256": "79bec96fe07431e1c40efcdf9f9753da24338a3cb97d7d22ac29dc830e3e2437",
+  "images_downloaded": 0,
+  "confirmed_denim": 0,
+  "training_ready": 0,
+  "selection": "jeans or denim as whole word in keywords, human description or AI description",
+  "notes": "Metadata matches only. No wearing-photo confirmation, rights transfer, model run, relevance grades or research split."
+}

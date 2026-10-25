@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "prepared_not_executed": true,
+  "purpose": "calibration_only",
+  "assets": 27,
+  "queries": 3,
+  "candidates": 24,
+  "label_trials": 75,
+  "zip_bytes": 2814046,
+  "zip_sha256": "5b64231975691b7537a18f64e8e325a7d5e25032e546a2065d17bcb7e647a626",
+  "packet_sha256": "f86b115742cf551db99c3cf54318747238d5dfda5fa29c3e631f8380df4b267e",
+  "new_dependencies_installed_locally": false,
+  "cuda_execution_pending": true
+}

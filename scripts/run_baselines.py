@@ -21,12 +21,21 @@ def vector(value, length=None):
 
 
 def rank_baselines(benchmark, features, color_weight):
+    # The research CLI retains all reviewed-group and complete-label checks.
+    _, judgments = validate_benchmark(benchmark)
+    return rank_pools({q:list(grades) for q,grades in judgments.items()}, features, color_weight)
+
+
+def rank_pools(original, features, color_weight):
+    """Grade-independent scoring shared with explicitly non-benchmark calibration."""
+    if (not isinstance(original, dict) or not original or any(
+            not isinstance(q, str) or not q or not isinstance(pool, list) or not pool
+            or any(not isinstance(c,str) or not c for c in pool)
+            or len(set(pool)) != len(pool) or q in pool for q,pool in original.items())):
+        raise ValueError('Expected nonempty unique candidate pools without self matches')
     if (type(color_weight) not in {int, float} or not math.isfinite(color_weight)
             or not 0 <= color_weight <= 1):
         raise ValueError('color_weight must be finite in [0, 1]')
-    # Validate pools and groups before scoring, without using grades to choose ranks.
-    _, judgments = validate_benchmark(benchmark)
-    original = {query_id: list(grades) for query_id, grades in judgments.items()}
     if (not isinstance(features, dict) or type(features.get('schema_version')) is not int
             or features['schema_version'] != 1):
         raise ValueError('Expected feature schema_version 1')

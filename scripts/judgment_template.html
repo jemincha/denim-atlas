@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="ko"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Denim Atlas · 1차 유사도 판정</title>
+<style>
+*{box-sizing:border-box}body{font:17px/1.55 system-ui,sans-serif;color:#172333;background:#f3f5f6;margin:0}main{max-width:1040px;margin:auto;padding:22px}h1{font-size:24px;margin:0 0 8px}p{margin:8px 0}.muted{color:#526276;font-size:14px}.pair{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:14px 0}figure{margin:0;background:white;border:1px solid #d8dfe6;border-radius:10px;padding:12px}figcaption{font-weight:700}img{display:block;width:100%;height:390px;object-fit:contain;margin-top:8px}button,select{font:inherit;padding:12px;border:1px solid #9aa8b9;border-radius:7px;background:white;color:#172333;cursor:pointer}button:focus-visible,select:focus-visible{outline:3px solid #e8a000;outline-offset:2px}button[aria-pressed=true]{background:#173f72;color:white;border-color:#173f72}.grades{display:flex;gap:8px;flex-wrap:wrap}.grades button{flex:1;min-width:135px}nav{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:14px}button:disabled{opacity:.45;cursor:default}progress{width:100%;height:12px}details{margin-top:16px}#status{min-height:26px;color:#154f2c}#why{width:100%;margin:12px 0}a{color:#174b86}.credit{font-size:12px;overflow-wrap:anywhere}@media(max-width:600px){main{padding:12px}.pair{gap:8px}figure{padding:8px}img{height:270px}.grades button{min-width:100px}h1{font-size:21px}}
+</style>
+<main>
+<h1>청바지 유사도 · 1차 판정</h1>
+<p>왼쪽 사진의 <b>보이는 바지</b>와 오른쪽 상품이 얼마나 비슷한지 골라줘.</p>
+<p class="muted">색·톤, 워싱·페이딩, 보이는 실루엣을 함께 판단. 취향·브랜드·배경은 제외하고 안 보이는 부분은 추측하지 않기. 모델 순위는 표시하지 않아.</p>
+<p class="muted">첫 회는 판정 기준을 맞추는 자료야. 일부 반복 문항이 포함돼. 최종 성능평가 결과로 사용하지 않아.</p>
+<label for="jump">문항</label> <select id="jump"></select> <span id="count"></span>
+<progress id="progress" value="0"></progress>
+<div class="pair"><figure><figcaption id="qlabel"></figcaption><img id="query" alt="비교 기준인 착용 사진의 바지 영역"><p id="note" class="muted"></p></figure><figure><figcaption>비교할 상품</figcaption><img id="candidate" alt="비교 대상 상품의 바지 영역"></figure></div>
+<div class="grades" aria-label="유사도 점수"><button data-grade="0">0 · 매우 다름</button><button data-grade="1">1 · 일부 비슷함</button><button data-grade="2">2 · 꽤 비슷함</button><button data-grade="3">3 · 매우 비슷함</button><button data-grade="U">판단 불가</button></div>
+<label for="why" class="muted">판단 불가 사유 / 관찰 메모</label>
+<select id="why"><option value="">없음</option><option value="silhouette_unobservable">실루엣이 잘 안 보임</option><option value="occlusion_or_crop">가림·잘림 때문에 어려움</option><option value="color_or_detail_uncertain">색·워싱 디테일을 읽기 어려움</option><option value="target_ambiguous">어느 바지를 봐야 할지 모호함</option></select>
+<p id="status" role="status" aria-live="polite"></p>
+<nav><button id="prev">이전</button><button id="next">다음</button><button id="unrated">미판정으로 이동</button><button id="export">판정 JSON 저장</button></nav>
+<p class="muted">점수를 누른 뒤 ‘다음’으로 이동해. 같은 브라우저에서는 임시 저장되고, 중간에도 JSON을 저장할 수 있어. 완료 후 JSON 파일을 이 채팅에 보내줘. 0–3 / U, ← → 키도 사용 가능.</p>
+<details><summary>사진 출처·사용 범위</summary><div id="credits" class="credit"></div><p class="muted">비공개 연구용 판정 자료. 원본·크롭·판정지는 공개 저장소에 올리지 않음. 크롭은 사각형 바지 영역이며 배경·신발 등 일부가 남아 있을 수 있음. 색 보정하지 않음.</p></details>
+</main>
+<script>
+const packet=__PACKET_DATA__;
+const key='denim-judgments-'+packet.packet_sha256;
+let index=0,answers={};
+const $=id=>document.getElementById(id),buttons=[...document.querySelectorAll('[data-grade]')];
+try{const saved=JSON.parse(localStorage.getItem(key)||'null');if(saved&&saved.packet_sha256===packet.packet_sha256){answers=saved.answers||{};index=Math.min(saved.index||0,packet.trials.length-1)}}catch(e){$('status').textContent='임시 저장을 읽지 못했어. JSON을 수시로 저장해줘.'}
+packet.trials.forEach((t,i)=>{const option=document.createElement('option');option.value=i;option.textContent=String(i+1);$('jump').append(option)});
+function persist(){try{localStorage.setItem(key,JSON.stringify({packet_sha256:packet.packet_sha256,index,answers}))}catch(e){$('status').textContent='임시 저장 불가: JSON을 저장해줘.'}}
+function render(){const t=packet.trials[index],q=packet.queries[t.query],c=packet.candidates[t.candidate],a=answers[t.trial_id];$('query').src=q.data_uri;$('candidate').src=c.data_uri;$('qlabel').textContent='기준 사진 Q'+(t.query+1);$('note').textContent=q.note||'';$('jump').value=index;buttons.forEach(b=>b.setAttribute('aria-pressed',String(a&&String(a.grade)===b.dataset.grade||false)));$('why').value=a?.reason||'';const n=Object.keys(answers).length;$('progress').max=packet.trials.length;$('progress').value=n;$('count').textContent=n+' / '+packet.trials.length+' 판정';$('prev').disabled=index===0;$('next').disabled=index===packet.trials.length-1;$('status').textContent=a?'이 문항 판정: '+(a.grade==='U'?'판단 불가':a.grade):'아직 판정하지 않은 문항';}
+buttons.forEach(b=>b.addEventListener('click',()=>{const id=packet.trials[index].trial_id;answers[id]={grade:b.dataset.grade==='U'?'U':Number(b.dataset.grade),reason:$('why').value};persist();render()}));
+$('why').addEventListener('change',()=>{const a=answers[packet.trials[index].trial_id];if(a){a.reason=$('why').value;persist()}});
+function move(i){index=Math.max(0,Math.min(i,packet.trials.length-1));persist();render()}
+$('prev').onclick=()=>move(index-1);$('next').onclick=()=>move(index+1);$('jump').onchange=e=>move(Number(e.target.value));$('unrated').onclick=()=>{const i=packet.trials.findIndex(t=>!answers[t.trial_id]);if(i>=0)move(i);else $('status').textContent='모든 문항 판정 완료. JSON을 저장해줘.'};
+$('export').onclick=()=>{const data={schema_version:1,packet_id:packet.packet_id,packet_sha256:packet.packet_sha256,rater_id:packet.rater_id,purpose:packet.purpose,exported_at:new Date().toISOString(),ratings:packet.trials.filter(t=>answers[t.trial_id]).map(t=>({trial_id:t.trial_id,...answers[t.trial_id]}))};const url=URL.createObjectURL(new Blob([JSON.stringify(data,null,2)],{type:'application/json'})),link=document.createElement('a');link.href=url;link.download='denim-round1-judgments.json';link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);$('status').textContent=data.ratings.length+'건 JSON 저장 요청 완료';};
+document.addEventListener('keydown',e=>{if(['SELECT','INPUT','TEXTAREA'].includes(document.activeElement.tagName))return;if(/^[0-3]$/.test(e.key)||e.key.toLowerCase()==='u'){buttons.find(b=>b.dataset.grade===e.key.toUpperCase())?.click()}if(e.key==='ArrowRight')move(index+1);if(e.key==='ArrowLeft')move(index-1)});
+for(const q of packet.queries){const p=document.createElement('p');p.textContent=q.credit||q.source_page||q.id;$('credits').append(p)}const p=document.createElement('p');p.textContent='상품 사진: GLAMI-1M, Apache-2.0 (발행자 데이터셋 카드). 변경: 바지 크롭, 무색보정.';$('credits').append(p);
+render();
+</script></html>

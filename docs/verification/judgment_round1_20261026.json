@@ -1,0 +1,13 @@
+{
+  "packet_id": "denim-atlas-calibration-round1-v1",
+  "packet_sha256": "f86b115742cf551db99c3cf54318747238d5dfda5fa29c3e631f8380df4b267e",
+  "purpose": "calibration_only",
+  "research_split": null,
+  "independent_product_groups_verified": false,
+  "queries": 3,
+  "candidates": 24,
+  "unique_pairs": 72,
+  "repeated_pairs": 3,
+  "total_trials": 75,
+  "judgments": 0
+}

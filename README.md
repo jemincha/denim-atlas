@@ -11,10 +11,11 @@
 | Model / compute | Marqo fashionSigLIP inference, synthetic backward and checkpoint checks passed on Kaggle T4 |
 | Evaluation | Fixed-pool nDCG@5, strict candidate validation and product/duplicate/image split checks implemented |
 | Baselines | Cosine B0 and mean-RGB control B1 implemented; ranking-to-evaluation CLI tested on synthetic vectors |
-| Local tests | 32 passed on Python 3.12, including audit hashes, license/URL screening and numbered TSV joins |
+| Local tests | 35 passed on Python 3.12, including judgment-packet provenance, uncertain labels and repeat conflicts |
 | Data | 900 images audited and thumbnail-inspected; ABO 600 excluded as unsuitable. GLAMI 24 clear denim crops visually reviewed by Codex; remaining crop/group review pending |
 | Real-image execution | 24 reviewed GLAMI crops encoded on T4; 768-D features and exploratory B0/B1 neighbor boards saved |
 | Research quality / fine-tuning | **Not measured / not run**; human judgments and independent product groups pending |
+| Human judgment preparation | Private rank-blind calibration sheet: 3 wearing queries × 24 crops, 72 unique pairs + 3 repeats; zero real grades assigned |
 
 Wearing-photo supply follow-up: a bounded Commons pilot acquired 24 attributed
 CC0/CC BY previews. A user-authorized Unsplash Lite audit processed 25,000 photo
@@ -46,6 +47,7 @@ Expand reviewed GLAMI crops, resolve product/variant/near-duplicate groups, free
 
 - [Research design, project history, model acquisition and recorded measurements](docs/RESEARCH.md)
 - [Benchmark schema, human-judgment rubric and evaluation](docs/EVALUATION.md)
+- [Single-rater calibration packet and next labeling step](docs/JUDGMENT_ROUND1.md)
 - [Remote feature extraction and B0/B1 runbook](docs/BASELINES.md)
 - [Dataset access checks and contingency](docs/DATA_ACCESS.md)
 - [Alternative datasets: acquisition and application record](docs/DATASET_SEARCH.md)

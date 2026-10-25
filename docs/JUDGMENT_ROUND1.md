@@ -35,3 +35,20 @@ The importer verifies packet checksum, export identity, unique known trial IDs a
 35 local tests pass. Separate synthetic-image UI fixture verified score 0, U with reason, navigation, reload restoration and an actual JSON download with the expected two records. The real sheet loaded both images with zero grades assigned; 390-pixel viewport check found no horizontal body overflow. No real human judgments, agreement estimate, retrieval metric or fine-tuning result exists yet.
 
 After this round, inspect U frequency, repeat conflicts and adequacy of the candidate pool with the user. Freeze the rubric before collecting a larger, independent evaluation set. Review product/duplicate groups and splits before training-pair construction; retain an untouched test set. Compare B0, B1 and the adapted model on the same fully judged held-out pools. A second independent rater on a subset would support a broader human-validity claim; it is not required to begin this explicitly single-rater pilot.
+
+## Received judgments
+
+The actual 75-trial user export was received and validated on October 26, 2026. Packet checksum matched; all known trial IDs appeared once, with no missing trials and no U responses. The earlier two-answer synthetic UI export was distinguished by its packet checksum and was not imported as research judgments. Raw export and validated individual records remain private.
+
+Two of the three repeat pairs received exactly matching grades. One pair received 0 and 1; it remains unresolved and is excluded rather than averaged or selected after seeing model scores. Three repeats are too few to establish stable rater reliability. No extra adjudication is required to inspect the other calibration judgments.
+
+| Usable unique pairs | Grade 0 | Grade 1 | Grade 2 | Grade 3 |
+|---|---:|---:|---:|---:|
+| Q1: sitting view (23) | 15 | 5 | 2 | 1 |
+| Q2: bent legs (24) | 9 | 4 | 6 | 5 |
+| Q3: partial waist/thigh (24) | 13 | 5 | 6 | 0 |
+| Total (71) | 37 | 14 | 14 | 6 |
+
+The 20 grades at 2 or 3 are observed close matches under the rater's criterion, not an estimate of retrieval success. Candidate presentation was shuffled, not a model result. Zero U responses do not establish full silhouette visibility in the partial queries. Preserve this as a 71-pair calibration collection with one unresolved pair, not a fully judged 72-pair benchmark. Aggregate provenance: [received-judgment report](verification/judgment_round1_received_20261026.json).
+
+Next compute milestone: extract frozen query features remotely, compare B0/B1 rankings descriptively with these labels (explicitly as calibration), then use disagreements to improve the next data/label collection. Q1's incomplete pool must not enter the strict complete-pool evaluator. Final unseen-group metrics and adaptation still require reviewed groups, frozen splits and independent labels; this collection is not silently promoted to test data.

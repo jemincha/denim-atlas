@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "purpose": "single_rater_calibration_only",
+  "date": "2026-10-26",
+  "packet_sha256": "f86b115742cf551db99c3cf54318747238d5dfda5fa29c3e631f8380df4b267e",
+  "raw_export_sha256": "6011b702c9fc146e247e90f1a9f12f15f6753e294991dc890f74fd90d87d878f",
+  "imported_sha256": "9e11b66d496c6bd14c751f55841e00c1c3b3e64ad115e4b14fd7eb0adad806ea",
+  "exported_at": "2026-10-25T17:15:42.828Z",
+  "answered_trials": 75,
+  "missing_trials": 0,
+  "uncertain_trials": 0,
+  "unique_pairs_presented": 72,
+  "usable_unique_pairs": 71,
+  "repeat_pairs": 3,
+  "repeat_pairs_exact_agreement": 2,
+  "conflicting_unique_pairs_excluded": 1,
+  "grade_counts": {
+    "0": 37,
+    "1": 14,
+    "2": 14,
+    "3": 6
+  },
+  "per_query": [
+    {
+      "query": "Q1",
+      "usable_unique_pairs": 23,
+      "grade_counts": {
+        "0": 15,
+        "1": 5,
+        "2": 2,
+        "3": 1
+      }
+    },
+    {
+      "query": "Q2",
+      "usable_unique_pairs": 24,
+      "grade_counts": {
+        "0": 9,
+        "1": 4,
+        "2": 6,
+        "3": 5
+      }
+    },
+    {
+      "query": "Q3",
+      "usable_unique_pairs": 24,
+      "grade_counts": {
+        "0": 13,
+        "1": 5,
+        "2": 6
+      }
+    }
+  ],
+  "research_split": null,
+  "independent_product_groups_verified": false,
+  "retrieval_quality_measured": false,
+  "fine_tuning_run": false
+}

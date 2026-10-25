@@ -15,7 +15,7 @@
 | Data | 900 images audited and thumbnail-inspected; ABO 600 excluded as unsuitable. GLAMI 24 clear denim crops visually reviewed by Codex; remaining crop/group review pending |
 | Real-image execution | 24 reviewed GLAMI crops encoded on T4; 768-D features and exploratory B0/B1 neighbor boards saved |
 | Research quality / fine-tuning | **Not measured / not run**; human judgments and independent product groups pending |
-| Human judgment preparation | Private rank-blind calibration sheet: 3 wearing queries × 24 crops, 72 unique pairs + 3 repeats; zero real grades assigned |
+| Human judgments | First single-rater calibration export received: 75/75 trials; 71 usable unique pairs, one conflicting repeat pair excluded. No held-out quality result |
 
 Wearing-photo supply follow-up: a bounded Commons pilot acquired 24 attributed
 CC0/CC BY previews. A user-authorized Unsplash Lite audit processed 25,000 photo

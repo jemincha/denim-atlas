@@ -1,15 +1,15 @@
-# External-feedback audit — October 24, 2026
+# External-feedback audit — updated October 25, 2026
 
 Review scope: the five criticisms pasted into the project conversation, compared with the current committed scripts, tests, documentation and Git history. One researcher running small fixed-pool experiments is the assumed workload. This is not an independent model-quality evaluation or a whole-repository security audit.
 
 | Feedback | Outcome after this audit | Evidence / remaining work |
 |---|---|---|
-| No real retrieval result | **Unresolved: requires usable images and judgments** | B0/B1 runner and evaluator exist; no real baseline metric, real denim training or effectiveness result. Synthetic vectors must never be presented as a baseline quality score. |
+| No real retrieval result | **Execution partly addressed; quality unresolved** | 24 reviewed real GLAMI crops encoded on T4; exploratory B0/B1 neighbor boards saved. No human-judged baseline metric, fine-tuning or effectiveness claim. See SCREENING_PILOT.md. |
 | README too long; first screen unclear | **Addressed in this update** | Concise README with a status table and short run instructions; previous detailed research narrative moved to RESEARCH.md. No fabricated demo image or result is added. |
-| DeepFashion2 dependency; no contingency | **Plan addressed; data availability unresolved** | DATA_ACCESS.md states contact and fallback gates, Fashionpedia limitations and a permitted owner-provided pilot option. No replacement dataset is assumed approved or acquired. |
+| DeepFashion2 dependency; no contingency | **Alternative data acquired and screened** | 900 open-license screening images acquired/audited. ABO pilot rejected as unsuitable; 24 GLAMI crops visually reviewed and encoded. Broader crop/product-group review remains. |
 | Recovery gaps and one-commit history | **Partly addressed** | New evaluator replaces the missing implementation; Git now has incremental recovery, documentation, evaluation and baseline commits. Original planning documents and legacy UI source remain missing; recovery provenance is retained. |
-| Tests cover importer, not evaluation risks | **Addressed for the implemented fixed-pool evaluator** | Twelve evaluator tests cover hand-calculated nDCG, unjudged/zero-positive handling, exact pools, split leakage and output protection. Six baseline/crop tests plus five importer tests also pass: 23 total on local Python 3.12. |
+| Tests cover importer, not evaluation risks | **Addressed for implemented evaluation and audit** | Twelve evaluator tests cover metric/pool/leakage risks. Importer, baseline/crop, acquisition and audit checks bring the local total to 28 passing tests. |
 
-Rechecked input → reviewed group validation → frozen-feature ranking → evaluation → report output and the tests exercising these paths. Shared benchmark validation is reused by ranking and evaluation. The new CUDA feature-extraction path has not run remotely, and crop/identity/rights flags cannot establish actual review by themselves. Paired uncertainty, split assignment and full-catalog evaluation remain outside the implemented code.
+Shared benchmark validation is reused by ranking and evaluation. The CUDA extractor now runs on reviewed real crops; crop/identity/rights flags alone still do not establish review. Paired uncertainty, split assignment and full-catalog evaluation remain unfinished.
 
-Conclusion: the feedback is **not all completed**. Software/test/documentation gaps have been reduced; the main evidence gap remains real data and human judgments. Original lost files and actual training results have not been recovered or invented.
+The feedback is **not all completed**. Real-data execution is now recorded; the main evidence gap is human-judged, product-disjoint effectiveness and actual fine-tuning. Original lost files remain missing.

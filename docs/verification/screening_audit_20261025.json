@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "verified_images": 900,
+  "sources": {
+    "abo": 600,
+    "glami": 300
+  },
+  "unique_decoded_images": 900,
+  "exact_duplicate_groups": 0,
+  "short_side_below_224": {},
+  "contact_sheets": [
+    "contact_00.jpg",
+    "contact_01.jpg",
+    "contact_02.jpg",
+    "contact_03.jpg",
+    "contact_04.jpg",
+    "contact_05.jpg",
+    "contact_06.jpg",
+    "contact_07.jpg",
+    "contact_08.jpg",
+    "contact_09.jpg",
+    "contact_10.jpg",
+    "contact_11.jpg",
+    "contact_12.jpg",
+    "contact_13.jpg",
+    "contact_14.jpg",
+    "contact_15.jpg",
+    "contact_16.jpg",
+    "contact_17.jpg",
+    "contact_18.jpg"
+  ],
+  "confirmed_denim": 0,
+  "reviewed_crops": 0,
+  "notes": "Exact decoded-pixel equality only; no near-duplicate/product identity or relevance inferred.",
+  "source_manifest_sha256": {
+    "abo": "e425628a1c1d215bcccd080a0feb4b631ec27a35dd50555947b90ae1283e2929",
+    "glami": "09955f68ee711d18af58633a2384a8fbde90cf065b08b5193aa254ab422bdfa9"
+  }
+}

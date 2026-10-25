@@ -22,7 +22,8 @@ def jeans_candidate(item):
     # Screening only: use titles, not a denim-colored product or a mention in marketing copy.
     title = names.lower()
     return (bool(re.search(r'\bjeans\b|\bdenim\b.*\b(pants|trousers)\b', title))
-            and not re.search(r'\b(shorts|skirt|jacket|shirt|dress|jumpsuit|dungarees)\b', title))
+            and not re.search(r'\b(shorts|skirt|jacket|shirt|dress|jumpsuit|dungarees|'
+                              r'phone|iphone|samsung|case|cover|shoe|shoes|sneaker|sneakers)\b', title))
 
 
 def image_path(value):

@@ -10,7 +10,8 @@ class AboTests(unittest.TestCase):
             return {'item_name': [{'language_tag': 'en_US', 'value': title}]}
         for title in ['Slim fit jeans', 'Denim straight leg pants']:
             self.assertTrue(jeans_candidate(item(title)))
-        for title in ['Denim jacket', 'Jeans shorts', 'Blue sofa', 'Jeans skirt']:
+        for title in ['Denim jacket', 'Jeans shorts', 'Blue sofa', 'Jeans skirt',
+                      'Jeans denim phone case', 'Jeans sneakers', 'iPhone jeans cover']:
             self.assertFalse(jeans_candidate(item(title)))
         self.assertFalse(jeans_candidate({'bullet_point': [{'value': 'wear with jeans'}]}))
 

@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "reviewer": "Codex visual review",
+  "review_basis": "19 contact sheets (all 900 thumbnails); enlarged 24 proposed crops",
+  "abo_screening_excluded": 600,
+  "abo_notes": "No usable denim pants selected: overwhelmingly phone cases, plus shoes and a brown-trouser view. Do not infer fabric from that view.",
+  "glami_thumbnail_reviewed": 300,
+  "selected_pipeline_pilot": 24,
+  "human_relevance_labels": 0,
+  "training_ready": 0,
+  "selection_limit": "Purposive clear single-garment examples, not representative sampling; other GLAMI images need individual crop/material review."
+}

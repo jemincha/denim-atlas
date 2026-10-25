@@ -11,11 +11,12 @@
 | Model / compute | Marqo fashionSigLIP inference, synthetic backward and checkpoint checks passed on Kaggle T4 |
 | Evaluation | Fixed-pool nDCG@5, strict candidate validation and product/duplicate/image split checks implemented |
 | Baselines | Cosine B0 and mean-RGB control B1 implemented; ranking-to-evaluation CLI tested on synthetic vectors |
-| Local tests | 26 passed on Python 3.12, including acquisition screening; optional Pillow check also passed |
-| Data | 900 screening images verified on Kaggle: ABO 600 + GLAMI 300; visual review/labels pending. DeepFashion application sent; DeepFashion2 access still unverified |
-| Real retrieval results / fine-tuning | **Not run** |
+| Local tests | 28 passed on Python 3.12, including audit hashes, duplicate detection and path boundaries |
+| Data | 900 images audited and thumbnail-inspected; ABO 600 excluded as unsuitable. GLAMI 24 clear denim crops visually reviewed by Codex; remaining crop/group review pending |
+| Real-image execution | 24 reviewed GLAMI crops encoded on T4; 768-D features and exploratory B0/B1 neighbor boards saved |
+| Research quality / fine-tuning | **Not measured / not run**; human judgments and independent product groups pending |
 
-The checks establish software execution, not useful denim retrieval or an improvement from fine-tuning. The new reviewed-crop CUDA extractor is prepared but has not yet run remotely.
+The frozen extractor now runs on real denim. A 24-image exploratory pool establishes execution, not retrieval quality or an improvement from fine-tuning. DeepFashion applications remain separate access requests.
 
 ## Research question
 
@@ -34,7 +35,7 @@ The second command needs reviewed benchmark/features; paths and weight are examp
 
 ## Next milestone
 
-Obtain usage-permitted real images, confirm denim/crops and groups, freeze splits, collect cross-product relevance judgments, then record the first real B0/B1 comparison. Choose the adaptation recipe after inspecting baseline failures.
+Expand reviewed GLAMI crops, resolve product/variant/near-duplicate groups, freeze splits and collect cross-product relevance judgments, then record the first scored B0/B1 comparison. Choose the adaptation recipe after inspecting baseline failures.
 
 ## Documentation and evidence
 
@@ -43,6 +44,7 @@ Obtain usage-permitted real images, confirm denim/crops and groups, freeze split
 - [Remote feature extraction and B0/B1 runbook](docs/BASELINES.md)
 - [Dataset access checks and contingency](docs/DATA_ACCESS.md)
 - [Alternative datasets: acquisition and application record](docs/DATASET_SEARCH.md)
+- [900-image audit, exclusions and real-image pilot](docs/SCREENING_PILOT.md)
 - [Next DeepFashion2 import](docs/NEXT_DATA_RUN.md)
 - [External-feedback audit: addressed and outstanding](docs/FEEDBACK_AUDIT.md)
 - [Current project state](PROJECT_STATE.md) · [Recovery provenance](docs/RECOVERY.md)

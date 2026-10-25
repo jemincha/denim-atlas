@@ -1,6 +1,6 @@
 # Frozen B0/B1 runbook
 
-Prepared October 24, 2026. Local synthetic tests exercise scoring, color statistics and the ranking-to-evaluation CLI. The new extractor has **not** run on remote CUDA or real denim images. The earlier model smoke check is separate evidence.
+Updated October 25, 2026. Local synthetic tests exercise scoring, color statistics and the ranking-to-evaluation CLI. The extractor has now run on remote T4 CUDA for 24 reviewed GLAMI crops; see [SCREENING_PILOT.md](SCREENING_PILOT.md). Exploratory neighbor boards have no human relevance labels or research-quality score.
 
 ## Order and current stopping point
 
@@ -11,7 +11,7 @@ Prepared October 24, 2026. Local synthetic tests exercise scoring, color statist
 5. Run B0/B1 on validation; choose and record the B1 weight there (or predeclare it).
 6. Run the unchanged recipe on test once. Inspect failures before selecting a fine-tuning recipe.
 
-**Steps 1–3 remain blocked on usable images and human review.** Code and synthetic tests do not satisfy them. No dataset download, approval assumption, image upload or new GPU session is part of this preparation.
+Open-license images and a 24-crop processing pilot are available. Product/duplicate review, frozen research splits and human judgments remain unfinished; the exploratory pilot does not satisfy steps 2–3 for a scored benchmark.
 
 ## Crop input
 

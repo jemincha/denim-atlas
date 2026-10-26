@@ -1,5 +1,16 @@
 # External-feedback audit — updated October 25, 2026
 
+## October 26 follow-up
+
+- Actual 27-image calibration completed and saved in private version 362288134; comparison/features files verified in its output tree. Q2 B0/B1 nDCG@5: 0.640659/0.639945; Q3: 0.529635/0.446854. Q1 remains incomplete. These are two descriptive, single-rater queries, not generalization evidence.
+- The researcher redirected priority to data collection and fine-tuning. First real-label last-block fine-tuning is now complete: 40 steps, training hinge 0.079425 → 0.018524, block checkpoint restoration verified. See TRAINING_PILOT.md. No further standalone starting-model validation is planned.
+- Current PROJECT_STATE is a short research status, with internal operation history archived in ignored private storage. DATA_ACCESS no longer reproduces mailbox searches or contact operations. Historical commits still contain old text; no history rewriting was performed. Existing author email/history was not changed without a chosen replacement identity.
+- README now declares AI-assisted implementation/screening and human-only relevance judgments. It distinguishes publisher license metadata from image/checkpoint publication clearance. OPEN_SOURCE_REVIEW is now English, consistent with the main research documentation.
+- Limitations remain: a clean catalog gallery, only three training queries, incomplete product groups, one rater and a 0/1 disagreement. The current loss uses only clear 2/3-versus-0 relations. Clarifying the boundary and adding mixed-background/query diversity remain necessary for a larger label round; old labels were not changed after seeing scores.
+- All 39 local tests pass. Source-data expansion was prepared but not executed before a user-requested pause; more documents/tests are not counted as additional model evidence.
+
+The table below preserves the earlier audit and its then-current test counts.
+
 Review scope: the five criticisms pasted into the project conversation, compared with the current committed scripts, tests, documentation and Git history. One researcher running small fixed-pool experiments is the assumed workload. This is not an independent model-quality evaluation or a whole-repository security audit.
 
 | Feedback | Outcome after this audit | Evidence / remaining work |

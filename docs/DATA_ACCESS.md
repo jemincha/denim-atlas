@@ -1,30 +1,18 @@
-# Dataset access and contingency — October 24, 2026
+# Dataset access and permitted alternatives
 
-## Verified access state
+Updated October 26, 2026. Access application records are operational material kept privately; this document records only research implications.
 
-- The user reported final submission of the official DeepFashion2 form.
-- On this check, the authenticated official form redirected to `alreadyresponded` and displayed “already responded” / one response permitted. This corroborates prior submission for that browser account; it is not approval or proof of email delivery.
-- Connected application-email Gmail searches returned no matches for `in:anywhere "DeepFashion2"`, recent `"DeepFashion"`, or `from:yyge13`. Additional recent spaced-name, form-receipt and sender searches also returned no IDs. `in:anywhere` includes Spam and Trash. Other accounts, messages deleted permanently and mail never delivered are not covered.
-- No access email/password has been verified. No request was re-submitted and no maintainer was contacted.
+| Source | Current research state |
+|---|---|
+| DeepFashion2 | Application submitted; access approval and remote-processing scope not verified. No protected archive processed. |
+| DeepFashion original | Application submitted; approval and remote-processing scope not verified. |
+| GLAMI-1M | Publisher card states Apache-2.0. Small private catalog pilot acquired, screened and encoded. Seller-image rights and derived-artifact publication are not independently cleared. |
+| Commons | Small CC0/CC BY preview pilot with per-file source/license/attribution records. Depicted-person/publication rights are not independently cleared. |
+| Unsplash Lite | Authorized private metadata/preview investigation under dataset terms. No public source-photo/metadata or weight release. |
+| Fashionpedia | Metadata audit only; labels are screening hints, not confirmed usable denim. |
 
-Do not commit account details, signatures, private correspondence or access passwords.
+The [official DeepFashion2 download instructions](https://github.com/switchablenorms/DeepFashion2#download-the-data) require a form for archive access. No published average response time was established. Historical issue reports are not delivery-time statistics or proof of this application's delay cause. Approval is not inferred from submission.
 
-## Processing time: no established average
+Permitted alternatives let the pilot proceed while access requests remain pending. Source provenance and usage review precede crop processing; reviewed product/duplicate groups and frozen splits precede training-pair construction. A small single-rater calibration set does not replace an independent held-out study. See [acquisition/screening record](DATASET_SEARCH.md) and [wearing-photo pilot](WEARING_DATA_PILOT.md).
 
-The [official repository](https://github.com/switchablenorms/DeepFashion2#download-the-data) requires the form to obtain the archive password. No published average processing time or delivery commitment was established in this check. Do not describe a fixed number of days as normal approval time.
-
-[Issue #8](https://github.com/switchablenorms/DeepFashion2/issues/8) contains a June 2019 two-day nonreceipt report and another user's report of waiting since the previous week. A maintainer attributed that incident to a form problem and supplied a contact address for assistance. These are old individual incidents, not processing-time statistics. [Issue #95](https://github.com/switchablenorms/DeepFashion2/issues/95) (September 2025) and [issue #97](https://github.com/switchablenorms/DeepFashion2/issues/97) (June 2026) also report missing mail/form problems; they do not establish the cause of this application's delay.
-
-The practical next step is a status inquiry through the official form-owner contact or the maintainer contact supplied in the official issue. Confirm that the application was received and ask for password delivery. This is a recommendation, not a claim that the application was rejected or that an automated system is currently broken. Sending an inquiry requires the user's instruction; none has been sent.
-
-## Contingency if access remains unavailable
-
-| Route | Can proceed now? | Gate and scope |
-|---|---|---|
-| DeepFashion2 main study | Metadata preparation only | Verify access and intended remote-processing scope, then screen trousers, review crops/groups and construct independent judgments. |
-| Fashionpedia pilot | Existing public metadata audit only | Check source-image terms individually and visually confirm denim before any image processing. The recorded 109 jeans labels are screening hints, not 109 usable verified denim items. Product identity must be reviewed; without it, do not claim product-disjoint evaluation. |
-| Owner-provided / explicitly permitted denim photos | No collection supplied yet | A small separately identified pilot can test the full pipeline once image ownership/permission, garment groups and judgments are recorded. Do not silently promote the initial inspiration photos into this set. |
-
-For either pilot, the sequence remains permission/provenance → confirmed denim and reviewed crop → product/duplicate/image groups → frozen splits → fixed-pool judgments → B0/B1 reports. Report source, image and query counts and limitations; a small pilot does not replace the planned held-out study.
-
-This original contingency plan did not itself authorize new applications or emails. The user subsequently explicitly requested alternative-dataset acquisition/applications and approved the DeepFashion release agreement, signature use and institutional-email submission. See [the executed search and acquisition record](DATASET_SEARCH.md). Unofficial protected-dataset mirrors, shared archive passwords, retailer scraping and collection purchases remain outside this work. Synthetic scores are software checks only. Do not freeze a fine-tuning loss or claim improvement before observing real baseline errors.
+No unofficial protected-dataset mirrors or shared passwords are used. Dataset/license metadata and software licenses are separate from rights in individual photographs and any derived checkpoint release. A publication decision requires its own artifact-specific review.

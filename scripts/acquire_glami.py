@@ -1,5 +1,6 @@
 """Remote-only GLAMI-1M jeans subset acquisition via range-readable official ZIP."""
 
+import argparse
 import csv
 from datetime import datetime, timezone
 import hashlib
@@ -18,12 +19,21 @@ def jeans_candidate(row):
 
 
 def main():
+    parser = argparse.ArgumentParser(description='Acquire a bounded GLAMI jeans screening batch remotely')
+    parser.add_argument('--max-images', type=int, default=300)
+    parser.add_argument('--skip-images', type=int, default=0)
+    parser.add_argument('--revision', help='Optional pinned publisher commit')
+    args = parser.parse_args()
+    if args.max_images <= 0 or args.skip_images < 0:
+        parser.error('max-images must be positive and skip-images nonnegative')
+    if args.revision and not re.fullmatch(r'[0-9a-f]{40}',args.revision):
+        parser.error('revision must be a full commit hash')
     if not Path('/kaggle/working').is_dir():
         raise RuntimeError('Acquire on remote Kaggle CPU')
     import fsspec
     from PIL import Image
     repo = 'https://huggingface.co/datasets/glami/glami-1m/'
-    revision = json.load(urlopen('https://huggingface.co/api/datasets/glami/glami-1m', timeout=60))['sha']
+    revision = args.revision or json.load(urlopen('https://huggingface.co/api/datasets/glami/glami-1m', timeout=60))['sha']
     url = repo + 'resolve/' + revision + '/GLAMI-1M-dataset.zip'
     root = Path('/kaggle/working') / ('glami_jeans_' + datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ'))
     root.mkdir(exist_ok=False)
@@ -52,7 +62,7 @@ def main():
                 for row in rows:
                     output.write(json.dumps(row, ensure_ascii=False) + '\n')
             image_members = {Path(name).stem: name for name in names if name.endswith('.jpg')}
-            image_ids = sorted({row['image_id'] for row in rows})[:300]
+            image_ids = sorted({row['image_id'] for row in rows})[args.skip_images:args.skip_images+args.max_images]
             if not image_ids:
                 raise ValueError('No jeans screening candidates; acquisition incomplete')
             print('Jeans rows:', len(rows), 'selected images:', len(image_ids), flush=True)
@@ -71,6 +81,8 @@ def main():
                 manifest.append({'image_id': image_id, 'file': 'images/' + image_id + '.jpg',
                                  'sha256': hashlib.sha256(raw).hexdigest(), 'denim_status': 'unreviewed',
                                  'crop_status': 'unreviewed', 'research_split': None})
+                if len(manifest) % 50 == 0:
+                    print('Verified images:',len(manifest),'/',len(image_ids),flush=True)
             with (root / 'screening_images.jsonl').open('x', encoding='utf-8') as output:
                 for row in manifest:
                     output.write(json.dumps(row) + '\n')
@@ -81,7 +93,8 @@ def main():
                'downloaded_verified_images': len(manifest),
                'image_bytes': sum((root / row['file']).stat().st_size for row in manifest),
                'output': str(root), 'confirmed_denim': 0, 'training_ready': 0,
-               'selection': 'First 300 unique IDs: pants category plus jeans/denim in title or description; screening only',
+               'selection': 'Sorted unique IDs: pants plus jeans/denim text; screening only',
+               'skip_images':args.skip_images,'max_images':args.max_images,
                'notes': 'Range reads from official ZIP; no complete-archive checksum claim. Source splits are not research splits.'}
     (root / 'summary.json').write_text(json.dumps(summary, indent=2) + '\n', encoding='utf-8')
     print(json.dumps(summary, indent=2), flush=True)

@@ -1,0 +1,256 @@
+{
+  "schema_version": 1,
+  "training_run": true,
+  "held_out_evaluation": false,
+  "purpose": "training_only_overfit_pilot",
+  "base_revision": "c56244cc94f92419e8369fa71efdaf403b124ce8",
+  "base_weights_sha256": "88908200434959fa3154ef79d408aac33341e8797fe5ca8ca6f0463aab32e6b3",
+  "trained_module": "visual.trunk.blocks.11",
+  "trainable_parameters": 7087872,
+  "real_images": 27,
+  "queries": 3,
+  "triplet_combinations": 222,
+  "optimizer_steps": 40,
+  "seed": 17,
+  "learning_rate": 1e-05,
+  "cosine_margin": 0.1,
+  "weight_decay": 0.01,
+  "all_training_triplets_hinge_before": 0.07942500710487366,
+  "all_training_triplets_hinge_after": 0.018523534759879112,
+  "history": [
+    {
+      "step": 1,
+      "sample_hinge_loss": 0.16778531670570374,
+      "gradient_norm": 3.444267749786377
+    },
+    {
+      "step": 2,
+      "sample_hinge_loss": 0.050206780433654785,
+      "gradient_norm": 1.6924924850463867
+    },
+    {
+      "step": 3,
+      "sample_hinge_loss": 0.013718605041503906,
+      "gradient_norm": 1.7356765270233154
+    },
+    {
+      "step": 4,
+      "sample_hinge_loss": 0.15096920728683472,
+      "gradient_norm": 2.455904722213745
+    },
+    {
+      "step": 5,
+      "sample_hinge_loss": 0.07508617639541626,
+      "gradient_norm": 1.8405789136886597
+    },
+    {
+      "step": 6,
+      "sample_hinge_loss": 0.2081024944782257,
+      "gradient_norm": 2.425476312637329
+    },
+    {
+      "step": 7,
+      "sample_hinge_loss": 0.05747109651565552,
+      "gradient_norm": 1.9740386009216309
+    },
+    {
+      "step": 8,
+      "sample_hinge_loss": 0.08721768856048584,
+      "gradient_norm": 2.161513328552246
+    },
+    {
+      "step": 9,
+      "sample_hinge_loss": 0,
+      "gradient_norm": 0
+    },
+    {
+      "step": 10,
+      "sample_hinge_loss": 0.019511818885803223,
+      "gradient_norm": 2.377753973007202
+    },
+    {
+      "step": 11,
+      "sample_hinge_loss": 0.0037412047386169434,
+      "gradient_norm": 2.7816572189331055
+    },
+    {
+      "step": 12,
+      "sample_hinge_loss": 0.06585600972175598,
+      "gradient_norm": 2.9760067462921143
+    },
+    {
+      "step": 13,
+      "sample_hinge_loss": 0.10664498805999756,
+      "gradient_norm": 2.226155996322632
+    },
+    {
+      "step": 14,
+      "sample_hinge_loss": 0,
+      "gradient_norm": 0
+    },
+    {
+      "step": 15,
+      "sample_hinge_loss": 0.04734247922897339,
+      "gradient_norm": 2.8881189823150635
+    },
+    {
+      "step": 16,
+      "sample_hinge_loss": 0.04668670892715454,
+      "gradient_norm": 1.470465898513794
+    },
+    {
+      "step": 17,
+      "sample_hinge_loss": 0.05742877721786499,
+      "gradient_norm": 2.4923155307769775
+    },
+    {
+      "step": 18,
+      "sample_hinge_loss": 0.07974916696548462,
+      "gradient_norm": 2.170785903930664
+    },
+    {
+      "step": 19,
+      "sample_hinge_loss": 0.06794857978820801,
+      "gradient_norm": 1.8784950971603394
+    },
+    {
+      "step": 20,
+      "sample_hinge_loss": 0.009259462356567383,
+      "gradient_norm": 1.9012709856033325
+    },
+    {
+      "step": 21,
+      "sample_hinge_loss": 0.028686821460723877,
+      "gradient_norm": 2.1482620239257812
+    },
+    {
+      "step": 22,
+      "sample_hinge_loss": 0.08095556497573853,
+      "gradient_norm": 2.0431437492370605
+    },
+    {
+      "step": 23,
+      "sample_hinge_loss": 0.02645474672317505,
+      "gradient_norm": 2.475212335586548
+    },
+    {
+      "step": 24,
+      "sample_hinge_loss": 0,
+      "gradient_norm": 0
+    },
+    {
+      "step": 25,
+      "sample_hinge_loss": 0.02695155143737793,
+      "gradient_norm": 2.5097010135650635
+    },
+    {
+      "step": 26,
+      "sample_hinge_loss": 0,
+      "gradient_norm": 0
+    },
+    {
+      "step": 27,
+      "sample_hinge_loss": 0.009541511535644531,
+      "gradient_norm": 2.2643566131591797
+    },
+    {
+      "step": 28,
+      "sample_hinge_loss": 0,
+      "gradient_norm": 0
+    },
+    {
+      "step": 29,
+      "sample_hinge_loss": 0,
+      "gradient_norm": 0
+    },
+    {
+      "step": 30,
+      "sample_hinge_loss": 0.01575535535812378,
+      "gradient_norm": 1.8936388492584229
+    },
+    {
+      "step": 31,
+      "sample_hinge_loss": 0,
+      "gradient_norm": 0
+    },
+    {
+      "step": 32,
+      "sample_hinge_loss": 0,
+      "gradient_norm": 0
+    },
+    {
+      "step": 33,
+      "sample_hinge_loss": 0.04407435655593872,
+      "gradient_norm": 2.116663932800293
+    },
+    {
+      "step": 34,
+      "sample_hinge_loss": 0.03698289394378662,
+      "gradient_norm": 1.7056828737258911
+    },
+    {
+      "step": 35,
+      "sample_hinge_loss": 0.003821730613708496,
+      "gradient_norm": 2.352349281311035
+    },
+    {
+      "step": 36,
+      "sample_hinge_loss": 0.020089149475097656,
+      "gradient_norm": 1.757625699043274
+    },
+    {
+      "step": 37,
+      "sample_hinge_loss": 0,
+      "gradient_norm": 0
+    },
+    {
+      "step": 38,
+      "sample_hinge_loss": 0,
+      "gradient_norm": 0
+    },
+    {
+      "step": 39,
+      "sample_hinge_loss": 0,
+      "gradient_norm": 0
+    },
+    {
+      "step": 40,
+      "sample_hinge_loss": 0,
+      "gradient_norm": 0
+    }
+  ],
+  "module_sha256_before": "8cc8a12f80d8f0c34d8a7ce354f9d5911698dc35162a5982fd67ef6d2f1d4c10",
+  "module_sha256_after": "23fc86a61d6a8b36b59dde57985905b3119f9c2eaff4d2b7776ffcfff3fb31e8",
+  "checkpoint_roundtrip_verified": true,
+  "checkpoint_bytes": 85076277,
+  "checkpoint_verification_scope": "Trainable block weights restored in same kernel; interrupted-job determinism not tested",
+  "training_script_sha256": "9bb1aca14ef9b6c9657ec6ac44087ecf48052e3c528896d229204a23caa6d4e6",
+  "checkpoint_sha256": "d587d1461cd806a19f7f80ebaaca39c8c7b79cb6291c1a63856aa8dc002a964d",
+  "seconds": 2.2460272729999815,
+  "peak_allocated_gib": 0.8827080726623535,
+  "device": "Tesla T4",
+  "packages": {
+    "torch": "2.11.0+cu128",
+    "torchvision": "0.26.0+cu128",
+    "open_clip_torch": "3.3.0",
+    "timm": "1.0.29",
+    "Pillow": "13.0.0"
+  },
+  "input_sha256": {
+    "packet": "c5fe3f98f79a9b402f64cbfc8f76dd3477bde5d74c7fb980046c77ca6edea07a",
+    "ratings": "6011b702c9fc146e247e90f1a9f12f15f6753e294991dc890f74fd90d87d878f",
+    "manifest": "a1a07b0be05684ee72104757069fbaed201f229f4786dc3c112d88ee98bc4d88"
+  },
+  "limits": "All three calibration queries used for training. Product groups unresolved; no unseen-quality claim. No color jitter or random crops.",
+  "artifact_status": {
+    "private_kaggle_notebook": "jemincha/denim-atlas-denim-fine-tuning-pilot",
+    "version_id": 362347502,
+    "saved_files_verified": [
+      "denim_finetune_pilot_v1/trained/last_block.pt",
+      "denim_finetune_pilot_v1/trained/training_report.json",
+      "denim_finetune_pilot_v1/trained/triplets.json"
+    ],
+    "gpu_session_stopped": true,
+    "weights_committed": false
+  }
+}

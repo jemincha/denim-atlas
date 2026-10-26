@@ -1,0 +1,18 @@
+{
+  "checked_at_utc": "2026-10-26T07:39:46.334456+00:00",
+  "package": "kaggle",
+  "version": "2.2.5",
+  "install_location": ".venv",
+  "version_command_verified": true,
+  "pip_check": "passed",
+  "auth_help_verified": true,
+  "oauth_flow_started": true,
+  "account_access_verified": true,
+  "remote_job_verified": false,
+  "secrets_in_report": false,
+  "verified_account": "jemincha",
+  "authentication_method": "official CLI OAuth",
+  "verification_command": "kaggle kernels list --mine --page-size 5",
+  "verification_exit_code": 0,
+  "visible_own_notebooks": 5
+}

@@ -41,11 +41,23 @@ def read_url(url, maximum):
     return raw
 
 
+def select_candidates(pages, excluded):
+    candidates = [p for p in pages.values()
+                  if f'commons:{p["pageid"]}' not in excluded
+                  and allowed_license(p.get('imageinfo',[{}])[0].get('extmetadata',{}))]
+    return sorted(candidates,key=lambda p:p['pageid'])[:24]
+
+
 def main():
     from PIL import Image, ImageDraw, ImageOps
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--output', type=Path, required=True)
+    parser.add_argument('--exclude-manifest', type=Path, help='Prior JSONL observations to avoid reacquisition')
     args = parser.parse_args()
+    excluded_raw = args.exclude_manifest.read_bytes() if args.exclude_manifest else b''
+    excluded = {json.loads(line)['id'] for line in excluded_raw.splitlines() if line.strip()}
+    if any(not re.fullmatch(r'commons:[0-9]+',identity) for identity in excluded):
+        raise ValueError('Expected Commons IDs in exclusion manifest')
     args.output.mkdir(parents=True, exist_ok=False)
     (args.output/'previews').mkdir()
     pages, source_hashes = {}, {}
@@ -60,9 +72,9 @@ def main():
         if 'error' in result:
             raise ValueError(str(result['error']))
         pages.update(result.get('query', {}).get('pages', {}))
-    candidates = [p for p in pages.values() if allowed_license(p.get('imageinfo',[{}])[0].get('extmetadata',{}))]
+    eligible = [p for p in pages.values() if allowed_license(p.get('imageinfo',[{}])[0].get('extmetadata',{}))]
     # shortcut: first 24 eligible page IDs test supply only; not representative sampling.
-    candidates.sort(key=lambda p:p['pageid'])
+    candidates = select_candidates(pages,excluded)
     records, errors = [], []
     sheet = Image.new('RGB', (1200, 1000), 'white')
     draw = ImageDraw.Draw(sheet)
@@ -99,7 +111,9 @@ def main():
     sheet.save(args.output/'contact.jpg', quality=92)
     (args.output/'screening_images.jsonl').write_text(''.join(json.dumps(r)+'\n' for r in records),encoding='utf-8')
     summary = {'complete':not errors, 'checked_at_utc':datetime.now(timezone.utc).isoformat(),
-               'metadata_images':len(pages), 'license_eligible':len(candidates),
+               'metadata_images':len(pages), 'license_eligible':len(eligible),
+               'excluded_prior_ids':len(excluded), 'selected_new_candidates':len(candidates),
+               'exclusion_manifest_sha256':hashlib.sha256(excluded_raw).hexdigest() if excluded_raw else None,
                'downloaded_previews':len(records), 'errors':errors,
                'licenses':dict(Counter(r['rights_metadata']['LicenseShortName']['value'] for r in records)),
                'preview_bytes':sum((args.output/r['file']).stat().st_size for r in records),

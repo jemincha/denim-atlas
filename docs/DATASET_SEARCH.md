@@ -1,4 +1,6 @@
-# Alternative dataset search — October 25, 2026
+# Alternative dataset search — updated October 27, 2026
+
+Latest GLAMI execution: bulk archive downloaded/checksummed once, 1,200 image files verified (includes prior 300), 512 name-filtered images visually screened, 347 used in completed weak text adaptation. See [expansion and results](GLAMI_EXPANSION.md). Historical acquisition records below describe their original smaller runs.
 
 ## Decisions and execution evidence
 

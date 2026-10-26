@@ -1,6 +1,7 @@
 """Remote-only GLAMI-1M jeans subset acquisition via range-readable official ZIP."""
 
 import argparse
+from contextlib import contextmanager
 import csv
 from datetime import datetime, timezone
 import hashlib
@@ -8,6 +9,9 @@ import io
 import json
 from pathlib import Path
 import re
+import random
+import shutil
+import tempfile
 from urllib.request import urlopen
 import zipfile
 
@@ -18,11 +22,40 @@ def jeans_candidate(row):
                                row.get('description', ''), flags=re.IGNORECASE)))
 
 
+@contextmanager
+def archive_stream(url, bulk=False):
+    if not bulk:
+        import fsspec
+        with fsspec.open(url, 'rb', block_size=2**20, cache_type='readahead') as stream:
+            yield stream
+        return
+    if shutil.disk_usage('/tmp').free < 13 * 10**9:
+        raise RuntimeError('Need at least 13 GB temporary space for official archive')
+    with tempfile.TemporaryFile(dir='/tmp') as stream:
+        digest, size, reported = hashlib.md5(), 0, 0
+        with urlopen(url, timeout=120) as response:
+            while chunk := response.read(8 * 2**20):
+                size += len(chunk)
+                if size > 12 * 10**9:
+                    raise ValueError('Official archive exceeds 12 GB size bound')
+                stream.write(chunk)
+                digest.update(chunk)
+                if size - reported >= 512 * 2**20:
+                    print('Archive downloaded MB:', size // 10**6, flush=True)
+                    reported = size
+        if digest.hexdigest() != '500348bbf54595db81cba353acd50d78':
+            raise ValueError('Official archive MD5 mismatch')
+        print('Official complete archive checksum verified; bytes:', size, flush=True)
+        stream.seek(0)
+        yield stream
+
+
 def main():
     parser = argparse.ArgumentParser(description='Acquire a bounded GLAMI jeans screening batch remotely')
     parser.add_argument('--max-images', type=int, default=300)
     parser.add_argument('--skip-images', type=int, default=0)
     parser.add_argument('--revision', help='Optional pinned publisher commit')
+    parser.add_argument('--bulk', action='store_true', help='Download/checksum archive once; extract only selected images')
     args = parser.parse_args()
     if args.max_images <= 0 or args.skip_images < 0:
         parser.error('max-images must be positive and skip-images nonnegative')
@@ -30,17 +63,18 @@ def main():
         parser.error('revision must be a full commit hash')
     if not Path('/kaggle/working').is_dir():
         raise RuntimeError('Acquire on remote Kaggle CPU')
-    import fsspec
-    from PIL import Image
+    from PIL import Image, ImageDraw, ImageOps
     repo = 'https://huggingface.co/datasets/glami/glami-1m/'
     revision = args.revision or json.load(urlopen('https://huggingface.co/api/datasets/glami/glami-1m', timeout=60))['sha']
+    if args.bulk and revision != 'befda45d8d4e8b8082bb8a1912d1f9eb9483991c':
+        raise ValueError('Bulk checksum is pinned to reviewed publisher revision')
     url = repo + 'resolve/' + revision + '/GLAMI-1M-dataset.zip'
     root = Path('/kaggle/working') / ('glami_jeans_' + datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ'))
     root.mkdir(exist_ok=False)
     (root / 'images').mkdir()
     print('GLAMI output:', root, 'revision:', revision, flush=True)
     # HTTPFile refuses unsupported range reads rather than silently downloading the entire archive.
-    with fsspec.open(url, 'rb', block_size=2**20, cache_type='readahead') as remote:
+    with archive_stream(url, args.bulk) as remote:
         with zipfile.ZipFile(remote) as archive:
             names = archive.namelist()
             print('Archive members:', len(names), 'sample:', names[:5], flush=True)
@@ -88,6 +122,18 @@ def main():
                     output.write(json.dumps(row) + '\n')
     card = urlopen(repo + 'resolve/' + revision + '/README.md', timeout=60).read()
     (root / 'SOURCE_README.md').write_bytes(card)
+    sample = random.Random(17).sample(manifest, min(96, len(manifest)))
+    (root / 'visual_sample.json').write_text(json.dumps(sample, indent=2), encoding='utf-8')
+    for page in range((len(sample) + 47) // 48):
+        sheet = Image.new('RGB', (1200, 1380), 'white')
+        draw = ImageDraw.Draw(sheet)
+        for index, row in enumerate(sample[page*48:(page+1)*48]):
+            x, y = (index % 8)*150, (index // 8)*230
+            with Image.open(root / row['file']) as image:
+                thumb = ImageOps.contain(image.convert('RGB'), (146, 202))
+                sheet.paste(thumb, (x+(146-thumb.width)//2, y))
+            draw.text((x+3, y+205), row['image_id'], fill='black')
+        sheet.save(root / f'visual_sample_{page+1}.jpg', quality=90)
     summary = {'complete': True, 'source': repo, 'revision': revision,
                'license': 'apache-2.0 (official dataset card)', 'candidate_rows': len(rows),
                'downloaded_verified_images': len(manifest),
@@ -95,7 +141,9 @@ def main():
                'output': str(root), 'confirmed_denim': 0, 'training_ready': 0,
                'selection': 'Sorted unique IDs: pants plus jeans/denim text; screening only',
                'skip_images':args.skip_images,'max_images':args.max_images,
-               'notes': 'Range reads from official ZIP; no complete-archive checksum claim. Source splits are not research splits.'}
+               'bulk_archive_checksum_verified': args.bulk,
+               'visual_sample_images': len(sample),
+               'notes': 'Bulk mode verifies official MD5; range mode has no full-archive checksum. Source splits are not research splits.'}
     (root / 'summary.json').write_text(json.dumps(summary, indent=2) + '\n', encoding='utf-8')
     print(json.dumps(summary, indent=2), flush=True)
 

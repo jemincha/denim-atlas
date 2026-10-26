@@ -1,8 +1,19 @@
 import unittest
-from scripts.acquire_commons import allowed_license, preview_url
+from scripts.acquire_commons import allowed_license, preview_url, select_candidates
 
 
 class CommonsTests(unittest.TestCase):
+    def test_expansion_is_bounded_disjoint_and_license_screened(self):
+        pages={str(i):{'pageid':i,'imageinfo':[{'extmetadata':{'LicenseUrl':{'value':
+            'https://creativecommons.org/licenses/by/4.0/'}}}]} for i in range(60)}
+        prior={f'commons:{i}' for i in range(24)}
+        pages['30']['imageinfo'][0]['extmetadata']['LicenseUrl']['value']='https://example.org/license'
+        chosen=select_candidates(pages,prior)
+        self.assertEqual(len(chosen),24)
+        self.assertTrue(all(f'commons:{p["pageid"]}' not in prior for p in chosen))
+        self.assertNotIn(30,[p['pageid'] for p in chosen])
+        self.assertEqual(chosen,select_candidates(dict(reversed(list(pages.items()))),prior))
+
     def test_license_requires_known_canonical_url_not_label(self):
         for path in ['licenses/by/4.0/', 'licenses/by/2.0', 'publicdomain/zero/1.0/deed.en']:
             self.assertTrue(allowed_license({'LicenseUrl':{'value':'https://creativecommons.org/'+path}}))

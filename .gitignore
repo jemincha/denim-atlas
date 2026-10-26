@@ -11,3 +11,4 @@ checkpoints/
 *.pth
 *.safetensors
 *.zip
+output/judgment-round2-preview.png

@@ -1,7 +1,10 @@
 import unittest
+from unittest.mock import patch
+from contextlib import closing
+import io
 
 from scripts.acquire_abo import image_path, jeans_candidate
-from scripts.acquire_glami import jeans_candidate as glami_candidate
+from scripts.acquire_glami import jeans_candidate as glami_candidate, archive_stream
 
 
 class AboTests(unittest.TestCase):
@@ -25,6 +28,15 @@ class AboTests(unittest.TestCase):
         self.assertTrue(glami_candidate({'category_name': 'womens-pants', 'name': 'Slim Jeans'}))
         self.assertFalse(glami_candidate({'category_name': 'womens-denim-jackets', 'name': 'Denim'}))
         self.assertFalse(glami_candidate({'category_name': 'mens-pants', 'name': 'Chinos'}))
+
+    def test_bulk_archive_rejects_bad_checksum_and_closes_temporary_file(self):
+        with patch('scripts.acquire_glami.shutil.disk_usage') as disk, \
+             patch('scripts.acquire_glami.urlopen', return_value=closing(io.BytesIO(b'bad zip'))), \
+             patch('scripts.acquire_glami.tempfile.TemporaryFile', return_value=io.BytesIO()):
+            disk.return_value.free = 14 * 10**9
+            with self.assertRaisesRegex(ValueError, 'MD5 mismatch'):
+                with archive_stream('https://example.invalid/archive', bulk=True):
+                    self.fail('Invalid archive must not be exposed')
 
 
 if __name__ == '__main__':

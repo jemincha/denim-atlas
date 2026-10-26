@@ -1,19 +1,21 @@
-# Denim Atlas — status, 2026-10-26
+# Denim Atlas — status, 2026-10-27
 
-Small research study of visible denim similarity across different products. Compare observed color/tone, wash/fading and silhouette; no personal-taste objective, original-color reconstruction or app UI.
+Small study of visible denim similarity across products: color/tone, wash/fading and silhouette. No personal-taste objective, original-color reconstruction or app UI.
 
 ## Evidence
 
-- Pinned Marqo-FashionSigLIP on Kaggle T4. First real-label fine-tuning completed: last vision block, 7,087,872 parameters, 40 steps, 222 clear-grade triplet combinations from 27 images. Training hinge loss 0.079425 → 0.018524; saved block-weight restoration verified. Private notebook version 362347502.
-- 900 screening images audited. ABO 600 rejected as unsuitable; 24 clear GLAMI catalog crops selected. Commons wearing crops supply three pilot queries. The curated gallery is not representative of mixed-background inputs.
-- One human rater completed 75 rank-blind trials. Two of three repeats matched; one 0/1 conflict is excluded. Usable labels: 71 unique pairs, no U responses. Three repeats do not establish rater reliability.
-- Actual calibration nDCG@5, B0/B1: Q2 0.640659/0.639945; Q3 0.529635/0.446854. Q1 has an incomplete pool and no metric. Fixed color weight 0.5; no label-driven search.
-- 39 local tests pass. Strict evaluation rejects split leakage and incomplete pools. Calibration scoring is separate from held-out evaluation.
+- GLAMI: 1,200 verified images, including the earlier 300; 12,434,870 image bytes. Official full-archive MD5 verified. Codex inspected 512 name-filtered images and whitelisted 347; blue/gray studio imagery is overrepresented.
+- Expanded weak image/text adaptation completed on Kaggle T4, private job `denim-atlas-glami-text-fine-tuning` version 3: 347 images, 2 epochs, 44 steps, last vision block (7,087,872 parameters). Fixed-batch training loss 0.865115 → 0.823334; 85,070,133-byte checkpoint and block restoration verified. No human similarity-quality score.
+- Earlier human-label pilot: 75 trials / 71 usable pairs, 27 images, 40 steps; training hinge 0.079425 → 0.018524. Its three queries are training data for that earlier experiment.
+- All three existing query cases had identical ranked top-5 before/after adaptation in the same 347-image gallery; no demonstrated retrieval improvement.
+- Official Kaggle CLI 2.2.5 authentication and remote CPU/GPU execution verified. Browser automation is no longer required. 43 local tests pass.
 
 ## Limits and next gate
 
-No held-out quality result, verified independent product groups or frozen research splits. The three pilot queries are now training data. Keep raw inputs/labels/weights private; publisher license metadata is not independent clearance for every image or a checkpoint release.
+Raw data/ratings/weights remain private. Publisher metadata is not independent clearance for seller images or checkpoint publication. Product groups, near duplicates and independent splits are unresolved; fine wash detail is limited by low-resolution images. Source descriptions are weak supervision, not human relevance labels.
 
-Paused at the researcher's request for folder organization. Next: expand permitted denim data and iterate fine-tuning, obtaining human labels when needed. Existing starting-model validation is finished. Additional GLAMI acquisition supports a disjoint ID window but has not been executed. Dataset access requests remain pending verification.
+Paused at the researcher's explicit sprint-stop request. All submitted remote jobs finished; the localhost annotation server was stopped. Files and browser-local draft state are retained. Do not resume experiments until requested.
 
-See [pilot protocol](docs/JUDGMENT_ROUND1.md), [evaluation](docs/EVALUATION.md) and [feedback audit](docs/FEEDBACK_AUDIT.md). Internal operational history is excluded from the current tracked state; prior commits retain their historical contents.
+Resume at `data/private/judgment_round2/packet/judge.html`: 3 queries × 17 candidates + 3 repeats = 54 trials. No grades were assigned by Codex and no new human export has been received. Restart its localhost server if needed; import the researcher's JSON through the existing provenance-checking importer, then construct training pairs. This is additional calibration/training, not independent held-out evaluation. Existing starting-model validation is finished; access-request status needs separate verification.
+
+See [expansion/protocol](docs/GLAMI_EXPANSION.md), [training evidence](docs/verification/glami_text_finetune_20261027.json), [evaluation](docs/EVALUATION.md) and [feedback audit](docs/FEEDBACK_AUDIT.md).

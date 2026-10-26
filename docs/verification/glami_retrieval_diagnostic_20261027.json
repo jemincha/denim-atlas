@@ -1,0 +1,19 @@
+{
+  "purpose": "qualitative_retrieval_rank_stability",
+  "kaggle_job": "jemincha/denim-atlas-glami-adaptation-ab",
+  "job_version": 1,
+  "query_count": 3,
+  "gallery_images": 347,
+  "same_gallery_before_after": true,
+  "same_preprocessing": true,
+  "trained_checkpoint_sha256": "33c274a744ff15e03c8f9383f2297c2f61ecc8652cb1ad88b565b130ba882532",
+  "ranked_top5_identical_by_query": {
+    "Q1": true,
+    "Q2": true,
+    "Q3": true
+  },
+  "question_packet_sha256": "4d48c278df3bb7e20a86b9c464d572352e261c87f769bf089762b28e0f9a6c67",
+  "human_quality_judgments": 0,
+  "independent_held_out_evaluation": false,
+  "conclusion": "No ranked top-5 change for these three existing calibration queries; this is not evidence of improved retrieval quality."
+}

@@ -6,6 +6,7 @@ import hashlib
 import json
 from pathlib import Path
 import random
+import re
 
 
 def validate_images(rows):
@@ -22,11 +23,13 @@ def validate_images(rows):
             raise ValueError('Invalid crop bytes or hash')
 
 
-def packet(queries, candidates):
+def packet(queries, candidates, packet_id='denim-atlas-calibration-round1-v1'):
     if not queries or len(candidates) < 2:
         raise ValueError('Queries and at least two candidates required')
     validate_images(queries + candidates)
-    seed = 'denim-atlas-calibration-round1-v1'
+    if not isinstance(packet_id,str) or not re.fullmatch(r'[a-z0-9-]{1,80}',packet_id):
+        raise ValueError('Expected a safe unique packet ID')
+    seed = packet_id
     rng = random.Random(seed)
     trials, groups = [], []
     for qi, query in enumerate(queries):
@@ -60,9 +63,10 @@ if __name__ == '__main__':
     parser.add_argument('--queries', type=Path, required=True)
     parser.add_argument('--gallery', type=Path, required=True)
     parser.add_argument('--output', type=Path, required=True)
+    parser.add_argument('--packet-id', default='denim-atlas-calibration-round1-v1')
     args = parser.parse_args()
     data = packet(json.loads(args.queries.read_text(encoding='utf-8'))['assets'],
-                  json.loads(args.gallery.read_text(encoding='utf-8'))['assets'])
+                  json.loads(args.gallery.read_text(encoding='utf-8'))['assets'], args.packet_id)
     args.output.mkdir(exist_ok=False)
     (args.output/'packet.json').write_text(json.dumps(data, ensure_ascii=False), encoding='utf-8')
     (args.output/'judge.html').write_text(build_html(data), encoding='utf-8')

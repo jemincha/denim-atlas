@@ -13,6 +13,18 @@ def asset(identity):
 
 
 class PacketTests(unittest.TestCase):
+    def test_round_ids_separate_provenance_and_export_names(self):
+        q,c=[asset('q')],[asset('a'),asset('b')]
+        old=packet(q,c)
+        new=packet(q,c,packet_id='denim-atlas-calibration-round2-v1')
+        self.assertNotEqual(old['packet_sha256'],new['packet_sha256'])
+        self.assertIn("packet.packet_id+'-judgments.json'",build_html(new))
+        export={k:old[k] for k in ('schema_version','packet_id','packet_sha256','rater_id','purpose')}
+        export['ratings']=[]
+        with self.assertRaisesRegex(ValueError,'provenance'):
+            import_ratings(new,export)
+        with self.assertRaises(ValueError):packet(q,c,packet_id='../unsafe')
+
     def test_import_uncertain_repeat_conflict_and_provenance(self):
         data=packet([asset('q')],[asset('a'),asset('b'),asset('c')])
         export={k:data[k] for k in ('schema_version','packet_id','packet_sha256','rater_id','purpose')}

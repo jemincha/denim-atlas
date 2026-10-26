@@ -1,0 +1,336 @@
+{
+  "schema_version": 1,
+  "purpose": "weak_image_text_adaptation",
+  "training_run": true,
+  "held_out_similarity_evaluation": false,
+  "real_training_images": 347,
+  "epochs": 2,
+  "steps": 44,
+  "batch_size": 16,
+  "learning_rate": 1e-06,
+  "seed": 17,
+  "precision": "fp32; prior FP16 attempt stopped on nonfinite gradient norm",
+  "loss": "open_clip ClipLoss, frozen source-description text embeddings",
+  "all_training_fixed_batch_loss_before": 0.8651152284069776,
+  "all_training_fixed_batch_loss_after": 0.823333639061073,
+  "base_revision": "c56244cc94f92419e8369fa71efdaf403b124ce8",
+  "base_weights_sha256": "88908200434959fa3154ef79d408aac33341e8797fe5ca8ca6f0463aab32e6b3",
+  "trained_module": "visual.trunk.blocks.11",
+  "tokenizer_files_sha256": {
+    "special_tokens_map.json": "acc196266a358dbcf2445f7b18f610c3c8763a5f0fdbf753f6aa0607631e7ba9",
+    "tokenizer.json": "5bc9b16db0e7adf5c9a2bd57f8f9c8e6ebdaabe75679cc956d007f78036d5b4a",
+    "tokenizer_config.json": "0724d06763bf8fa5464c3e964fa754d00c5953e49239554f3385677db09956ed",
+    "spiece.model": "d60acb128cf7b7f2536e8f38a5b18a05535c9e14c7a355904270e15b0945ea86"
+  },
+  "trainable_parameters": 7087872,
+  "module_sha256_before": "8cc8a12f80d8f0c34d8a7ce354f9d5911698dc35162a5982fd67ef6d2f1d4c10",
+  "module_sha256_after": "5a59e61684b95eb1ec9ed26dfe652805b2f08a75f2e32f2c7bbd72b9ca9e6811",
+  "checkpoint_roundtrip_verified": true,
+  "checkpoint_bytes": 85070133,
+  "checkpoint_sha256": "33c274a744ff15e03c8f9383f2297c2f61ecc8652cb1ad88b565b130ba882532",
+  "source_summary_sha256": "3018cab43d6b9a9e081dd35a483fbd2d741709489cad4032fc1248e7bbbb1888",
+  "visual_review": {
+    "decision": "proceed_weak_text_pilot",
+    "reviewer": "Codex visual inspection",
+    "review_date": "2026-10-26",
+    "source_summary_sha256": "3018cab43d6b9a9e081dd35a483fbd2d741709489cad4032fc1248e7bbbb1888",
+    "visually_inspected_images": 512,
+    "approved_images": 347,
+    "excluded_or_uncertain_images": 165,
+    "sample_size_before_name_filter": 96,
+    "criterion": "Visible denim-like construction/texture, seams/pockets/wash and interpretable garment view. Exclude ambiguous smooth fabrics, obvious non-denim/sportswear, multiple target garments, folded or close-up-only views. This is visual screening, not physical material certification or relevance grading.",
+    "limits": "Catalog/studio-dominated, default low-resolution GLAMI images. Entire 1200-image corpus not cleared. Some coated/colored/white denim excluded as visually uncertain; blue/gray bias remains."
+  },
+  "script_sha256": "4827f248807f16fb0c09ddf29a54ea53297be64d92f1a307e800269969ce8f98",
+  "history": [
+    {
+      "step": 1,
+      "epoch": 1,
+      "loss": 0.9403463006019592,
+      "gradient_norm": 10.334968566894531
+    },
+    {
+      "step": 2,
+      "epoch": 1,
+      "loss": 0.9985892176628113,
+      "gradient_norm": 8.785261154174805
+    },
+    {
+      "step": 3,
+      "epoch": 1,
+      "loss": 1.0153915882110596,
+      "gradient_norm": 9.231239318847656
+    },
+    {
+      "step": 4,
+      "epoch": 1,
+      "loss": 0.9906508326530457,
+      "gradient_norm": 9.327515602111816
+    },
+    {
+      "step": 5,
+      "epoch": 1,
+      "loss": 0.5994881391525269,
+      "gradient_norm": 7.940938472747803
+    },
+    {
+      "step": 6,
+      "epoch": 1,
+      "loss": 0.5685920715332031,
+      "gradient_norm": 9.636796951293945
+    },
+    {
+      "step": 7,
+      "epoch": 1,
+      "loss": 0.6375560760498047,
+      "gradient_norm": 8.865900039672852
+    },
+    {
+      "step": 8,
+      "epoch": 1,
+      "loss": 0.8657796382904053,
+      "gradient_norm": 10.650004386901855
+    },
+    {
+      "step": 9,
+      "epoch": 1,
+      "loss": 1.114895224571228,
+      "gradient_norm": 10.333489418029785
+    },
+    {
+      "step": 10,
+      "epoch": 1,
+      "loss": 0.574098527431488,
+      "gradient_norm": 7.339121341705322
+    },
+    {
+      "step": 11,
+      "epoch": 1,
+      "loss": 0.48095351457595825,
+      "gradient_norm": 6.920815944671631
+    },
+    {
+      "step": 12,
+      "epoch": 1,
+      "loss": 0.5833747386932373,
+      "gradient_norm": 6.152661323547363
+    },
+    {
+      "step": 13,
+      "epoch": 1,
+      "loss": 1.0446239709854126,
+      "gradient_norm": 10.753631591796875
+    },
+    {
+      "step": 14,
+      "epoch": 1,
+      "loss": 1.0375025272369385,
+      "gradient_norm": 9.227373123168945
+    },
+    {
+      "step": 15,
+      "epoch": 1,
+      "loss": 0.6434946060180664,
+      "gradient_norm": 9.784712791442871
+    },
+    {
+      "step": 16,
+      "epoch": 1,
+      "loss": 0.4092448353767395,
+      "gradient_norm": 6.39099645614624
+    },
+    {
+      "step": 17,
+      "epoch": 1,
+      "loss": 1.378208875656128,
+      "gradient_norm": 16.24298858642578
+    },
+    {
+      "step": 18,
+      "epoch": 1,
+      "loss": 1.3563017845153809,
+      "gradient_norm": 10.122336387634277
+    },
+    {
+      "step": 19,
+      "epoch": 1,
+      "loss": 0.36850160360336304,
+      "gradient_norm": 4.905256271362305
+    },
+    {
+      "step": 20,
+      "epoch": 1,
+      "loss": 0.9464982748031616,
+      "gradient_norm": 7.746878147125244
+    },
+    {
+      "step": 21,
+      "epoch": 1,
+      "loss": 0.9020040035247803,
+      "gradient_norm": 8.867647171020508
+    },
+    {
+      "step": 22,
+      "epoch": 1,
+      "loss": 0.5887109041213989,
+      "gradient_norm": 9.070444107055664
+    },
+    {
+      "step": 23,
+      "epoch": 2,
+      "loss": 0.7397485971450806,
+      "gradient_norm": 8.226524353027344
+    },
+    {
+      "step": 24,
+      "epoch": 2,
+      "loss": 0.26985085010528564,
+      "gradient_norm": 4.951851844787598
+    },
+    {
+      "step": 25,
+      "epoch": 2,
+      "loss": 0.6536146402359009,
+      "gradient_norm": 9.651698112487793
+    },
+    {
+      "step": 26,
+      "epoch": 2,
+      "loss": 0.5067760944366455,
+      "gradient_norm": 8.890340805053711
+    },
+    {
+      "step": 27,
+      "epoch": 2,
+      "loss": 1.0636165142059326,
+      "gradient_norm": 11.028674125671387
+    },
+    {
+      "step": 28,
+      "epoch": 2,
+      "loss": 0.7779762148857117,
+      "gradient_norm": 9.210490226745605
+    },
+    {
+      "step": 29,
+      "epoch": 2,
+      "loss": 0.6029938459396362,
+      "gradient_norm": 6.907914161682129
+    },
+    {
+      "step": 30,
+      "epoch": 2,
+      "loss": 0.8851341605186462,
+      "gradient_norm": 10.15832233428955
+    },
+    {
+      "step": 31,
+      "epoch": 2,
+      "loss": 1.1736080646514893,
+      "gradient_norm": 11.959504127502441
+    },
+    {
+      "step": 32,
+      "epoch": 2,
+      "loss": 0.7589190006256104,
+      "gradient_norm": 8.075654983520508
+    },
+    {
+      "step": 33,
+      "epoch": 2,
+      "loss": 1.400827407836914,
+      "gradient_norm": 14.830719947814941
+    },
+    {
+      "step": 34,
+      "epoch": 2,
+      "loss": 0.35437482595443726,
+      "gradient_norm": 5.84686279296875
+    },
+    {
+      "step": 35,
+      "epoch": 2,
+      "loss": 0.6027254462242126,
+      "gradient_norm": 9.418313026428223
+    },
+    {
+      "step": 36,
+      "epoch": 2,
+      "loss": 1.226067304611206,
+      "gradient_norm": 12.25571346282959
+    },
+    {
+      "step": 37,
+      "epoch": 2,
+      "loss": 0.8144037127494812,
+      "gradient_norm": 9.00512981414795
+    },
+    {
+      "step": 38,
+      "epoch": 2,
+      "loss": 0.6115305423736572,
+      "gradient_norm": 8.652511596679688
+    },
+    {
+      "step": 39,
+      "epoch": 2,
+      "loss": 0.8495173454284668,
+      "gradient_norm": 8.614593505859375
+    },
+    {
+      "step": 40,
+      "epoch": 2,
+      "loss": 0.8526023626327515,
+      "gradient_norm": 9.476344108581543
+    },
+    {
+      "step": 41,
+      "epoch": 2,
+      "loss": 0.6541749238967896,
+      "gradient_norm": 7.440547466278076
+    },
+    {
+      "step": 42,
+      "epoch": 2,
+      "loss": 0.9298028349876404,
+      "gradient_norm": 10.972955703735352
+    },
+    {
+      "step": 43,
+      "epoch": 2,
+      "loss": 1.1148192882537842,
+      "gradient_norm": 9.423643112182617
+    },
+    {
+      "step": 44,
+      "epoch": 2,
+      "loss": 0.40532127022743225,
+      "gradient_norm": 8.580561637878418
+    }
+  ],
+  "seconds": 14.531554823999983,
+  "peak_allocated_gib": 1.0465168952941895,
+  "device": "Tesla T4",
+  "packages": {
+    "torch": "2.11.0+cu128",
+    "open_clip_torch": "3.3.0",
+    "timm": "1.0.29",
+    "Pillow": "13.0.0",
+    "transformers": "5.16.1",
+    "tokenizers": "0.23.1"
+  },
+  "limits": "Training IDs visually screened by Codex, without human relevance labels. Full acquired corpus is not individually cleared. Captions may be multilingual/noisy. Known item, exact decoded image and caption dedup only; near duplicates unresolved. Same-data fitting metrics do not show unseen retrieval improvement. Fixed white letterbox; no color jitter or random crops.",
+  "kaggle_job": "jemincha/denim-atlas-glami-text-fine-tuning",
+  "job_version": 3,
+  "prior_failed_versions": [
+    {
+      "version": 1,
+      "reason": "local snapshot omitted tokenizer assets"
+    },
+    {
+      "version": 2,
+      "reason": "nonfinite FP16 gradient norm; guard stopped run"
+    }
+  ],
+  "report_sha256": "3403977707ede7a7931f61a99db541384da67eb91d854c1232559d35112ee908"
+}

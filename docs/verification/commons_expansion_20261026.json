@@ -1,0 +1,49 @@
+{
+  "complete": true,
+  "checked_at_utc": "2026-10-26T05:36:10.125665+00:00",
+  "metadata_images": 99,
+  "license_eligible": 43,
+  "excluded_prior_ids": 24,
+  "selected_new_candidates": 19,
+  "exclusion_manifest_sha256": "82966a76bf7c42ad607a38940a7206aea87c4c8b74ebb3eac099697eef6464e2",
+  "downloaded_previews": 19,
+  "errors": [],
+  "licenses": {
+    "CC0": 5,
+    "CC BY 2.0": 12,
+    "CC BY 3.0": 1,
+    "CC BY 4.0": 1
+  },
+  "preview_bytes": 1248699,
+  "metadata_sha256": {
+    "Men wearing jeans": "6d2820d61098273325d66607694bc4add01c622865453de0950623c8f726d130",
+    "Women wearing jeans": "ed16da7187d838974b66e28da894b5171357dabb63f6da8ca9ded84d1cd4b8db"
+  },
+  "confirmed_denim": 0,
+  "training_ready": 0,
+  "notes": "Two bounded category pages; CC0/CC BY metadata screen. No original images, model inference, product groups or human relevance labels.",
+  "total_commons_previews_now": 43,
+  "new_ids_overlap": 0,
+  "total_exact_byte_hash_duplicates": 0,
+  "selected_higher_resolution_previews": 3,
+  "higher_resolution_preview_bytes": 974161,
+  "reviewed_denim_crops": 3,
+  "crop_sizes": [
+    [
+      246,
+      233
+    ],
+    [
+      261,
+      445
+    ],
+    [
+      210,
+      305
+    ]
+  ],
+  "human_relevance_labels": 0,
+  "product_independence_verified": false,
+  "capture_groups": "Conservative candidates for Baliuag sequence, volunteers event and venture event; related views omitted from selected targets",
+  "local_bulk_processing": false
+}

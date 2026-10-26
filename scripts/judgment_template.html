@@ -1,14 +1,15 @@
 <!doctype html>
 <html lang="ko"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Denim Atlas · 1차 유사도 판정</title>
+<title>Denim Atlas · 유사도 판정</title>
 <style>
 *{box-sizing:border-box}body{font:17px/1.55 system-ui,sans-serif;color:#172333;background:#f3f5f6;margin:0}main{max-width:1040px;margin:auto;padding:22px}h1{font-size:24px;margin:0 0 8px}p{margin:8px 0}.muted{color:#526276;font-size:14px}.pair{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:14px 0}figure{margin:0;background:white;border:1px solid #d8dfe6;border-radius:10px;padding:12px}figcaption{font-weight:700}img{display:block;width:100%;height:390px;object-fit:contain;margin-top:8px}button,select{font:inherit;padding:12px;border:1px solid #9aa8b9;border-radius:7px;background:white;color:#172333;cursor:pointer}button:focus-visible,select:focus-visible{outline:3px solid #e8a000;outline-offset:2px}button[aria-pressed=true]{background:#173f72;color:white;border-color:#173f72}.grades{display:flex;gap:8px;flex-wrap:wrap}.grades button{flex:1;min-width:135px}nav{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:14px}button:disabled{opacity:.45;cursor:default}progress{width:100%;height:12px}details{margin-top:16px}#status{min-height:26px;color:#154f2c}#why{width:100%;margin:12px 0}a{color:#174b86}.credit{font-size:12px;overflow-wrap:anywhere}@media(max-width:600px){main{padding:12px}.pair{gap:8px}figure{padding:8px}img{height:270px}.grades button{min-width:100px}h1{font-size:21px}}
 </style>
 <main>
-<h1>청바지 유사도 · 1차 판정</h1>
+<h1>청바지 유사도 판정</h1>
 <p>왼쪽 사진의 <b>보이는 바지</b>와 오른쪽 상품이 얼마나 비슷한지 골라줘.</p>
 <p class="muted">색·톤, 워싱·페이딩, 보이는 실루엣을 함께 판단. 취향·브랜드·배경은 제외하고 안 보이는 부분은 추측하지 않기. 모델 순위는 표시하지 않아.</p>
-<p class="muted">첫 회는 판정 기준을 맞추는 자료야. 일부 반복 문항이 포함돼. 최종 성능평가 결과로 사용하지 않아.</p>
+<p class="muted">판정 기준과 추가 학습을 위한 자료야. 일부 반복 문항이 포함돼. 독립적인 최종 성능평가 결과로 사용하지 않아.</p>
+<p class="muted"><b>0과 1의 구분:</b> 0은 보이는 주요 특징이 달라 유사 상품으로 보기 어려운 경우, 1은 일부 요소는 닮았지만 전체 차이가 큰 경우야. 2는 꽤 비슷함, 3은 관찰 가능한 핵심 특징이 매우 비슷함. 정보가 부족하면 0 대신 ‘판단 불가’를 골라줘.</p>
 <label for="jump">문항</label> <select id="jump"></select> <span id="count"></span>
 <progress id="progress" value="0"></progress>
 <div class="pair"><figure><figcaption id="qlabel"></figcaption><img id="query" alt="비교 기준인 착용 사진의 바지 영역"><p id="note" class="muted"></p></figure><figure><figcaption>비교할 상품</figcaption><img id="candidate" alt="비교 대상 상품의 바지 영역"></figure></div>
@@ -33,8 +34,8 @@ buttons.forEach(b=>b.addEventListener('click',()=>{const id=packet.trials[index]
 $('why').addEventListener('change',()=>{const a=answers[packet.trials[index].trial_id];if(a){a.reason=$('why').value;persist()}});
 function move(i){index=Math.max(0,Math.min(i,packet.trials.length-1));persist();render()}
 $('prev').onclick=()=>move(index-1);$('next').onclick=()=>move(index+1);$('jump').onchange=e=>move(Number(e.target.value));$('unrated').onclick=()=>{const i=packet.trials.findIndex(t=>!answers[t.trial_id]);if(i>=0)move(i);else $('status').textContent='모든 문항 판정 완료. JSON을 저장해줘.'};
-$('export').onclick=()=>{const data={schema_version:1,packet_id:packet.packet_id,packet_sha256:packet.packet_sha256,rater_id:packet.rater_id,purpose:packet.purpose,exported_at:new Date().toISOString(),ratings:packet.trials.filter(t=>answers[t.trial_id]).map(t=>({trial_id:t.trial_id,...answers[t.trial_id]}))};const url=URL.createObjectURL(new Blob([JSON.stringify(data,null,2)],{type:'application/json'})),link=document.createElement('a');link.href=url;link.download='denim-round1-judgments.json';link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);$('status').textContent=data.ratings.length+'건 JSON 저장 요청 완료';};
+$('export').onclick=()=>{const data={schema_version:1,packet_id:packet.packet_id,packet_sha256:packet.packet_sha256,rater_id:packet.rater_id,purpose:packet.purpose,exported_at:new Date().toISOString(),ratings:packet.trials.filter(t=>answers[t.trial_id]).map(t=>({trial_id:t.trial_id,...answers[t.trial_id]}))};const url=URL.createObjectURL(new Blob([JSON.stringify(data,null,2)],{type:'application/json'})),link=document.createElement('a');link.href=url;link.download=packet.packet_id+'-judgments.json';link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);$('status').textContent=data.ratings.length+'건 JSON 저장 요청 완료';};
 document.addEventListener('keydown',e=>{if(['SELECT','INPUT','TEXTAREA'].includes(document.activeElement.tagName))return;if(/^[0-3]$/.test(e.key)||e.key.toLowerCase()==='u'){buttons.find(b=>b.dataset.grade===e.key.toUpperCase())?.click()}if(e.key==='ArrowRight')move(index+1);if(e.key==='ArrowLeft')move(index-1)});
-for(const q of packet.queries){const p=document.createElement('p');p.textContent=q.credit||q.source_page||q.id;$('credits').append(p)}const p=document.createElement('p');p.textContent='상품 사진: GLAMI-1M, Apache-2.0 (발행자 데이터셋 카드). 변경: 바지 크롭, 무색보정.';$('credits').append(p);
+for(const q of packet.queries){const p=document.createElement('p');p.textContent=q.credit||q.source_page||q.id;$('credits').append(p)}const p=document.createElement('p');p.textContent='상품 사진: GLAMI-1M. Apache-2.0은 발행자 데이터셋 카드의 표기이며 원출처 이미지 조건은 별도 적용. 비교용 PNG 변환 또는 바지 크롭, 색 보정 없음.';$('credits').append(p);
 render();
 </script></html>

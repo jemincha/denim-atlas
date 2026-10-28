@@ -8,8 +8,10 @@ import random
 
 try:
     from .extract_features import REVISION, WEIGHT_SHA256, reviewed_crops
+    from .finetune_denim_pilot import initial_checkpoint
 except ImportError:
     from extract_features import REVISION, WEIGHT_SHA256, reviewed_crops
+    from finetune_denim_pilot import initial_checkpoint
 
 
 def main():
@@ -18,6 +20,8 @@ def main():
     parser.add_argument('--trained', type=Path, required=True)
     parser.add_argument('--queries', type=Path, required=True)
     parser.add_argument('--output', type=Path, required=True)
+    parser.add_argument('--gallery-run', type=Path, help='Optional separate run holding gallery image records')
+    parser.add_argument('--initial-run', type=Path, help='Compare against a verified prior adaptation instead of the frozen base')
     args = parser.parse_args()
     if not Path('/kaggle/working').is_dir() or args.output.exists():
         parser.error('Remote execution and a new output directory required')
@@ -27,7 +31,7 @@ def main():
             or hashlib.sha256(checkpoint.read_bytes()).hexdigest() != report['checkpoint_sha256']
             or hashlib.sha256((args.acquisition/'summary.json').read_bytes()).hexdigest() != report['source_summary_sha256']):
         raise ValueError('Training/source provenance mismatch')
-    gallery = json.loads((args.trained/'training_examples.json').read_text())
+    gallery = json.loads(((args.gallery_run or args.trained)/'training_examples.json').read_text())
     gallery_paths = []
     for row in gallery:
         identity = row['image_id']
@@ -52,6 +56,13 @@ def main():
         if hashlib.file_digest(stream,'sha256').hexdigest() != WEIGHT_SHA256: raise ValueError('Base weight mismatch')
     model,_,preprocess = open_clip.create_model_and_transforms('local-dir:'+str(snapshot),device='cuda:0',require_pretrained=True)
     model.eval().requires_grad_(False)
+    expected = 'visual.trunk.blocks.'+str(len(model.visual.trunk.blocks)-1)
+    initial = None
+    if args.initial_run:
+        initial_path,initial = initial_checkpoint(args.initial_run)
+        saved = torch.load(initial_path,map_location='cpu',weights_only=True)
+        if saved['module'] != expected: raise ValueError('Wrong initial module')
+        model.get_submodule(expected).load_state_dict(saved['state_dict'],strict=True)
     target = model.visual.image_size
     if isinstance(target,int): target = (target,target)
     paths = [r[1] for r in queries]+gallery_paths
@@ -70,7 +81,6 @@ def main():
         return torch.argsort(scores,dim=1,descending=True,stable=True)[:,:5].tolist()
     rankings = {'starting':encode()}
     saved = torch.load(checkpoint,map_location='cpu',weights_only=True)
-    expected = 'visual.trunk.blocks.'+str(len(model.visual.trunk.blocks)-1)
     if saved['module'] != expected or report['trained_module'] != expected: raise ValueError('Wrong trained module')
     model.get_submodule(expected).load_state_dict(saved['state_dict'],strict=True)
     rankings['adapted'] = encode()
@@ -98,10 +108,12 @@ def main():
         questions.append({'question':'Q'+str(i+1),'query_id':query[0],'query_credit':query_rows[i].get('credit'),
             'candidates':choices,'response':None})
     (args.output/'questions.json').write_text(json.dumps({'purpose':'qualitative_model_blind_comparison','questions':questions,
-        'limits':'Three existing calibration queries, no independent held-out claim. Candidate gallery was used for weak text training. No human score yet.'},indent=2),encoding='utf-8')
+        'limits':'Exploratory queries; candidate gallery was used for weak text training. Product/duplicate groups unresolved; no independent product-disjoint quality claim. No human score yet.'},indent=2),encoding='utf-8')
     (args.output/'model_mapping_private.json').write_text(json.dumps(mapping,indent=2),encoding='utf-8')
     print(json.dumps({'query_sheets':len(queries),'gallery_images':len(gallery),'same_gallery_before_after':True,
-        'checkpoint_sha256':report['checkpoint_sha256'],'quality_evaluated':False,'device':torch.cuda.get_device_name(0)}),flush=True)
+        'checkpoint_sha256':report['checkpoint_sha256'],
+        'initial_checkpoint_sha256':initial['checkpoint_sha256'] if initial else None,
+        'quality_evaluated':False,'device':torch.cuda.get_device_name(0)}),flush=True)
 
 
 if __name__ == '__main__':

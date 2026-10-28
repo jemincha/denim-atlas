@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "packet_id": "denim-atlas-calibration-round2-v1",
+  "packet_sha256": "730f66b4127d38def8b68f37a17c95edf7e5a445cd9a93bebaaa35e644472b9c",
+  "ratings_sha256": "aaba2ce7441da2eaabd015b33ad42f0acdd61932cc94dc30c63311698092ed12",
+  "answered_trials": 54,
+  "missing_trials": 0,
+  "uncertain_trials": 0,
+  "usable_unique_pairs": 51,
+  "repeated_pairs": 3,
+  "exact_repeat_matches": 3,
+  "conflicting_repeat_pairs": 0,
+  "grade_counts": {
+    "1": 12,
+    "0": 32,
+    "2": 6,
+    "3": 1
+  },
+  "by_query": [
+    {
+      "query": "Q1",
+      "grade_counts": {
+        "1": 3,
+        "0": 10,
+        "2": 3,
+        "3": 1
+      },
+      "clear_positive_count": 4,
+      "clear_negative_count": 10
+    },
+    {
+      "query": "Q2",
+      "grade_counts": {
+        "2": 2,
+        "1": 6,
+        "0": 9
+      },
+      "clear_positive_count": 2,
+      "clear_negative_count": 9
+    },
+    {
+      "query": "Q3",
+      "grade_counts": {
+        "0": 13,
+        "1": 3,
+        "2": 1
+      },
+      "clear_positive_count": 1,
+      "clear_negative_count": 13
+    }
+  ],
+  "training_triplet_combinations": 71,
+  "downloaded_exports": 2,
+  "duplicate_export_rating_content": true,
+  "cross_round_shared_source_images": 2,
+  "cross_round_comparable_pairs": 6,
+  "cross_round_source_grade_differences": 4,
+  "round1_labels_merged": false,
+  "limits": "Single rater; three repeats do not establish population reliability. Prior and new views of two source images stay separate; old labels are not merged into this training run. These are calibration/training judgments, not held-out test labels."
+}

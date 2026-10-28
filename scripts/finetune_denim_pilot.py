@@ -10,11 +10,11 @@ import time
 
 try:
     from .extract_features import REVISION, WEIGHT_SHA256, reviewed_crops
-    from .evaluate import unique_object
+    from .evaluate import unique_object, ndcg_at_5
     from .import_judgments import import_ratings
 except ImportError:
     from extract_features import REVISION, WEIGHT_SHA256, reviewed_crops
-    from evaluate import unique_object
+    from evaluate import unique_object, ndcg_at_5
     from import_judgments import import_ratings
 
 
@@ -33,11 +33,24 @@ def training_triplets(packet, ratings):
     return triples
 
 
+def initial_checkpoint(root):
+    report = json.loads((root/'training_report.json').read_text(encoding='utf-8'),object_pairs_hook=unique_object)
+    path = root/'last_block.pt'
+    if (report.get('base_revision') != REVISION or report.get('base_weights_sha256') != WEIGHT_SHA256
+            or hashlib.sha256(path.read_bytes()).hexdigest() != report.get('checkpoint_sha256')):
+        raise ValueError('Initial checkpoint provenance mismatch')
+    return path, report
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--input-root', type=Path, required=True)
     parser.add_argument('--output', type=Path, required=True)
+    parser.add_argument('--initial-run', type=Path, help='Continue a checksum-verified trained block with fresh optimizer')
+    parser.add_argument('--steps', type=int, default=40)
     args = parser.parse_args()
+    if not 1 <= args.steps <= 1000:
+        parser.error('steps must be 1..1000')
     if not Path('/kaggle/working').is_dir():
         parser.error('Kaggle GPU only; no local training')
     if args.output.exists():
@@ -57,7 +70,7 @@ def main():
     import torch.nn.functional as F
     import open_clip
     from huggingface_hub import snapshot_download
-    from PIL import Image
+    from PIL import Image, ImageOps
     if not torch.cuda.is_available():
         parser.error('CUDA required; no CPU fallback')
     if importlib.metadata.version('open_clip_torch') != '3.3.0':
@@ -75,28 +88,47 @@ def main():
     blocks = model.visual.trunk.blocks
     module_name = 'visual.trunk.blocks.'+str(len(blocks)-1)
     module = model.get_submodule(module_name)
+    parent = None
+    if args.initial_run:
+        path, parent = initial_checkpoint(args.initial_run)
+        saved = torch.load(path,map_location='cpu',weights_only=True)
+        if saved['module'] != module_name or parent['trained_module'] != module_name:
+            raise ValueError('Initial trainable module mismatch')
+        module.load_state_dict(saved['state_dict'],strict=True)
     module.requires_grad_(True)
     optimizer = torch.optim.AdamW(module.parameters(),lr=1e-5,weight_decay=0.01)
-    scaler = torch.amp.GradScaler('cuda')
     tensors = {}
+    target = model.visual.image_size
+    if isinstance(target,int): target = (target,target)
     for identity,path,checksum in crops:
         assert hashlib.sha256(path.read_bytes()).hexdigest() == checksum
         with Image.open(path) as image:
             assert image.mode == 'RGB'
-            tensors[identity] = preprocess(image)
+            tensors[identity] = preprocess(ImageOps.pad(image,target,color='white'))
     def digest():
         h = hashlib.sha256()
         for name,value in module.state_dict().items():
             h.update(name.encode());h.update(value.detach().cpu().contiguous().numpy().tobytes())
         return h.hexdigest()
-    def fitting_loss():
-        with torch.inference_mode(),torch.autocast('cuda',dtype=torch.float16):
+    labels = {(r['query_id'],r['candidate_id']):r['grade'] for r in import_ratings(packet,ratings)['judged_unique_pairs']}
+    def fitting_metrics():
+        with torch.inference_mode():
             encoded = {key:model.encode_image(value.unsqueeze(0).cuda(),normalize=True).float()[0]
                        for key,value in tensors.items()}
             losses = [torch.relu(0.1-(encoded[q]*encoded[p]).sum()+(encoded[q]*encoded[n]).sum())
                       for q,p,n in triples]
-        return torch.stack(losses).mean().item()
-    before_hash,before_loss = digest(),fitting_loss()
+        scores = []
+        for i,query in enumerate(packet['queries']):
+            q=query['id']; pool=packet['candidate_pools'][i]
+            complete=all((q,c) in labels for c in pool)
+            ordered=sorted(pool,key=lambda c:(-float(encoded[q]@encoded[c]),c))
+            scores.append({'query_id':q,'fully_judged_pool':complete,
+                'training_pool_ndcg_at_5':ndcg_at_5([labels[q,c] for c in ordered]) if complete else None})
+        return torch.stack(losses).mean().item(),scores
+    before_hash = digest()
+    if parent and before_hash != parent['module_sha256_after']:
+        raise ValueError('Initial block digest mismatch')
+    before_loss,before_scores = fitting_metrics()
     args.output.mkdir(parents=True,exist_ok=False)
     (args.output/'triplets.json').write_text(json.dumps({'purpose':'training_only_overfit_pilot',
         'triplets':triples,'packet_sha256':packet['packet_sha256']}),encoding='utf-8')
@@ -104,27 +136,27 @@ def main():
     started = time.perf_counter()
     history = []
     order = list(triples);rng.shuffle(order)
-    for step in range(40):
+    for step in range(args.steps):
         query,positive,negative = order[step % len(order)]
         batch = torch.stack([tensors[k] for k in (query,positive,negative)]).cuda()
         optimizer.zero_grad(set_to_none=True)
-        with torch.autocast('cuda',dtype=torch.float16):
-            encoded = model.encode_image(batch,normalize=True).float()
-            loss = torch.relu(0.1-F.cosine_similarity(encoded[0:1],encoded[1:2])
-                              +F.cosine_similarity(encoded[0:1],encoded[2:3])).mean()
+        encoded = model.encode_image(batch,normalize=True).float()
+        loss = torch.relu(0.1-F.cosine_similarity(encoded[0:1],encoded[1:2])
+                          +F.cosine_similarity(encoded[0:1],encoded[2:3])).mean()
         assert torch.isfinite(loss).item()
-        scaler.scale(loss).backward();scaler.unscale_(optimizer)
+        loss.backward()
         norm = torch.nn.utils.clip_grad_norm_(module.parameters(),1.0,error_if_nonfinite=True)
-        scaler.step(optimizer);scaler.update()
+        optimizer.step()
         history.append({'step':step+1,'sample_hinge_loss':loss.item(),'gradient_norm':norm.item()})
         if (step+1)%10 == 0: print(json.dumps(history[-1]),flush=True)
-    after_hash,after_loss = digest(),fitting_loss()
+    after_hash = digest()
+    after_loss,after_scores = fitting_metrics()
     assert after_hash != before_hash, 'No learned parameter update'
     checkpoint = args.output/'last_block.pt'
     torch.save({'module':module_name,'state_dict':module.state_dict(),
-        'optimizer':optimizer.state_dict(),'scaler':scaler.state_dict(),
+        'optimizer':optimizer.state_dict(),
         'torch_rng':torch.get_rng_state(),'cuda_rng':torch.cuda.get_rng_state_all(),
-        'step':40,'model_revision':REVISION,'weights_sha256':WEIGHT_SHA256,
+        'step':args.steps,'model_revision':REVISION,'weights_sha256':WEIGHT_SHA256,
         'packet_sha256':packet['packet_sha256'],'purpose':'training_only_overfit_pilot'},checkpoint)
     saved = torch.load(checkpoint,map_location='cpu',weights_only=True)
     with torch.no_grad(): next(module.parameters()).zero_()
@@ -135,10 +167,15 @@ def main():
         'base_weights_sha256':WEIGHT_SHA256,'trained_module':module_name,
         'trainable_parameters':sum(p.numel() for p in module.parameters()),
         'real_images':len(crops),'queries':len(packet['queries']),
-        'triplet_combinations':len(triples),'optimizer_steps':40,'seed':17,
+        'triplet_combinations':len(triples),'optimizer_steps':args.steps,'seed':17,'precision':'fp32',
+        'initial_checkpoint_sha256':parent['checkpoint_sha256'] if parent else None,
+        'source_summary_sha256':parent.get('source_summary_sha256') if parent else None,
+        'optimizer_initialization':'fresh; parent optimizer intentionally not restored',
+        'preprocessing':'fixed white letterbox, original color; no random crop/jitter',
         'learning_rate':1e-5,'cosine_margin':0.1,'weight_decay':0.01,
         'all_training_triplets_hinge_before':before_loss,
         'all_training_triplets_hinge_after':after_loss,'history':history,
+        'training_pool_results_before':before_scores,'training_pool_results_after':after_scores,
         'module_sha256_before':before_hash,'module_sha256_after':after_hash,
         'checkpoint_roundtrip_verified':True,'checkpoint_bytes':checkpoint.stat().st_size,
         'checkpoint_verification_scope':'Trainable block weights restored in same kernel; interrupted-job determinism not tested',

@@ -4,22 +4,24 @@
 
 사진 속 데님의 색·톤·페이딩·워싱·실루엣을 비교하는 작은 ML 연구 과제입니다. 개인 취향, 원래 원단 색 복원, 모바일 앱은 현재 범위에 포함하지 않습니다.
 
-## Current snapshot — October 27, 2026
+## Current snapshot — October 29, 2026
 
 | Area | Verified state |
 |---|---|
 | Model / compute | Marqo fashionSigLIP inference, synthetic backward and checkpoint checks passed on Kaggle T4 |
 | Evaluation | Fixed-pool nDCG@5, strict candidate validation and product/duplicate/image split checks implemented |
 | Baselines | Cosine B0 and mean-RGB control B1 implemented; ranking-to-evaluation CLI tested on synthetic vectors |
-| Local tests | 43 passed on Python 3.12; includes archive checksum rejection, visual-whitelist inputs, deduplication, cross-round judgment provenance and evaluation safeguards |
+| Local tests | 44 passed on Python 3.12; includes archive checksum rejection, visual-whitelist inputs, deduplication, cross-round judgment provenance and evaluation safeguards |
 | Data | GLAMI expanded to 1,200 verified images (includes earlier 300); 512 name-filtered candidates visually inspected by Codex, 347 whitelisted. Product grouping remains unresolved; ABO 600 excluded |
 | Real-image execution | 24 reviewed GLAMI crops encoded on T4; 768-D features and exploratory B0/B1 neighbor boards saved |
 | Calibration nDCG@5 (B0 / B1) | Q2: **0.641 / 0.640**; Q3: **0.530 / 0.447**. Single-rater pilot, 24 candidates; Q1 excluded |
 | First fine-tuning | Last vision block, 7,087,872 parameters, 40 real-label steps. Training hinge loss **0.0794 → 0.0185**; checkpoint weight restoration passed |
 | Expanded adaptation | 347 visually screened GLAMI images, weak product-description supervision, 2 epochs / 44 steps on T4. Fixed-batch training loss **0.8651 → 0.8233**; checkpoint restoration verified. Separate from human similarity labels |
-| Retrieval diagnostic | All three existing query cases had identical ranked top-5 before/after adaptation on the same 347-image gallery. No demonstrated retrieval improvement |
+| Weak-text retrieval diagnostic | All three existing query cases had identical ranked top-5 before/after weak adaptation on the 347-image gallery |
+| Human-label continuation | 51 round-2 pairs, 71 triplet combinations, 142 FP32 steps from the 347-image checkpoint. Training-pool mean nDCG@5 **0.4493 → 0.8526**; hinge **0.06014 → 0**. Same 3 queries / 17 candidates, not unseen quality |
+| Human-continuation retrieval | Top-5 ranks changed for all 3 training and all 3 new query photos on the 347-image gallery. New-query relevance grades pending; rank changes alone are not improvement |
 | Held-out quality | **Not measured**; current three queries are now training data, with product groups and independent splits pending |
-| Human judgments | First single-rater calibration export received: 75/75 trials; 71 usable unique pairs, one conflicting repeat pair excluded. No held-out quality result |
+| Human judgments | Two single-rater exports: first round 75 trials / 71 usable pairs; second round 54 trials / 51 usable pairs, repeats 3/3 consistent. Round-1 labels were not merged into the continuation |
 
 Wearing-photo supply follow-up: a bounded Commons pilot acquired 24 attributed
 CC0/CC BY previews. A user-authorized Unsplash Lite audit processed 25,000 photo
@@ -30,7 +32,7 @@ Calibration numbers above were recorded before training. The first fine-tuning r
 
 ## Human and AI contributions
 
-This is an AI-assisted research project. Codex assisted with implementation, tests, source investigation, preliminary visual screening/crop review and experiment execution. The researcher supplied all 75 appearance-relevance judgments through a rank-blind sheet; AI screening is not human ground truth. The researcher owns study decisions and result interpretation. Single-rater calibration is reported separately from future independent evaluation.
+This is an AI-assisted research project. Codex assisted with implementation, tests, source investigation, preliminary visual screening/crop review and experiment execution. The researcher supplied all appearance-relevance judgments (75 first-round and 54 second-round trials) through a rank-blind sheet; AI screening is not human ground truth. The researcher owns study decisions and result interpretation. Single-rater calibration is reported separately from future independent evaluation.
 
 ## Research question
 
@@ -49,7 +51,7 @@ The second command needs reviewed benchmark/features; paths and weight are examp
 
 ## Next milestone
 
-Sprint paused at the researcher's request. A second rank-blind judgment packet is ready: 3 queries × 17 candidates, plus 3 repeats (54 trials). Identical A/B lists do not need preference judging; the next learning signal is the researcher's image-pair grades. Keep previous calibration queries out of future held-out claims and review product/duplicate groups before splitting expanded data. Official Kaggle CLI remote execution is verified.
+Round-2 human-label continuation and retrieval inspection completed. Both checkpoints are frozen and a new rank-blind 54-trial packet is ready for three different wearing-photo queries on the same 347-image gallery. This next check concerns new query images; the gallery was used for weak adaptation and product groups remain unresolved. Keep its labels out of training until the comparison is recorded. See [round-2 protocol and evidence](docs/HUMAN_ROUND2.md).
 
 ## Documentation and evidence
 
@@ -57,6 +59,7 @@ Sprint paused at the researcher's request. A second rank-blind judgment packet i
 - [Benchmark schema, human-judgment rubric and evaluation](docs/EVALUATION.md)
 - [Single-rater calibration packet and next labeling step](docs/JUDGMENT_ROUND1.md)
 - [First real-label fine-tuning run](docs/TRAINING_PILOT.md)
+- [Human round-2 continuation and new-query check](docs/HUMAN_ROUND2.md)
 - [Expanded GLAMI data, visual screening and weak text adaptation](docs/GLAMI_EXPANSION.md)
 - [Open-source reuse review and adoption decisions](docs/OPEN_SOURCE_REVIEW.md)
 - [Remote feature extraction and B0/B1 runbook](docs/BASELINES.md)

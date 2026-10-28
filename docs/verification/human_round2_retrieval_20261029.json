@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "job": "jemincha/denim-atlas-human-round2-retrieval-review",
+  "job_version": 2,
+  "gallery_images": 347,
+  "same_gallery_before_after": true,
+  "before_checkpoint_sha256": "33c274a744ff15e03c8f9383f2297c2f61ecc8652cb1ad88b565b130ba882532",
+  "after_checkpoint_sha256": "13f9bae82346d36661ecde4dcebdf2923895c9a8dade0d28ff7d9518ca395667",
+  "query_sets": [
+    {
+      "query_set": "training",
+      "queries": [
+        {
+          "query": "Q1",
+          "same_ranked_top5": false,
+          "shared_top5_count": 2
+        },
+        {
+          "query": "Q2",
+          "same_ranked_top5": false,
+          "shared_top5_count": 1
+        },
+        {
+          "query": "Q3",
+          "same_ranked_top5": false,
+          "shared_top5_count": 2
+        }
+      ],
+      "changed_ranked_top5_count": 3
+    },
+    {
+      "query_set": "new_query",
+      "queries": [
+        {
+          "query": "Q1",
+          "same_ranked_top5": false,
+          "shared_top5_count": 3
+        },
+        {
+          "query": "Q2",
+          "same_ranked_top5": false,
+          "shared_top5_count": 4
+        },
+        {
+          "query": "Q3",
+          "same_ranked_top5": false,
+          "shared_top5_count": 3
+        }
+      ],
+      "changed_ranked_top5_count": 3
+    }
+  ],
+  "quality_evaluated": false,
+  "limits": "Rank changes are not quality improvement. New-query labels pending; gallery used for weak adaptation; independent product groups unresolved. Version 1 failed before model comparison on an incorrect acquisition filename."
+}

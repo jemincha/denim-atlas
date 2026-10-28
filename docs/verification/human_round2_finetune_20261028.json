@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "training_run": true,
+  "held_out_evaluation": false,
+  "purpose": "training_only_overfit_pilot",
+  "base_revision": "c56244cc94f92419e8369fa71efdaf403b124ce8",
+  "base_weights_sha256": "88908200434959fa3154ef79d408aac33341e8797fe5ca8ca6f0463aab32e6b3",
+  "trained_module": "visual.trunk.blocks.11",
+  "trainable_parameters": 7087872,
+  "real_images": 20,
+  "queries": 3,
+  "triplet_combinations": 71,
+  "optimizer_steps": 142,
+  "seed": 17,
+  "precision": "fp32",
+  "initial_checkpoint_sha256": "33c274a744ff15e03c8f9383f2297c2f61ecc8652cb1ad88b565b130ba882532",
+  "source_summary_sha256": "3018cab43d6b9a9e081dd35a483fbd2d741709489cad4032fc1248e7bbbb1888",
+  "optimizer_initialization": "fresh; parent optimizer intentionally not restored",
+  "preprocessing": "fixed white letterbox, original color; no random crop/jitter",
+  "learning_rate": 1e-05,
+  "cosine_margin": 0.1,
+  "weight_decay": 0.01,
+  "all_training_triplets_hinge_before": 0.060140687972307205,
+  "all_training_triplets_hinge_after": 0.0,
+  "module_sha256_before": "5a59e61684b95eb1ec9ed26dfe652805b2f08a75f2e32f2c7bbd72b9ca9e6811",
+  "module_sha256_after": "64df601c4f0cc1a4e27e378e07d7a50f8d6c5e411df335cff6979fd5ba833ede",
+  "checkpoint_roundtrip_verified": true,
+  "checkpoint_bytes": 85076085,
+  "checkpoint_verification_scope": "Trainable block weights restored in same kernel; interrupted-job determinism not tested",
+  "training_script_sha256": "5b113310d7f0076e39e7111b486f9ec3ed3322595a8ca12a4e0aadedd9e7bdd4",
+  "checkpoint_sha256": "13f9bae82346d36661ecde4dcebdf2923895c9a8dade0d28ff7d9518ca395667",
+  "seconds": 7.388277314999982,
+  "peak_allocated_gib": 0.8828439712524414,
+  "device": "Tesla T4",
+  "packages": {
+    "torch": "2.11.0+cu128",
+    "torchvision": "0.26.0+cu128",
+    "open_clip_torch": "3.3.0",
+    "timm": "1.0.29",
+    "Pillow": "13.0.0"
+  },
+  "input_sha256": {
+    "packet": "ccc08bdb5f42fb463ed83db59c604889f21310517994bc94b6de4a5e66fe2d2c",
+    "ratings": "aaba2ce7441da2eaabd015b33ad42f0acdd61932cc94dc30c63311698092ed12",
+    "manifest": "6c4324bdd41e8aa3706c7e9fcfb410c0f2e6b0787dc775c0c8b1c1595751b9c6"
+  },
+  "limits": "All three calibration queries used for training. Product groups unresolved; no unseen-quality claim. No color jitter or random crops.",
+  "job": "jemincha/denim-atlas-human-round2-fine-tuning",
+  "job_version": 1,
+  "query_labels": [
+    "Q1",
+    "Q2",
+    "Q3"
+  ],
+  "pool_candidates_per_query": 17,
+  "training_pool_ndcg_at_5_before": [
+    0.7563931449258221,
+    0.26261611549809705,
+    0.3288315337890528
+  ],
+  "training_pool_macro_ndcg_at_5_before": 0.4492802647376573,
+  "training_pool_ndcg_at_5_after": [
+    0.8777069972374096,
+    0.937708058067494,
+    0.7424693355471289
+  ],
+  "training_pool_macro_ndcg_at_5_after": 0.8526281302840109
+}

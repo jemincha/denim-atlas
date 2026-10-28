@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "packet_id": "denim-atlas-new-query-round3-v1",
+  "packet_sha256": "235330fe3f5e205dc4e17b5fa116f736a310342a9e9d605825968dfb975984c8",
+  "queries": 3,
+  "candidates": 17,
+  "unique_pairs": 51,
+  "repeat_trials": 3,
+  "total_trials": 54,
+  "judgments": 0,
+  "model_names_and_ranks_hidden": true,
+  "query_source_overlap_with_prior_training": 0,
+  "gallery_images": 347,
+  "gallery_used_for_weak_adaptation": true,
+  "independent_product_groups_verified": false,
+  "purpose": "calibration_only",
+  "next_use": "Compare frozen checkpoints before further fitting",
+  "query_crop_sha256": [
+    "97f9e41e6de79829d9c1b1d3e23184e40bc473d1082082a6b1c5c184f07d0bf6",
+    "bd4f13e87095aaa8b96398bc6fdaf306e9a5e1896cb153eacb44e6e6d9f07e94",
+    "0650184eb00dafa8611c596feeb57e83cfc3ea4409ab9b4a2b2e1c5aa800059b"
+  ],
+  "template_sha256": "0fc623ff3cd4bf796571429698eacea74e4b257f1e1a93b2ca9d7a06e0da83c4",
+  "private_html_sha256": "0715c734736c89d36e1ae0a5211b8a2fddd1885359e7f4e3511a1fe98d1890f6"
+}

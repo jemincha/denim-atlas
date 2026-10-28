@@ -19,3 +19,5 @@ Prioritize data/appearance coverage, image suitability and candidate mining befo
 Product/duplicate groups and independent splits remain unresolved. Seller-image and checkpoint publication rights are not established. No access-request check this sprint.
 
 [Protocol, results and revised workflow](docs/HUMAN_ROUND2.md) · [Result evidence](docs/verification/new_query_round3_results_20261029.json)
+
+Methodology review completed: [primary-source benchmark and proposed sprint](docs/METHODOLOGY_BENCHMARK.md). The nearest reference is attribute-specific similarity learning. Audit available supervision before changing the architecture or requesting another rating batch; the detailed sprint is a proposal, not an executed experiment.

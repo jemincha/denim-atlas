@@ -55,6 +55,7 @@ The new-query comparison is complete and did not demonstrate improvement. Stop e
 
 ## Documentation and evidence
 
+- [Methodology benchmark, project diagnosis and proposed next sprint](docs/METHODOLOGY_BENCHMARK.md)
 - [Research design, project history, model acquisition and recorded measurements](docs/RESEARCH.md)
 - [Benchmark schema, human-judgment rubric and evaluation](docs/EVALUATION.md)
 - [Single-rater calibration packet and next labeling step](docs/JUDGMENT_ROUND1.md)

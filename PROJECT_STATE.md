@@ -1,22 +1,21 @@
 # Denim Atlas — 2026-10-29
 
-Research target: retrieve different denim products matching observed color/tone, wash/fading and silhouette. No personal-taste objective, color restoration or app UI.
+Goal: retrieve different denim products matching observed color/tone, wash/fading and silhouette. No personal-taste objective or app UI.
 
 ## Evidence
 
-- GLAMI: 1,200 acquired images; 512 visually inspected by Codex, 347 whitelisted. Low-resolution blue/gray studio bias; source archive checksum verified.
-- Weak-text adaptation: 347 images, 44 steps, loss 0.865115 → 0.823334. Old queries' top-5 initially unchanged.
-- Round-2 human export: 54 trials / 51 unique pairs; three repeats consistent. Old labels not merged.
-- Continued last vision block from the weak-text checkpoint: 71 triplet combinations, 142 FP32 steps. Training-pool mean nDCG@5 **0.4493 → 0.8526**; hinge 0.06014 → 0. Checkpoint restoration verified. These are training fitting figures.
-- Retrieval review completed: all three training and all three new query top-5 rankings changed. New-query relevance remains unjudged.
-- 44 local tests pass. Model weights and bulk data stay remote; official Kaggle CLI works.
+- GLAMI: 1,200 acquired images; 512 visually reviewed by Codex, 347 whitelisted. Low-resolution blue/gray studio bias.
+- Weak-text adaptation: 347 images / 44 steps. Human continuation: 51 round-2 pairs, 71 triplet combinations / 142 FP32 steps. Training-pool nDCG@5 0.4493 → 0.8526; checkpoint restoration verified.
+- New-query round completed: 54 trials / 51 unique pairs, three consistent repeats, no missing/uncertain responses. Grades 0:37, 1:9, 2:4, 3:1.
+- Frozen weak-text versus human-continuation new-query nDCG@5 **0.3841 → 0.3513**; grade >=2 precision@5 0.2000 → 0.1333. Three query photos, same training gallery. No demonstrated generalization improvement.
+- 46 local tests pass. Weights/bulk images stay remote; raw ratings/images stay private.
 
-## Current human-input gate
+## Next work
 
-New packet `denim-atlas-new-query-round3-v1`: 3 different Commons wearing-photo crops × 17 candidates + 3 repeats = 54 trials. Private directory `data/private/judgment_round3/packet/`; localhost port 8879. Original round-2 export preserved. Await researcher JSON; do not assign grades.
+No human-input gate or pending GPU training. The researcher reported that obviously dissimilar candidates waste labeling effort. Stop full cross-query rating grids; query-specific pools are now supported and tested. Retrospective count: 23 rather than 54 trials, but 13/20 corresponding model-selected pairs were still zero. Two positives were found only in the wider pool; filtering needs a coverage audit.
 
-On receipt: import with provenance checks, handle repeat conflicts/uncertainty, then compare the frozen weak-text and human-continuation rankings on the fully judged fixed pool before further fitting. Packet and checkpoint hashes are in the linked evidence. No pending GPU run.
+Prioritize data/appearance coverage, image suitability and candidate mining before requesting small batches of plausible/uncertain pairs. Machine attributes are weak supervision, not human grades. Keep frozen evaluation candidates separate from training-label mining; never hide bad retrievals from scoring. Existing new-query labels remain outside further fitting.
 
-New queries were not trained on, but the 347-image gallery was used for weak adaptation. Product/duplicate groups and independent splits remain unresolved. Rank changes alone are not improved quality. Raw images, ratings and weights remain private; publication rights for seller images/derived weights are unresolved. Access-request status was not checked this sprint.
+Product/duplicate groups and independent splits remain unresolved. Seller-image and checkpoint publication rights are not established. No access-request check this sprint.
 
-[Protocol and evidence](docs/HUMAN_ROUND2.md) · [Research design](docs/RESEARCH.md)
+[Protocol, results and revised workflow](docs/HUMAN_ROUND2.md) · [Result evidence](docs/verification/new_query_round3_results_20261029.json)

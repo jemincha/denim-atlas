@@ -1,0 +1,135 @@
+{
+  "schema_version": 1,
+  "packet_id": "denim-atlas-new-query-round3-v1",
+  "packet_sha256": "235330fe3f5e205dc4e17b5fa116f736a310342a9e9d605825968dfb975984c8",
+  "ratings_sha256": "55c044d5a3c3d85351d9695c6e7ef86cfb2e80e6e4c3fa939419f35c688efef5",
+  "answered_trials": 54,
+  "missing_trials": 0,
+  "uncertain_trials": 0,
+  "unique_pairs": 51,
+  "repeat_checks": 3,
+  "exact_repeat_matches": 3,
+  "conflicting_pairs": 0,
+  "grade_counts": {
+    "0": 37,
+    "1": 9,
+    "3": 1,
+    "2": 4
+  },
+  "queries": [
+    {
+      "query": "Q1",
+      "pool_size": 17,
+      "pool_positive_grade_ge2": 1,
+      "methods": {
+        "adapted": {
+          "ndcg_at_5": 0.0,
+          "top5_grades": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "precision_at_5_grade_ge2": 0.0
+        },
+        "starting": {
+          "ndcg_at_5": 0.0,
+          "top5_grades": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "precision_at_5_grade_ge2": 0.0
+        }
+      }
+    },
+    {
+      "query": "Q2",
+      "pool_size": 17,
+      "pool_positive_grade_ge2": 1,
+      "methods": {
+        "starting": {
+          "ndcg_at_5": 0.3672919835537663,
+          "top5_grades": [
+            1,
+            0,
+            0,
+            1,
+            1
+          ],
+          "precision_at_5_grade_ge2": 0.0
+        },
+        "adapted": {
+          "ndcg_at_5": 0.3155742573859003,
+          "top5_grades": [
+            0,
+            1,
+            1,
+            1,
+            0
+          ],
+          "precision_at_5_grade_ge2": 0.0
+        }
+      }
+    },
+    {
+      "query": "Q3",
+      "pool_size": 17,
+      "pool_positive_grade_ge2": 3,
+      "methods": {
+        "starting": {
+          "ndcg_at_5": 0.78506356172312,
+          "top5_grades": [
+            2,
+            0,
+            2,
+            0,
+            2
+          ],
+          "precision_at_5_grade_ge2": 0.6
+        },
+        "adapted": {
+          "ndcg_at_5": 0.7383121460922933,
+          "top5_grades": [
+            2,
+            2,
+            0,
+            1,
+            0
+          ],
+          "precision_at_5_grade_ge2": 0.4
+        }
+      }
+    }
+  ],
+  "macro_ndcg_at_5": {
+    "starting": 0.38411851509229544,
+    "adapted": 0.3512954678260645
+  },
+  "macro_precision_at_5_grade_ge2": {
+    "starting": 0.19999999999999998,
+    "adapted": 0.13333333333333333
+  },
+  "before_checkpoint_sha256": "33c274a744ff15e03c8f9383f2297c2f61ecc8652cb1ad88b565b130ba882532",
+  "after_checkpoint_sha256": "13f9bae82346d36661ecde4dcebdf2923895c9a8dade0d28ff7d9518ca395667",
+  "query_source_overlap_with_prior_training": 0,
+  "gallery_images": 347,
+  "gallery_used_for_weak_adaptation": true,
+  "labels_used_for_further_training": false,
+  "independent_product_groups_verified": false,
+  "judgment_budget_audit": {
+    "actual_unique_pairs": 51,
+    "actual_trials_with_repeats": 54,
+    "own_query_top5_union_unique_pairs": 20,
+    "own_query_top5_union_zero_pairs": 13,
+    "cross_query_extra_pairs": 31,
+    "cross_query_extra_zero_pairs": 24,
+    "own_query_union_trials_with_repeats": 23,
+    "simulation_only_no_replacement_packet_issued": true
+  },
+  "metric_scope": "Descriptive nDCG@5 using 2^grade-1 and the entire fully judged fixed 17-candidate pool per query for IDCG. Frozen saved top-5 lists supply DCG; remaining 12 grades affect IDCG only. No unjudged gallery item is imputed as zero. This is not the group-validated benchmark CLI.",
+  "limits": "Three new query images, one rater, partial crops, training gallery and unresolved product/duplicate groups. Lower scores do not establish a statistically general effect or its cause. Query-specific top-5 unions alone would miss two positive pairs discovered in the wider cross-query pool; future evaluation needs coverage audits. No rank-driven relevance filtering of evaluation results."
+}

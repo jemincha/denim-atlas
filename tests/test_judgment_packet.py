@@ -13,6 +13,28 @@ def asset(identity):
 
 
 class PacketTests(unittest.TestCase):
+    def test_query_specific_pools_avoid_cross_query_trials(self):
+        queries=[asset('q1'),asset('q2')]
+        gallery=[asset('a'),asset('b'),asset('c'),asset('d')]
+        pools={'q1':['a','b'],'q2':['b','c','d']}
+        data=packet(queries,gallery,pools=pools)
+        self.assertEqual(data,packet(queries,gallery,pools=pools))
+        self.assertEqual(len(data['trials']),7)
+        for qi,query in enumerate(queries):
+            trials=[t for t in data['trials'] if t['query']==qi]
+            self.assertEqual({gallery[t['candidate']]['id'] for t in trials},set(pools[query['id']]))
+            self.assertEqual(sum(t['repeat'] for t in trials),1)
+        export={k:data[k] for k in ('schema_version','packet_id','packet_sha256','rater_id','purpose')}
+        export['ratings']=[{'trial_id':t['trial_id'],'grade':0} for t in data['trials']]
+        self.assertEqual(len(import_ratings(data,export)['judged_unique_pairs']),5)
+
+    def test_rejects_incomplete_unknown_duplicate_or_empty_pools(self):
+        for pools in ({}, {'q':['a','missing']}, {'q':['a','a']},
+                      {'q':[]}, {'q':['a']}, {'q':['a',False]},
+                      {'q':'ab'}, {'other':['a','b']}):
+            with self.subTest(pools=pools),self.assertRaises(ValueError):
+                packet([asset('q')],[asset('a'),asset('b')],pools=pools)
+
     def test_round_ids_separate_provenance_and_export_names(self):
         q,c=[asset('q')],[asset('a'),asset('b')]
         old=packet(q,c)

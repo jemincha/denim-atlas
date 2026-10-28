@@ -44,3 +44,30 @@ Packet `denim-atlas-new-query-round3-v1` is hashed before labels; [preparation e
 After receiving the researcher's export, validate provenance, repeats, uncertainty and pool completeness. Compute both frozen rankings against the same completely judged 17-candidate pool before any new training. Do not score unjudged gallery images as zero. Preserve these observations as exploratory new-query evidence; product-disjoint generalization is still untested.
 
 Version 1 of the retrieval-only job stopped before model comparison because its launcher looked for the wrong acquisition filename. Version 2 uses the verified `screening_images.jsonl`; checkpoints and candidate-selection rules were unchanged. No repeated training or label-driven checkpoint selection occurred.
+
+## New-query results and labeling-cost correction — October 29
+
+The researcher supplied all 54 trials. All three repeats matched; no missing, uncertain or conflicting responses. The 51 unique pairs were graded **0:37, 1:9, 2:4, 3:1**. No new-query labels were used for additional training.
+
+| New query | Weak-text parent nDCG@5 | Human continuation nDCG@5 |
+|---|---:|---:|
+| Q1 | 0.0000 | 0.0000 |
+| Q2 | 0.3673 | 0.3156 |
+| Q3 | 0.7851 | 0.7383 |
+| Macro mean | **0.3841** | **0.3513** |
+
+Mean precision@5 for grade >=2 was 0.2000 → 0.1333. Both methods returned no grade >=2 item in their top-5 for Q1 or Q2, even though this wider judged pool contained one such item for each. The positive items were therefore present in the candidate material; insufficient gallery coverage alone cannot explain these misses. Training-set fitting did not demonstrate improved relevance for these three new photos. This sample cannot establish a general statistical effect or isolate overfitting, domain shift or data coverage as the cause.
+
+Scores use the frozen saved top-5 lists for DCG and all 17 completely judged candidates per query for IDCG (`2^grade-1`). Remaining candidates' arbitrary order below rank five does not affect nDCG@5. Unjudged gallery images were not assigned zero. This is a descriptive new-query calculation using the shared metric function, not an assertion that the strict product-group benchmark requirements were satisfied. [Aggregate results and budget audit](verification/new_query_round3_results_20261029.json).
+
+The packet design created avoidable work: it combined candidates retrieved for three different queries and then asked for every query/candidate combination. Only 20 of 51 pairs belonged to their own query's top-5 union. Query-specific pools would have produced **23 trials including three repeats**, versus 54 actually completed; this is a retrospective count, not a measured time saving. Of those 20 pairs, 13 were still zero. The wider cross-query pool also discovered two positives outside the corresponding models' top-5 unions, so simply shrinking the pool does not solve retrieval or coverage.
+
+### Revised workflow
+
+- Stop issuing full cross-query rating grids. Build future packets with `build_judgment_packet.py --pools <query_to_candidate_ids.json>`. Each query has its own fixed candidate IDs, randomized presentation and a repeat. Existing packet/export provenance remains unchanged.
+- Codex first audits image suitability, crop/view diversity, known duplicates and appearance coverage; source descriptions or machine attributes are weak supervision, not human relevance truth. Mine candidates per query and inspect batches before requesting more labels. Do not manufacture a positive when no suitable candidate exists.
+- For training-data collection, request small batches concentrating on plausible matches and uncertain distinctions; retain a small random audit of excluded candidates. A budget of 5–10 judgments per request is an initial workload constraint, not evidence of sufficient statistical power.
+- For evaluation, freeze the pool and both rankings before labels. Keep every evaluated method's retrieved false positive visible to scoring; do not remove bad recommendations or auto-label them zero to make evaluation look better. Include a coverage control when relying on model-selected pools.
+- Preserve the recorded new-query labels outside further fitting while revising data/mining. Do not launch another similar 3-query overfit run simply to improve these inspected scores. Stronger claims require new independent query/product groups.
+
+The code correction prevents unnecessary cross-query combinations. Better candidate quality and lower human workload from the broader data/mining changes have not yet been demonstrated. No replacement packet was issued.

@@ -1,0 +1,43 @@
+{
+  "purpose": "surface_attribute_taxonomy_feasibility",
+  "source_url": "https://s3.amazonaws.com/ifashionist-dataset/annotations/instances_attributes_val2020.json",
+  "source_sha256": "f831f415edad12d52acde8b138fe7ebd1592b57bf0dcd6a3b63ba8cabd208223",
+  "source_bytes": 14533475,
+  "attributes": 294,
+  "pants_instances": 314,
+  "jeans_or_denim_hint_instances": 109,
+  "keyword_matching_attributes": [
+    {
+      "id": 36,
+      "name": "jeans",
+      "supercategory": "nickname",
+      "level": 1,
+      "taxonomy_id": "att000038_00",
+      "pants_instances": 109
+    },
+    {
+      "id": 297,
+      "name": "distressed",
+      "supercategory": "textile finishing, manufacturing techniques",
+      "level": 1,
+      "taxonomy_id": "att000317_00",
+      "pants_instances": 21
+    },
+    {
+      "id": 298,
+      "name": "washed",
+      "supercategory": "textile finishing, manufacturing techniques",
+      "level": 1,
+      "taxonomy_id": "att000318_00",
+      "pants_instances": 68
+    }
+  ],
+  "images_downloaded": 0,
+  "confirmed_denim": 0,
+  "training_performed": false,
+  "limits": "Only annotation taxonomy and source counts. Source labels do not prove observed color/fading, denim material, image usage permission or negative labels for absent annotations.",
+  "job": "jemincha/denim-atlas-surface-label-taxonomy",
+  "job_version": 1,
+  "decision": "Potential coarse auxiliary tags only; no directly usable fine observed-color/fading labels or new images established",
+  "annotation_attribution": "Fashionpedia Consortium; public annotation metadata audit, image terms separate"
+}

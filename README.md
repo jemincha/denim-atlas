@@ -11,7 +11,7 @@
 | Model / compute | Pinned Marqo fashionSigLIP last-block adaptation runs on Kaggle T4; finite updates and checkpoint restoration verified |
 | Evaluation | Fixed-pool nDCG@5, strict candidate validation and product/duplicate/image split checks implemented |
 | Baselines | Cosine B0 and mean-RGB control B1 implemented; ranking-to-evaluation CLI tested on synthetic vectors |
-| Local tests | 52 passed on Python 3.12; includes archive checksum rejection, visual-whitelist inputs, deduplication, cross-round judgment provenance and evaluation safeguards |
+| Local tests | 56 passed on Python 3.12; includes archive checksum rejection, visual-whitelist inputs, deduplication, cross-round judgment provenance and evaluation safeguards |
 | Data | 1,200 acquired GLAMI images; 751 candidates inspected by Codex, 562 provisionally accepted. Explicit source-cut labels for 375; expanded training uses 333 images / fixed 39 validation, with 3 linked images reserved |
 | Real-image execution | 24 reviewed GLAMI crops encoded on T4; 768-D features and exploratory B0/B1 neighbor boards saved |
 | Calibration nDCG@5 (B0 / B1) | Q2: **0.641 / 0.640**; Q3: **0.530 / 0.447**. Single-rater pilot, 24 candidates; Q1 excluded |
@@ -53,10 +53,11 @@ The second command needs reviewed benchmark/features; paths and weight are examp
 
 ## Next milestone
 
-Attribute supervision, data expansion, three-seed repetition and reused human regression checks completed. Only two selected relative appearance comparisons await the researcher; no new full rating grid or browser form. Color/wash supervision and independent wearing-photo/product evaluation remain next research gaps. See [fit-proxy experiment](docs/FIT_PROXY_EXPERIMENT.md).
+Attribute supervision, data expansion, three-seed repetition and reused human regression checks completed. The two selected appearance comparisons were both rejected (neither candidate acceptable). They remain qualitative feedback, with no absolute grades inferred. A 24-image automatic-description pilot failed the fine-detail consistency/visual feasibility gate; its outputs were not used for training. A brief mismatch explanation is the next input; no new rating grid. Color/wash supervision and independent wearing-photo/product evaluation remain next research gaps. See [fit-proxy experiment](docs/FIT_PROXY_EXPERIMENT.md).
 
 ## Documentation and evidence
 
+- [Observed-appearance annotation feasibility and rejection of unreliable labels](docs/APPEARANCE_ANNOTATION_PILOT.md)
 - [Attribute-supervision pilot, expansion and repeated results](docs/FIT_PROXY_EXPERIMENT.md)
 - [Methodology benchmark, project diagnosis and proposed next sprint](docs/METHODOLOGY_BENCHMARK.md)
 - [Research design, project history, model acquisition and recorded measurements](docs/RESEARCH.md)

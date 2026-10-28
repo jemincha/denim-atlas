@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "purpose": "appearance_weak_annotation_feasibility",
+  "model": "Qwen/Qwen3-VL-2B-Instruct",
+  "revision": "89644892e4d85e24eaac8bacfd4f463576704203",
+  "model_weight_sha256": {
+    "model.safetensors": "7de1838c87a5349b016c26a1c3f7d2bc400a3d485f95ef39a7059ffd734977a0"
+  },
+  "model_license_card": "Apache-2.0; image terms remain separate",
+  "images": 24,
+  "schema_valid_images": 22,
+  "schema_invalid_images": 2,
+  "unknown_counts": {
+    "view": 0,
+    "color_family": 0,
+    "observed_tone": 0,
+    "lightness": 0,
+    "fade_strength": 0,
+    "front_hip_whiskers": 0,
+    "front_thigh_lightening": 0,
+    "knee_lightening": 0,
+    "rips": 0,
+    "detail_readability": 0
+  },
+  "color_counts": {
+    "blue": 14,
+    "white": 1,
+    "black": 6,
+    "gray": 1
+  },
+  "fade_counts": {
+    "moderate": 18,
+    "none": 4
+  },
+  "manifest_sha256": "f3f9a0324ce85665ad5d42c94f0bf1950e05f57a17a6dab69267a0629b8a9a54",
+  "prompt_sha256": "e66679a1e3b9c562049ae9f3587f23fad1ce77f0909c429f5bd3450ba13ed17a",
+  "script_sha256": "91b23a9047ed8f49e851c00780a52e63e207ef19bbe93fc493c7b86a0c63bba2",
+  "seconds_inference": 108.81295240600002,
+  "peak_allocated_gib": 4.077928066253662,
+  "device": "Tesla T4",
+  "precision": "float16, sdpa; T4 does not require bfloat16 or FlashAttention",
+  "packages": {
+    "torch": "2.11.0+cu128",
+    "transformers": "5.16.1",
+    "Pillow": "13.0.0",
+    "huggingface_hub": "1.29.0"
+  },
+  "human_labels_created": 0,
+  "training_performed": false,
+  "ranking_performed": false,
+  "limits": "Schema validity and model consistency are not visual-label accuracy. All predictions are unverified weak descriptions; unknown is not negative. Small biased catalog/wearing pilot, limited resolution, no confidence calibration or human agreement claim.",
+  "job": "jemincha/denim-atlas-appearance-annotation-pilot",
+  "job_version": 1,
+  "original_machine_annotations_sha256": "d23af85ec05bb6f49782f2e64c9f3dbf5dfa3ffb9848908e54a6e729904ddb46",
+  "postreview_validator_sha256": "a2bee9967a44f809bc17dcfa7ac8df69a985e4fd67c5e00e5e962038ad387117",
+  "postreview_consistency_valid_images": 19,
+  "postreview_consistency_rejections": {
+    "Visible fading conflicts with no fading": 3,
+    "Unobserved front details asserted": 2
+  },
+  "initial_valid_front_whiskers_visible": 21,
+  "unknowns_in_initial_valid_descriptions": 0,
+  "decision": "Do not scale or train on these appearance descriptions",
+  "rationale": "Original schema pass did not establish useful wash supervision. Two responses violated the specified back/side front-detail mask; three none-fading outputs asserted explicitly faded hip whiskers. All initially accepted responses avoided unknown and largely repeated local-detail labels. No independent attribute accuracy labels exist.",
+  "visual_review_scope": "Codex comparison against the six previously displayed audit assets and the three existing Commons crops; no human attribute-accuracy labels. Coarse color may be useful for proposals but was not validated as training truth.",
+  "new_human_attribute_accuracy_labels": 0,
+  "new_training_or_ranking": false,
+  "validator_caveat": "Back/side masking is a prompt-contract consistency check, not visual ground truth. An oblique front view may reveal front details even when a model tags it side; that can be a view-label/schema issue. Thigh/knee lightening alone is allowed with no fading because illumination may cause it."
+}

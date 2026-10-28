@@ -1,0 +1,218 @@
+{
+  "schema_version": 1,
+  "purpose": "weak_source_fit_proxy",
+  "overall_similarity_evaluated": false,
+  "human_labels_used": false,
+  "training_images": 121,
+  "validation_images": 39,
+  "source_summary": {
+    "schema_version": 1,
+    "visually_screened_examples": 347,
+    "explicit_fit_examples": 160,
+    "unknown_or_ambiguous_title_examples": 187,
+    "group_conflict_exclusions": 0,
+    "selected_examples": 160,
+    "label_counts": {
+      "skinny": 44,
+      "flared": 13,
+      "straight": 49,
+      "slim": 42,
+      "wide": 12
+    },
+    "split_counts": {
+      "train": {
+        "skinny": 33,
+        "straight": 37,
+        "flared": 10,
+        "slim": 32,
+        "wide": 9
+      },
+      "validation": {
+        "flared": 3,
+        "straight": 12,
+        "skinny": 11,
+        "wide": 3,
+        "slim": 10
+      }
+    },
+    "known_source_groups": 159,
+    "market_geo_counts": {
+      "tr": 130,
+      "cz": 28,
+      "bg": 1,
+      "ro": 1
+    },
+    "structured_observed_color_labels": 0,
+    "structured_wash_labels": 0,
+    "seed": 17,
+    "split_unit": "linked known item, exact decoded pixels, normalized title family",
+    "independent_product_groups_verified": false,
+    "source_summary_sha256": "3018cab43d6b9a9e081dd35a483fbd2d741709489cad4032fc1248e7bbbb1888",
+    "source_examples_sha256": "c5623b0a8f46889ffa6d4f4723109e4ae2a685a80437f8667d097419ae6ce96c",
+    "limits": "Catalog words are noisy proxies, not human silhouette labels or overall relevance. Source groups are conservative metadata links, not verified product identities. No pristine test set. Color and wash remain unknown."
+  },
+  "steps": 120,
+  "batch_size": 20,
+  "groups_per_class_per_batch": 4,
+  "seed": 17,
+  "precision": "fp32",
+  "learning_rate": 1e-06,
+  "weight_decay": 0.01,
+  "cosine_margin": 0.1,
+  "loss": "Mean hinge over all cross-source-group positive / other-cut negative triplets in a balanced batch",
+  "base_revision": "c56244cc94f92419e8369fa71efdaf403b124ce8",
+  "base_weights_sha256": "88908200434959fa3154ef79d408aac33341e8797fe5ca8ca6f0463aab32e6b3",
+  "trained_module": "visual.trunk.blocks.11",
+  "trainable_parameters": 7087872,
+  "before": {
+    "train": {
+      "macro_ndcg_at_5": 0.4051911180741553,
+      "macro_precision_at_5": 0.38975894075894074,
+      "per_class": {
+        "flared": {
+          "queries": 10,
+          "ndcg_at_5": 0.3377535230398082,
+          "precision_at_5": 0.32
+        },
+        "skinny": {
+          "queries": 33,
+          "ndcg_at_5": 0.5428428517777043,
+          "precision_at_5": 0.5212121212121212
+        },
+        "slim": {
+          "queries": 32,
+          "ndcg_at_5": 0.31306541909124247,
+          "precision_at_5": 0.325
+        },
+        "straight": {
+          "queries": 37,
+          "ndcg_at_5": 0.4332358525583981,
+          "precision_at_5": 0.42702702702702705
+        },
+        "wide": {
+          "queries": 9,
+          "ndcg_at_5": 0.3990579439036233,
+          "precision_at_5": 0.35555555555555557
+        }
+      }
+    },
+    "validation": {
+      "macro_ndcg_at_5": 0.4173774449416762,
+      "macro_precision_at_5": 0.3094545454545455,
+      "per_class": {
+        "flared": {
+          "queries": 3,
+          "ndcg_at_5": 0.4826190114311231,
+          "precision_at_5": 0.26666666666666666
+        },
+        "skinny": {
+          "queries": 11,
+          "ndcg_at_5": 0.3627228304394828,
+          "precision_at_5": 0.32727272727272727
+        },
+        "slim": {
+          "queries": 10,
+          "ndcg_at_5": 0.37402071884658,
+          "precision_at_5": 0.32
+        },
+        "straight": {
+          "queries": 12,
+          "ndcg_at_5": 0.44616862313366507,
+          "precision_at_5": 0.43333333333333335
+        },
+        "wide": {
+          "queries": 3,
+          "ndcg_at_5": 0.4213560408575303,
+          "precision_at_5": 0.20000000000000004
+        }
+      }
+    }
+  },
+  "after": {
+    "train": {
+      "macro_ndcg_at_5": 0.4844586201284377,
+      "macro_precision_at_5": 0.4777818727818728,
+      "per_class": {
+        "flared": {
+          "queries": 10,
+          "ndcg_at_5": 0.5309617315506261,
+          "precision_at_5": 0.5
+        },
+        "skinny": {
+          "queries": 33,
+          "ndcg_at_5": 0.6094699312691793,
+          "precision_at_5": 0.593939393939394
+        },
+        "slim": {
+          "queries": 32,
+          "ndcg_at_5": 0.3171655777635032,
+          "precision_at_5": 0.325
+        },
+        "straight": {
+          "queries": 37,
+          "ndcg_at_5": 0.4684350206596002,
+          "precision_at_5": 0.4810810810810811
+        },
+        "wide": {
+          "queries": 9,
+          "ndcg_at_5": 0.4962608393992801,
+          "precision_at_5": 0.48888888888888893
+        }
+      }
+    },
+    "validation": {
+      "macro_ndcg_at_5": 0.5188963672025378,
+      "macro_precision_at_5": 0.37163636363636365,
+      "per_class": {
+        "flared": {
+          "queries": 3,
+          "ndcg_at_5": 0.8568805729851068,
+          "precision_at_5": 0.4000000000000001
+        },
+        "skinny": {
+          "queries": 11,
+          "ndcg_at_5": 0.42774963243855485,
+          "precision_at_5": 0.4181818181818182
+        },
+        "slim": {
+          "queries": 10,
+          "ndcg_at_5": 0.35173887883741617,
+          "precision_at_5": 0.33999999999999997
+        },
+        "straight": {
+          "queries": 12,
+          "ndcg_at_5": 0.5225882196240351,
+          "precision_at_5": 0.5
+        },
+        "wide": {
+          "queries": 3,
+          "ndcg_at_5": 0.4355245321275764,
+          "precision_at_5": 0.20000000000000004
+        }
+      }
+    }
+  },
+  "module_sha256_before": "8cc8a12f80d8f0c34d8a7ce354f9d5911698dc35162a5982fd67ef6d2f1d4c10",
+  "module_sha256_after": "6ef86023e43748185b1d590c0a96ab54607e04d632eac244738387b42b291b9d",
+  "checkpoint_sha256": "7b29e64996cf0ce7dda5e1ade6b533a18fbb4a91647e2a5bed4bbedbc621787f",
+  "checkpoint_bytes": 85070197,
+  "checkpoint_roundtrip_verified": true,
+  "loss_analytic_self_check_passed": true,
+  "manifest_sha256": "22932a0ec5eb0760453fd7119a046b9d02a1eff1821842c3bff7ebb7d088572f",
+  "review_sha256": "b5cb980b5dfd00527d16df61591663375179b62f6c818a13637ee0704b51ccf1",
+  "training_script_sha256": "4afb137546d9c0998b3b5822bf45c7ea0d7b7ebf189751b9d1e76fe2084d33fd",
+  "seconds_training_validation_save": 48.05184022599997,
+  "peak_allocated_gib": 1.0919160842895508,
+  "device": "Tesla T4",
+  "packages": {
+    "torch": "2.11.0+cu128",
+    "open_clip_torch": "3.3.0",
+    "timm": "1.0.29",
+    "Pillow": "13.0.0"
+  },
+  "preprocessing": "Fixed white letterbox; original color; no random crop or color jitter; dropout remains disabled",
+  "selection": "Final step 120 fixed before results; no test or human-query tuning",
+  "limits": "Catalog-cut proxy labels only, not human-verified silhouette or overall appearance. Validation excludes known source families, not certified independent products. No color/wash learning claim; no pristine test set.",
+  "job": "jemincha/denim-atlas-fit-proxy-fine-tuning",
+  "job_version": 2
+}

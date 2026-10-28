@@ -8,11 +8,11 @@
 
 | Area | Verified state |
 |---|---|
-| Model / compute | Marqo fashionSigLIP inference, synthetic backward and checkpoint checks passed on Kaggle T4 |
+| Model / compute | Pinned Marqo fashionSigLIP last-block adaptation runs on Kaggle T4; finite updates and checkpoint restoration verified |
 | Evaluation | Fixed-pool nDCG@5, strict candidate validation and product/duplicate/image split checks implemented |
 | Baselines | Cosine B0 and mean-RGB control B1 implemented; ranking-to-evaluation CLI tested on synthetic vectors |
-| Local tests | 46 passed on Python 3.12; includes archive checksum rejection, visual-whitelist inputs, deduplication, cross-round judgment provenance and evaluation safeguards |
-| Data | GLAMI expanded to 1,200 verified images (includes earlier 300); 512 name-filtered candidates visually inspected by Codex, 347 whitelisted. Product grouping remains unresolved; ABO 600 excluded |
+| Local tests | 52 passed on Python 3.12; includes archive checksum rejection, visual-whitelist inputs, deduplication, cross-round judgment provenance and evaluation safeguards |
+| Data | 1,200 acquired GLAMI images; 751 candidates inspected by Codex, 562 provisionally accepted. Explicit source-cut labels for 375; expanded training uses 333 images / fixed 39 validation, with 3 linked images reserved |
 | Real-image execution | 24 reviewed GLAMI crops encoded on T4; 768-D features and exploratory B0/B1 neighbor boards saved |
 | Calibration nDCG@5 (B0 / B1) | Q2: **0.641 / 0.640**; Q3: **0.530 / 0.447**. Single-rater pilot, 24 candidates; Q1 excluded |
 | First fine-tuning | Last vision block, 7,087,872 parameters, 40 real-label steps. Training hinge loss **0.0794 → 0.0185**; checkpoint weight restoration passed |
@@ -20,7 +20,9 @@
 | Weak-text retrieval diagnostic | All three existing query cases had identical ranked top-5 before/after weak adaptation on the 347-image gallery |
 | Human-label continuation | 51 round-2 pairs, 71 triplet combinations, 142 FP32 steps from the 347-image checkpoint. Training-pool mean nDCG@5 **0.4493 → 0.8526**; hinge **0.06014 → 0**. Same 3 queries / 17 candidates, not unseen quality |
 | Human-continuation retrieval | New-query fixed-pool mean nDCG@5 **0.3841 → 0.3513**; relevance precision@5 (grade >=2) **0.2000 → 0.1333**. Three new query photos, single rater; observed scores declined |
-| Held-out quality | **Product-disjoint quality not measured**. Three new-query observations recorded on a gallery used for weak training; independent product/duplicate groups pending |
+| Attribute-supervised pilot | Weak title-cut labels: fixed validation class-macro nDCG@5 **0.4174 → 0.5176** over three seeds. Expanded-data run **0.4990**. Source-cut proxy, not overall appearance quality |
+| Reused human development check | Original frozen baseline **0.3888**; fit-only adaptation **0.4129** (121 training images), **0.4053** (333). Three reused queries, no new human labels; no general quality claim |
+| Held-out quality | **Product-disjoint quality not measured**. Weak source-group validation and three reused human development queries recorded; independent product/duplicate groups pending |
 | Human judgments | Three single-rater rounds: 75 / 54 / 54 trials. Latest: 51 unique pairs, repeats 3/3 consistent; 37 pairs rated 0. New-query labels remain outside training |
 
 Wearing-photo supply follow-up: a bounded Commons pilot acquired 24 attributed
@@ -36,7 +38,7 @@ This is an AI-assisted research project. Codex assisted with implementation, tes
 
 ## Research question
 
-Can human appearance judgments improve ranking on unseen product groups over the frozen starting checkpoint and a simple color control?
+Can denim-specific attribute supervision and a small number of human appearance judgments improve ranking on unseen product groups over the frozen starting checkpoint and a simple color control?
 
 Match the visible garment, including lighting and wear. Different products can match; same-product identity is not an automatic positive. Freeze product/duplicate groups and splits before constructing training pairs. Compare identical fully judged pools using nDCG@5 with gain `2^grade - 1`; uncertain labels are not zero. Choose weights/checkpoints on validation only.
 
@@ -51,10 +53,11 @@ The second command needs reviewed benchmark/features; paths and weight are examp
 
 ## Next milestone
 
-The new-query comparison is complete and did not demonstrate improvement. Stop expanding full cross-query rating grids. The packet builder now supports query-specific pools (23 instead of 54 trials in this round's retrospective budget simulation), but candidate relevance itself still needs work. Next, audit data/appearance coverage and improve candidate mining before another small human audit; keep existing new-query labels outside further fitting. See [round-2 protocol and evidence](docs/HUMAN_ROUND2.md).
+Attribute supervision, data expansion, three-seed repetition and reused human regression checks completed. Only two selected relative appearance comparisons await the researcher; no new full rating grid or browser form. Color/wash supervision and independent wearing-photo/product evaluation remain next research gaps. See [fit-proxy experiment](docs/FIT_PROXY_EXPERIMENT.md).
 
 ## Documentation and evidence
 
+- [Attribute-supervision pilot, expansion and repeated results](docs/FIT_PROXY_EXPERIMENT.md)
 - [Methodology benchmark, project diagnosis and proposed next sprint](docs/METHODOLOGY_BENCHMARK.md)
 - [Research design, project history, model acquisition and recorded measurements](docs/RESEARCH.md)
 - [Benchmark schema, human-judgment rubric and evaluation](docs/EVALUATION.md)

@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "job": "jemincha/denim-atlas-fit-proxy-repeats",
+  "job_version": 1,
+  "runs": [
+    {
+      "seed": 17,
+      "before_validation": 0.4173774449416762,
+      "after_validation": 0.5188963672025378,
+      "before_train": 0.4051911180741553,
+      "after_train": 0.4844586201284377,
+      "checkpoint_sha256": "d46eac04d546409ba8cfdc429bea97a636eec582db84838479f402731209111b",
+      "script_sha256": "eaf16da3025ba6133d6aa2460442196388d33b01524d3a7ed7e083d3f45f9d08",
+      "manifest_sha256": "22932a0ec5eb0760453fd7119a046b9d02a1eff1821842c3bff7ebb7d088572f",
+      "seconds_training_validation_save": 43.663540775,
+      "checkpoint_roundtrip_verified": true
+    },
+    {
+      "seed": 31,
+      "before_validation": 0.4173774449416762,
+      "after_validation": 0.5181562645009092,
+      "before_train": 0.4051911180741553,
+      "after_train": 0.4850188168566335,
+      "checkpoint_sha256": "9b3880edd682d4a45b1fc42190d92ba843084c81d8426dbe9396030a05bb5280",
+      "script_sha256": "eaf16da3025ba6133d6aa2460442196388d33b01524d3a7ed7e083d3f45f9d08",
+      "manifest_sha256": "22932a0ec5eb0760453fd7119a046b9d02a1eff1821842c3bff7ebb7d088572f",
+      "seconds_training_validation_save": 46.506747632999975,
+      "checkpoint_roundtrip_verified": true
+    },
+    {
+      "seed": 47,
+      "before_validation": 0.4173774449416762,
+      "after_validation": 0.5157481975274569,
+      "before_train": 0.4051911180741553,
+      "after_train": 0.4871174965799999,
+      "checkpoint_sha256": "612d1b609f431d902607b1652abd701bf813bf156c1ec4642bda2550273e7095",
+      "script_sha256": "eaf16da3025ba6133d6aa2460442196388d33b01524d3a7ed7e083d3f45f9d08",
+      "manifest_sha256": "22932a0ec5eb0760453fd7119a046b9d02a1eff1821842c3bff7ebb7d088572f",
+      "seconds_training_validation_save": 46.49356504399998,
+      "checkpoint_roundtrip_verified": true
+    }
+  ],
+  "baseline_macro_ndcg_at_5": 0.4173774449416762,
+  "after_mean_macro_ndcg_at_5": 0.5176002764103014,
+  "after_sample_sd": 0.0016460817547886647,
+  "all_seeds_improved": true,
+  "checkpoint_selection": "No seed selected by human relevance; seed17 remains the fixed reference.",
+  "limits": "Three training-order seeds, same 39 weakly labeled validation images. Seed spread is not uncertainty over independent products or raters. Same-seed validation metrics matched exactly but block digests differed; bitwise training reproducibility is not established. No tensor-level difference magnitude was measured.",
+  "same_seed17_validation_metric_reproduced": true,
+  "same_seed17_trainable_block_digest_reproduced": false
+}

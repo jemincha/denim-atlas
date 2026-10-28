@@ -1,0 +1,25 @@
+{
+  "purpose": "selected_qualitative_relative_audit",
+  "source_packet_sha256": "7906891dbae0302d489a36b9f435fb971f4e97f87c8f9ad2c34cd2d6b98762b6",
+  "requested_questions": [
+    {
+      "display": 1,
+      "source_question": 2
+    },
+    {
+      "display": 2,
+      "source_question": 4
+    }
+  ],
+  "choices": [
+    "A",
+    "B",
+    "tie",
+    "neither",
+    "uncertain"
+  ],
+  "question": "Compare observed color/tone, wash/fading and visible silhouette together; which candidate resembles the reference more?",
+  "selection_note": "Two of four changed-top1 cases retained for an ambiguous overall-appearance spot check. Two large visible-color-mismatch cases were not sent to the human; no relevance grades assigned to those exclusions. This selection is not a random/unbiased performance evaluation.",
+  "new_human_answers": 0,
+  "sheet_sha256": "e95317b784e972e8bfbe554e35f06943702c55f6483738519239cfeda9c33e49"
+}

@@ -1,0 +1,69 @@
+{
+  "purpose": "weak_source_title_fit_audit",
+  "verified_images": 160,
+  "sample_images": 25,
+  "all_file_and_pixel_hashes_verified": true,
+  "median_width": 228.0,
+  "median_height": 298.0,
+  "min_short_side": 228,
+  "manifest_summary": {
+    "schema_version": 1,
+    "visually_screened_examples": 347,
+    "explicit_fit_examples": 160,
+    "unknown_or_ambiguous_title_examples": 187,
+    "group_conflict_exclusions": 0,
+    "selected_examples": 160,
+    "label_counts": {
+      "skinny": 44,
+      "flared": 13,
+      "straight": 49,
+      "slim": 42,
+      "wide": 12
+    },
+    "split_counts": {
+      "train": {
+        "skinny": 33,
+        "straight": 37,
+        "flared": 10,
+        "slim": 32,
+        "wide": 9
+      },
+      "validation": {
+        "flared": 3,
+        "straight": 12,
+        "skinny": 11,
+        "wide": 3,
+        "slim": 10
+      }
+    },
+    "known_source_groups": 159,
+    "market_geo_counts": {
+      "tr": 130,
+      "cz": 28,
+      "bg": 1,
+      "ro": 1
+    },
+    "structured_observed_color_labels": 0,
+    "structured_wash_labels": 0,
+    "seed": 17,
+    "split_unit": "linked known item, exact decoded pixels, normalized title family",
+    "independent_product_groups_verified": false,
+    "source_summary_sha256": "3018cab43d6b9a9e081dd35a483fbd2d741709489cad4032fc1248e7bbbb1888",
+    "source_examples_sha256": "c5623b0a8f46889ffa6d4f4723109e4ae2a685a80437f8667d097419ae6ce96c",
+    "limits": "Catalog words are noisy proxies, not human silhouette labels or overall relevance. Source groups are conservative metadata links, not verified product identities. No pristine test set. Color and wash remain unknown."
+  },
+  "human_relevance_labels_created": 0,
+  "training_performed": false,
+  "review": {
+    "decision": "proceed_weak_source_fit",
+    "manifest_sha256": "22932a0ec5eb0760453fd7119a046b9d02a1eff1821842c3bff7ebb7d088572f",
+    "reviewer": "Codex visual sample inspection",
+    "sample_images": 25,
+    "sampling": "five per title-derived class, seed 31, before training",
+    "sample_sha256": "2da651399af97612ad25ac8c977ce78468ddeba74c025ddc977d697819a91609",
+    "findings": "Denim garments and leg outlines visible in the stratified sample. Flat catalog and full-body studio views are mixed. Cut boundaries overlap: some straight or wide titles look tapered/narrow in the depicted pose. Keep catalog labels explicitly weak; no human silhouette truth or corrected relevance grades.",
+    "publication_scope": "Private research only; no raw image/weight release clearance"
+  },
+  "job": "jemincha/denim-atlas-fit-supervision-audit",
+  "job_version": 1
+}

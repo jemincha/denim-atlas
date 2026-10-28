@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "new_visually_reviewed_images": 239,
+  "new_approved_images": 215,
+  "new_excluded_or_uncertain": 24,
+  "total_reviewed_approved_examples": 562,
+  "expanded_fit_plan": {
+    "schema_version": 1,
+    "visually_screened_examples": 562,
+    "explicit_fit_examples": 375,
+    "unknown_or_ambiguous_title_examples": 187,
+    "group_conflict_exclusions": 0,
+    "selected_examples": 372,
+    "validation_linked_reserve_examples": 3,
+    "validation_anchor_sha256": "22932a0ec5eb0760453fd7119a046b9d02a1eff1821842c3bff7ebb7d088572f",
+    "label_counts": {
+      "slim": 103,
+      "skinny": 102,
+      "straight": 113,
+      "flared": 28,
+      "wide": 26
+    },
+    "split_counts": {
+      "train": {
+        "slim": 93,
+        "skinny": 91,
+        "straight": 101,
+        "flared": 25,
+        "wide": 23
+      },
+      "validation": {
+        "flared": 3,
+        "straight": 12,
+        "skinny": 11,
+        "wide": 3,
+        "slim": 10
+      }
+    },
+    "known_source_groups": 369,
+    "market_geo_counts": {
+      "tr": 284,
+      "bg": 2,
+      "cz": 78,
+      "sk": 3,
+      "ro": 5
+    },
+    "structured_observed_color_labels": 0,
+    "structured_wash_labels": 0,
+    "seed": 17,
+    "split_unit": "linked known item, exact decoded pixels, normalized title family",
+    "independent_product_groups_verified": false,
+    "source_summary_sha256": "3018cab43d6b9a9e081dd35a483fbd2d741709489cad4032fc1248e7bbbb1888",
+    "source_examples_sha256": "9c8f9205b9b15d30a9958899b7330c979636a134ebd5b93e04992f4aecb638c0",
+    "limits": "Catalog words are noisy proxies, not human silhouette labels or overall relevance. Source groups are conservative metadata links, not verified product identities. No pristine test set. Color and wash remain unknown."
+  },
+  "visual_scope": "Visible jeans-like construction with source jeans/cut titles; not material certification or human relevance. Colored examples retained where garment construction is visible. Uncertain materials, composites and unreadable silhouettes excluded.",
+  "training_performed_on_expansion": true,
+  "validation_images_locked": true,
+  "source_candidates_sha256": "6390867e78f4f615d7275160bae4e8e59bb35937dbaa6e9e9b7a52e6c795b198",
+  "expanded_manifest_sha256": "cec3d78efe55b4458591f9c4680066dd84465b4ff5f264c774677b540af5a13f",
+  "training_job": "jemincha/denim-atlas-fit-expanded-fine-tuning",
+  "training_job_version": 1
+}

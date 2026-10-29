@@ -2,7 +2,7 @@ import copy
 import json
 import unittest
 
-from scripts.prepare_attribute_audit import prepare
+from scripts.prepare_attribute_audit import prepare, select_expansion
 
 
 def fixture():
@@ -16,6 +16,31 @@ def fixture():
 
 
 class AttributeAuditTests(unittest.TestCase):
+    def test_expansion_excludes_transitive_metadata_bridges_and_seen_pixels(self):
+        examples=[{'image_id':str(i),'sha256':str(i)*64,'pixel_sha256':
+                   'shared' if i in (4,5) else str(i)} for i in range(1,7)]
+        rows=[{'image_id':str(i),'item_id':str(i),'name':f'Brand{i} jeans'} for i in range(1,7)]
+        rows[0].update(item_id='a',name='Brand Straight Jeans - Blue')
+        rows[1].update(item_id='b',name='Brand Straight Jeans - Black')
+        rows[2].update(item_id='c')
+        rows.extend([{'image_id':'9','item_id':'b','name':'Bridge Slim'},
+                     {'image_id':'10','item_id':'c','name':'Bridge Slim'}])
+        result=select_expansion(examples,rows,{'glami:1'},{'glami:4'},count=1)
+        self.assertEqual([r['id'] for r in result['examples']],['glami:6'])
+        self.assertEqual(result['summary']['excluded_reviewed_images'],5)
+        self.assertFalse(result['summary']['training_eligible'])
+        with self.assertRaisesRegex(ValueError,'Insufficient'):
+            select_expansion(examples,rows,{'glami:1'},{'glami:4'},count=2)
+
+    def test_expansion_is_deterministic_unique_and_does_not_invent_attributes(self):
+        examples=[{'image_id':str(i),'sha256':'a'*64,'pixel_sha256':str(i)} for i in range(20)]
+        rows=[{'image_id':str(i),'item_id':str(i),
+               'name':f'Brand{i} '+('slim' if i%2 else 'straight')+' jeans'} for i in range(20)]
+        a=select_expansion(examples,rows,set(),set(),count=8)
+        self.assertEqual(a,select_expansion(list(reversed(examples)),list(reversed(rows)),set(),set(),count=8))
+        self.assertEqual(len({r['source_group'] for r in a['examples']}),8)
+        self.assertTrue(all('attributes' not in r for r in a['examples']))
+
     def test_coarse_drafts_survive_unrelated_wash_failure_without_becoming_truth(self):
         result=prepare(*fixture())
         row=result['observations'][0]

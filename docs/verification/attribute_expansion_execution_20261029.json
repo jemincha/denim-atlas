@@ -1,0 +1,65 @@
+{
+  "purpose": "bounded_unverified_attribute_expansion",
+  "job": "jemincha/denim-atlas-attribute-expansion",
+  "job_version": 1,
+  "status": "COMPLETE",
+  "images": 96,
+  "schema_valid_images": 96,
+  "color_counts": {
+    "blue": 81,
+    "neutral": 15
+  },
+  "lightness_counts": {
+    "light": 16,
+    "medium": 58,
+    "dark": 22
+  },
+  "unknown_counts": {
+    "color_family": 0,
+    "lightness": 0
+  },
+  "selection_manifest_sha256": "ea6f6352dbc193ccf92d8a04a24a4750d2a330598ce42a0958c355af5ef9e5bc",
+  "anchor_manifest_sha256": "b42e5370908c62f8012260f249149b8056d6d0265a3d9eb2a3ebc498020cd4cb",
+  "executed_script_sha256": "a08df7dbfd256772524db6e24413dcfb3ea827f65932b762fee6f0ccae301534",
+  "model": "Qwen/Qwen3-VL-2B-Instruct",
+  "revision": "89644892e4d85e24eaac8bacfd4f463576704203",
+  "weights_sha256": {
+    "model.safetensors": "7de1838c87a5349b016c26a1c3f7d2bc400a3d485f95ef39a7059ffd734977a0"
+  },
+  "sum_inference_seconds": 166.88841627200014,
+  "timing_scope": "Inference segments only; excludes installation, download, model loading, CLI transfer and review.",
+  "peak_allocated_gib": 4.249151706695557,
+  "original_annotations_sha256": "61d3dd2849398668e7292af4032c8b1d445c568aac6e1e10de75f0acf2685ef1",
+  "input_image_hashes_verified": 96,
+  "review": {
+    "reviewer": "Codex preliminary visual screening; not human attribute ground truth",
+    "observations_inspected": 96,
+    "sheets": 4,
+    "human_accuracy_labels_on_targets": 0,
+    "findings": [
+      "Potential other-color handling problems on visibly chromatic examples; categorical outputs alone do not prove accuracy.",
+      "Dark/medium and light/medium boundaries remain uncertain in some catalog/wearing images.",
+      "All outputs remain machine drafts; no automatic certification from schema compliance."
+    ],
+    "flagged_color_examples": [
+      "glami:1038698",
+      "glami:104830",
+      "glami:107518",
+      "glami:1024107"
+    ],
+    "selection_unchanged": "The original eight-photo pre-inference audit is preserved; no replacement based on output correctness.",
+    "decision": "Hold all 96 outside training pending blind per-attribute audit; unknowns and fine wash remain unresolved."
+  },
+  "human_audit": {
+    "photos": 8,
+    "pre_inference_request_sha256": "5d5c907a0a95082acfa434e56bcb50160c5fbb1acbd6d8410d111795a1c0c171",
+    "request_sha256": "617318b50298e32b71a28492972de2a15f9bb03db233ff74274f5bbcdd987c66",
+    "sheet_sha256": "702673b5f22efcda369f8526adab8e499c0279c1bf488f42e01c235bf5fecd4b",
+    "human_answers_received": 0
+  },
+  "training_performed": false,
+  "training_eligible": false,
+  "new_human_attribute_labels_created": 0,
+  "tests_passed": 70,
+  "limits": "These are 96 machine-drafted observations, not 192 independent examples or evidence of retrieval improvement. Selected source groups are conservative; physical product independence and attribute accuracy are not certified."
+}

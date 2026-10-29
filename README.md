@@ -11,7 +11,7 @@
 | Model / compute | Pinned Marqo fashionSigLIP last-block adaptation runs on Kaggle T4; finite updates and checkpoint restoration verified |
 | Evaluation | Fixed-pool nDCG@5, strict candidate validation and product/duplicate/image split checks implemented |
 | Baselines | Cosine B0 and mean-RGB control B1 implemented; ranking-to-evaluation CLI tested on synthetic vectors |
-| Local tests | 68 passed on Python 3.12; includes archive checksum rejection, visual-whitelist inputs, deduplication, cross-round judgment provenance and evaluation safeguards |
+| Local tests | 70 passed on Python 3.12; includes archive checksum rejection, visual-whitelist inputs, deduplication, cross-round judgment provenance and evaluation safeguards |
 | Data | 1,200 acquired GLAMI images; 751 candidates inspected by Codex, 562 provisionally accepted. Explicit source-cut labels for 375; expanded training uses 333 images / fixed 39 validation, with 3 linked images reserved |
 | Real-image execution | 24 reviewed GLAMI crops encoded on T4; 768-D features and exploratory B0/B1 neighbor boards saved |
 | Calibration nDCG@5 (B0 / B1) | Q2: **0.641 / 0.640**; Q3: **0.530 / 0.447**. Single-rater pilot, 24 candidates; Q1 excluded |
@@ -55,7 +55,7 @@ The second command needs reviewed benchmark/features; paths and weight are examp
 
 **Axis-separation correction:** human joint grades and the cut-class proxy did not isolate silhouette from surface appearance. New calibration packets now store those two grades independently; import, analysis and training guards prevent silently pooling them. This changes the annotation protocol, not the trained model. [Audit, implemented fixes and next training limits](docs/AXIS_SEPARATION_AUDIT.md).
 
-Attribute-supervised pilots and reused human development checks completed; useful whole-appearance improvement remains unproven. The two selected comparisons were rejected under a joint prompt and do not identify the failed axis. The unverified VLM descriptions remain excluded from training. Attribute calibration now has six human responses; original coarse-family agreement is 5/5 comparable, brightness 2/6 on selected anchors. Two bounded 18-image inference retries exposed prompt/context dependence; a three-photo blind follow-up is pending. No new training or axis-conditioned trained model is claimed.
+Attribute-supervised pilots and reused human development checks completed; useful whole-appearance improvement remains unproven. The two selected comparisons were rejected under a joint prompt and do not identify the failed axis. The unverified VLM descriptions remain excluded from training. Attribute calibration now has six human responses; original coarse-family agreement is 5/5 comparable, brightness 2/6 on selected anchors. Two bounded 18-image inference retries exposed prompt/context dependence. The three-photo follow-up agrees 3/3 per attribute with visual references; a protected-group 96-image draft expansion completed, awaiting a preselected eight-photo audit. No new training or axis-conditioned trained model is claimed.
 
 ## Documentation and evidence
 

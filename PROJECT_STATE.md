@@ -17,7 +17,7 @@ The two selected comparisons were answered **neither / neither**. Private respon
 
 - Fashionpedia metadata audit complete: 294 attributes, 314 pants; jeans109 / washed68 / distressed21 (overlapping pants counts, not approved denim). No photographed-color or fine fading-strength/location labels established; no images downloaded.
 - Qwen3-VL-2B-Instruct image-only pilot complete: 24 previously reviewed images, pinned revision/weights, T4 inference 108.81s / 4.078GiB. Original parser accepted22; two view/detail contract violations. Three more contradicted no-fading with faded whiskers; revised consistency pass19. Unknowns absent and detail labels repetitive. No human attribute-accuracy labels; no training/reranking or large-scale annotation performed. Keep these descriptions unverified and do not scale.
-- 68 local tests pass. No pending compute jobs. Retrieval backbone remains FashionSigLIP; fit-only weights remain experimental.
+- 70 local tests pass. No pending compute jobs. Retrieval backbone remains FashionSigLIP; fit-only weights remain experimental.
 
 The follow-up closes the mismatch question: overall resemblance was rejected; no personal weights or facet-specific cause inferred. A private CPU run reused 372 cached embeddings, expanding each selected query from 38 eligible validation candidates to 371 cross-group candidates. Both expanded-gallery top-1 choices are identical before/after fit adaptation (top-8 overlap 8/8 and 7/8). Training images are allowed in this diagnostic; it is not held-out evaluation and does not cover all 562 accepted candidates. No human acceptance or absence of a suitable match established. [Evidence](docs/verification/gallery_diagnosis_20261029.json).
 
@@ -25,7 +25,7 @@ The researcher clarified that the joint prompt led to rejection whenever either 
 
 Implemented: new packet CLI defaults to schema2 with separate silhouette/surface scores on the same image pair; independent U/repeats/conflicts; explicit-axis analysis; legacy joint trainer rejects these records. Historical packets/API defaults and grades stay intact. 60 tests plus actual browser download/import and 390px layout checked using engineering fixtures only. [Separation audit](docs/AXIS_SEPARATION_AUDIT.md).
 
-Next: credible axis-specific supervision and diagnostic contrasts (same cut/different surface and different cut/similar surface), then an explicit axis-conditioned training objective. Two heads are a proposal, not a trained model. Do not expand fit-only training, train on unverified VLM descriptions, infer positives from proximity, or require both axes to match before collecting axis-specific evidence. No pending compute job. The three-image follow-up below is the current human gate. Raw model outputs/statuses and revised validator remain separate; consistency passes are not visual accuracy.
+Next: credible axis-specific supervision and diagnostic contrasts (same cut/different surface and different cut/similar surface), then an explicit axis-conditioned training objective. Two heads are a proposal, not a trained model. Do not expand fit-only training, train on unverified VLM descriptions, infer positives from proximity, or require both axes to match before collecting axis-specific evidence. No pending compute job. The eight-image expansion audit below is the current human gate. Raw model outputs/statuses and revised validator remain separate; consistency passes are not visual accuracy.
 
 Protected-dataset access and source-image/model-publication rights remain unverified. Conservative source groups do not certify independent products.
 
@@ -41,4 +41,10 @@ The six anchor answers were received: five explicit family values, six brightnes
 
 Two bounded, pinned-model T4 inference retries completed on the same 18 unjudged targets, excluding all six anchors. Text-only brightness dark6/medium12/light0; with five verified reference images dark6/medium9/light3. Four family outputs changed neutral->blue with references. Accuracy on these targets is unknown; keep variants/fieldwise drafts unverified. Original exact-fence parsing failure and separate normalization are both preserved. No optimizer updates or model weights on laptop.
 
-Current human gate: three selected unjudged photos under `data/private/attribute_followup_20261029/`, family and brightness only, predictions hidden. Await these answers before scaling or training; no pending compute jobs. 68 tests pass. [Execution and limits](docs/ATTRIBUTE_AUDIT.md).
+The three follow-up answers are recorded: blue/light, blue-black/dark, blue/medium. Visual-reference outputs agree3/3 per attribute; text-only2/3 per attribute. Selected development evidence only. The blue-black answer resolves one provisional Codex neutral interpretation in favor of the reference-context prediction; the earlier fieldwise-source draft is not adopted.
+
+Fixed five-anchor 96-image weak-label expansion completed: 16 per each of six source-tag sampling strata, seed131, 96 distinct linked groups. Full source-metadata/item/title/pixel links protect validation39, reserves3 and prior pilot observations; 55 reviewed images excluded. Four additionally selected legacy-human-pool-linked images are reserved from any later training by a separate overlay. No retrieval-model training performed.
+
+All96 outputs are schema-valid, unverified drafts: blue81/neutral15; light16/medium58/dark22; no unknowns. Codex inspected four sheets and flagged possible other-color and brightness-boundary problems without assigning ground truth.
+
+Current human gate: eight photos fixed before inference (seed197; one per sampling stratum plus two random remaining), under `data/private/attribute_expansion_20261029/`; family and brightness only, predictions hidden. All96 remain outside training; no pending compute jobs. 70 tests pass. [Execution and limits](docs/ATTRIBUTE_AUDIT.md).

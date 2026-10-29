@@ -1,0 +1,44 @@
+{
+  "purpose": "bounded_unverified_attribute_expansion",
+  "selection": {
+    "reviewed_images": 562,
+    "source_metadata_images": 6979,
+    "selected_images": 96,
+    "eligible_source_groups": 483,
+    "excluded_reviewed_images": 55,
+    "stratum_counts": {
+      "flared": 16,
+      "skinny": 16,
+      "slim": 16,
+      "straight": 16,
+      "unclassified": 16,
+      "wide": 16
+    },
+    "seed": 131,
+    "training_eligible": false,
+    "independent_products_verified": false,
+    "limits": "Known item/title/pixel links include supplied unreviewed metadata bridges. Strata are weak source tags, not visual labels; unknown is not a negative. Protects supplied groups only, not proof of product independence."
+  },
+  "protected_observations": 42,
+  "previous_pilot_observations": 24,
+  "manifest_sha256": "ea6f6352dbc193ccf92d8a04a24a4750d2a330598ce42a0958c355af5ef9e5bc",
+  "input_sha256": {
+    "reviewed_examples": "9c8f9205b9b15d30a9958899b7330c979636a134ebd5b93e04992f4aecb638c0",
+    "source_rows": "26ce5c8df6486fcff59019c8aa86e9416abc935c3484676e121670e8777b258d",
+    "validation_anchor": "cec3d78efe55b4458591f9c4680066dd84465b4ff5f264c774677b540af5a13f"
+  },
+  "audit": {
+    "photos": 8,
+    "chosen_before_inference": true,
+    "request_sha256": "5d5c907a0a95082acfa434e56bcb50160c5fbb1acbd6d8410d111795a1c0c171",
+    "selection": "Before inference, seed197: one random observation per weak sampling stratum plus two random remaining observations; display order shuffled. Not selected by output correctness.",
+    "human_answers_received": 0
+  },
+  "prior_human_pool_training_reservations": 4,
+  "training_reservations_sha256": "00a2ead5d2579b3308f6124708f191e0e8407353fabc3cadd5559e1468d6df76",
+  "selector_script_sha256": "4e73305dfcd42cef6b51011a21e7f0d9e780900284dd48320849ef127c7106e7",
+  "tests_passed": 70,
+  "training_eligible": false,
+  "independent_product_groups_verified": false,
+  "limits": "Sampling strata and future automatic tags are not human ground truth. The full 96 are annotation targets, not a held-out evaluation set. Four prior-human-pool-linked observations have an additional future-training reservation."
+}

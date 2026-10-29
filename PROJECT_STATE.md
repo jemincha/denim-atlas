@@ -29,4 +29,6 @@ Next: credible axis-specific supervision and diagnostic contrasts (same cut/diff
 
 Protected-dataset access and source-image/model-publication rights remain unverified. Conservative source groups do not certify independent products.
 
+Working design: [attribute representation and similarity](docs/SIMILARITY_DESIGN.md). Two main axes, eight initial attribute groups; volume/profile and color/lightness separated; fading recorded as observed contrast/pattern/location rather than inferred process. Ordinal anchors, tolerances and axis-conditioned heads are proposed, not fixed/trained. No new annotations, training or quality measurements for this design review.
+
 [Appearance pilot](docs/APPEARANCE_ANNOTATION_PILOT.md) · [Fit experiment](docs/FIT_PROXY_EXPERIMENT.md) · [Methodology](docs/METHODOLOGY_BENCHMARK.md)

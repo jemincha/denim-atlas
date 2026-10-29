@@ -51,6 +51,8 @@ These analysis commands retain the frozen-feature provenance checks and complete
 
 ## Next training decision and limits
 
+The [working representation and similarity design](SIMILARITY_DESIGN.md) expands each axis into subordinate attributes, separates volume from leg profile and color family from lightness, and proposes a calibration policy. It is not a frozen ontology or an implemented scoring model.
+
 Do not continue the fit-only objective as evidence of whole-appearance progress. First obtain credible, observable axis-specific supervision on a small diagnostic contrast set, using existing assets and requesting human input only for unresolved cases. No new human labels have been produced by this software change.
 
 Then retain the pretrained backbone and use explicit axis-conditioned distances/objectives, such as two small projection heads. That model change is **proposed, not implemented or validated**. Source-cut labels remain a weak silhouette proxy. Surface supervision and protected product groups remain unresolved. Independently report each axis, plus joint acceptability only if directly judged under a defined rule; do not hide a failed axis by averaging it with the other. Thresholds, weights and checkpoint selection must be fixed on development data before a fresh test.

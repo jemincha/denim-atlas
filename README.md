@@ -60,6 +60,7 @@ Attribute-supervised pilots and reused human development checks completed; usefu
 ## Documentation and evidence
 
 - [Silhouette / surface separation audit and corrected annotation protocol](docs/AXIS_SEPARATION_AUDIT.md)
+- [Working attribute representation and definition of similarity](docs/SIMILARITY_DESIGN.md)
 - [Observed-appearance annotation feasibility and rejection of unreliable labels](docs/APPEARANCE_ANNOTATION_PILOT.md)
 - [Attribute-supervision pilot, expansion and repeated results](docs/FIT_PROXY_EXPERIMENT.md)
 - [Methodology benchmark, project diagnosis and proposed next sprint](docs/METHODOLOGY_BENCHMARK.md)

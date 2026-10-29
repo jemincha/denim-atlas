@@ -24,6 +24,7 @@
 | Reused human development check | Original frozen baseline **0.3888**; fit-only adaptation **0.4129** (121 training images), **0.4053** (333). Three reused queries, no new human labels; no general quality claim |
 | Held-out quality | **Product-disjoint quality not measured**. Weak source-group validation and three reused human development queries recorded; independent product/duplicate groups pending |
 | Human judgments | Three single-rater rounds: 75 / 54 / 54 trials. Latest: 51 unique pairs, repeats 3/3 consistent; 37 pairs rated 0. New-query labels remain outside training |
+| Attribute audit | 17 human-judged development photos. Latest eight: 2B color-family agreement **7/8**, lightness **5/8**; controlled 4B probe **5/8**, **6/8**. All 96 automatic drafts remain excluded from training |
 
 Wearing-photo supply follow-up: a bounded Commons pilot acquired 24 attributed
 CC0/CC BY previews. A user-authorized Unsplash Lite audit processed 25,000 photo
@@ -55,11 +56,11 @@ The second command needs reviewed benchmark/features; paths and weight are examp
 
 **Axis-separation correction:** human joint grades and the cut-class proxy did not isolate silhouette from surface appearance. New calibration packets now store those two grades independently; import, analysis and training guards prevent silently pooling them. This changes the annotation protocol, not the trained model. [Audit, implemented fixes and next training limits](docs/AXIS_SEPARATION_AUDIT.md).
 
-Attribute-supervised pilots and reused human development checks completed; useful whole-appearance improvement remains unproven. The two selected comparisons were rejected under a joint prompt and do not identify the failed axis. The unverified VLM descriptions remain excluded from training. Attribute calibration now has six human responses; original coarse-family agreement is 5/5 comparable, brightness 2/6 on selected anchors. Two bounded 18-image inference retries exposed prompt/context dependence. The three-photo follow-up agrees 3/3 per attribute with visual references; a protected-group 96-image draft expansion completed, awaiting a preselected eight-photo audit. No new training or axis-conditioned trained model is claimed.
+Attribute-supervised pilots and reused human development checks completed; useful whole-appearance improvement remains unproven. A 96-image draft expansion failed its broader eight-photo human gate: 2B family/lightness agreement was 7/8 and 5/8. A controlled 4B annotation probe changed those counts to 5/8 and 6/8, so larger capacity did not provide a reliable replacement. All 96 drafts remain outside training. The next proposed experiment compares full-image and garment-region preprocessing, with continuous observed color/lightness diagnostics; this direction awaits researcher confirmation. Silhouette and wash remain separate objectives. No automatic segmentation, new training or axis-conditioned trained model is claimed.
 
 ## Documentation and evidence
 
-- [Attribute-label inventory, machine review and six-image human gate](docs/ATTRIBUTE_AUDIT.md)
+- [Attribute-label inventory, human audits and controlled annotation-model comparison](docs/ATTRIBUTE_AUDIT.md)
 - [Silhouette / surface separation audit and corrected annotation protocol](docs/AXIS_SEPARATION_AUDIT.md)
 - [Working attribute representation and definition of similarity](docs/SIMILARITY_DESIGN.md)
 - [Observed-appearance annotation feasibility and rejection of unreliable labels](docs/APPEARANCE_ANNOTATION_PILOT.md)

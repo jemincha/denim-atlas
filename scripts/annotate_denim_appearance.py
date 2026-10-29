@@ -18,6 +18,13 @@ except ImportError:
 MODEL = 'Qwen/Qwen3-VL-2B-Instruct'
 REVISION = '89644892e4d85e24eaac8bacfd4f463576704203'
 WEIGHT_SHA256 = '7de1838c87a5349b016c26a1c3f7d2bc400a3d485f95ef39a7059ffd734977a0'
+MODEL_PROFILES = {
+    '2b':{'model':MODEL,'revision':REVISION,'weights':{'model.safetensors':WEIGHT_SHA256}},
+    '4b':{'model':'Qwen/Qwen3-VL-4B-Instruct',
+          'revision':'ebb281ec70b05090aa6165b016eac8ec08e71b17',
+          'weights':{
+              'model-00001-of-00002.safetensors':'30a01a0556622645a3cce87b655bbbbbc1f170c196099f1b666c93202c3339a9',
+              'model-00002-of-00002.safetensors':'046296a2a387efb43b0c997d5833c789604d168834f6e0d3064bf7bb13d002a6'}}}
 ENUMS = {
     'view':{'front','back','side','mixed','unknown'},
     'color_family':{'blue','gray','black','white','beige','brown','green','pink','red','multicolor','other','unknown'},
@@ -132,6 +139,7 @@ def main():
     parser.add_argument('--coarse-only',action='store_true',
                         help='Request only observed color family and dominant lightness')
     parser.add_argument('--anchors',type=Path,help='Reviewed human reference images; coarse mode only')
+    parser.add_argument('--model-size',choices=sorted(MODEL_PROFILES),default='2b')
     args = parser.parse_args()
     if not Path('/kaggle/working').is_dir() or args.output.exists():
         parser.error('Remote Kaggle and a new output directory required')
@@ -159,12 +167,13 @@ def main():
     from PIL import Image, ImageOps
     if not torch.cuda.is_available(): parser.error('CUDA required; no local or CPU model fallback')
     if importlib.metadata.version('transformers')!='5.16.1':raise ValueError('Expected Transformers 5.16.1')
-    snapshot=Path(snapshot_download(MODEL,revision=REVISION,
+    profile = MODEL_PROFILES[args.model_size]
+    snapshot=Path(snapshot_download(profile['model'],revision=profile['revision'],
         allow_patterns=['*.json','*.safetensors','*.model','merges.txt','vocab.json','LICENSE','README.md']))
     weights={}
     for path in sorted(snapshot.glob('*.safetensors')):
         with path.open('rb') as stream:weights[path.name]=hashlib.file_digest(stream,'sha256').hexdigest()
-    if weights!={'model.safetensors':WEIGHT_SHA256}:raise ValueError('Unexpected pinned model weights')
+    if weights!=profile['weights']:raise ValueError('Unexpected pinned model weights')
     processor=AutoProcessor.from_pretrained(snapshot,trust_remote_code=False)
     model=Qwen3VLForConditionalGeneration.from_pretrained(snapshot,dtype=torch.float16,
         attn_implementation='sdpa',trust_remote_code=False).to('cuda:0').eval()
@@ -199,11 +208,11 @@ def main():
         print(json.dumps({'processed':len(results),'schema_valid':item['schema_valid']}),flush=True)
         del inputs,generated
     valid=[r for r in results if r['schema_valid']]
-    summary={'schema_version':1,'purpose':'appearance_weak_annotation_feasibility','model':MODEL,
+    summary={'schema_version':1,'purpose':'appearance_weak_annotation_feasibility','model':profile['model'],
         'annotation_mode':'coarse_only' if args.coarse_only else 'full_description',
         'visual_anchor_count':len(anchors),
         'anchor_manifest_sha256':hashlib.sha256(anchor_raw).hexdigest() if anchor_raw else None,
-        'revision':REVISION,'model_weight_sha256':weights,'model_license_card':'Apache-2.0; image terms remain separate',
+        'revision':profile['revision'],'model_weight_sha256':weights,'model_license_card':'Apache-2.0; image terms remain separate',
         'images':len(rows),'schema_valid_images':len(valid),'schema_invalid_images':len(rows)-len(valid),
         'unknown_counts':{k:sum(r['attributes'][k]=='unknown' for r in valid) for k in fields},
         'color_counts':dict(Counter(r['attributes']['color_family'] for r in valid)),

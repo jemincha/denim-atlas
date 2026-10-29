@@ -1,0 +1,29 @@
+{
+  "purpose": "preselected_expansion_attribute_audit",
+  "images_answered": 8,
+  "per_attribute": {
+    "color_family": {
+      "agreements": 7,
+      "comparable": 8,
+      "mismatch_displays": [
+        7
+      ]
+    },
+    "lightness": {
+      "agreements": 5,
+      "comparable": 8,
+      "mismatch_displays": [
+        1,
+        2,
+        6
+      ]
+    }
+  },
+  "pre_inference_request_sha256": "5d5c907a0a95082acfa434e56bcb50160c5fbb1acbd6d8410d111795a1c0c171",
+  "request_sha256": "617318b50298e32b71a28492972de2a15f9bb03db233ff74274f5bbcdd987c66",
+  "sheet_sha256": "702673b5f22efcda369f8526adab8e499c0279c1bf488f42e01c235bf5fecd4b",
+  "predictions_sha256": "61d3dd2849398668e7292af4032c8b1d445c568aac6e1e10de75f0acf2685ef1",
+  "human_answers_sha256": "5cd6946f3f9551352b9d926a16ea0c6e745c2708e8bad5e470addb9dd693a603",
+  "decision": "Do not promote the 96 drafts to training. Brightness fails the useful-label gate; other-color handling also needs correction. Preserve observed brightness separately from light/mid/dark retail color names.",
+  "limits": "Eight observations sampled before inference, stratified by weak source-fit categories. Single rater and small sample; no population guarantee, independent held-out test or retrieval improvement claim. No unjudged labels are converted to zero."
+}

@@ -4,7 +4,7 @@
 
 사진 속 데님의 색·톤·페이딩·워싱·실루엣을 비교하는 작은 ML 연구 과제입니다. 개인 취향, 원래 원단 색 복원, 모바일 앱은 현재 범위에 포함하지 않습니다.
 
-## Current snapshot — October 29, 2026
+## Current snapshot — October 30, 2026
 
 | Area | Verified state |
 |---|---|
@@ -25,6 +25,7 @@
 | Held-out quality | **Product-disjoint quality not measured**. Weak source-group validation and three reused human development queries recorded; independent product/duplicate groups pending |
 | Human judgments | Three single-rater rounds: 75 / 54 / 54 trials. Latest: 51 unique pairs, repeats 3/3 consistent; 37 pairs rated 0. New-query labels remain outside training |
 | Attribute audit | 17 human-judged development photos. Latest eight: 2B color-family agreement **7/8**, lightness **5/8**; controlled 4B probe **5/8**, **6/8**. All 96 automatic drafts remain excluded from training |
+| Regional experiment preparation | 96 existing images hash-verified, all 228x298. Eight development observations / 16 garment and hip-thigh regions prepared; six scoped human preferences pending. No new training or quality claim |
 
 Wearing-photo supply follow-up: a bounded Commons pilot acquired 24 attributed
 CC0/CC BY previews. A user-authorized Unsplash Lite audit processed 25,000 photo
@@ -56,7 +57,7 @@ The second command needs reviewed benchmark/features; paths and weight are examp
 
 **Axis-separation correction:** human joint grades and the cut-class proxy did not isolate silhouette from surface appearance. New calibration packets now store those two grades independently; import, analysis and training guards prevent silently pooling them. This changes the annotation protocol, not the trained model. [Audit, implemented fixes and next training limits](docs/AXIS_SEPARATION_AUDIT.md).
 
-Attribute-supervised pilots and reused human development checks completed; useful whole-appearance improvement remains unproven. A 96-image draft expansion failed its broader eight-photo human gate: 2B family/lightness agreement was 7/8 and 5/8. A controlled 4B annotation probe changed those counts to 5/8 and 6/8, so larger capacity did not provide a reliable replacement. All 96 drafts remain outside training. The next proposed experiment compares full-image and garment-region preprocessing, with continuous observed color/lightness diagnostics; this direction awaits researcher confirmation. Silhouette and wash remain separate objectives. No automatic segmentation, new training or axis-conditioned trained model is claimed.
+Attribute-supervised pilots and reused human development checks completed; useful whole-appearance improvement remains unproven. A 96-image draft expansion failed its broader eight-photo human gate: 2B family/lightness agreement was 7/8 and 5/8. A controlled 4B annotation probe changed those counts to 5/8 and 6/8, so larger capacity did not provide a reliable replacement. All 96 drafts remain outside training. The approved next experiment targets axis-specific garment-plus-region matching against a strong general multimodal comparator; data-readiness work begins first. Silhouette and wash remain separate objectives. No automatic segmentation, new training or axis-conditioned trained model is claimed. [Sprint alignment and reviews](docs/SPRINT_REVIEW.md).
 
 ## Documentation and evidence
 

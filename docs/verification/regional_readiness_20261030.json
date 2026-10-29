@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-30",
+  "purpose": "regional_axis_development_readiness",
+  "verified_existing_images": 96,
+  "source_sizes": {
+    "(228, 298)": 96
+  },
+  "selected_observations": 8,
+  "distinct_known_source_groups": 8,
+  "isolated_product_observations": 7,
+  "wearing_observations": 1,
+  "regions_per_observation": 2,
+  "region_assets": 16,
+  "proposed_comparison_cases": 3,
+  "scoped_human_decisions": 6,
+  "human_answers": 0,
+  "training_eligible_observations": 0,
+  "new_image_acquisition": false,
+  "training_performed": false,
+  "model_inference_performed": false,
+  "manifest_sha256": "2bab22df4235b539bcd45ad8da83a469cf33fdd8e1653154157f1e781b70bd5c",
+  "request_sha256": "780245965661c3cb3a9be798ef065fd3e2eb4801af7ded1e22c9e9b768913a97",
+  "preparation_script_sha256": "b07fbd41a334687d43755721dcfa5b1f4b5ef69c1ba287b05b83d79125b4942a",
+  "limits": "Eight known source groups, not certified product identities. Prior model/annotation exposure is allowed for development; none is an independent test. Human similarity still required. Broad fade/shape only; no texture or superiority claim.",
+  "visual_review_source": "Codex inspected all three boards; preliminary engineering/visibility review, not human relevance",
+  "comparison_prompt_axes": [
+    "silhouette",
+    "surface"
+  ],
+  "checkpoint_status": "Awaiting six scoped human preferences; no training label or performance gain established"
+}

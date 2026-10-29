@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "purpose": "appearance_weak_annotation_feasibility",
+  "model": "Qwen/Qwen3-VL-2B-Instruct",
+  "annotation_mode": "coarse_only",
+  "revision": "89644892e4d85e24eaac8bacfd4f463576704203",
+  "model_weight_sha256": {
+    "model.safetensors": "7de1838c87a5349b016c26a1c3f7d2bc400a3d485f95ef39a7059ffd734977a0"
+  },
+  "model_license_card": "Apache-2.0; image terms remain separate",
+  "images": 18,
+  "schema_valid_images": 0,
+  "schema_invalid_images": 18,
+  "unknown_counts": {
+    "color_family": 0,
+    "lightness": 0
+  },
+  "color_counts": {},
+  "lightness_counts": {},
+  "manifest_sha256": "a54b53278a38dcce2b75775c350787f8f09c2e0f2a71b3bb217c6e2fa356010b",
+  "prompt_sha256": "6177673ca658b0ac134a4a5c02f1f68b6a553b8e983fc1ffb96e2246311fb285",
+  "script_sha256": "06736b737dfb0c2cf1f9231a977d52b8e57504b8c905e17bdd6c8ab0f49559fd",
+  "seconds_inference": 31.723191729999996,
+  "peak_allocated_gib": 4.044096946716309,
+  "device": "Tesla T4",
+  "precision": "float16, sdpa; T4 does not require bfloat16 or FlashAttention",
+  "packages": {
+    "torch": "2.11.0+cu128",
+    "transformers": "5.16.1",
+    "Pillow": "13.0.0",
+    "huggingface_hub": "1.29.0"
+  },
+  "human_labels_created": 0,
+  "training_performed": false,
+  "ranking_performed": false,
+  "limits": "Schema validity and model consistency are not visual-label accuracy. All predictions are unverified weak descriptions; unknown is not negative. Small biased catalog/wearing pilot, limited resolution, no confidence calibration or human agreement claim.",
+  "job": "jemincha/denim-atlas-coarse-attribute-retry",
+  "job_version": 1,
+  "transport_revalidation": {
+    "original_annotations_sha256": "ec58f320991548b406a74193e340ba758247b4dd975960890f007a8da0ccdb8f",
+    "original_strict_valid": 0,
+    "transport_revalidated": 18,
+    "normalization": "Strip only an exact whole-response JSON code fence; preserve raw response and all field/value/duplicate checks.",
+    "parser_script_sha256": "b26f1c3200af1b096934103f8975e87ca7c02ece01fef69ba0062ab756f33238",
+    "lightness_counts": {
+      "medium": 12,
+      "dark": 6
+    },
+    "color_counts": {
+      "blue": 13,
+      "neutral": 5
+    },
+    "limits": "Transport parsing is not annotation accuracy; no new inference or human labels."
+  },
+  "human_anchor_targets_excluded": 6,
+  "ground_truth_on_targets": false,
+  "decision": "Text-only instructions do not establish usable lightness labels. No light predictions despite visually pale development examples. Hold scaling/training; try explicit human reference images once.",
+  "new_human_accuracy_measurements": 0
+}

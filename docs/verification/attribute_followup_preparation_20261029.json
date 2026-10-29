@@ -1,0 +1,27 @@
+{
+  "purpose": "coarse_attribute_development_followup",
+  "selection": "Three deliberately selected examples cover a pale-blue probe, a color-family context disagreement and a medium-blue control. Not a random accuracy sample.",
+  "fields": {
+    "color_family": [
+      "blue",
+      "neutral",
+      "other",
+      "U"
+    ],
+    "lightness": [
+      "dark",
+      "medium",
+      "light",
+      "mixed",
+      "U"
+    ]
+  },
+  "photos": 3,
+  "human_answers_received": 0,
+  "blind_to_predictions": true,
+  "request_sha256": "0ed878b70b07de5bc304043cdd2111d06cceeb2025961929b4c9db7d441859cb",
+  "sheet_sha256": "23d06af371e26d713f3c368e5a5167f853ed7fe3ca354e7932c751f4bd3dd233",
+  "tests_passed": 68,
+  "new_training": false,
+  "limits": "Selected development gate; no independent accuracy estimate or automatic training approval."
+}

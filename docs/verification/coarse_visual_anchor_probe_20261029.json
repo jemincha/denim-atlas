@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "purpose": "appearance_weak_annotation_feasibility",
+  "model": "Qwen/Qwen3-VL-2B-Instruct",
+  "annotation_mode": "coarse_only",
+  "visual_anchor_count": 5,
+  "anchor_manifest_sha256": "b42e5370908c62f8012260f249149b8056d6d0265a3d9eb2a3ebc498020cd4cb",
+  "revision": "89644892e4d85e24eaac8bacfd4f463576704203",
+  "model_weight_sha256": {
+    "model.safetensors": "7de1838c87a5349b016c26a1c3f7d2bc400a3d485f95ef39a7059ffd734977a0"
+  },
+  "model_license_card": "Apache-2.0; image terms remain separate",
+  "images": 18,
+  "schema_valid_images": 18,
+  "schema_invalid_images": 0,
+  "unknown_counts": {
+    "color_family": 0,
+    "lightness": 0
+  },
+  "color_counts": {
+    "blue": 17,
+    "neutral": 1
+  },
+  "lightness_counts": {
+    "medium": 9,
+    "light": 3,
+    "dark": 6
+  },
+  "manifest_sha256": "a54b53278a38dcce2b75775c350787f8f09c2e0f2a71b3bb217c6e2fa356010b",
+  "prompt_sha256": "6177673ca658b0ac134a4a5c02f1f68b6a553b8e983fc1ffb96e2246311fb285",
+  "script_sha256": "a08df7dbfd256772524db6e24413dcfb3ea827f65932b762fee6f0ccae301534",
+  "seconds_inference": 33.32186250500001,
+  "peak_allocated_gib": 4.249151706695557,
+  "device": "Tesla T4",
+  "precision": "float16, sdpa; T4 does not require bfloat16 or FlashAttention",
+  "packages": {
+    "torch": "2.11.0+cu128",
+    "transformers": "5.16.1",
+    "Pillow": "13.0.0",
+    "huggingface_hub": "1.29.0"
+  },
+  "human_labels_created": 0,
+  "training_performed": false,
+  "ranking_performed": false,
+  "limits": "Schema validity and model consistency are not visual-label accuracy. All predictions are unverified weak descriptions; unknown is not negative. Small biased catalog/wearing pilot, limited resolution, no confidence calibration or human agreement claim.",
+  "job": "jemincha/denim-atlas-coarse-visual-anchors",
+  "job_version": 1,
+  "anchor_role": "five previously supplied human observations in inference context; no optimizer updates",
+  "target_human_accuracy_labels": 0,
+  "color_family_changes_vs_text_only": [
+    {
+      "id": "glami:1022635",
+      "text_only": "neutral",
+      "visual_anchors": "blue"
+    },
+    {
+      "id": "glami:1023784",
+      "text_only": "neutral",
+      "visual_anchors": "blue"
+    },
+    {
+      "id": "glami:1023979",
+      "text_only": "neutral",
+      "visual_anchors": "blue"
+    },
+    {
+      "id": "glami:1022956",
+      "text_only": "neutral",
+      "visual_anchors": "blue"
+    }
+  ],
+  "decision": "Do not scale or certify. Keep context variants separate and request a three-photo blind attribute check. Fieldwise draft is a development hypothesis only.",
+  "new_human_answers_used_as_anchors": 5,
+  "tests_passed": 68
+}

@@ -1,10 +1,43 @@
 import json
 import unittest
 
-from scripts.annotate_denim_appearance import parse_annotation, ENUMS
+from scripts.annotate_denim_appearance import parse_annotation, parse_coarse_annotation, validate_anchor_rows, ENUMS
 
 
 class AppearanceAnnotationTests(unittest.TestCase):
+    def test_visual_anchors_require_verified_observations_and_target_exclusion(self):
+        row={'id':'reference','human_verified':True,'attributes':{
+            'target_ambiguous':False,'color_family':'blue','lightness':'light'}}
+        self.assertEqual(validate_anchor_rows({'examples':[row]},{'target'}),[row])
+        for plan,targets in (({'examples':[row]},{'reference'}),
+                             ({'examples':[dict(row,human_verified=False)]},{'target'}),
+                             ({'examples':[row,row]},{'target'}),({'examples':[]},{'target'}),
+                             ({'examples':[dict(row,attributes=dict(row['attributes'],lightness='unknown'))]},{'target'})):
+            with self.subTest(plan=plan),self.assertRaises(ValueError):validate_anchor_rows(plan,targets)
+
+    def test_coarse_accepts_exact_json_fence_but_not_prose_or_multiple_blocks(self):
+        raw='{"target_ambiguous":false,"color_family":"neutral","lightness":"dark"}'
+        self.assertEqual(parse_coarse_annotation('```json\n'+raw+'\n```'),json.loads(raw))
+        for text in ('Here is the answer: '+raw,'```json\n'+raw+'\n```\nExplanation',
+                     '```json\n'+raw+'\n```\n```json\n'+raw+'\n```'):
+            with self.subTest(text=text),self.assertRaises(ValueError):parse_coarse_annotation(text)
+
+    def test_coarse_mode_has_only_two_independent_attributes(self):
+        row={'target_ambiguous':False,'color_family':'unknown','lightness':'light'}
+        self.assertEqual(parse_coarse_annotation(json.dumps(row)),row)
+        for change in (dict(row,fade_strength='strong'),dict(row,lightness='white'),
+                       dict(row,target_ambiguous=1),{'target_ambiguous':False,'color_family':'blue'}):
+            with self.subTest(change=change),self.assertRaises(ValueError):
+                parse_coarse_annotation(json.dumps(change))
+        with self.assertRaises(ValueError):
+            parse_coarse_annotation('{"target_ambiguous":false,"color_family":"blue","color_family":"neutral","lightness":"dark"}')
+
+    def test_coarse_ambiguous_target_requires_unknown_not_dark_or_neutral(self):
+        row={'target_ambiguous':True,'color_family':'unknown','lightness':'unknown'}
+        self.assertEqual(parse_coarse_annotation(json.dumps(row)),row)
+        with self.assertRaisesRegex(ValueError,'Ambiguous'):
+            parse_coarse_annotation(json.dumps(dict(row,lightness='dark')))
+
     def valid(self):
         return dict(target_ambiguous=False,view='front',color_family='blue',observed_tone='cool',
             lightness='medium',fade_strength='moderate',front_hip_whiskers='visible',

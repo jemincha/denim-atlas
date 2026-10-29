@@ -60,6 +60,7 @@ Attribute-supervised pilots and reused human development checks completed; usefu
 
 ## Documentation and evidence
 
+- [Literature review: regional and attribute-conditioned learning, strong multimodal comparison and next experiment](docs/LITERATURE_REVIEW_20261030.md)
 - [Attribute-label inventory, human audits and controlled annotation-model comparison](docs/ATTRIBUTE_AUDIT.md)
 - [Silhouette / surface separation audit and corrected annotation protocol](docs/AXIS_SEPARATION_AUDIT.md)
 - [Working attribute representation and definition of similarity](docs/SIMILARITY_DESIGN.md)

@@ -1,0 +1,34 @@
+{
+  "purpose": "candidate_pool_development_diagnosis",
+  "cached_images": 372,
+  "checkpoint_sha256": "7419436f8c61b5cd789816adb2eb652553bee7e04ca42c9c3897e4fc843660fe",
+  "manifest_sha256": "cec3d78efe55b4458591f9c4680066dd84465b4ff5f264c774677b540af5a13f",
+  "source_code_sha256": "3d66b3a561114e3944502adf3d031aedaa5eb1f39217b44b9a290c3610a3d842",
+  "new_training_steps": 0,
+  "new_model_encodings": 0,
+  "human_labels_created": 0,
+  "limits": "Selected catalog queries reused after human rejection. Gallery includes training images. Nearest neighbors cannot establish that acceptable matches exist or are absent; not a held-out evaluation or a quality score.",
+  "job": "jemincha/denim-atlas-gallery-diagnosis",
+  "job_version": 1,
+  "status": "COMPLETE",
+  "compute": "CPU; network and GPU disabled",
+  "private_summary_sha256": "8ac1dccc5fdee342c37aaa8d03dd524d19f2274ac2363da0744477f96b909487",
+  "queries": [
+    {
+      "old_eligible_candidates": 38,
+      "expanded_eligible_candidates": 371,
+      "same_top1_before_after": true,
+      "top8_overlap": 8
+    },
+    {
+      "old_eligible_candidates": 38,
+      "expanded_eligible_candidates": 371,
+      "same_top1_before_after": true,
+      "top8_overlap": 7
+    }
+  ],
+  "inspection": "Codex viewed both expanded-neighbor sheets. Appearance resemblance remains ungraded; no positive or negative labels inferred.",
+  "inventory_coverage": "372 cached, source-cut-labeled images only; not all 562 provisionally accepted images.",
+  "interpretation": "The original selected audit constrained both queries to 38 eligible validation candidates. Enlarging the gallery changes top1 for both queries but yields identical before/after top1. Candidate availability and overall appearance ranking remain separate unresolved questions.",
+  "next_decision": "Do not expand fit-only training or scale the rejected VLM descriptions. Define credible whole-appearance positive supervision before another adaptation run."
+}

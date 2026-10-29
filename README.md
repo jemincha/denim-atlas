@@ -53,7 +53,7 @@ The second command needs reviewed benchmark/features; paths and weight are examp
 
 ## Next milestone
 
-Attribute supervision, data expansion, three-seed repetition and reused human regression checks completed. The two selected appearance comparisons were both rejected (neither candidate acceptable). They remain qualitative feedback, with no absolute grades inferred. A 24-image automatic-description pilot failed the fine-detail consistency/visual feasibility gate; its outputs were not used for training. A brief mismatch explanation is the next input; no new rating grid. Color/wash supervision and independent wearing-photo/product evaluation remain next research gaps. See [fit-proxy experiment](docs/FIT_PROXY_EXPERIMENT.md).
+Attribute supervision, data expansion, three-seed repetition and reused human regression checks completed. The two selected appearance comparisons were both rejected (neither candidate acceptable). They remain qualitative feedback, with no absolute grades inferred. A 24-image automatic-description pilot failed the fine-detail consistency/visual feasibility gate; its outputs were not used for training. The follow-up confirms almost no overall resemblance; no further facet-level explanation is requested. A cached-vector diagnosis expanded the two selected queries from 38 to 371 eligible candidates: both models now share the same top-1 per query. This is a gallery-scope diagnostic, not new quality evidence. Color/wash supervision and independent wearing-photo/product evaluation remain next research gaps. See [fit-proxy experiment](docs/FIT_PROXY_EXPERIMENT.md).
 
 ## Documentation and evidence
 

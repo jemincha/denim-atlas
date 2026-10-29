@@ -6,10 +6,17 @@
   "sheet_sha256": "e95317b784e972e8bfbe554e35f06943702c55f6483738519239cfeda9c33e49",
   "absolute_grades_assigned": false,
   "training_triplets_created": 0,
-  "limits": "Neither is not an A/B tie and is not converted into individual grade0 labels. Selected cases do not estimate population performance; reasons were not elicited.",
+  "limits": "Neither is not an A/B tie and is not converted into individual grade0 labels. Selected cases do not estimate population performance. The follow-up rejects overall resemblance; no facet-specific cause or personal preference is inferred.",
   "answered_questions": 2,
   "response_counts": {
     "neither": 2
   },
-  "base_and_expanded_fit_both_unacceptable_in_selected_cases": true
+  "base_and_expanded_fit_both_unacceptable_in_selected_cases": true,
+  "follow_up": {
+    "date": "2026-10-29",
+    "scope": "both displayed cases",
+    "meaning": "Researcher reports almost no overall resemblance.",
+    "attribute_level_cause_established": false,
+    "additional_training_labels_created": 0
+  }
 }

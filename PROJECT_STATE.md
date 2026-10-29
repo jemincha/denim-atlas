@@ -17,7 +17,7 @@ The two selected comparisons were answered **neither / neither**. Private respon
 
 - Fashionpedia metadata audit complete: 294 attributes, 314 pants; jeans109 / washed68 / distressed21 (overlapping pants counts, not approved denim). No photographed-color or fine fading-strength/location labels established; no images downloaded.
 - Qwen3-VL-2B-Instruct image-only pilot complete: 24 previously reviewed images, pinned revision/weights, T4 inference 108.81s / 4.078GiB. Original parser accepted22; two view/detail contract violations. Three more contradicted no-fading with faded whiskers; revised consistency pass19. Unknowns absent and detail labels repetitive. No human attribute-accuracy labels; no training/reranking or large-scale annotation performed. Keep these descriptions unverified and do not scale.
-- 60 local tests pass. No pending compute jobs. Retrieval backbone remains FashionSigLIP; fit-only weights remain experimental.
+- 64 local tests pass. No pending compute jobs. Retrieval backbone remains FashionSigLIP; fit-only weights remain experimental.
 
 The follow-up closes the mismatch question: overall resemblance was rejected; no personal weights or facet-specific cause inferred. A private CPU run reused 372 cached embeddings, expanding each selected query from 38 eligible validation candidates to 371 cross-group candidates. Both expanded-gallery top-1 choices are identical before/after fit adaptation (top-8 overlap 8/8 and 7/8). Training images are allowed in this diagnostic; it is not held-out evaluation and does not cover all 562 accepted candidates. No human acceptance or absence of a suitable match established. [Evidence](docs/verification/gallery_diagnosis_20261029.json).
 
@@ -25,10 +25,16 @@ The researcher clarified that the joint prompt led to rejection whenever either 
 
 Implemented: new packet CLI defaults to schema2 with separate silhouette/surface scores on the same image pair; independent U/repeats/conflicts; explicit-axis analysis; legacy joint trainer rejects these records. Historical packets/API defaults and grades stay intact. 60 tests plus actual browser download/import and 390px layout checked using engineering fixtures only. [Separation audit](docs/AXIS_SEPARATION_AUDIT.md).
 
-Next: credible axis-specific supervision and diagnostic contrasts (same cut/different surface and different cut/similar surface), then an explicit axis-conditioned training objective. Two heads are a proposal, not a trained model. Do not expand fit-only training, train on unverified VLM descriptions, infer positives from proximity, or require both axes to match before collecting axis-specific evidence. No pending human question or compute job. Raw model outputs/statuses and revised validator remain separate; consistency passes are not visual accuracy.
+Next: credible axis-specific supervision and diagnostic contrasts (same cut/different surface and different cut/similar surface), then an explicit axis-conditioned training objective. Two heads are a proposal, not a trained model. Do not expand fit-only training, train on unverified VLM descriptions, infer positives from proximity, or require both axes to match before collecting axis-specific evidence. No pending compute job. The six-image coarse-attribute calibration below is the current human gate. Raw model outputs/statuses and revised validator remain separate; consistency passes are not visual accuracy.
 
 Protected-dataset access and source-image/model-publication rights remain unverified. Conservative source groups do not certify independent products.
 
 Working design: [attribute representation and similarity](docs/SIMILARITY_DESIGN.md). Two main axes, eight initial attribute groups; volume/profile and color/lightness separated; fading recorded as observed contrast/pattern/location rather than inferred process. Ordinal anchors, tolerances and axis-conditioned heads are proposed, not fixed/trained. No new annotations, training or quality measurements for this design review.
 
 [Appearance pilot](docs/APPEARANCE_ANNOTATION_PILOT.md) · [Fit experiment](docs/FIT_PROXY_EXPERIMENT.md) · [Methodology](docs/METHODOLOGY_BENCHMARK.md)
+
+## Attribute feasibility execution
+
+`prepare_attribute_audit.py` built a draft inventory: 562 catalog observations plus 3 existing Commons crops; 375 weak retail-fit tags and 24 machine drafts each for color, lightness and tone. No labels certified or promoted to training. All 24 pilot image hashes verified and visually inspected by Codex. Coarse color remains a calibration candidate; lightness collapsed to medium20/dark4, no light or unknown; tone lacks anchors. Rejected wash descriptions stay excluded.
+
+Current human gate: six selected photos, blind to predictions, color family and dominant photographed lightness only. Private request/image under `data/private/attribute_audit_20261029/`; no new website needed. This is anchor calibration, not random accuracy estimation. Await these six attribute answers before scaling annotation or training. No GPU/model inference this step; 64 tests pass. [Execution and limits](docs/ATTRIBUTE_AUDIT.md).

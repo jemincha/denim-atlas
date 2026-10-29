@@ -1,0 +1,83 @@
+{
+  "date": "2026-10-29",
+  "purpose": "attribute_label_feasibility_stage1",
+  "inventory": {
+    "reviewed_catalog_images": 562,
+    "observations": 565,
+    "proposal_counts": {
+      "retail_fit": 375,
+      "color_family": 24,
+      "lightness": 24,
+      "observed_tone": 24
+    },
+    "human_verified_observations": 0,
+    "training_eligible_observations": 0,
+    "limits": "Source fit remains retail terminology, not observed geometry. Coarse fields are isolated from rejected wash assertions but remain unverified. Unknown is not absence; titles never establish photographed color. This inventory is not an approved training manifest."
+  },
+  "pilot_images": 24,
+  "canonical_color_counts": {
+    "blue": 16,
+    "neutral": 8
+  },
+  "lightness_counts": {
+    "medium": 20,
+    "dark": 4
+  },
+  "tone_counts": {
+    "cool": 9,
+    "neutral": 15
+  },
+  "review": {
+    "reviewer": "Codex qualitative visual inspection; not human attribute ground truth",
+    "images_inspected": 24,
+    "source_hashes_verified": 24,
+    "scope": "Coarse color, lightness and tone drafts only; no wash-label rehabilitation.",
+    "findings": {
+      "color_family": "Coarse blue/neutral split is visually plausible on this limited set, pending blind human calibration. No accuracy certified.",
+      "lightness": "Labels collapse to medium even for white, pale blue and dark navy examples. Do not scale lightness annotation.",
+      "observed_tone": "No agreed yellow-cast anchors or human reference labels; do not certify tone from this inspection."
+    },
+    "suspect_lightness_examples": [
+      "glami:1023544",
+      "glami:1024289",
+      "glami:1023683",
+      "glami:1023784",
+      "glami:1038506",
+      "commons:125041989:pants"
+    ],
+    "decisions": {
+      "color_family": "small human calibration only",
+      "lightness": "hold; establish anchors and revise prompt/measurement",
+      "observed_tone": "hold until yellow-cast definition and anchors",
+      "fade_and_wash": "rejected outputs remain excluded"
+    },
+    "human_labels_created": 0,
+    "training_labels_promoted": 0
+  },
+  "private_input_hashes": {
+    "examples": "9c8f9205b9b15d30a9958899b7330c979636a134ebd5b93e04992f4aecb638c0",
+    "source_rows": "26ce5c8df6486fcff59019c8aa86e9416abc935c3484676e121670e8777b258d",
+    "manifest": "f3f9a0324ce85665ad5d42c94f0bf1950e05f57a17a6dab69267a0629b8a9a54",
+    "descriptions": "d23af85ec05bb6f49782f2e64c9f3dbf5dfa3ffb9848908e54a6e729904ddb46"
+  },
+  "human_gate": {
+    "images": 6,
+    "fields": [
+      "color_family",
+      "lightness"
+    ],
+    "blind_to_machine_predictions": true,
+    "selection": "Targeted contrasting/borderline examples: white, dark blue, lighter blue, black, gray and a wearing crop. Not a random accuracy sample.",
+    "sheet_sha256": "4ba8de6f1f9e410ad081f122fefc17d3d3da80f8b29d21ccfb156e25adb56813",
+    "request_sha256": "cd1e5473e67765cbf341caf0b750effb20cb5d58b42ccc2e263fad1cfa78ab14",
+    "human_answers_received": 0
+  },
+  "asset_reuse_job": "jemincha/denim-atlas-attribute-audit-assets",
+  "asset_reuse_version": 1,
+  "new_model_inference": false,
+  "new_training": false,
+  "weights_downloaded_locally": false,
+  "tests_passed": 64,
+  "script_sha256": "10efa7ea2860433997687ecd615ef189f37d15244687e6587589ff949db57bf8",
+  "limits": "Six selected examples calibrate anchors and expose failure cases; they do not estimate population accuracy or approve automatic labeling at scale. Machine screening and human review are distinct. Calibration assets are not a fresh test set."
+}

@@ -1,0 +1,57 @@
+{
+  "date": "2026-10-29",
+  "purpose": "axis_separation_software_and_protocol_audit",
+  "finding": "Axes were not separated end to end; historical joint labels cannot identify either axis independently.",
+  "model_architecture_changed": false,
+  "new_training_steps": 0,
+  "human_labels_collected": 0,
+  "schema2_axes": [
+    "silhouette",
+    "surface"
+  ],
+  "legacy_joint_packets_preserved": true,
+  "schema2_joint_trainer_rejected": true,
+  "no_automatic_axis_grade_aggregation": true,
+  "tests": {
+    "command": "python -m unittest discover -s tests -q",
+    "passed": 60
+  },
+  "browser_engineering_qa": {
+    "engineering_fixture_only": true,
+    "browser": "installed Chrome, separate headless context",
+    "checks": [
+      "independent axis values",
+      "partial completion",
+      "reload persistence",
+      "axis-specific unknown",
+      "export roundtrip shape",
+      "390px no horizontal overflow",
+      "legacy numeric shortcut"
+    ],
+    "browser_errors": []
+  },
+  "actual_browser_download_import_checked": true,
+  "historical_cut_proxy_validates_full_appearance": false,
+  "source_sha256": {
+    "scripts/build_judgment_packet.py": "bdadcfa38eb1d55fb66e6f457a2087f8536746ff521c6d15d8bc2e32c6a2fcf9",
+    "scripts/judgment_template.html": "a88dc61e423c7cf1e96e7ff967ecbf37bdc35d1041f598b5596a6516bca7f3b9",
+    "scripts/import_judgments.py": "4ac5df9834f10888b5cfc2f6d965fd31881f15bc9080face74f02fddbb7e5d6d",
+    "scripts/analyze_calibration.py": "1d46f5307a48ed83bbe44274a6161277e89c6494b77491e7c6e306a839d5cedf",
+    "scripts/finetune_denim_pilot.py": "d7fe031a44814cfac03e4ca5d6e350ccaf79c2b77971e207eff670983334574c",
+    "tests/test_judgment_packet.py": "d4094baf51f6c4d19d6f7814be5eb04ad1c3258014fb5cadd1b125a4a9f01c3e",
+    "tests/test_calibration.py": "6bd61a8b6f3730d563e92d02651a1696d6deb6a051c75f4879c19a9c7a31c40e"
+  },
+  "limits": [
+    "Engineering clicks are not human labels or research measurements.",
+    "New CLI packets separate axes; existing programmatic packet() callers must opt in.",
+    "No trained axis-conditioned distances or validated surface supervision yet.",
+    "No improvement in retrieval quality measured by this change."
+  ],
+  "cli_default_and_legacy_mode_checked": true,
+  "historical_round3_reimport": {
+    "answered_trials": 54,
+    "judged_unique_pairs": 51,
+    "consistent_repeats": 3,
+    "labels_rewritten": false
+  }
+}

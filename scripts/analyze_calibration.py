@@ -17,8 +17,14 @@ except ImportError:
     from run_baselines import rank_pools, vector
 
 
-def analyze(packet, ratings, features):
+def analyze(packet, ratings, features, comparison_axis=None):
     imported = import_ratings(packet, ratings)
+    if imported['schema_version'] == 2:
+        if comparison_axis not in imported['axis_results']:
+            raise ValueError('Select silhouette or surface explicitly; axis grades are not combined')
+        imported = imported['axis_results'][comparison_axis]
+    elif comparison_axis not in (None, 'overall'):
+        raise ValueError('Historical overall grades cannot be interpreted as axis grades')
     provenance = features.get('provenance', {})
     if (provenance.get('revision') != REVISION
             or provenance.get('weights_sha256') != WEIGHT_SHA256
@@ -45,6 +51,7 @@ def analyze(packet, ratings, features):
                 'top5':[{'candidate_id':c,'grade':grades.get((query,c))} for c in candidates[:5]],
                 'ranking':candidates})
     return {'schema_version':1, 'purpose':'calibration_only', 'color_weight':0.5,
+            'comparison_axis':comparison_axis or 'overall',
             'packet_sha256':packet['packet_sha256'], 'usable_pairs':len(grades),
             'held_out_evaluation':False, 'product_independence_verified':False,
             'training_run':False, 'feature_provenance':provenance, 'results':results,
@@ -55,10 +62,12 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     for key in ('packet','ratings','features','output'):
         parser.add_argument('--'+key, type=Path, required=True)
+    parser.add_argument('--comparison-axis', choices=['overall','silhouette','surface'])
     args = parser.parse_args()
     raw = {key:getattr(args,key).read_bytes() for key in ('packet','ratings','features')}
     result = analyze(*(json.loads(raw[key], object_pairs_hook=unique_object)
-                       for key in ('packet','ratings','features')))
+                       for key in ('packet','ratings','features')),
+                     comparison_axis=args.comparison_axis)
     result['input_sha256'] = {key:hashlib.sha256(value).hexdigest() for key,value in raw.items()}
     with args.output.open('x', encoding='utf-8') as stream:
         json.dump(result,stream,ensure_ascii=False,indent=2,allow_nan=False)

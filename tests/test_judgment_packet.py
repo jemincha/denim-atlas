@@ -4,6 +4,8 @@ import unittest
 
 from scripts.build_judgment_packet import packet, build_html
 from scripts.import_judgments import import_ratings
+from scripts.finetune_denim_pilot import training_triplets
+from scripts.analyze_calibration import analyze
 
 
 def asset(identity):
@@ -13,6 +15,66 @@ def asset(identity):
 
 
 class PacketTests(unittest.TestCase):
+    def axis_packet(self):
+        data=packet([asset('q')],[asset('a'),asset('b')],
+                    packet_id='denim-atlas-two-axis-check-v1',separate_axes=True)
+        export={k:data[k] for k in ('schema_version','packet_id','packet_sha256',
+                                   'rater_id','purpose','comparison_axes')}
+        export['ratings']=[]
+        return data,export
+
+    def test_axis_disagreement_is_preserved_without_joint_grade(self):
+        data,export=self.axis_packet()
+        self.assertEqual(data['schema_version'],2)
+        self.assertNotEqual(data['packet_sha256'],packet([asset('q')],[asset('a'),asset('b')],
+                            packet_id=data['packet_id'])['packet_sha256'])
+        for t in data['trials']:
+            export['ratings'].append({'trial_id':t['trial_id'],'scores':{
+                'silhouette':{'grade':3},'surface':{'grade':0}}})
+        result=import_ratings(data,export)
+        self.assertNotIn('judged_unique_pairs',result)
+        self.assertEqual(result['complete_trials'],len(data['trials']))
+        self.assertEqual({r['grade'] for r in result['axis_results']['silhouette']['judged_unique_pairs']},{3})
+        self.assertEqual({r['grade'] for r in result['axis_results']['surface']['judged_unique_pairs']},{0})
+        with self.assertRaisesRegex(ValueError,'explicit axis objective'):
+            training_triplets(data,export)
+        with self.assertRaisesRegex(ValueError,'Select silhouette or surface'):
+            analyze(data,export,{})
+
+    def test_axis_repeat_conflicts_and_unknowns_do_not_erase_other_axis(self):
+        data,export=self.axis_packet()
+        first=data['trials'][0]
+        repeat=next(t for t in data['trials'] if t['repeat'])
+        other=next(t for t in data['trials'] if t['candidate']!=first['candidate'])
+        export['ratings']=[
+            {'trial_id':first['trial_id'],'scores':{'silhouette':{'grade':3},'surface':{'grade':0}}},
+            {'trial_id':repeat['trial_id'],'scores':{'silhouette':{'grade':2},'surface':{'grade':0}}},
+            {'trial_id':other['trial_id'],'scores':{'silhouette':{'grade':'U','reason':'silhouette_unobservable'},
+                                                  'surface':{'grade':2}}}]
+        result=import_ratings(data,export)['axis_results']
+        self.assertEqual(len(result['silhouette']['conflicts_requiring_review']),1)
+        self.assertEqual(result['silhouette']['uncertain_trials'],1)
+        self.assertEqual(result['silhouette']['judged_unique_pairs'],[])
+        self.assertEqual(len(result['surface']['judged_unique_pairs']),2)
+        self.assertTrue(result['surface']['repeat_checks'][0]['exact_agreement'])
+        del export['ratings'][2]['scores']['surface']
+        self.assertEqual(import_ratings(data,export)['axis_results']['surface']['missing_trials'],1)
+
+    def test_axis_export_rejects_mixed_labels_or_wrong_provenance(self):
+        import copy
+        data,export=self.axis_packet()
+        tid=data['trials'][0]['trial_id']
+        for scores in ({'overall':{'grade':2}}, {'silhouette':{'grade':True}},
+                       {'surface':{'grade':4}}, {'surface':{'grade':None}},
+                       {'surface':{'grade':'U','reason':'silhouette_unobservable'}},
+                       {'surface':2}, {}):
+            with self.subTest(scores=scores),self.assertRaises(ValueError):
+                import_ratings(data,dict(export,ratings=[{'trial_id':tid,'scores':scores}]))
+        bad=copy.deepcopy(export);bad['comparison_axes']=['surface','silhouette']
+        with self.assertRaisesRegex(ValueError,'provenance'):import_ratings(data,bad)
+        with self.assertRaises(ValueError):
+            import_ratings(data,dict(export,ratings=[{'trial_id':tid,'grade':2,'scores':{'surface':{'grade':2}}}]))
+
     def test_query_specific_pools_avoid_cross_query_trials(self):
         queries=[asset('q1'),asset('q2')]
         gallery=[asset('a'),asset('b'),asset('c'),asset('d')]

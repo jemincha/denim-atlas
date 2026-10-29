@@ -19,6 +19,8 @@ except ImportError:
 
 
 def training_triplets(packet, ratings):
+    if packet.get('schema_version') != 1:
+        raise ValueError('Joint-grade trainer cannot consume separate-axis judgments; an explicit axis objective is required')
     labels = import_ratings(packet, ratings)['judged_unique_pairs']
     queries = sorted({r['query_id'] for r in labels})
     triples = []

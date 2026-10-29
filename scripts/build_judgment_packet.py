@@ -23,7 +23,8 @@ def validate_images(rows):
             raise ValueError('Invalid crop bytes or hash')
 
 
-def packet(queries, candidates, packet_id='denim-atlas-calibration-round1-v1', pools=None):
+def packet(queries, candidates, packet_id='denim-atlas-calibration-round1-v1', pools=None,
+           separate_axes=False):
     if not queries or len(candidates) < 2:
         raise ValueError('Queries and at least two candidates required')
     validate_images(queries + candidates)
@@ -57,6 +58,8 @@ def packet(queries, candidates, packet_id='denim-atlas-calibration-round1-v1', p
               'rater_id':'jemin', 'queries':queries, 'candidates':candidates,
               'trials':trials, 'candidate_pools':groups,
               'research_split':None, 'independent_product_groups_verified':False}
+    if separate_axes:
+        result.update(schema_version=2, comparison_axes=['silhouette', 'surface'])
     raw = json.dumps(result, sort_keys=True, ensure_ascii=False, separators=(',',':')).encode()
     result['packet_sha256'] = hashlib.sha256(raw).hexdigest()
     return result
@@ -75,10 +78,13 @@ if __name__ == '__main__':
     parser.add_argument('--output', type=Path, required=True)
     parser.add_argument('--packet-id', default='denim-atlas-calibration-round1-v1')
     parser.add_argument('--pools', type=Path, help='JSON mapping query IDs to their candidate IDs')
+    parser.add_argument('--legacy-overall', action='store_true',
+                        help='Reproduce historical joint-grade packets; new packets separate the two axes')
     args = parser.parse_args()
     data = packet(json.loads(args.queries.read_text(encoding='utf-8'))['assets'],
                   json.loads(args.gallery.read_text(encoding='utf-8'))['assets'], args.packet_id,
-                  json.loads(args.pools.read_text(encoding='utf-8')) if args.pools else None)
+                  json.loads(args.pools.read_text(encoding='utf-8')) if args.pools else None,
+                  separate_axes=not args.legacy_overall)
     args.output.mkdir(exist_ok=False)
     (args.output/'packet.json').write_text(json.dumps(data, ensure_ascii=False), encoding='utf-8')
     (args.output/'judge.html').write_text(build_html(data), encoding='utf-8')
@@ -86,5 +92,6 @@ if __name__ == '__main__':
     summary.update(queries=len(data['queries']), candidates=len(data['candidates']),
                    unique_pairs=sum(map(len,data['candidate_pools'])),
                    repeated_pairs=len(data['queries']), total_trials=len(data['trials']), judgments=0)
+    summary['comparison_axes'] = data.get('comparison_axes', ['overall'])
     (args.output/'summary.json').write_text(json.dumps(summary,indent=2)+'\n',encoding='utf-8')
     print(json.dumps(summary,indent=2))

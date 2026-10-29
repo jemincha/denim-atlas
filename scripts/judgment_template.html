@@ -7,35 +7,70 @@
 <main>
 <h1>청바지 유사도 판정</h1>
 <p>왼쪽 사진의 <b>보이는 바지</b>와 오른쪽 상품이 얼마나 비슷한지 골라줘.</p>
-<p class="muted">색·톤, 워싱·페이딩, 보이는 실루엣을 함께 판단. 취향·브랜드·배경은 제외하고 안 보이는 부분은 추측하지 않기. 모델 순위는 표시하지 않아.</p>
+<p class="muted" id="scope">색·톤, 워싱·페이딩, 보이는 실루엣을 함께 판단. 취향·브랜드·배경은 제외하고 안 보이는 부분은 추측하지 않기. 모델 순위는 표시하지 않아.</p>
 <p class="muted">판정 기준과 추가 학습을 위한 자료야. 일부 반복 문항이 포함돼. 독립적인 최종 성능평가 결과로 사용하지 않아.</p>
-<p class="muted"><b>0과 1의 구분:</b> 0은 보이는 주요 특징이 달라 유사 상품으로 보기 어려운 경우, 1은 일부 요소는 닮았지만 전체 차이가 큰 경우야. 2는 꽤 비슷함, 3은 관찰 가능한 핵심 특징이 매우 비슷함. 정보가 부족하면 0 대신 ‘판단 불가’를 골라줘.</p>
+<p class="muted" id="rubric"><b>0과 1의 구분:</b> 0은 보이는 주요 특징이 달라 유사 상품으로 보기 어려운 경우, 1은 일부 요소는 닮았지만 전체 차이가 큰 경우야. 2는 꽤 비슷함, 3은 관찰 가능한 핵심 특징이 매우 비슷함. 정보가 부족하면 0 대신 ‘판단 불가’를 골라줘.</p>
 <label for="jump">문항</label> <select id="jump"></select> <span id="count"></span>
 <progress id="progress" value="0"></progress>
 <div class="pair"><figure><figcaption id="qlabel"></figcaption><img id="query" alt="비교 기준인 착용 사진의 바지 영역"><p id="note" class="muted"></p></figure><figure><figcaption>비교할 상품</figcaption><img id="candidate" alt="비교 대상 상품의 바지 영역"></figure></div>
-<div class="grades" aria-label="유사도 점수"><button data-grade="0">0 · 매우 다름</button><button data-grade="1">1 · 일부 비슷함</button><button data-grade="2">2 · 꽤 비슷함</button><button data-grade="3">3 · 매우 비슷함</button><button data-grade="U">판단 불가</button></div>
+<div id="score-fields"><div class="grades" aria-label="유사도 점수"><button data-grade="0">0 · 매우 다름</button><button data-grade="1">1 · 일부 비슷함</button><button data-grade="2">2 · 꽤 비슷함</button><button data-grade="3">3 · 매우 비슷함</button><button data-grade="U">판단 불가</button></div>
 <label for="why" class="muted">판단 불가 사유 / 관찰 메모</label>
-<select id="why"><option value="">없음</option><option value="silhouette_unobservable">실루엣이 잘 안 보임</option><option value="occlusion_or_crop">가림·잘림 때문에 어려움</option><option value="color_or_detail_uncertain">색·워싱 디테일을 읽기 어려움</option><option value="target_ambiguous">어느 바지를 봐야 할지 모호함</option></select>
+<select id="why"><option value="">없음</option><option value="silhouette_unobservable">실루엣이 잘 안 보임</option><option value="occlusion_or_crop">가림·잘림 때문에 어려움</option><option value="color_or_detail_uncertain">색·워싱 디테일을 읽기 어려움</option><option value="target_ambiguous">어느 바지를 봐야 할지 모호함</option></select></div>
 <p id="status" role="status" aria-live="polite"></p>
 <nav><button id="prev">이전</button><button id="next">다음</button><button id="unrated">미판정으로 이동</button><button id="export">판정 JSON 저장</button></nav>
-<p class="muted">점수를 누른 뒤 ‘다음’으로 이동해. 같은 브라우저에서는 임시 저장되고, 중간에도 JSON을 저장할 수 있어. 완료 후 JSON 파일을 이 채팅에 보내줘. 0–3 / U, ← → 키도 사용 가능.</p>
+<p class="muted" id="help">점수를 누른 뒤 ‘다음’으로 이동해. 같은 브라우저에서는 임시 저장되고, 중간에도 JSON을 저장할 수 있어. 완료 후 JSON 파일을 이 채팅에 보내줘. 0–3 / U, ← → 키도 사용 가능.</p>
 <details><summary>사진 출처·사용 범위</summary><div id="credits" class="credit"></div><p class="muted">비공개 연구용 판정 자료. 원본·크롭·판정지는 공개 저장소에 올리지 않음. 크롭은 사각형 바지 영역이며 배경·신발 등 일부가 남아 있을 수 있음. 색 보정하지 않음.</p></details>
 </main>
 <script>
 const packet=__PACKET_DATA__;
 const key='denim-judgments-'+packet.packet_sha256;
 let index=0,answers={};
-const $=id=>document.getElementById(id),buttons=[...document.querySelectorAll('[data-grade]')];
+const $=id=>document.getElementById(id),separate=packet.schema_version===2;
+let fields=[{axis:'overall',label:'전체 외관',buttons:[...document.querySelectorAll('[data-grade]')],why:$('why')}];
+if(separate){
+  $('scope').textContent='같은 사진 쌍을 두 축으로 따로 판단해줘. 실루엣 점수에는 색·워싱을, 색·표면 점수에는 핏을 반영하지 않기. 취향·브랜드·배경은 제외하고 보이는 조명은 그대로 비교해. 모델 순위는 표시하지 않아.';
+  $('rubric').textContent='각 축에서 0은 거의 닮지 않음, 1은 일부 닮지만 큰 차이, 2는 꽤 비슷함, 3은 매우 비슷함이야. 안 보이는 축만 판단 불가로 남겨줘. 두 점수는 평균내거나 전체 점수로 자동 변환하지 않아.';
+  $('help').textContent='각 축의 버튼을 따로 골라줘. 한 축만 답해도 중간 JSON 저장이 가능해. 임시 저장과 ← → 이동을 지원해. 숫자 단축키는 두 축 중 잘못된 곳에 입력되지 않도록 사용하지 않아.';
+  $('score-fields').replaceChildren();
+  fields=[
+    {axis:'silhouette',label:'실루엣',tip:'허벅지·무릎·밑단의 폭, 다리선과 퍼지는 형태를 비교. 색·워싱·찢김은 점수에서 제외. 각도·가림 때문에 형태를 읽기 어려우면 판단 불가.',reason:'silhouette_unobservable',reasonLabel:'실루엣이 잘 안 보임'},
+    {axis:'surface',label:'색·표면',tip:'보이는 색의 밝기·톤, 워싱·페이딩의 강도와 위치, 읽히는 질감·찢김을 비교. 핏은 점수에서 제외. 해상도나 가림으로 표면 특징을 읽기 어려우면 판단 불가.',reason:'color_or_detail_uncertain',reasonLabel:'색·워싱 디테일을 읽기 어려움'}
+  ].map(field=>{
+    const section=document.createElement('section'),heading=document.createElement('h2'),tip=document.createElement('p'),grades=document.createElement('div'),label=document.createElement('label'),why=document.createElement('select');
+    heading.id='heading-'+field.axis;heading.textContent=field.label;heading.style.fontSize='19px';section.setAttribute('aria-labelledby',heading.id);
+    tip.className='muted';tip.textContent=field.tip;grades.className='grades';grades.setAttribute('aria-label',field.label+' 점수');
+    const buttons=['0','1','2','3','U'].map((grade,i)=>{const button=document.createElement('button');button.dataset.grade=grade;button.textContent=['0 · 매우 다름','1 · 일부 비슷함','2 · 꽤 비슷함','3 · 매우 비슷함','판단 불가'][i];grades.append(button);return button});
+    why.id='why-'+field.axis;why.style.width='100%';why.style.margin='12px 0';label.htmlFor=why.id;label.className='muted';label.textContent=field.label+' 관찰 사유';
+    for(const [value,text] of [['','없음'],[field.reason,field.reasonLabel],['occlusion_or_crop','가림·잘림 때문에 어려움'],['target_ambiguous','어느 바지를 봐야 할지 모호함']]){const option=document.createElement('option');option.value=value;option.textContent=text;why.append(option)}
+    section.append(heading,tip,grades,label,why);$('score-fields').append(section);return {...field,buttons,why};
+  });
+}
+function score(answer,axis){return separate?answer?.scores?.[axis]:answer}
+function complete(answer){return fields.every(field=>score(answer,field.axis)?.grade!==undefined)}
 try{const saved=JSON.parse(localStorage.getItem(key)||'null');if(saved&&saved.packet_sha256===packet.packet_sha256){answers=saved.answers||{};index=Math.min(saved.index||0,packet.trials.length-1)}}catch(e){$('status').textContent='임시 저장을 읽지 못했어. JSON을 수시로 저장해줘.'}
 packet.trials.forEach((t,i)=>{const option=document.createElement('option');option.value=i;option.textContent=String(i+1);$('jump').append(option)});
 function persist(){try{localStorage.setItem(key,JSON.stringify({packet_sha256:packet.packet_sha256,index,answers}))}catch(e){$('status').textContent='임시 저장 불가: JSON을 저장해줘.'}}
-function render(){const t=packet.trials[index],q=packet.queries[t.query],c=packet.candidates[t.candidate],a=answers[t.trial_id];$('query').src=q.data_uri;$('candidate').src=c.data_uri;$('qlabel').textContent='기준 사진 Q'+(t.query+1);$('note').textContent=q.note||'';$('jump').value=index;buttons.forEach(b=>b.setAttribute('aria-pressed',String(a&&String(a.grade)===b.dataset.grade||false)));$('why').value=a?.reason||'';const n=Object.keys(answers).length;$('progress').max=packet.trials.length;$('progress').value=n;$('count').textContent=n+' / '+packet.trials.length+' 판정';$('prev').disabled=index===0;$('next').disabled=index===packet.trials.length-1;$('status').textContent=a?'이 문항 판정: '+(a.grade==='U'?'판단 불가':a.grade):'아직 판정하지 않은 문항';}
-buttons.forEach(b=>b.addEventListener('click',()=>{const id=packet.trials[index].trial_id;answers[id]={grade:b.dataset.grade==='U'?'U':Number(b.dataset.grade),reason:$('why').value};persist();render()}));
-$('why').addEventListener('change',()=>{const a=answers[packet.trials[index].trial_id];if(a){a.reason=$('why').value;persist()}});
+function render(){
+  const t=packet.trials[index],q=packet.queries[t.query],c=packet.candidates[t.candidate],a=answers[t.trial_id];
+  $('query').src=q.data_uri;$('candidate').src=c.data_uri;$('qlabel').textContent='기준 사진 Q'+(t.query+1);$('note').textContent=q.note||'';$('jump').value=index;
+  for(const field of fields){const value=score(a,field.axis);field.buttons.forEach(b=>b.setAttribute('aria-pressed',String(value!==undefined&&String(value.grade)===b.dataset.grade)));field.why.value=value?.reason||''}
+  const n=packet.trials.filter(t=>complete(answers[t.trial_id])).length;
+  $('progress').max=packet.trials.length;$('progress').value=n;$('count').textContent=n+' / '+packet.trials.length+(separate?' 두 축 판정 완료':' 판정');
+  $('prev').disabled=index===0;$('next').disabled=index===packet.trials.length-1;
+  $('status').textContent=fields.map(field=>{const grade=score(a,field.axis)?.grade;return field.label+': '+(grade===undefined?'미판정':grade==='U'?'판단 불가':grade)}).join(' / ');
+}
+for(const field of fields){
+  field.buttons.forEach(b=>b.addEventListener('click',()=>{
+    const id=packet.trials[index].trial_id,value={grade:b.dataset.grade==='U'?'U':Number(b.dataset.grade),reason:field.why.value};
+    if(separate){answers[id]??={scores:{}};answers[id].scores[field.axis]=value}else answers[id]=value;
+    persist();render();
+  }));
+  field.why.addEventListener('change',()=>{const value=score(answers[packet.trials[index].trial_id],field.axis);if(value){value.reason=field.why.value;persist()}});
+}
 function move(i){index=Math.max(0,Math.min(i,packet.trials.length-1));persist();render()}
-$('prev').onclick=()=>move(index-1);$('next').onclick=()=>move(index+1);$('jump').onchange=e=>move(Number(e.target.value));$('unrated').onclick=()=>{const i=packet.trials.findIndex(t=>!answers[t.trial_id]);if(i>=0)move(i);else $('status').textContent='모든 문항 판정 완료. JSON을 저장해줘.'};
-$('export').onclick=()=>{const data={schema_version:1,packet_id:packet.packet_id,packet_sha256:packet.packet_sha256,rater_id:packet.rater_id,purpose:packet.purpose,exported_at:new Date().toISOString(),ratings:packet.trials.filter(t=>answers[t.trial_id]).map(t=>({trial_id:t.trial_id,...answers[t.trial_id]}))};const url=URL.createObjectURL(new Blob([JSON.stringify(data,null,2)],{type:'application/json'})),link=document.createElement('a');link.href=url;link.download=packet.packet_id+'-judgments.json';link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);$('status').textContent=data.ratings.length+'건 JSON 저장 요청 완료';};
-document.addEventListener('keydown',e=>{if(['SELECT','INPUT','TEXTAREA'].includes(document.activeElement.tagName))return;if(/^[0-3]$/.test(e.key)||e.key.toLowerCase()==='u'){buttons.find(b=>b.dataset.grade===e.key.toUpperCase())?.click()}if(e.key==='ArrowRight')move(index+1);if(e.key==='ArrowLeft')move(index-1)});
+$('prev').onclick=()=>move(index-1);$('next').onclick=()=>move(index+1);$('jump').onchange=e=>move(Number(e.target.value));$('unrated').onclick=()=>{const i=packet.trials.findIndex(t=>!complete(answers[t.trial_id]));if(i>=0)move(i);else $('status').textContent='모든 문항 판정 완료. JSON을 저장해줘.'};
+$('export').onclick=()=>{const data={schema_version:packet.schema_version,packet_id:packet.packet_id,packet_sha256:packet.packet_sha256,rater_id:packet.rater_id,purpose:packet.purpose,exported_at:new Date().toISOString(),ratings:packet.trials.filter(t=>answers[t.trial_id]).map(t=>({trial_id:t.trial_id,...answers[t.trial_id]}))};if(separate)data.comparison_axes=packet.comparison_axes;const url=URL.createObjectURL(new Blob([JSON.stringify(data,null,2)],{type:'application/json'})),link=document.createElement('a');link.href=url;link.download=packet.packet_id+'-judgments.json';link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);$('status').textContent=data.ratings.length+'건 JSON 저장 요청 완료';};
+document.addEventListener('keydown',e=>{if(['SELECT','INPUT','TEXTAREA'].includes(document.activeElement.tagName))return;if(!separate&&(/^[0-3]$/.test(e.key)||e.key.toLowerCase()==='u')){fields[0].buttons.find(b=>b.dataset.grade===e.key.toUpperCase())?.click()}if(e.key==='ArrowRight')move(index+1);if(e.key==='ArrowLeft')move(index-1)});
 for(const q of packet.queries){const p=document.createElement('p');p.textContent=q.credit||q.source_page||q.id;$('credits').append(p)}const p=document.createElement('p');p.textContent='상품 사진: GLAMI-1M. Apache-2.0은 발행자 데이터셋 카드의 표기이며 원출처 이미지 조건은 별도 적용. 비교용 PNG 변환 또는 바지 크롭, 색 보정 없음.';$('credits').append(p);
 render();
 </script></html>

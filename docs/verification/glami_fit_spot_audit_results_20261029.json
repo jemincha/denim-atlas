@@ -18,5 +18,12 @@
     "meaning": "Researcher reports almost no overall resemblance.",
     "attribute_level_cause_established": false,
     "additional_training_labels_created": 0
+  },
+  "axis_clarification": {
+    "date": "2026-10-29",
+    "meaning": "Researcher rejected a pair if either axis differed substantially. Existing answers remain joint-appearance responses, not evidence that both axes individually failed.",
+    "historical_answers_rewritten": false,
+    "axis_grades_inferred": false,
+    "audit": "docs/AXIS_SEPARATION_AUDIT.md"
   }
 }

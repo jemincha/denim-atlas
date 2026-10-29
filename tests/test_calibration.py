@@ -24,6 +24,24 @@ def fixture():
 
 
 class CalibrationTests(unittest.TestCase):
+    def test_axis_metrics_require_explicit_selection_and_do_not_average(self):
+        old,_,features=fixture()
+        p=packet(old['queries'],old['candidates'],separate_axes=True)
+        r={k:p[k] for k in ('schema_version','packet_id','packet_sha256','rater_id','purpose','comparison_axes')}
+        r['ratings']=[{'trial_id':t['trial_id'],'scores':{
+            'silhouette':{'grade':3 if t['candidate']==0 else 0},
+            'surface':{'grade':3 if t['candidate']==2 else 0}}} for t in p['trials']]
+        shape=analyze(p,r,features,comparison_axis='silhouette')
+        surface=analyze(p,r,features,comparison_axis='surface')
+        self.assertEqual(shape['comparison_axis'],'silhouette')
+        self.assertEqual(surface['comparison_axis'],'surface')
+        self.assertEqual(shape['results'][0]['calibration_ndcg_at_5'],1.)
+        self.assertLess(surface['results'][0]['calibration_ndcg_at_5'],1.)
+        with self.assertRaisesRegex(ValueError,'not combined'):analyze(p,r,features)
+        _,old_r,old_f=fixture()
+        with self.assertRaisesRegex(ValueError,'cannot be interpreted'):
+            analyze(old,old_r,old_f,comparison_axis='silhouette')
+
     def test_cli_records_inputs_and_preserves_existing_output(self):
         p,r,f=fixture()
         with tempfile.TemporaryDirectory(dir=Path(__file__).resolve().parents[1]) as directory:

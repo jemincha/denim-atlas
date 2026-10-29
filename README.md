@@ -11,7 +11,7 @@
 | Model / compute | Pinned Marqo fashionSigLIP last-block adaptation runs on Kaggle T4; finite updates and checkpoint restoration verified |
 | Evaluation | Fixed-pool nDCG@5, strict candidate validation and product/duplicate/image split checks implemented |
 | Baselines | Cosine B0 and mean-RGB control B1 implemented; ranking-to-evaluation CLI tested on synthetic vectors |
-| Local tests | 56 passed on Python 3.12; includes archive checksum rejection, visual-whitelist inputs, deduplication, cross-round judgment provenance and evaluation safeguards |
+| Local tests | 60 passed on Python 3.12; includes archive checksum rejection, visual-whitelist inputs, deduplication, cross-round judgment provenance and evaluation safeguards |
 | Data | 1,200 acquired GLAMI images; 751 candidates inspected by Codex, 562 provisionally accepted. Explicit source-cut labels for 375; expanded training uses 333 images / fixed 39 validation, with 3 linked images reserved |
 | Real-image execution | 24 reviewed GLAMI crops encoded on T4; 768-D features and exploratory B0/B1 neighbor boards saved |
 | Calibration nDCG@5 (B0 / B1) | Q2: **0.641 / 0.640**; Q3: **0.530 / 0.447**. Single-rater pilot, 24 candidates; Q1 excluded |
@@ -53,10 +53,13 @@ The second command needs reviewed benchmark/features; paths and weight are examp
 
 ## Next milestone
 
-Attribute supervision, data expansion, three-seed repetition and reused human regression checks completed. The two selected appearance comparisons were both rejected (neither candidate acceptable). They remain qualitative feedback, with no absolute grades inferred. A 24-image automatic-description pilot failed the fine-detail consistency/visual feasibility gate; its outputs were not used for training. The follow-up confirms almost no overall resemblance; no further facet-level explanation is requested. A cached-vector diagnosis expanded the two selected queries from 38 to 371 eligible candidates: both models now share the same top-1 per query. This is a gallery-scope diagnostic, not new quality evidence. Color/wash supervision and independent wearing-photo/product evaluation remain next research gaps. See [fit-proxy experiment](docs/FIT_PROXY_EXPERIMENT.md).
+**Axis-separation correction:** human joint grades and the cut-class proxy did not isolate silhouette from surface appearance. New calibration packets now store those two grades independently; import, analysis and training guards prevent silently pooling them. This changes the annotation protocol, not the trained model. [Audit, implemented fixes and next training limits](docs/AXIS_SEPARATION_AUDIT.md).
+
+Attribute-supervised pilots and reused human development checks completed; useful whole-appearance improvement remains unproven. The two selected comparisons were rejected under a joint prompt and do not identify the failed axis. The unverified VLM descriptions remain excluded from training. Next: credible axis-specific supervision and diagnostic contrasts, rather than more fit-only training or another large joint-rating grid. No axis-conditioned trained model is claimed.
 
 ## Documentation and evidence
 
+- [Silhouette / surface separation audit and corrected annotation protocol](docs/AXIS_SEPARATION_AUDIT.md)
 - [Observed-appearance annotation feasibility and rejection of unreliable labels](docs/APPEARANCE_ANNOTATION_PILOT.md)
 - [Attribute-supervision pilot, expansion and repeated results](docs/FIT_PROXY_EXPERIMENT.md)
 - [Methodology benchmark, project diagnosis and proposed next sprint](docs/METHODOLOGY_BENCHMARK.md)

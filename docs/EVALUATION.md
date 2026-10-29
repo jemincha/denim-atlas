@@ -24,6 +24,8 @@ Each pool contains a `query_id` and `candidates`, a list of objects with `id` an
 
 ## Human judgments
 
+**October 29 correction:** the joint rubric below describes historical schema1 rounds. New calibration packets collect silhouette and surface grades separately (schema2); neither axis can be recovered from old joint grades. See [axis-separation audit and protocol](AXIS_SEPARATION_AUDIT.md). The reviewed benchmark schema described here remains unchanged; schema2 calibration exports are not directly promoted into it.
+
 Judge the visible denim region in the query against each candidate. Compare observed color/tone, wash/fading strength and placement, and silhouette. Preserve visible lighting. Do not judge preferred brands, personal taste, presumed original fabric color, or photographic background similarity.
 
 | Grade | Joint visible appearance |

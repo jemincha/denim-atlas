@@ -4,6 +4,10 @@ Use the user's current instructions and the approved research scope in
 `docs/SPRINT_REVIEW.md`. Read `PROJECT_STATE.md` and the latest sprint review
 before resuming work. Historical setup documents are not current status.
 
+Present human comparison images in right-side Codex tabs so the researcher can
+inspect/zoom them while typing in chat. Do not embed the comparison boards in the
+chat by default. A queued tab request is not confirmation that it is visible.
+
 At every sprint boundary, including a user-requested safe stop:
 
 - Compare actual progress with the approved flow: permitted data -> garment/region

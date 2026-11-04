@@ -192,3 +192,14 @@ artifact or experiment was added. Before more adaptation, prioritize adequate
 separate evaluation coverage and a specified general-model comparator. Training
 judgments remain delegated to the visual assistant. Narrowing the task to color
 alone or imposing manual training grids is not adopted without a direction decision.
+
+**Review checkpoint — S2-2026-11-05 repository handoff**
+
+The current README, state and revised development plan now describe the completed
+Sprint 2 result and the same next sequence: Sprint 3 evaluation/comparator, Sprint 4
+controlled improvement, Sprint 5 independent comparison/release. This replaces the
+older four-sprint forward schedule; the two-axis quality objective is unchanged.
+No new training, acquisition, labels or quality result was created by this handoff.
+Machine-teacher limits, no-gain development outcome and missing independent quality
+remain explicit. Existing result artifacts and implementation are preserved for
+review at a fixed repository revision.

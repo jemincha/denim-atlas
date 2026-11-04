@@ -1,161 +1,120 @@
-# Denim Atlas development plan — 2026-11-05
+# Denim Atlas development plan
 
-**Objective and current position**
+Updated 2026-11-05 after Sprint 2. This replaces the earlier forward plan;
+completed experiment records and their frozen results remain unchanged.
 
-Sprint2 execution is complete:54 frozen features, two axis heads and a matched
-E0/E1/E2 development comparison. Agreement stays2/3 per axis; training fits all
-strict constraints. [Results and diagnosis](REGIONAL_AXIS_PILOT.md). Proceed through
-evaluation-coverage and named-comparator access investigation before another
-adaptation trial; capacity remains a later controlled diagnostic.
+## Research objective and task
 
-November5 execution amendment: the researcher delegated the pending axis judgments
-to the conversational multimodal assistant. [Sprint1 inputs](SPRINT1_INPUT_CONTRACT.md)
-are now prepared:27 observations,54 regions,20 machine decisions and19 usable
-constraints, with train18/development9 protected folds. The cached1,200 originals
-are all228x298. Sprint1 closes for a **machine-supervised pilot**; it does not certify
-teacher accuracy, independent matching quality or general-model superiority.
-The manual gate described in the original plan below is superseded for this pilot.
+Learn photographed denim resemblance across different products and test whether
+adaptation improves matching over the frozen encoder and a specified strong general
+multimodal comparator. Quality is the primary goal; efficiency alone is insufficient.
 
-Build a denim-adapted matching model that improves on a specified strong general
-multimodal comparator for photographed, cross-product appearance. Report the task,
-model/version, evaluation domain and uncertainty. Faster/cheaper inference is a
-secondary benefit, not the primary success criterion. Match visible lighting and
-wear; silhouette and surface appearance remain independently inspectable.
+Keep two inspectable axes:
 
-Working remote execution, adaptation, grouping and evaluation already exist.
-562 catalog observations are provisionally accepted; their usefulness varies by
-attribute. The full cached-source audit now covers1,200 images, not just96 previews.
-The earlier three human boards remain unanswered and retired as a blocking gate;
-their images may appear in the separately sourced machine packet. All96 rejected
-Qwen attribute drafts remain outside training. Useful unseen matching improvement
-and a direct strong-model comparison remain unestablished.
+- **Silhouette:** visible volume and upper-leg/knee/hem profile.
+- **Surface:** photographed color family, lightness, apparent cast, fade contrast,
+  pattern/location and distressing. Preserve observed lighting and wear.
 
-This operational plan follows the approved [literature-based direction](LITERATURE_REVIEW_20261030.md)
-and [sprint review protocol](SPRINT_REVIEW.md). It does not reopen the app/UI scope.
+The [working definition](SIMILARITY_DESIGN.md) exists, but perceptual tolerances and
+reliable evaluation truth are not yet established. Retail cut names, shared product
+identity, teacher agreement and training loss are not substitutes. Overall similarity
+must not hide a large mismatch on one axis; the acceptance rule still needs calibration.
 
-**Four sprints, with an experiment at the center**
+## Completed work and actual evidence
 
-| Sprint | Deliverable and Codex work | Researcher intervention | Exit / repair decision |
-|---|---|---|---|
-| 1. Usable evidence and a fixed comparison contract | Completed source/crop audit, grouped machine-supervision inputs and comparison contract; preserve machine label provenance without fabricated human grades | Training annotation delegated to the conversational visual assistant on November5; no pending manual training gate | Ready for a small teacher-distillation pilot on broad visible cues. This amends the human-supervision assumption; teacher accuracy and final comparison access remain separate limits |
-| 2. First regional/axis adaptation | Reuse FashionSigLIP on Kaggle. Cache garment-wide and hip/thigh features; train small silhouette/surface projections using only supported axis relationships. Run an unadapted reference, an untrained regional control and one adapted configuration. Save manifests, run summary and example failures | Check a small set of disagreements only if labels/regions are ambiguous | A real train->validation cycle with all outcomes reported. Training loss alone does not pass. If fit improves but validation does not, inspect data/labels and head capacity before unfreezing more weights |
-| 3. Controlled improvement | Change the component implicated by Sprint2: candidate relationships, region alignment, image detail, aggregation or trainable scope. Unfreeze the last vision block only as a separate justified experiment. Compare a promising recipe across three seeds where compute permits | Confirm only informative comparisons or a material direction/resource change | Keep a change only with validation evidence. After two no-gain iterations on the same hypothesis, brief the failure and revise the hypothesis; do not silently run another parameter sweep |
-| 4. Independent comparison and research release | Freeze recipe, checkpoints and comparator prompts; evaluate fresh group material, report axis/joint quality and failure slices; prepare reproducible commands, results and figures. Publish only permitted artifacts | Blind final quality judgments; independent second-rater sample if available. Agree evaluation workload before asking for a large batch | Report the measured win, loss or inconclusive result. Claim superiority only for the tested model/task/domain with adequate evidence; unresolved uncertainty is not a win |
-
-Planning envelope: roughly1-3 focused work sessions per sprint after its inputs are
-ready. This is a scheduling estimate, not a runtime or delivery promise. Free-GPU
-availability, source access, human decisions and comparator access are explicit
-dependencies. A sprint ends at a defined result or a documented gate, not because
-a fixed number of calendar days elapsed.
-
-**First model and experimental comparison**
-
-Keep the pinned FashionSigLIP encoder initially. Use garment-wide features for
-silhouette, and garment-wide plus hip/thigh features for surface. Regional position
-must remain meaningful; knee fading cannot stand in for thigh fading. Start with
-two small trainable projections to reduce the risk of fitting a tiny label set.
-If frozen features discard needed details, head adaptation may fail; the subsequent
-last-block experiment tests that limit rather than assuming it is solved.
-
-| Experiment | Inputs / adaptation | Purpose |
+| Sprint | Delivered | Scientific conclusion |
 |---|---|---|
-| E0 | Frozen encoder, garment-wide view | Current retrieval reference on the same prepared data |
-| E1 | Same frozen encoder, garment-wide+regional views; no learned heads | Isolate what input/local evidence changes; select any aggregation only on development |
-| E2 | Same views, two axis-supervised trainable projections | Isolate task-specific adaptation over E1 |
-| E3, conditional | Same accepted data/views, last vision block adaptation | Test whether changing visual features adds value after the head experiment |
-| G | Specified strong general multimodal model, same evidence and candidate pool | Quality comparator; exact available model/version and access still need verification |
+| 1 — regional input preparation | Cached-source audit; 27 observations, 54 regions; train 18/development 9; 20 machine decisions yielding 13 train and 6 development constraints, with 1 neither excluded | Ready for a small weak-supervision pilot. No independent ground truth or quality gain established |
+| 2 — first controlled adaptation | Frozen FashionSigLIP, garment/regional controls and two 64-D projections; one fixed 200-step run on T4; checkpoint restoration and error analysis | Development agreement remains 2/3 per axis for E0/E1/E2. No net gain; silhouette fixes one preference and regresses another |
 
-Prepare G's inputs/prompt and freeze its development comparison before selecting
-the adapted recipe; run the same frozen prompt on the final test. G gets equivalent
-garment/region views, a cross-product appearance instruction and uncertainty options.
-Do not use small Qwen tag accuracy as its proxy, force an identity-matching prompt,
-or give it poorer images. Compare ordering within a shared pool separately from
-the complete retrieval pipeline. A reranker cannot recover a missing candidate.
+[Input contract](SPRINT1_INPUT_CONTRACT.md) · [Sprint 2 experiment](REGIONAL_AXIS_PILOT.md) ·
+[Frozen result record](verification/sprint2_results_20261105.json).
 
-Source-group splits precede pair construction. Existing viewed/trained material
-remains development data; known links and capture separation are not certified
-product independence. Preserve the historical validation and reservation overlays.
-Build the new protocol's train/development/test groups explicitly; do not relabel
-the current three boards as a final test.
+All 1,200 cached source images are 228x298, including 562 provisionally accepted
+observations. The current three development anchors contain no wearing photos and
+no case with different preferred candidates between the axes. The 147,456 head
+parameters are underdetermined by 13 dependent training constraints. All 96 rejected
+Qwen attribute drafts remain excluded. These limits are not resolved by the latest run.
 
-**Data, annotation and human workload**
+## Revised sequence from the current checkpoint
 
-- Start from already acquired material and inspected rectangles. Inventory larger
-  originals in the existing archive before seeking another broad download. Keep
-  low-resolution examples for readable broad cues; they cannot certify weave or
-  tiny wash details. New source access/rights remain source-specific checks.
-- Use a staged supply target: a development subset with plausible alternatives,
-  then a few hundred readable observations if the pilot needs more variety. These
-  are working ranges, not minimum scientific requirements or promised availability.
-- A first label-feasibility target is at least ten varied anchor groups with
-  useful relationships for each trained axis. Three anchors/six preferences are
-  insufficient for a quality claim. Judge evidence and coverage, not generated
-  triplet count. Repeated combinations do not add independent examples.
-- Codex handles extraction, crop proposals, metadata joins, duplicate/group checks,
-  candidate suggestions, training, experiment tracking and analysis. Model-produced
-  labels remain weak; teacher agreement is not independent human truth.
-- Human judgments define relative closeness and acceptance. Retain A/B/tie/neither/U
-  per axis without inventing absolute grades. Existing joint judgments stay joint.
-  Relative preferences may train ranking, but cannot be used directly as nDCG grades.
-- Use right-side tabs for inspection and zoom. Confirm actual visibility before
-  requesting answers; a queued request does not clear the presentation gate. Reuse
-  the prepared artifacts and existing packet workflow before building more UI.
-- Ask5-10 decisions per interaction, with neither/U available. Prioritize close
-  confounders and model disagreement while keeping some random coverage. Report
-  useful relationships and actual human time when measured. Do not hide total work
-  by splitting an unexpectedly large annotation job into many small requests.
+### Sprint 3 — evaluation inputs and comparator before further adaptation
 
-**Evaluation and success**
+1. Specify the exact available strong general model, version, execution route,
+   image preprocessing and expected access/cost. Prepare the fixed input/prompt
+   bundle before any request for paid API authorization. Current conversational
+   labels have no exposed checkpoint and are not a named GPT API benchmark.
+2. Freeze the comparison question and endpoint for each axis. Specify how useful
+   matches, ties, neither and unknown are handled. Relative A/B labels support
+   preference agreement; graded nDCG requires separately justified relevance grades.
+3. Assemble readable, permitted evaluation material with known source/duplicate
+   groups separated from training. Include wearing views, axis-conflicting choices,
+   plausible close alternatives and difficult negatives. Keep prior selected/model-
+   inspected material marked as development; do not rename it an untouched final test.
+4. Use roughly 30 varied development anchors as an initial coverage target, not a
+   promise of statistical adequacy. Define the candidate count, views and complete
+   annotation workload before scaling. If appropriate alternatives or readable
+   detail are missing, repair those inputs rather than manufacturing positives.
+5. Freeze judgments before inspecting rankings. Training annotation remains
+   delegated to the visual assistant. Record evaluator identity/version and whether
+   evidence is human or machine. A teacher must not certify its own superiority:
+   if reference judgments depend on the comparator itself, report agreement with
+   that teacher, not independent quality.
+6. Run the frozen encoder and strong comparator on the same evidence and pools.
+   Report per-axis outcomes, coverage, ambiguity and failures. Within-pool ranking
+   and full-gallery candidate retrieval are different endpoints.
 
-Development evaluation supports selecting checkpoints, region rules, aggregation
-and prompts; final evaluation must be untouched by those choices. Preserve complete
-human grades for fixed pools when computing nDCG@5 and precision@5. Assess both
-axes and directly judged overall acceptability; do not average away a major failure.
+**Exit:** a concrete, reproducible comparison can distinguish the proposed methods
+on the intended task. If access or independent evaluation truth is unavailable,
+report the exact gate; do not call an AI-agreement benchmark independent human truth.
+No additional adaptation run is scheduled before these inputs are usable.
 
-A later20-30-query final pilot is a planning range, not evidence of sufficient
-statistical power. Before it starts, report the number of queries, pooled candidates,
-axes, repeats and raters, and the resulting total human workload. Use a small
-complete-pool subset for graded ranking and a separate blind comparison of the
-systems' returned results where that answers the research question more efficiently.
-Do not mix those endpoints or claim full-gallery recall from incomplete pools.
+### Sprint 4 — one controlled improvement
 
-Success requires matched quality evidence over G and the frozen reference on new
-groups, accompanied by axis/per-query errors and paired uncertainty at query/group
-level. Report wins, ties, neither and unknown rather than a cherry-picked win rate.
-Measure the predefined challenging slices and representative overall cases; the
-former alone cannot support a broad superiority claim. A single-rater pilot can
-establish feasibility; broader human claims require independent judgments.
+Choose one intervention from the frozen comparison's failures. Candidates include
+lower head capacity, better region alignment, more useful training relationships or
+higher-detail source material. Keep unchanged controls and run the same evaluation
+protocol. Do not change data, labels, capacity and aggregation simultaneously.
 
-No fixed improvement percentage is promised or retrospectively chosen. If an
-external claim is intended, predeclare the primary endpoint and evidence threshold
-after the development pilot and before touching the final test. If quality is tied,
-efficiency may still be a finding, but does not satisfy the primary ambition.
+Start with the pinned FashionSigLIP encoder. A lower-capacity control can reuse
+cached features. Unfreeze the last vision block only when the evidence implicates
+missing visual representation rather than inadequate labels, coverage or capacity.
+Compare a promising recipe across seeds before retaining it. After two no-gain
+iterations on one hypothesis, summarize the failure and revise that hypothesis;
+do not turn the stage into an unconstrained parameter sweep.
 
-**Investigation backlog, triggered by evidence**
+**Exit:** a measured development gain with paired cases and remaining regressions,
+or a negative/inconclusive finding with the next evidence-driven decision.
+Training fitting alone does not pass.
 
-| Observation | Investigate next | Artifact / decision |
-|---|---|---|
-| Mostly neither or no convincing alternatives | Candidate coverage, source diversity and close-product supply | Coverage report; add the missing examples before training |
-| Wash is unreadable | Original image supply, crop visibility and spatial resolution | Resolution/region audit; limit the claim or improve inputs |
-| Surface gain but silhouette regression, or reverse | Axis label leakage, feature sharing and aggregation | Per-axis error table; adjust the implicated component |
-| Better fitting but no validation gain | Anchor diversity, group leakage, label errors and model capacity | Data/split audit, then a separately controlled capacity change |
-| Reasonable encoder ranks but G reranks much better | Cross-image/local interactions and difficult comparisons | Targeted local ranking experiment; investigate relevant reranker methods |
-| Apparent win only with AI-generated labels | Teacher bias, shared evaluator and test contamination | Independent human audit before any superiority claim |
+### Sprint 5 — independent comparison and research release
 
-Refer to the [existing literature review](LITERATURE_REVIEW_20261030.md) when choosing
-the next intervention. Add a focused source/code investigation when it would change
-a decision; do not restart a general paper survey at every iteration.
+Freeze the selected recipe, checkpoints, comparator version, prompt and primary
+endpoint before final evaluation. Use fresh protected groups and report silhouette,
+surface, directly assessed overall acceptability where available, and relevant
+view/detail slices. Report paired uncertainty at the anchor/group level, including
+unknowns and neither outcomes. Do not choose a favorable threshold after seeing
+final results or present a selected hard-case win as overall superiority.
 
-**Sprint closure and immediate work**
+An AI-judged result supports an AI-judged claim. A broad human-quality claim needs
+independent human evidence; do not silently reintroduce a large manual training
+assignment to obtain it. If that evidence cannot be obtained, narrow the conclusion,
+not the recorded failure. Any change to the research goal needs a direction decision.
 
-At each boundary use [the mandatory review](SPRINT_REVIEW.md): approved plan versus
-actual step, new quality evidence, unresolved limits/feedback, next investigation
-and exact human gate. Update current state and brief in Korean. Separate acquisition,
-software, annotation, fitting and quality evidence. Keep private data out of Git.
+**Exit:** a reproducible win, loss or inconclusive result on the declared domain,
+with limitations and rights-cleared code/results. No superiority claim without
+matched evidence. Raw images, judgments, correspondence and model artifacts remain
+private unless their separate release rights are established.
 
-Immediate work order: verify that the prepared boards can actually open in the
-right-side panel; prepare the scoped-label import/training contract and grouped
-input audit in parallel; then collect the existing six answers once the researcher
-resumes that gate. The earlier request to defer questions is respected. Planning
-does not fabricate missing labels, authorize paid APIs/new agreements, or imply new
-training results. Existing free remote-compute authorization continues to apply.
+## Execution ownership and scope
+
+Codex handles source preparation, crops, known-group protection, machine annotation,
+experiments and error analysis. Human intervention is reserved for actual access,
+cost/terms decisions or a research-direction choice; training annotation has been
+delegated. Color/brightness-only work may be a diagnostic, but does not replace the
+two-axis denim objective without approval. Mobile UI and shopping integration remain
+outside this research scope.
+
+Use the existing [sprint review](SPRINT_REVIEW.md) and [state](../PROJECT_STATE.md)
+for brief result/limit/next-decision updates. Do not add another tracker or general
+audit document by default. Tests establish software behavior, not matching quality.

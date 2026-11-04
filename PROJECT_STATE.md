@@ -27,17 +27,17 @@ projection heads. **No development preference-agreement gain.**
   Original packet/teacher: `data/private/regional_sprint1_20261105/`.
   [Public result/hash record](docs/verification/sprint2_results_20261105.json).
 
-## Next execution — controlled improvement
+## Next execution — revised plan after Sprint 2
 
-Before another adaptation trial, repair evaluation coverage and establish the exact
-strong general-model comparison route on the same evidence/pools. Current3 anchors
-have0 different-winner cases between axes and0 wearing views. Freeze additional
-judgments before viewing system rankings, preserve group reservations, and keep
-machine supervision distinct from independent evaluation truth. Then test reduced
-head capacity as one controlled change;13 constraints versus147,456 parameters
-are underdetermined. No automatic scope reduction to color/brightness alone and
-no reintroduction of manual training grids; neither was authorized by the feedback.
-A new named-model/API benchmark has not been run or claimed by this priority update.
+Review snapshot: S2-2026-11-05. The [revised plan](docs/DEVELOPMENT_PLAN.md) replaces
+older forward-work instructions; historical experiments/results stay unchanged.
+Sprint 3 now closes evaluation coverage and exact strong-comparator access/version
+before further adaptation. Include axis-conflicting/wearing cases, protected groups,
+readable detail and judgments frozen before system rankings. Distinguish machine
+teacher reproduction from independent human-quality evidence.
+Sprint 4 tests one controlled improvement; Sprint 5 freezes and evaluates the final
+recipe. No automatic backbone expansion, manual training grid, paid API use or
+color-only replacement goal. [Sprint 2 implementation/result commit](https://github.com/jemincha/denim-atlas/commit/1bcc00b).
 
 ## Carry-forward limits
 

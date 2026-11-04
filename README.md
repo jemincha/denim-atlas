@@ -1,94 +1,89 @@
 # Denim Atlas
 
-**Fine-tuning a pretrained vision encoder to retrieve denim with similar visible appearance across different products.**
+**Independent matching-quality improvement has not been demonstrated.**
 
-사진 속 데님의 색·톤·페이딩·워싱·실루엣을 비교하는 작은 ML 연구 과제입니다. 개인 취향, 원래 원단 색 복원, 모바일 앱은 현재 범위에 포함하지 않습니다.
+사진 속 데님의 실루엣과 색·톤·워싱·페이딩을 기준으로, 서로 다른 상품의
+외관 유사도를 학습하는 연구 프로젝트입니다. 개인 취향 분석, 원래 원단 색
+복원과 모바일 앱 제작은 현재 범위에 포함하지 않습니다.
 
-## Current snapshot — November 5, 2026
+## Current evidence — November 5, 2026
 
-| Area | Verified state |
+| Question | Current answer |
 |---|---|
-| Model / compute | Pinned Marqo fashionSigLIP last-block adaptation runs on Kaggle T4; finite updates and checkpoint restoration verified |
-| Evaluation | Fixed-pool nDCG@5, strict candidate validation and product/duplicate/image split checks implemented |
-| Baselines | Cosine B0 and mean-RGB control B1 implemented; ranking-to-evaluation CLI tested on synthetic vectors |
-| Local tests | 84 passed on Python 3.12; includes archive checksum rejection, visual-whitelist inputs, deduplication, cross-round judgment provenance and evaluation safeguards |
-| Regional pilot input | Sprint1 ready:27 observations /54 regions,20 machine decisions ->19 constraints; train18/development9. Weak teacher supervision, no independent quality result |
-| Regional-axis adaptation | Frozen encoder +147,456 head parameters,200 steps. Train strict agreement7/7 silhouette and5/5 surface; development remains2/3 per axis for frozen, regional and trained controls. **No development agreement gain** |
-| Source resolution | All1,200 cached originals and562 reviewed-image hashes checked:228x298; supplied metadata has no original URL fields |
-| Data | 1,200 acquired GLAMI images; 751 candidates inspected by Codex, 562 provisionally accepted. Explicit source-cut labels for 375; expanded training uses 333 images / fixed 39 validation, with 3 linked images reserved |
-| Real-image execution | 24 reviewed GLAMI crops encoded on T4; 768-D features and exploratory B0/B1 neighbor boards saved |
-| Calibration nDCG@5 (B0 / B1) | Q2: **0.641 / 0.640**; Q3: **0.530 / 0.447**. Single-rater pilot, 24 candidates; Q1 excluded |
-| First fine-tuning | Last vision block, 7,087,872 parameters, 40 real-label steps. Training hinge loss **0.0794 → 0.0185**; checkpoint weight restoration passed |
-| Expanded adaptation | 347 visually screened GLAMI images, weak product-description supervision, 2 epochs / 44 steps on T4. Fixed-batch training loss **0.8651 → 0.8233**; checkpoint restoration verified. Separate from human similarity labels |
-| Weak-text retrieval diagnostic | All three existing query cases had identical ranked top-5 before/after weak adaptation on the 347-image gallery |
-| Human-label continuation | 51 round-2 pairs, 71 triplet combinations, 142 FP32 steps from the 347-image checkpoint. Training-pool mean nDCG@5 **0.4493 → 0.8526**; hinge **0.06014 → 0**. Same 3 queries / 17 candidates, not unseen quality |
-| Human-continuation retrieval | New-query fixed-pool mean nDCG@5 **0.3841 → 0.3513**; relevance precision@5 (grade >=2) **0.2000 → 0.1333**. Three new query photos, single rater; observed scores declined |
-| Attribute-supervised pilot | Weak title-cut labels: fixed validation class-macro nDCG@5 **0.4174 → 0.5176** over three seeds. Expanded-data run **0.4990**. Source-cut proxy, not overall appearance quality |
-| Reused human development check | Original frozen baseline **0.3888**; fit-only adaptation **0.4129** (121 training images), **0.4053** (333). Three reused queries, no new human labels; no general quality claim |
-| Held-out quality | **Product-disjoint quality not measured**. Weak source-group validation and three reused human development queries recorded; independent product/duplicate groups pending |
-| Human judgments | Three single-rater rounds: 75 / 54 / 54 trials. Latest: 51 unique pairs, repeats 3/3 consistent; 37 pairs rated 0. New-query labels remain outside training |
-| Attribute audit | 17 human-judged development photos. Latest eight: 2B color-family agreement **7/8**, lightness **5/8**; controlled 4B probe **5/8**, **6/8**. All 96 automatic drafts remain excluded from training |
-| Regional experiment preparation | 96 existing images hash-verified, all 228x298. Eight development observations / 16 garment and hip-thigh regions prepared; six scoped human preferences pending. No new training or quality claim |
+| Does adaptation improve independent product-group matching quality? | Not established. No adequate independent appearance benchmark yet |
+| Does it outperform a strong general multimodal model? | Not measured. Comparator version/access and independent evaluation truth remain unresolved |
+| Latest controlled result | Frozen garment, frozen regional and trained axis-head models each agree with the machine teacher on2/3 development preferences per axis; no net gain |
+| Latest data |27 photographs /54 garment and hip-thigh views; train18/development9,3 development anchors. Known source/file/pixel groups are separated; certified product independence is not established |
+| Input limit | All1,200 cached GLAMI source images are228x298, including562 provisionally accepted observations. Fine weave and tiny wash details are unresolved |
+| Supervision limit |20 conversational-assistant judgments yield13 train/6 development constraints;1 neither is excluded. They are weak machine supervision, not human truth; the teacher checkpoint is unexposed |
 
-Wearing-photo supply follow-up: a bounded Commons pilot acquired 24 attributed
-CC0/CC BY previews. A user-authorized Unsplash Lite audit processed 25,000 photo
-records, found 293 text candidates and privately inspected 24 previews on Kaggle.
-Neither new pilot is training-ready. See [wearing-photo evidence and limits](docs/WEARING_DATA_PILOT.md).
+## Latest comparison
 
-Calibration numbers above were recorded before training. The first fine-tuning run then used the same 27 images and clear human judgments to test actual adaptation; its loss decrease is training-set fitting, not unseen retrieval improvement. No further standalone starting-model validation is planned. DeepFashion applications remain separate access requests.
+FashionSigLIP remains frozen; the adapted variant learns separate silhouette and
+surface projections. These counts measure agreement with the frozen machine
+preferences on the same3 development anchors, not human-rated retrieval quality.
 
-## Human and AI contributions
+| Model | Development silhouette | Development surface |
+|---|---|---|
+| E0 garment-wide frozen features |2/3|2/3|
+| E1 frozen garment+regional features |2/3|2/3|
+| E2 untrained projection control |1/3|2/3|
+| E2 trained projections |2/3|2/3|
 
-This is an AI-assisted research project. Codex assisted with implementation, tests, source investigation, preliminary visual screening/crop review and experiment execution. The researcher supplied all appearance-relevance judgments (75 first-round, 54 second-round and 54 new-query trials) through a rank-blind sheet; AI screening is not human ground truth. The researcher owns study decisions and result interpretation. Single-rater calibration is reported separately from future independent evaluation.
+Silhouette fixes one preference and regresses another; surface winners do not
+change. Development has no cases with different winners between axes and no
+wearing photographs. It cannot establish generalized axis separation or
+wearing-to-catalog robustness. [Full results, fitting measurements and failure analysis](docs/REGIONAL_AXIS_PILOT.md).
 
-## Research question
+An earlier single-rater, new-query human development check declined in nDCG@5
+from0.3841 to0.3513. It is not a sufficiently independent product-group test.
+Training-set fitting and title-cut proxy gains are recorded in the
+[experiment history](docs/RESEARCH.md), [fit study](docs/FIT_PROXY_EXPERIMENT.md)
+and [human continuation](docs/HUMAN_ROUND2.md); they are not appearance-quality gains.
 
-Can denim-specific attribute supervision and a small number of human appearance judgments improve ranking on unseen product groups over the frozen starting checkpoint and a simple color control?
+## Task and next evidence gate
 
-Match the visible garment, including lighting and wear. Different products can match; same-product identity is not an automatic positive. Freeze product/duplicate groups and splits before constructing training pairs. Compare identical fully judged pools using nDCG@5 with gain `2^grade - 1`; uncertain labels are not zero. Choose weights/checkpoints on validation only.
+Compare two separately inspectable axes: visible volume/leg profile, and photographed
+color/lightness/cast plus fade contrast/pattern/location and distressing. Preserve
+observed lighting and wear. Product identity and shared retail labels are not
+automatic positives. [Working definition and unresolved tolerances](docs/SIMILARITY_DESIGN.md).
 
-## Run the lightweight checks
+Before another adaptation trial, strengthen an evaluation set kept outside training,
+including axis-conflicting alternatives and wearing views; establish the exact
+strong general-model comparison route on the same images and candidate pools.
+Freeze judgments and comparison rules before inspecting system rankings. Separate
+teacher reproduction from independent quality, and change one experimental factor
+at a time. The latest no-gain run does not justify a larger model or a parameter sweep.
+
+Training annotation has been delegated to the visual assistant. Large manual
+training grids will not be reintroduced by default. Independent evaluation truth
+is still a separate requirement for a credible superiority claim.
+
+## Reproduction and provenance
+
+Code and lightweight checks are available; raw photographs, judgments and weights
+remain private. Model execution runs on Kaggle CUDA, not the laptop.
 
 ```sh
 python -m unittest discover -s tests -v
-python scripts/run_baselines.py --benchmark data/private/validation.json --features runs/features.json --color-weight 0.5 --output runs/baselines-validation-w05
 ```
 
-The second command needs reviewed benchmark/features; paths and weight are examples. Synthetic fixtures are included in tests, not claimed as research data. Scoring/evaluation use the standard library. Image/model processing stays on remote compute; do not download weights to the old laptop.
+Software checks and saved-checkpoint restoration establish execution correctness,
+not matching quality. Model/config/input hashes and actual controls accompany the
+[regional experiment](docs/REGIONAL_AXIS_PILOT.md).
 
-## Next milestone
+Codex assisted with implementation, visual screening, source investigation and
+experiment execution. The researcher supplied the historical three rounds of joint
+human judgments. The latest axis-specific labels were created by this Codex
+conversation's multimodal visual assistant, with no separate ChatGPT API call.
+Legacy joint labels remain joint; they cannot be retrospectively split into axes.
+Rejected Qwen attribute drafts remain outside training.
 
-**Sprint2 completed without development agreement gain.** Regional features and two axis heads were trained on the frozen machine-supervision packet. Development remains2/3 per axis; training fits all strict constraints. [Results, controls and failure analysis](docs/REGIONAL_AXIS_PILOT.md). Next: repair axis-conflict/wearing coverage and test capacity separately. The teacher checkpoint is unexposed; these results cannot establish human quality or superiority to a strong general model.
+[Current state](PROJECT_STATE.md) · [Plan](docs/DEVELOPMENT_PLAN.md) ·
+[Sprint findings](docs/SPRINT_REVIEW.md) · [Evaluation protocol](docs/EVALUATION.md) ·
+[Supervision input contract](docs/SPRINT1_INPUT_CONTRACT.md) ·
+[Research history](docs/RESEARCH.md).
 
-**Axis-separation correction:** human joint grades and the cut-class proxy did not isolate silhouette from surface appearance. New calibration packets now store those two grades independently; import, analysis and training guards prevent silently pooling them. This changes the annotation protocol, not the trained model. [Audit, implemented fixes and next training limits](docs/AXIS_SEPARATION_AUDIT.md).
-
-Attribute-supervised pilots and reused human development checks completed; useful whole-appearance improvement remains unproven. A 96-image draft expansion failed its broader eight-photo human gate: 2B family/lightness agreement was 7/8 and 5/8. A controlled 4B annotation probe changed those counts to 5/8 and 6/8, so larger capacity did not provide a reliable replacement. All 96 drafts remain outside training. The approved next experiment targets axis-specific garment-plus-region matching against a strong general multimodal comparator; The first controlled regional/head run is complete; it did not improve development preference agreement. Silhouette and wash remain separate objectives. No automatic segmentation, new training or axis-conditioned trained model is claimed. [Sprint alignment and reviews](docs/SPRINT_REVIEW.md).
-
-## Documentation and evidence
-
-- [Sprint2 regional/axis adaptation, results and failure analysis](docs/REGIONAL_AXIS_PILOT.md)
-- [Sprint1 machine-supervision input and comparison contract](docs/SPRINT1_INPUT_CONTRACT.md)
-- [Development plan: four sprints, controlled experiments, human gates and success criteria](docs/DEVELOPMENT_PLAN.md)
-- [Literature review: regional and attribute-conditioned learning, strong multimodal comparison and next experiment](docs/LITERATURE_REVIEW_20261030.md)
-- [Attribute-label inventory, human audits and controlled annotation-model comparison](docs/ATTRIBUTE_AUDIT.md)
-- [Silhouette / surface separation audit and corrected annotation protocol](docs/AXIS_SEPARATION_AUDIT.md)
-- [Working attribute representation and definition of similarity](docs/SIMILARITY_DESIGN.md)
-- [Observed-appearance annotation feasibility and rejection of unreliable labels](docs/APPEARANCE_ANNOTATION_PILOT.md)
-- [Attribute-supervision pilot, expansion and repeated results](docs/FIT_PROXY_EXPERIMENT.md)
-- [Methodology benchmark, project diagnosis and proposed next sprint](docs/METHODOLOGY_BENCHMARK.md)
-- [Research design, project history, model acquisition and recorded measurements](docs/RESEARCH.md)
-- [Benchmark schema, human-judgment rubric and evaluation](docs/EVALUATION.md)
-- [Single-rater calibration packet and next labeling step](docs/JUDGMENT_ROUND1.md)
-- [First real-label fine-tuning run](docs/TRAINING_PILOT.md)
-- [Human round-2 continuation and new-query check](docs/HUMAN_ROUND2.md)
-- [Expanded GLAMI data, visual screening and weak text adaptation](docs/GLAMI_EXPANSION.md)
-- [Open-source reuse review and adoption decisions](docs/OPEN_SOURCE_REVIEW.md)
-- [Remote feature extraction and B0/B1 runbook](docs/BASELINES.md)
-- [Dataset access checks and contingency](docs/DATA_ACCESS.md)
-- [Alternative datasets: acquisition and application record](docs/DATASET_SEARCH.md)
-- [900-image audit, exclusions and real-image pilot](docs/SCREENING_PILOT.md)
-- [Next DeepFashion2 import](docs/NEXT_DATA_RUN.md)
-- [External-feedback audit: addressed and outstanding](docs/FEEDBACK_AUDIT.md)
-- [Current project state](PROJECT_STATE.md) · [Recovery provenance](docs/RECOVERY.md)
-
-The original workspace was partially recovered from saved Kaggle code/output. The current evaluator is newly implemented; lost planning/legacy UI files are not claimed recovered. GLAMI's publisher card labels the dataset Apache-2.0; this project has not independently established every seller image's rights or cleared release of derived checkpoints. Raw images, judgments, correspondence and weights remain private. Publication of model artifacts needs a separate rights review; upstream image/model terms apply independently.
+GLAMI's publisher card states Apache-2.0; this project has not independently cleared
+every seller image or derived-checkpoint release. Source/model terms apply
+separately. Raw material and model artifacts have not been published.

@@ -29,13 +29,15 @@ projection heads. **No development preference-agreement gain.**
 
 ## Next execution — controlled improvement
 
-First repair development coverage: current3 anchors have0 different-winner cases
-between axes and0 wearing views. Freeze new axis-conflicting/wearing cases before
-examining model outputs, preserve reservations/groups and machine provenance.
-Separately test reduced head capacity on the same cached features/labels;13 dependent
-constraints versus147,456 parameters are underdetermined. Do not conflate changing
-inputs with changing capacity, sweep parameters or unfreeze the backbone by default.
-No new manual training annotation gate; the researcher delegated those judgments.
+Before another adaptation trial, repair evaluation coverage and establish the exact
+strong general-model comparison route on the same evidence/pools. Current3 anchors
+have0 different-winner cases between axes and0 wearing views. Freeze additional
+judgments before viewing system rankings, preserve group reservations, and keep
+machine supervision distinct from independent evaluation truth. Then test reduced
+head capacity as one controlled change;13 constraints versus147,456 parameters
+are underdetermined. No automatic scope reduction to color/brightness alone and
+no reintroduction of manual training grids; neither was authorized by the feedback.
+A new named-model/API benchmark has not been run or claimed by this priority update.
 
 ## Carry-forward limits
 

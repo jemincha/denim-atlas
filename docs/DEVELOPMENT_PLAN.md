@@ -5,7 +5,8 @@
 Sprint2 execution is complete:54 frozen features, two axis heads and a matched
 E0/E1/E2 development comparison. Agreement stays2/3 per axis; training fits all
 strict constraints. [Results and diagnosis](REGIONAL_AXIS_PILOT.md). Proceed through
-controlled coverage/capacity investigation, not broader backbone tuning.
+evaluation-coverage and named-comparator access investigation before another
+adaptation trial; capacity remains a later controlled diagnostic.
 
 November5 execution amendment: the researcher delegated the pending axis judgments
 to the conversational multimodal assistant. [Sprint1 inputs](SPRINT1_INPUT_CONTRACT.md)

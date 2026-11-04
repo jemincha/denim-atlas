@@ -179,3 +179,16 @@ adaptation experiment complete; the sprint review must be revisited at its bound
 - Decision: Sprint2 complete with **no demonstrated development-agreement gain**.
   Continue the existing controlled-improvement plan through data/coverage and
   capacity diagnosis; no new human training grid or broader backbone tuning.
+
+**Feedback clarification — 2026-11-05, after Review003**
+
+The external critique correctly identifies absent independent quality evidence,
+proxy/fitting confusion and weak data/evaluation coverage. Its one-vector/no-axis-label
+snapshot predates the completed two-head pilot and20 machine decisions; legacy joint
+labels remain usable only for joint judgments, not axis decomposition. README also
+retained contradictory historical preparation/no-training sentences; these are now
+removed, and independent quality/no-gain evidence leads the page. No new audit
+artifact or experiment was added. Before more adaptation, prioritize adequate
+separate evaluation coverage and a specified general-model comparator. Training
+judgments remain delegated to the visual assistant. Narrowing the task to color
+alone or imposing manual training grids is not adopted without a direction decision.

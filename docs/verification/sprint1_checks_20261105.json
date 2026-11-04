@@ -1,0 +1,9 @@
+{
+  "date": "2026-11-05",
+  "tests_run": 80,
+  "failures": 0,
+  "errors": 0,
+  "scope": "Software guards only; no matching-quality claim.",
+  "real_private_input_validation": "27 sources,54 derived crops and20 machine decisions validated;19 constraints retained",
+  "temp_location": "workspace ignored runs/test-temp; sandbox default temp was not writable"
+}

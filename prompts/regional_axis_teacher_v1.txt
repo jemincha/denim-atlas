@@ -1,0 +1,32 @@
+Task: judge photographed cross-product denim resemblance, independently by axis.
+Input: one REFERENCE and candidates A and B, each with garment-wide and hip/thigh
+views derived from the same source photograph. Display enlargement adds no detail.
+Do not use brand, source titles, product identity, purchase options or personal taste.
+
+silhouette: compare visible volume and leg profile (upper leg, knee, hem), separately.
+Ignore color and surface processing. Straight and wide are not mutually exclusive.
+Pose and missing body regions may make the comparison unobservable.
+
+surface: compare photographed color family, lightness, apparent cool/yellow cast,
+fade contrast, pattern and corresponding placement (including hip/thigh whiskers),
+and visible distressing. Ignore fit width. Keep black separate from dark blue.
+Preserve photographed lighting; do not restore the original fabric color or infer
+manufacturing processes/material from appearance. Do not invent readable weave.
+Neither cool tones nor a particular wash strength is inherently preferred.
+
+For EACH axis return:
+choice = A | B | tie | neither | unknown
+useful_match = true for A/B/tie; false for neither; null for unknown.
+confidence = low | medium | high (ordinal self-assessment, not a probability).
+reason = concise visible evidence including material mismatch or observability limits.
+
+A/B: chosen candidate is a useful broad visual match and closer than the other.
+tie: both are useful matches and similarly close; not image identity or absolute grades.
+neither: neither is a useful match; never force the less bad candidate to be positive.
+unknown: insufficient visible evidence or unresolved tradeoff prevents a decision.
+Return neither/unknown separately for one axis even if the other is readable.
+These are machine supervision proposals, not human ground truth or final quality scores.
+
+Output: {"ratings": [{"case_id": "C01", "axis": "silhouette",
+"choice": "unknown", "useful_match": null, "confidence": "low",
+"reason": "..."}, ...]}; exactly one record for each supplied case and axis.

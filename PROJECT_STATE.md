@@ -1,68 +1,51 @@
-# Denim Atlas — 2026-10-29
+# Denim Atlas — 2026-11-05
 
-Goal: cross-product similarity of observed denim color/tone, wash/fading and silhouette. No taste profiling, color restoration or app UI.
+Goal: better cross-product denim matching than a specified strong general multimodal
+comparator, preserving photographed lighting/wear. Silhouette and surface remain
+separate. No taste profiling, original-color restoration or app UI.
 
-## Completed this sprint
+## Current handoff
 
-- Audited current labels: no structured observed-color/wash targets. Extracted five explicit weak title-cut classes from 160 of 347 previously screened images.
-- Grouped known item/pixel/title-family links; initial split 121 train / 39 validation. Fine-tuned the last FashionSigLIP vision block, 120 FP32 updates, lr 1e-6, balanced cross-source triplet batches.
-- Same 39-image proxy validation: frozen class-macro nDCG@5 0.4174; three training-order seeds 0.5189 / 0.5182 / 0.5157. Mean 0.5176. Same-seed metrics repeat; bitwise block digests differ.
-- Screened another 239 acquired images, provisionally accepted 215. Inventory: 562 accepted candidates, 375 explicit weak cut labels. Reserved 3 linked images; expanded train333 / exact original validation39. Same 120 updates: proxy score 0.4990.
-- Reused 51 existing human grades: original frozen baseline 0.3888; small fit model 0.4129, expanded fit model 0.4053. No new training labels or checkpoint tuning from human answers; three development queries are not a fresh test.
-- All completed training runs passed same-kernel checkpoint restoration. Weights/images stay private and remote; no pending compute job.
+Sprint1 is complete for a **machine-supervised regional pilot**. The researcher
+explicitly delegated training judgments to the visual assistant; no manual training
+annotation gate remains. [Input contract](docs/SPRINT1_INPUT_CONTRACT.md) ·
+[Alignment review002](docs/SPRINT_REVIEW.md) · [Plan](docs/DEVELOPMENT_PLAN.md).
 
-## Follow-up and candidate-pool diagnosis
+- Private cached-source audit:1,200/1,200 image hashes and562/562 reviewed hashes
+  verified; every audited source is228x298. Supplied metadata has no original URL
+  fields. Enlarging images does not recover weave or tiny wash details.
+- Frozen packet:27 known source groups,54 source-derived regions,10 anchor cases;
+  train18/development9 protected against known-group/file/decoded-pixel leakage.
+- 20 machine decisions:18 strict preferences,1 distance tie,1 neither.19 usable
+  constraints; strict training anchors silhouette7/surface5, development3 each.
+  Neither/U never become zero grades; no absolute relevance grades inferred.
+- Teacher: this Codex conversation's multimodal visual assistant. Exact checkpoint
+  unavailable; no separate ChatGPT API call or paid API use. Labels are weak,
+  outputs frozen; repeat consistency and accuracy are unestablished.
+- Raw packet/ratings/training inputs: `data/private/regional_sprint1_20261105/`.
+  Source audit: `data/private/source_audit_20261105/`. Public aggregate/hashes:
+  [readiness](docs/verification/sprint1_machine_readiness_20261105.json).
 
-The two selected comparisons were answered **neither / neither**. Private responses: `data/private/fit_spot_audit_20261029/spot_audit/responses_20261029.json`; aggregate: `docs/verification/glami_fit_spot_audit_results_20261029.json`. No absolute grade0 labels, A/B ties or triplets inferred. The researcher further reports almost no overall resemblance in either displayed case. Specific facet causes remain unspecified; no additional explanation is required.
+## Next execution
 
-- Fashionpedia metadata audit complete: 294 attributes, 314 pants; jeans109 / washed68 / distressed21 (overlapping pants counts, not approved denim). No photographed-color or fine fading-strength/location labels established; no images downloaded.
-- Qwen3-VL-2B-Instruct image-only pilot complete: 24 previously reviewed images, pinned revision/weights, T4 inference 108.81s / 4.078GiB. Original parser accepted22; two view/detail contract violations. Three more contradicted no-fading with faded whiskers; revised consistency pass19. Unknowns absent and detail labels repetitive. No human attribute-accuracy labels; no training/reranking or large-scale annotation performed. Keep these descriptions unverified and do not scale.
-- 70 local tests pass. No pending compute jobs. Retrieval backbone remains FashionSigLIP; fit-only weights remain experimental.
+Start Sprint2 with the pinned FashionSigLIP encoder: cache garment and hip/thigh
+features, compare E0/E1 and two small axis projections E2 on the frozen packet.
+Use train only for fitting. Development preference agreement measures teacher
+reproduction; it is not independent human acceptance or superiority to GPT.
+Do not expand last-block training before diagnosing the head experiment.
 
-The follow-up closes the mismatch question: overall resemblance was rejected; no personal weights or facet-specific cause inferred. A private CPU run reused 372 cached embeddings, expanding each selected query from 38 eligible validation candidates to 371 cross-group candidates. Both expanded-gallery top-1 choices are identical before/after fit adaptation (top-8 overlap 8/8 and 7/8). Training images are allowed in this diagnostic; it is not held-out evaluation and does not cover all 562 accepted candidates. No human acceptance or absence of a suitable match established. [Evidence](docs/verification/gallery_diagnosis_20261029.json).
+## Carry-forward limits
 
-The researcher clarified that the joint prompt led to rejection whenever either silhouette or surface differed substantially. Old grades do not reveal the failed axis and are not decomposed. Audit found: one joint human grade, one shared embedding, cut-only triplets unconstrained by surface, and no validated surface objective.
+No regional-head training or independent quality improvement yet. Historical
+human-continuation new-query nDCG declined0.3841->0.3513; source-fit proxy gains are
+not appearance quality. See [fit](docs/FIT_PROXY_EXPERIMENT.md) and
+[human continuation](docs/HUMAN_ROUND2.md). All96 rejected Qwen attribute drafts
+remain outside training. Current folds are development material, mostly catalog
+views; known groups do not certify distinct products. Strong-comparator exact
+version/access and independent evaluation truth remain later experiment gates.
+Source-image/checkpoint release rights are not cleared; raw material stays private.
 
-Implemented: new packet CLI defaults to schema2 with separate silhouette/surface scores on the same image pair; independent U/repeats/conflicts; explicit-axis analysis; legacy joint trainer rejects these records. Historical packets/API defaults and grades stay intact. 60 tests plus actual browser download/import and 390px layout checked using engineering fixtures only. [Separation audit](docs/AXIS_SEPARATION_AUDIT.md).
-
-Next: credible axis-specific supervision and diagnostic contrasts (same cut/different surface and different cut/similar surface), then an explicit axis-conditioned training objective. Two heads are a proposal, not a trained model. Do not expand fit-only training, train on unverified VLM descriptions, infer positives from proximity, or require both axes to match before collecting axis-specific evidence. No pending compute job. The eight-image expansion audit below has been received and did not clear bulk training use. Raw model outputs/statuses and revised validator remain separate; consistency passes are not visual accuracy.
-
-Protected-dataset access and source-image/model-publication rights remain unverified. Conservative source groups do not certify independent products.
-
-Working design: [attribute representation and similarity](docs/SIMILARITY_DESIGN.md). Two main axes, eight initial attribute groups; volume/profile and color/lightness separated; fading recorded as observed contrast/pattern/location rather than inferred process. Ordinal anchors, tolerances and axis-conditioned heads are proposed, not fixed/trained. No new annotations, training or quality measurements for this design review.
-
-[Appearance pilot](docs/APPEARANCE_ANNOTATION_PILOT.md) · [Fit experiment](docs/FIT_PROXY_EXPERIMENT.md) · [Methodology](docs/METHODOLOGY_BENCHMARK.md)
-
-## Attribute feasibility execution
-
-`prepare_attribute_audit.py` built a draft inventory: 562 catalog observations plus 3 existing Commons crops; 375 weak retail-fit tags and 24 machine drafts each for color, lightness and tone. No labels certified or promoted to training. All 24 pilot image hashes verified and visually inspected by Codex. Coarse color remains a calibration candidate; lightness collapsed to medium20/dark4, no light or unknown; tone lacks anchors. Rejected wash descriptions stay excluded.
-
-The six anchor answers were received: five explicit family values, six brightness values. Image5 raw-denim wording does not identify family; leave that field unassigned. Image6 very-light wording is preserved and mapped to the existing light bin. Original VLM agreement: family5/5 comparable, brightness2/6; selected development-anchor counts only. No relevance labels or training eligibility inferred.
-
-Two bounded, pinned-model T4 inference retries completed on the same 18 unjudged targets, excluding all six anchors. Text-only brightness dark6/medium12/light0; with five verified reference images dark6/medium9/light3. Four family outputs changed neutral->blue with references. Accuracy on these targets is unknown; keep variants/fieldwise drafts unverified. Original exact-fence parsing failure and separate normalization are both preserved. No optimizer updates or model weights on laptop.
-
-The three follow-up answers are recorded: blue/light, blue-black/dark, blue/medium. Visual-reference outputs agree3/3 per attribute; text-only2/3 per attribute. Selected development evidence only. The blue-black answer resolves one provisional Codex neutral interpretation in favor of the reference-context prediction; the earlier fieldwise-source draft is not adopted.
-
-Fixed five-anchor 96-image weak-label expansion completed: 16 per each of six source-tag sampling strata, seed131, 96 distinct linked groups. Full source-metadata/item/title/pixel links protect validation39, reserves3 and prior pilot observations; 55 reviewed images excluded. Four additionally selected legacy-human-pool-linked images are reserved from any later training by a separate overlay. No retrieval-model training performed.
-
-All96 outputs are schema-valid, unverified drafts: blue81/neutral15; light16/medium58/dark22; no unknowns. Codex inspected four sheets and flagged possible other-color and brightness-boundary problems without assigning ground truth.
-
-The preselected eight-photo blind audit is received: family agreement7/8, brightness5/8. Named shades and explicit brightness remain separate; do not derive brightness from light/mid/dark-blue wording. There are17 distinct human attribute observations across three rounds (16 explicit family values,17 brightness values), all development/calibration material. All96 drafts remain outside training.
-
-One controlled Qwen3-VL-4B annotation probe completed on24 existing targets with the same prompt, five visual references and preprocessing. On the same eight judged observations, family agreement5/8 and brightness6/8; no automatic teacher replacement. Post-hoc brightness agreement on wearing/isolated images is0/3 and5/5 for2B,2/3 and4/5 for4B; this does not establish causality or general accuracy. FashionSigLIP remains the retrieval backbone. No new training, local weights or pending compute jobs. 70 tests pass. [Execution and limits](docs/ATTRIBUTE_AUDIT.md).
-
-Pending direction confirmation: compare full-image versus garment-region preprocessing before requesting more manual grids or enlarging categorical annotation. Proposed continuous observed-color/lightness diagnostics cover only part of surface appearance; silhouette, yellow cast, wash placement and fading contrast still need their own evidence. Start with the existing wearing photos as development cases, preserve image/crop provenance, and do not infer segmentation quality or retrieval improvement from a crop preview.
-
-## Literature follow-up — 2026-10-30
-
-The researcher retains a quality-first goal: outperform a strong general multimodal comparator on defined denim matching, rather than replace it only for efficiency. [Primary-paper review and proposed experiment](docs/LITERATURE_REVIEW_20261030.md) extends the prior methodology review with ASEN's global/local journal model, Localized Triplet, LookBench/GR-Lite, LamRA, recent training-free MLLM reranking and evaluation cautions.
-
-Proposed next direction: axis-specific garment-plus-region matching with reliable cross-product relationships, preserving FashionSigLIP for the first controlled adaptation. Crop and continuous-color diagnostics are components, not a substitute for learning wash structure and silhouette. Stop repeated coarse-teacher prompting. A strong general-model comparison must use the same visible evidence and human test truth; Qwen2B/4B tag audits are not that comparison.
-
-This follow-up produced analysis only: no new data, weights, paid API calls or training. Automatic drafts remain outside training. The researcher has now approved the regional/axis-specific experiment and mandatory end-of-sprint alignment reviews. [Approved flow, checklist and first review](docs/SPRINT_REVIEW.md) are enforced by root `AGENTS.md`. No new quality improvement is claimed.
-
-Active sprint: prepare an evidence-ready development set from existing permitted images; verify original resolution, readable garment/hip-thigh regions, plausible cross-product alternatives and group reservations. Then request a small, scoped human gate. Do not continue coarse-teacher prompt iteration or infer axis labels from legacy joint grades. Strong-model comparison access and truly independent final evaluation remain unresolved. All historical "pending direction confirmation" notes above are superseded by this approval.
-
-Data-readiness checkpoint: all96 existing source images match their hashes and are228x298. Eight observations from distinct known source groups (seven isolated, one wearing) were selected for a development-only regional probe;16 manually inspected rectangular region assets preserve source bytes, crop boxes/hashes and occlusion notes. All exclude the four legacy-human training reserves. Three rank-blind boards request six independent silhouette/surface preferences. Selection/readability review is Codex-assisted, not human similarity truth; none is training eligible. All are development material, not independent products/test observations. [Aggregate evidence](docs/verification/regional_readiness_20261030.json).
-
-Current human gate: `data/private/regional_pilot_20261030/human_request.json` and three comparison PNGs; choose A/B/tie/neither/U separately for silhouette and surface. No new acquisition, model encoding, API spending or training was performed. Pixel resolution limits this probe to broad shape/tone/fading placement; it cannot support fine weave. After answers, distinguish usable scoped relationships from neither/U without inventing absolute grades, then prepare the controlled feature/training comparison.
+At every sprint boundary update this state and `docs/SPRINT_REVIEW.md`, compare
+actual work with the approved flow, brief remaining evidence gaps in Korean,
+and continue authorized work until a genuine human/access gate. Human comparison
+artifacts, if needed later, must be visibly opened in a right-side Codex tab.

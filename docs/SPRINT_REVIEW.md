@@ -88,6 +88,8 @@ Decision and next deliverable / human gate:
 
 **Active sprint checkpoint — regional data preparation**
 
+Historical October30 checkpoint; superseded by Review002 below.
+
 Source verification:96/96 existing photos hash-valid, all228x298. Eight observations,
 16 garment/hip-thigh rectangles and three blind boards are prepared; human labels0,
 training eligible0, quality improvement unmeasured. [Readiness evidence](verification/regional_readiness_20261030.json).
@@ -97,3 +99,43 @@ both alternatives, investigate better cross-product candidate supply before trai
 if scope is unreadable, improve input detail/regions. Do not compensate by inventing
 positives or generating more triplet combinations. This checkpoint does not mark the
 adaptation experiment complete; the sprint review must be revisited at its boundary.
+
+**Review 002 — 2026-11-05: Sprint1 closure for a machine-supervised pilot**
+
+- Target/actual: source -> regions -> grouped supervision -> training-input contract
+  completed. The researcher explicitly delegated training judgments to the visual
+  assistant; the pending manual gate was removed. This changes label provenance,
+  not the quality-first, cross-product two-axis objective. [Inputs/contract](SPRINT1_INPUT_CONTRACT.md).
+- Evidence: cached1,200 image hashes and562 reviewed hashes verified; all228x298,
+  no URL fields in supplied metadata.27 observations/54 checked rectangles,
+  train18/development9 with group/file/pixel guards.20 machine decisions produce
+  18 strict preferences and1 distance tie;1 neither excluded. Human answers added0.
+  [Frozen aggregate and hashes](verification/sprint1_machine_readiness_20261105.json).
+- Quality delta: no new training or independent retrieval measurement this sprint.
+  Machine development agreement will measure teacher reproduction. The teacher is
+  this conversation's visual assistant, with no exposed exact checkpoint and no
+  separate ChatGPT API call. No repeat-run consistency test, calibrated confidence
+  or strong-general-model superiority is established. A15/B3/tie1/neither1 reflects
+  this selected candidate set; no position-swap experiment was performed.
+- Limits/feedback: usable training inputs now exist, but low source detail, mostly
+  catalog views, dependent selected cases and tiny development coverage persist.
+  A strict input gate is software evidence, not reliable ground-truth certification.
+  The earlier70 tests and new validation checks do not resolve the demand for real
+  quality results. Rejected96 Qwen drafts remain excluded; no broad teacher promotion.
+- Priority1: run the planned E0/E1/E2 controlled adaptation on this frozen weak
+  packet; save per-axis train/development margins and disagreement examples. This
+  decides whether the regional/head implementation can learn transferable teacher
+  constraints; a train-only gain triggers data/capacity diagnosis, not a quality claim.
+- Priority2: inspect higher-detail permitted wearing sources before texture claims
+  or scale-up; current metadata supplies no larger originals. The next source and
+  readability audit determine whether fine wash matching is supportable.
+- Priority3: fix accessible strong-comparator version and independent evaluation
+  truth before final comparison. Randomized presentation and a second independent
+  judgment route are required to investigate teacher/position bias. Do not request
+  another manual training grid or invoke a paid API without new need/authorization.
+- Human/resources:20 assistant-created decisions, no new human annotation burden
+  and no paid API call. Private CPU audit version2 completed; wall time not measured.
+  Legacy human overall judgments remain distinct from the new machine supervision.
+- Decision: Sprint1 **complete for the amended small distillation pilot**, with
+  limitations carried forward. Next is Sprint2's pinned-encoder regional/axis
+  experiment; no new human intervention is required to begin that existing plan.

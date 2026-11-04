@@ -4,14 +4,16 @@
 
 사진 속 데님의 색·톤·페이딩·워싱·실루엣을 비교하는 작은 ML 연구 과제입니다. 개인 취향, 원래 원단 색 복원, 모바일 앱은 현재 범위에 포함하지 않습니다.
 
-## Current snapshot — October 30, 2026
+## Current snapshot — November 5, 2026
 
 | Area | Verified state |
 |---|---|
 | Model / compute | Pinned Marqo fashionSigLIP last-block adaptation runs on Kaggle T4; finite updates and checkpoint restoration verified |
 | Evaluation | Fixed-pool nDCG@5, strict candidate validation and product/duplicate/image split checks implemented |
 | Baselines | Cosine B0 and mean-RGB control B1 implemented; ranking-to-evaluation CLI tested on synthetic vectors |
-| Local tests | 70 passed on Python 3.12; includes archive checksum rejection, visual-whitelist inputs, deduplication, cross-round judgment provenance and evaluation safeguards |
+| Local tests | 80 passed on Python 3.12; includes archive checksum rejection, visual-whitelist inputs, deduplication, cross-round judgment provenance and evaluation safeguards |
+| Regional pilot input | Sprint1 ready:27 observations /54 regions,20 machine decisions ->19 constraints; train18/development9. Weak teacher supervision, no independent quality result |
+| Source resolution | All1,200 cached originals and562 reviewed-image hashes checked:228x298; supplied metadata has no original URL fields |
 | Data | 1,200 acquired GLAMI images; 751 candidates inspected by Codex, 562 provisionally accepted. Explicit source-cut labels for 375; expanded training uses 333 images / fixed 39 validation, with 3 linked images reserved |
 | Real-image execution | 24 reviewed GLAMI crops encoded on T4; 768-D features and exploratory B0/B1 neighbor boards saved |
 | Calibration nDCG@5 (B0 / B1) | Q2: **0.641 / 0.640**; Q3: **0.530 / 0.447**. Single-rater pilot, 24 candidates; Q1 excluded |
@@ -55,12 +57,16 @@ The second command needs reviewed benchmark/features; paths and weight are examp
 
 ## Next milestone
 
+**Sprint1 closed for a machine-supervised pilot.** The researcher delegated training judgments to the conversational visual assistant. [Frozen input/provenance contract](docs/SPRINT1_INPUT_CONTRACT.md) now feeds the planned regional/axis adaptation. No separate ChatGPT API was called; the teacher checkpoint is unexposed, so these labels cannot serve as independent evidence of superiority.
+
 **Axis-separation correction:** human joint grades and the cut-class proxy did not isolate silhouette from surface appearance. New calibration packets now store those two grades independently; import, analysis and training guards prevent silently pooling them. This changes the annotation protocol, not the trained model. [Audit, implemented fixes and next training limits](docs/AXIS_SEPARATION_AUDIT.md).
 
-Attribute-supervised pilots and reused human development checks completed; useful whole-appearance improvement remains unproven. A 96-image draft expansion failed its broader eight-photo human gate: 2B family/lightness agreement was 7/8 and 5/8. A controlled 4B annotation probe changed those counts to 5/8 and 6/8, so larger capacity did not provide a reliable replacement. All 96 drafts remain outside training. The approved next experiment targets axis-specific garment-plus-region matching against a strong general multimodal comparator; data-readiness work begins first. Silhouette and wash remain separate objectives. No automatic segmentation, new training or axis-conditioned trained model is claimed. [Sprint alignment and reviews](docs/SPRINT_REVIEW.md).
+Attribute-supervised pilots and reused human development checks completed; useful whole-appearance improvement remains unproven. A 96-image draft expansion failed its broader eight-photo human gate: 2B family/lightness agreement was 7/8 and 5/8. A controlled 4B annotation probe changed those counts to 5/8 and 6/8, so larger capacity did not provide a reliable replacement. All 96 drafts remain outside training. The approved next experiment targets axis-specific garment-plus-region matching against a strong general multimodal comparator; Sprint1 preparation is complete. Silhouette and wash remain separate objectives. No automatic segmentation, new training or axis-conditioned trained model is claimed. [Sprint alignment and reviews](docs/SPRINT_REVIEW.md).
 
 ## Documentation and evidence
 
+- [Sprint1 machine-supervision input and comparison contract](docs/SPRINT1_INPUT_CONTRACT.md)
+- [Development plan: four sprints, controlled experiments, human gates and success criteria](docs/DEVELOPMENT_PLAN.md)
 - [Literature review: regional and attribute-conditioned learning, strong multimodal comparison and next experiment](docs/LITERATURE_REVIEW_20261030.md)
 - [Attribute-label inventory, human audits and controlled annotation-model comparison](docs/ATTRIBUTE_AUDIT.md)
 - [Silhouette / surface separation audit and corrected annotation protocol](docs/AXIS_SEPARATION_AUDIT.md)

@@ -1,0 +1,84 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-05",
+  "sprint": 1,
+  "status": "complete_for_machine_supervised_pilot",
+  "direction_amendment": "Researcher delegated axis judgments to the conversational multimodal assistant; no new human annotation gate. Machine labels remain weak supervision.",
+  "source_audit": {
+    "schema_version": 1,
+    "cached_images_verified": 1200,
+    "reviewed_images_verified": 562,
+    "source_sizes": {
+      "228x298": 1200
+    },
+    "reviewed_source_sizes": {
+      "228x298": 562
+    },
+    "url_fields": [],
+    "new_downloads": 0,
+    "model_inference": false
+  },
+  "source_audit_sha256": "e6b4dec7b0f543c300d1b58546a757f2ba2fdf78cd423fc9f4483e77989dd966",
+  "remote_audit_version": 2,
+  "selected_observations": 27,
+  "garment_and_hip_thigh_regions": 54,
+  "known_source_groups": 27,
+  "fold_images": {
+    "train": 18,
+    "development": 9
+  },
+  "anchor_cases": 10,
+  "machine_axis_decisions": 20,
+  "human_decisions_created": 0,
+  "choices": {
+    "A": 15,
+    "neither": 1,
+    "B": 3,
+    "tie": 1
+  },
+  "usable_teacher_constraints": 19,
+  "strict_anchor_counts": {
+    "train": {
+      "silhouette": 7,
+      "surface": 5
+    },
+    "development": {
+      "silhouette": 3,
+      "surface": 3
+    }
+  },
+  "ready_for_small_distillation_pilot": true,
+  "packet_sha256": "da9687b476fe59ed7b5e4151ce434d3578311598c76b4e83084dcc7555e7ee81",
+  "packet_file_sha256": "ec554758af2914f9dbec1fa96dc0c0b1765faa84911a5d731c3e3d2e1196584b",
+  "teacher_export_sha256": "79d95ce00f7aff008aa981f92d45e950aa8975e2386cd3ed066d1e1599868ee7",
+  "teacher_export_file_sha256": "2737b51358a89a3832d6be4e270273941fc61ea8271eb294d3757b88148d1255",
+  "training_input_sha256": "d98828947821772ea2d4ae40ab5a023e99a24ba7b9f56604d948ba64d68b7994",
+  "rubric_sha256": "5527b6478653075d08b2871a63a64132c020daf2a0dd5339bcb1ec6af01783ef",
+  "teacher_runtime": "Codex conversation multimodal visual assistant",
+  "exact_teacher_checkpoint": null,
+  "separate_chatgpt_api_call": false,
+  "external_api_spend": 0,
+  "training_performed": false,
+  "independent_matching_quality_measured": false,
+  "repeat_teacher_consistency_measured": false,
+  "limits": [
+    "All 1200 cached sources are 228x298; fine weave/detail claims unsupported. No original URL fields in provided metadata.",
+    "27 known source groups do not certify distinct products. Both folds are development material, with prior selection/exposure.",
+    "19 teacher constraints include one distance tie; the neither decision is excluded. Three development anchors are a pilot, not independent quality evidence.",
+    "Conversational teacher checkpoint is not exposed. Frozen artifacts are auditable but exact inference replay is unavailable.",
+    "A versioned strong general-model comparison on independent material is still required; this teacher export is not that benchmark."
+  ],
+  "presentation_board_sha256": {
+    "C01.png": "f9867bb61b09467d6b00dacb0930264cde82568234a7c6656ee1f7a2adecc091",
+    "C02.png": "e24ae230344fc64d4fe9dcd117e9a17c9f098073820be40db1c9205a5eadca77",
+    "C03.png": "e7fb3ac1c68c11cc013b8ddfb89055325067baeed13f7397e821260fdcce0fd4",
+    "C04.png": "5ee37742122d2efad9564a24a67e2e44dc38b779290a2446200a700f6bd6f7a7",
+    "C05.png": "5f2821fda6ff467195ec43a10adbba1f05d014480efc747973e22a6f83399217",
+    "C06.png": "11e69db23eb528d6042121842dec1a567c6991e4b825396060e59fcc78b665fa",
+    "C07.png": "d731c51534dd797be412e5bc788f7a44e1280ba3531281cdb8a33d5a5169c742",
+    "C08.png": "dba7dadc472edf0bd55ddd210b49740acd98ad660949877476af275871eccf2d",
+    "C09.png": "660c2bdb9d248a8ddce843e53332effe71b1e43a74a7c3c70b25aa2edc4085cb",
+    "C10.png": "da485783c645ed9dd3f367b7894b1121efc547e1b83573062c494e98f85fa875"
+  },
+  "preparation_script_sha256": "97e33120b7dd8b1b516b52ca1c0c79d99dd27a2cb39c9bb288167ded6f6c340e"
+}

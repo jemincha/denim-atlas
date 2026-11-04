@@ -6,46 +6,49 @@ separate. No taste profiling, original-color restoration or app UI.
 
 ## Current handoff
 
-Sprint1 is complete for a **machine-supervised regional pilot**. The researcher
-explicitly delegated training judgments to the visual assistant; no manual training
-annotation gate remains. [Input contract](docs/SPRINT1_INPUT_CONTRACT.md) ·
-[Alignment review002](docs/SPRINT_REVIEW.md) · [Plan](docs/DEVELOPMENT_PLAN.md).
+Sprint2 completed: frozen FashionSigLIP regional features and two separately trained
+projection heads. **No development preference-agreement gain.**
+[Experiment](docs/REGIONAL_AXIS_PILOT.md) · [Review003](docs/SPRINT_REVIEW.md) ·
+[Plan](docs/DEVELOPMENT_PLAN.md).
 
-- Private cached-source audit:1,200/1,200 image hashes and562/562 reviewed hashes
-  verified; every audited source is228x298. Supplied metadata has no original URL
-  fields. Enlarging images does not recover weave or tiny wash details.
-- Frozen packet:27 known source groups,54 source-derived regions,10 anchor cases;
-  train18/development9 protected against known-group/file/decoded-pixel leakage.
-- 20 machine decisions:18 strict preferences,1 distance tie,1 neither.19 usable
-  constraints; strict training anchors silhouette7/surface5, development3 each.
-  Neither/U never become zero grades; no absolute relevance grades inferred.
-- Teacher: this Codex conversation's multimodal visual assistant. Exact checkpoint
-  unavailable; no separate ChatGPT API call or paid API use. Labels are weak,
-  outputs frozen; repeat consistency and accuracy are unestablished.
-- Raw packet/ratings/training inputs: `data/private/regional_sprint1_20261105/`.
-  Source audit: `data/private/source_audit_20261105/`. Public aggregate/hashes:
-  [readiness](docs/verification/sprint1_machine_readiness_20261105.json).
+- 27 observations /54 views, train18/development9 protected folds;13 train constraints,
+  6 development constraints. Labels are the conversational visual assistant's weak
+  judgments, not human truth; exact teacher checkpoint/repeat accuracy unavailable.
+- E0 garment/E1 regional/E2 trained: development silhouette2/3 and surface2/3 for
+  all three. E2 fixes1/regresses1 silhouette preference; surface winners unchanged.
+  Training reaches7/7 silhouette,5/5 surface plus1 tie; loss0.066095->0.00006586.
+- 200 fixed AdamW steps, seed37,64-D heads,147,456 parameters; encoder remains frozen.
+  Dev-gradient exclusion and exact saved-head prediction restoration passed.
+  84 local tests passed; CPU-recomputed E0/E1 outcomes match GPU output.
+- Private TeslaT4 kernel `jemincha/denim-atlas-regional-axis-pilot`,version2,complete.
+  Encoder loading/features44.70s; encoding/training/save46.71s excludes setup/queue.
+  Weights remain remote/private; no pending compute job, paid API or new human labels.
+- Small private results/cache: `data/private/regional_heads_20261105/`.
+  Original packet/teacher: `data/private/regional_sprint1_20261105/`.
+  [Public result/hash record](docs/verification/sprint2_results_20261105.json).
 
-## Next execution
+## Next execution — controlled improvement
 
-Start Sprint2 with the pinned FashionSigLIP encoder: cache garment and hip/thigh
-features, compare E0/E1 and two small axis projections E2 on the frozen packet.
-Use train only for fitting. Development preference agreement measures teacher
-reproduction; it is not independent human acceptance or superiority to GPT.
-Do not expand last-block training before diagnosing the head experiment.
+First repair development coverage: current3 anchors have0 different-winner cases
+between axes and0 wearing views. Freeze new axis-conflicting/wearing cases before
+examining model outputs, preserve reservations/groups and machine provenance.
+Separately test reduced head capacity on the same cached features/labels;13 dependent
+constraints versus147,456 parameters are underdetermined. Do not conflate changing
+inputs with changing capacity, sweep parameters or unfreeze the backbone by default.
+No new manual training annotation gate; the researcher delegated those judgments.
 
 ## Carry-forward limits
 
-No regional-head training or independent quality improvement yet. Historical
-human-continuation new-query nDCG declined0.3841->0.3513; source-fit proxy gains are
-not appearance quality. See [fit](docs/FIT_PROXY_EXPERIMENT.md) and
-[human continuation](docs/HUMAN_ROUND2.md). All96 rejected Qwen attribute drafts
-remain outside training. Current folds are development material, mostly catalog
-views; known groups do not certify distinct products. Strong-comparator exact
-version/access and independent evaluation truth remain later experiment gates.
-Source-image/checkpoint release rights are not cleared; raw material stays private.
+No independent human matching-quality gain or strong-general-model superiority.
+Historical human-continuation nDCG declined0.3841->0.3513; source-fit proxy gains
+remain distinct. All96 rejected Qwen attribute drafts stay outside training.
+All1,200 cached sources, including562 screened images, are228x298; supplied metadata
+has no original URL fields. Fine weave/detail and wearing-domain quality remain
+unmeasured. Known groups do not certify distinct products. Strong-comparator exact
+version/access and independent evaluation truth remain later gates. Source-image
+and checkpoint release rights are not cleared; raw material stays private.
 
-At every sprint boundary update this state and `docs/SPRINT_REVIEW.md`, compare
-actual work with the approved flow, brief remaining evidence gaps in Korean,
-and continue authorized work until a genuine human/access gate. Human comparison
-artifacts, if needed later, must be visibly opened in a right-side Codex tab.
+At each sprint boundary update this state and `docs/SPRINT_REVIEW.md`, compare actual
+work with the approved flow and brief limits/next investigation in Korean. Continue
+authorized work to a genuine human/access gate. Any later human comparison images
+must be visibly opened in a right-side Codex tab; queued is not visible.

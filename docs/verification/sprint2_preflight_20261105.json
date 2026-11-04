@@ -1,0 +1,34 @@
+{
+  "date": "2026-11-05",
+  "purpose": "fixed_sprint2_machine_teacher_pilot",
+  "config": {
+    "seed": 37,
+    "projection_dim": 64,
+    "steps": 200,
+    "learning_rate": 0.0003,
+    "weight_decay": 0.01,
+    "cosine_margin": 0.05,
+    "tie_tolerance": 0.02
+  },
+  "packet_file_sha256": "ec554758af2914f9dbec1fa96dc0c0b1765faa84911a5d731c3e3d2e1196584b",
+  "teacher_file_sha256": "2737b51358a89a3832d6be4e270273941fc61ea8271eb294d3757b88148d1255",
+  "training_script_sha256": "4b181b112b7e1bb6dd26c1b71dcfdeeeb0385045504e9297c3e743db43e7348e",
+  "bundle_sha256": "b5b51e32b8fb48b8cb71d8a7c9925e9e2987208cbd1f9de240362c18a1f479ad",
+  "tests_passed_before_remote_run": 84,
+  "controls": [
+    "E0_garment",
+    "E1_equal_normalized_garment_and_hip_thigh",
+    "E2_initial_projection",
+    "E2_final_step200_projection"
+  ],
+  "selection": "One fixed seed and final step; no development tuning",
+  "training_truth": "machine_visual only",
+  "quality_claim": false,
+  "remote_kernel": "jemincha/denim-atlas-regional-axis-pilot",
+  "remote_version": 2,
+  "private_input_dataset": "jemincha/denim-atlas-regional-pilot-inputs",
+  "dataset_default_visibility": "private (confirmed by create response)",
+  "transport": "Separate private data payload and small source script; oversized embedded request returned400 before job creation; runtime1 failed because Kaggle auto-extracted inputs.zip; runtime2 locates exact packet and verifies pinned packet/rating hashes before full asset validation.",
+  "wrapper_sha256": "eaf187c2a925ec0efce4a069788f4df28052c9e068ccf698f2fea0a180232178",
+  "wrapper_bytes": 39221
+}

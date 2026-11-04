@@ -1,0 +1,261 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-05",
+  "sprint": 2,
+  "status": "completed_no_development_agreement_gain",
+  "kernel": "jemincha/denim-atlas-regional-axis-pilot",
+  "kernel_version": 2,
+  "purpose": "machine_teacher_distillation_only",
+  "independent_matching_quality_evidence": false,
+  "data": {
+    "observations": 27,
+    "region_views": 54,
+    "train_observations": 18,
+    "development_observations": 9,
+    "training_constraints": 13,
+    "development_constraints": 6,
+    "distinct_development_anchors": 3,
+    "development_axis_conflict_cases": 0,
+    "development_wearing_observations": 0
+  },
+  "experiments": {
+    "E0_garment": {
+      "train": {
+        "silhouette": {
+          "constraints": 7,
+          "strict_comparisons": 7,
+          "strict_correct": 2,
+          "preference_agreement": 0.2857142857142857,
+          "mean_loss": 0.06454377174377442,
+          "mean_signed_margin": -0.014543771743774414,
+          "ties": 0,
+          "ties_satisfied": 0
+        },
+        "surface": {
+          "constraints": 6,
+          "strict_comparisons": 5,
+          "strict_correct": 3,
+          "preference_agreement": 0.6,
+          "mean_loss": 0.051464845736821495,
+          "mean_signed_margin": -0.006936907768249512,
+          "ties": 1,
+          "ties_satisfied": 0
+        }
+      },
+      "development": {
+        "silhouette": {
+          "constraints": 3,
+          "strict_comparisons": 3,
+          "strict_correct": 2,
+          "preference_agreement": 0.6666666666666666,
+          "mean_loss": 0.0453142801920573,
+          "mean_signed_margin": 0.004685719807942708,
+          "ties": 0,
+          "ties_satisfied": 0
+        },
+        "surface": {
+          "constraints": 3,
+          "strict_comparisons": 3,
+          "strict_correct": 2,
+          "preference_agreement": 0.6666666666666666,
+          "mean_loss": 0.0453142801920573,
+          "mean_signed_margin": 0.004685719807942708,
+          "ties": 0,
+          "ties_satisfied": 0
+        }
+      }
+    },
+    "E1_regional": {
+      "train": {
+        "silhouette": {
+          "constraints": 7,
+          "strict_comparisons": 7,
+          "strict_correct": 2,
+          "preference_agreement": 0.2857142857142857,
+          "mean_loss": 0.06454377174377442,
+          "mean_signed_margin": -0.014543771743774414,
+          "ties": 0,
+          "ties_satisfied": 0
+        },
+        "surface": {
+          "constraints": 6,
+          "strict_comparisons": 5,
+          "strict_correct": 1,
+          "preference_agreement": 0.2,
+          "mean_loss": 0.05325122674306234,
+          "mean_signed_margin": -0.013078582286834717,
+          "ties": 1,
+          "ties_satisfied": 1
+        }
+      },
+      "development": {
+        "silhouette": {
+          "constraints": 3,
+          "strict_comparisons": 3,
+          "strict_correct": 2,
+          "preference_agreement": 0.6666666666666666,
+          "mean_loss": 0.0453142801920573,
+          "mean_signed_margin": 0.004685719807942708,
+          "ties": 0,
+          "ties_satisfied": 0
+        },
+        "surface": {
+          "constraints": 3,
+          "strict_comparisons": 3,
+          "strict_correct": 2,
+          "preference_agreement": 0.6666666666666666,
+          "mean_loss": 0.0485575278600057,
+          "mean_signed_margin": 0.0014424721399943035,
+          "ties": 0,
+          "ties_satisfied": 0
+        }
+      }
+    },
+    "E2_initial_projection": {
+      "train": {
+        "silhouette": {
+          "constraints": 7,
+          "strict_comparisons": 7,
+          "strict_correct": 1,
+          "preference_agreement": 0.14285714285714285,
+          "mean_loss": 0.060279078142983576,
+          "mean_signed_margin": -0.00955420732498169,
+          "ties": 0,
+          "ties_satisfied": 0
+        },
+        "surface": {
+          "constraints": 6,
+          "strict_comparisons": 5,
+          "strict_correct": 1,
+          "preference_agreement": 0.2,
+          "mean_loss": 0.07191058993339539,
+          "mean_signed_margin": -0.03521796464920044,
+          "ties": 1,
+          "ties_satisfied": 1
+        }
+      },
+      "development": {
+        "silhouette": {
+          "constraints": 3,
+          "strict_comparisons": 3,
+          "strict_correct": 1,
+          "preference_agreement": 0.3333333333333333,
+          "mean_loss": 0.0585325042406718,
+          "mean_signed_margin": -0.008532504240671793,
+          "ties": 0,
+          "ties_satisfied": 0
+        },
+        "surface": {
+          "constraints": 3,
+          "strict_comparisons": 3,
+          "strict_correct": 2,
+          "preference_agreement": 0.6666666666666666,
+          "mean_loss": 0.046104280153910326,
+          "mean_signed_margin": 0.003895719846089681,
+          "ties": 0,
+          "ties_satisfied": 0
+        }
+      }
+    },
+    "E2_trained_projection": {
+      "train": {
+        "silhouette": {
+          "constraints": 7,
+          "strict_comparisons": 7,
+          "strict_correct": 7,
+          "preference_agreement": 1.0,
+          "mean_loss": 0.0,
+          "mean_signed_margin": 0.39534108127866474,
+          "ties": 0,
+          "ties_satisfied": 0
+        },
+        "surface": {
+          "constraints": 6,
+          "strict_comparisons": 5,
+          "strict_correct": 5,
+          "preference_agreement": 1.0,
+          "mean_loss": 0.00013171633084615073,
+          "mean_signed_margin": 0.1181059718132019,
+          "ties": 1,
+          "ties_satisfied": 1
+        }
+      },
+      "development": {
+        "silhouette": {
+          "constraints": 3,
+          "strict_comparisons": 3,
+          "strict_correct": 2,
+          "preference_agreement": 0.6666666666666666,
+          "mean_loss": 0.07158602476119995,
+          "mean_signed_margin": -0.015005568663279215,
+          "ties": 0,
+          "ties_satisfied": 0
+        },
+        "surface": {
+          "constraints": 3,
+          "strict_comparisons": 3,
+          "strict_correct": 2,
+          "preference_agreement": 0.6666666666666666,
+          "mean_loss": 0.04136976401011149,
+          "mean_signed_margin": 0.00863023598988851,
+          "ties": 0,
+          "ties_satisfied": 0
+        }
+      }
+    }
+  },
+  "paired_development_changes_vs_E1": {
+    "silhouette": {
+      "fixed": 1,
+      "regressed": 1,
+      "unchanged": 1
+    },
+    "surface": {
+      "fixed": 0,
+      "regressed": 0,
+      "unchanged": 3
+    }
+  },
+  "trainable_parameters": 147456,
+  "initial_train_loss": 0.06609483063220978,
+  "final_train_loss": 6.585817027371377e-05,
+  "config": {
+    "seed": 37,
+    "projection_dim": 64,
+    "steps": 200,
+    "learning_rate": 0.0003,
+    "weight_decay": 0.01,
+    "cosine_margin": 0.05,
+    "tie_tolerance": 0.02
+  },
+  "encoding_seconds": 44.699714484000026,
+  "encoding_training_save_seconds": 46.711457886000005,
+  "device": "Tesla T4",
+  "packages": {
+    "torch": "2.11.0+cu130",
+    "torchvision": "0.26.0+cu130",
+    "open_clip_torch": "3.3.0",
+    "timm": "1.0.30",
+    "Pillow": "13.0.0",
+    "huggingface_hub": "1.33.0"
+  },
+  "base_revision": "c56244cc94f92419e8369fa71efdaf403b124ce8",
+  "base_weights_sha256": "88908200434959fa3154ef79d408aac33341e8797fe5ca8ca6f0463aab32e6b3",
+  "packet_sha256": "da9687b476fe59ed7b5e4151ce434d3578311598c76b4e83084dcc7555e7ee81",
+  "teacher_export_sha256": "79d95ce00f7aff008aa981f92d45e950aa8975e2386cd3ed066d1e1599868ee7",
+  "training_script_sha256": "4b181b112b7e1bb6dd26c1b71dcfdeeeb0385045504e9297c3e743db43e7348e",
+  "checkpoint_sha256": "aac7e9e86801abaac7cea20f61c7f91d5c89514a3388e5492913c04241da9e67",
+  "checkpoint_roundtrip_verified": true,
+  "development_loss_gradient_guard": true,
+  "private_report_file_sha256": "d53eed01fda35b504e7310614f6313263fd82f7bf5c1f84d927b1053b252f028",
+  "private_feature_file_sha256": "8e374458304ef99aaf1ed153e92d0c8d87596755f5c218d5e6c0a6bad1530899",
+  "selection": "Fixed final step200; no development-driven checkpoint or parameter selection",
+  "interpretation": "Training constraints are fitted; development agreement is unchanged. Silhouette margins worsen on average and one correct preference regresses while another is fixed. Surface margins improve on average without a preference flip. This is compatible with overfitting but3 selected anchors cannot establish its cause.",
+  "limits": [
+    "Machine labels from an unexposed conversational teacher checkpoint; not human truth or a strong-model benchmark.",
+    "No development case asks for different winners on the two axes, so development cannot establish axis decoupling.",
+    "All development images are isolated catalog views; wearing/general-domain quality remains unmeasured.",
+    "147456 head parameters and13 dependent training constraints are severely underdetermined.",
+    "228x298 sources cannot establish fine weave/detail matching. No head/backbone weights downloaded locally or published."
+  ]
+}

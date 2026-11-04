@@ -1,0 +1,15 @@
+{
+  "frozen_input_and_training_source_hashes_verified": true,
+  "cached_feature_provenance_verified": true,
+  "cpu_recomputed_controls": [
+    "E0_garment",
+    "E1_regional"
+  ],
+  "max_cpu_gpu_score_error": 1.8207472607389974e-07,
+  "all_control_preference_outcomes_match": true,
+  "local_backbone_or_head_weights_downloaded": false,
+  "checkpoint_roundtrip_verified_remotely": true,
+  "development_score_gradient_exclusion_verified_remotely": true,
+  "local_tests_passed_before_execution": 84,
+  "successful_remote_version": 2
+}

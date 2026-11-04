@@ -139,3 +139,43 @@ adaptation experiment complete; the sprint review must be revisited at its bound
 - Decision: Sprint1 **complete for the amended small distillation pilot**, with
   limitations carried forward. Next is Sprint2's pinned-encoder regional/axis
   experiment; no new human intervention is required to begin that existing plan.
+
+**Review 003 — 2026-11-05: Sprint2 regional/axis adaptation**
+
+- Target/actual: prepared regions/grouped machine supervision -> frozen-feature
+  E0/E1 controls -> two axis projections -> development comparison and error
+  analysis completed. [Experiment](REGIONAL_AXIS_PILOT.md). No baseline-only detour,
+  coarse-teacher prompting, UI construction or last-block unfreezing.
+- Evidence:54 region features,147,456 head parameters,200 fixed steps; training
+  strict agreement7/7 silhouette and5/5 surface plus a satisfied tie. Equal-axis
+  loss0.066095->0.00006586; saved-head restoration and dev-gradient exclusion passed.
+  Development remains2/3 per axis for E0/E1/E2; no net preference-agreement gain.
+  Silhouette fixes1/regresses1; surface winners unchanged. [Results](verification/sprint2_results_20261105.json).
+- Quality/uncertainty: these are machine-teacher development agreements across3
+  selected anchors, not independent human matching quality or superiority to GPT.
+  The previous new-query regression remains relevant; a training win does not
+  supersede it. E2's untrained projection control and all outcomes are retained.
+- Limits/feedback: fitting capacity is large relative to13 dependent constraints;
+  development has0 axis-conflicting cases and0 wearing photos. This is an important
+  coverage gap for the project's two-axis claim. Teacher checkpoint/repeat accuracy,
+  fine source detail, independent comparison truth and release rights remain open.
+  Requests for actual training/results are addressed; useful quality gain is unresolved.
+- Priority1 investigation: freeze additional axis-conflicting and wearing
+  development cases with reserved-group checks and machine labels before model
+  outputs are examined; measure which axes actually disagree. This decides whether
+  failure extends beyond the current catalog-heavy, shared-winner cases.
+- Priority2 investigation: on the same cached features and labels compare reduced
+  head capacity as one controlled change. Save train/development margins and paired
+  outcomes; use this to decide whether more trainable scope is warranted. Do not
+  change labels/data and capacity in one unexplained comparison or begin a sweep.
+- Priority3 investigation: identify readable higher-resolution permitted wearing
+  material and a versioned strong-model/independent-evaluation route. These decide
+  support for fine wash claims and later superiority testing; no paid API assumed.
+- Human/resources:0 new human decisions,0 paid API calls. Private TeslaT4 kernel
+  version2 completed;46.71s encoding/training/save excludes setup/queue.84 local
+  checks and CPU-recomputed E0/E1 outcomes verify software, not matching quality.
+  Initial large-request400 and auto-extracted input-path failure were repaired
+  without changing frozen data/config. Weights remain remote/private; no pending job.
+- Decision: Sprint2 complete with **no demonstrated development-agreement gain**.
+  Continue the existing controlled-improvement plan through data/coverage and
+  capacity diagnosis; no new human training grid or broader backbone tuning.

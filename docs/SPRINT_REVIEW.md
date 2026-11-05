@@ -203,3 +203,10 @@ No new training, acquisition, labels or quality result was created by this hando
 Machine-teacher limits, no-gain development outcome and missing independent quality
 remain explicit. Existing result artifacts and implementation are preserved for
 review at a fixed repository revision.
+
+
+2026-11-05: B/quality superiority and detailed washing retained; S1/S2 execution is recorded but research gates remain pending; the 3-anchor AI result cannot decide the quality hypothesis.
+Human evaluation only (~30–40 minutes, estimate) is approved; machine labels stay training/engineering-only, never development/final quality truth; paid-model spending remains unapproved.
+Source feasibility: 10 CC BY/CC0 wearing originals actually verified (up to3680x5520), with readable800x900 and2200x1600 detail crops; capture duplicates/occlusion remain, so30 independent usable anchors are not established.
+Evidence: prior Commons source snapshots plus data/private/commons_wearing_20261105/source_images.csv (20 previews,6 new originals;4 originals reused from prior candidates); no new research document or JSON, no training or evaluation labels.
+Next: expand readable independent source/candidate coverage, then freeze human rubric/endpoint/exclusions/stop rules and named comparator access before comparison; quality gate may close only after the independent evidence exists.

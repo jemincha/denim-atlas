@@ -24,8 +24,8 @@ must not hide a large mismatch on one axis; the acceptance rule still needs cali
 
 | Sprint | Delivered | Scientific conclusion |
 |---|---|---|
-| 1 — regional input preparation | Cached-source audit; 27 observations, 54 regions; train 18/development 9; 20 machine decisions yielding 13 train and 6 development constraints, with 1 neither excluded | Ready for a small weak-supervision pilot. No independent ground truth or quality gain established |
-| 2 — first controlled adaptation | Frozen FashionSigLIP, garment/regional controls and two 64-D projections; one fixed 200-step run on T4; checkpoint restoration and error analysis | Development agreement remains 2/3 per axis for E0/E1/E2. No net gain; silhouette fixes one preference and regresses another |
+| 1 — input execution recorded; research gate pending | Cached-source audit; 27 observations, 54 regions; train 18/development 9; 20 machine decisions yielding 13 train and 6 development constraints, with 1 neither excluded | Ready for a small weak-supervision pilot. No independent ground truth or quality gain established |
+| 2 — pipeline check recorded; research gate pending | Frozen FashionSigLIP, garment/regional controls and two 64-D projections; one fixed 200-step run on T4; checkpoint restoration and error analysis | Development agreement remains 2/3 per axis for E0/E1/E2. No net gain; silhouette fixes one preference and regresses another |
 
 [Input contract](SPRINT1_INPUT_CONTRACT.md) · [Sprint 2 experiment](REGIONAL_AXIS_PILOT.md) ·
 [Frozen result record](verification/sprint2_results_20261105.json).
@@ -38,7 +38,13 @@ Qwen attribute drafts remain excluded. These limits are not resolved by the late
 
 ## Revised sequence from the current checkpoint
 
-### Sprint 3 — evaluation inputs and comparator before further adaptation
+### Sprint 3 — data feasibility first, then independent evaluation and comparator
+
+First establish whether permitted high-resolution wearing originals contain readable
+hip/thigh washing detail and sufficient independent garment coverage. Report actual
+original downloads, native garment-region detail and remaining supply gaps before
+advancing. Keep the detailed-wash objective; the researcher declined automatic
+scope reduction. Until data and human truth gates pass, this stage remains pending.
 
 1. Specify the exact available strong general model, version, execution route,
    image preprocessing and expected access/cost. Prepare the fixed input/prompt
@@ -55,7 +61,10 @@ Qwen attribute drafts remain excluded. These limits are not resolved by the late
    promise of statistical adequacy. Define the candidate count, views and complete
    annotation workload before scaling. If appropriate alternatives or readable
    detail are missing, repair those inputs rather than manufacturing positives.
-5. Freeze judgments before inspecting rankings. Training annotation remains
+5. Freeze human evaluation judgments before inspecting rankings. Machine labels
+   are allowed for training and engineering diagnostics only, not development/final
+   quality truth. The researcher approved an estimated30–40-minute independent
+   evaluation session, not manual training annotation. Training annotation remains
    delegated to the visual assistant. Record evaluator identity/version and whether
    evidence is human or machine. A teacher must not certify its own superiority:
    if reference judgments depend on the comparator itself, report agreement with

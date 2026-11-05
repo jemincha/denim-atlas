@@ -4,7 +4,7 @@ A small research project on matching different denim products by photographed
 silhouette, color, tone, washing and fading. 개인 취향 분석이나 앱 제작보다,
 외관 매칭 모델의 적응과 검증에 집중합니다.
 
-**Snapshot: S2-2026-11-05 — Sprints 1 and 2 are complete as experiments.
+**Snapshot: S2-2026-11-05 — Sprints 1 and 2 have execution records; their research gates remain pending.
 Independent matching-quality improvement and superiority to a strong general model
 have not been demonstrated.**
 
@@ -69,8 +69,8 @@ acceptance tolerances remain unvalidated. [Working definition](docs/SIMILARITY_D
 
 | Stage | State / next deliverable |
 |---|---|
-| Sprint 1 — usable regional inputs | Completed for a small machine-supervised pilot; no independent ground truth established |
-| Sprint 2 — first axis-head adaptation | Completed with no development-agreement gain |
+| Sprint 1 — usable regional inputs | Execution recorded; research gate pending independent human evaluation and readable data |
+| Sprint 2 — first axis-head adaptation | Pipeline check executed; quality hypothesis inconclusive on 3 machine-judged anchors |
 | Sprint 3 — evaluation and strong comparator | Next: readable, protected evaluation groups, axis-conflicting/wearing cases, frozen judgments and exact model/access/prompt; matched frozen/comparator results before more adaptation |
 | Sprint 4 — controlled improvement | Change one implicated component, retain controls and investigate regressions |
 | Sprint 5 — independent comparison/release | Freeze the recipe before final evaluation; publish only conclusions and artifacts supported by evidence and rights |

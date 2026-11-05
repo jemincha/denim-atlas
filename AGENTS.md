@@ -29,3 +29,9 @@ At every sprint boundary, including a user-requested safe stop:
 
 Continue through routine authorized steps until a real human gate. A review is
 not permission to end every completed subtask or to create recurring automations.
+
+Current quality gates (2026-11-05):
+- Training labels may be machine-generated; development/final quality truth must come from independent human judgment. Machine diagnostics cannot close a research gate; mark it pending even when execution is complete.
+- Sprint3 starts with actual high-resolution wearing-photo feasibility and a source/readability go/no-go report. Preserve the detailed-wash objective; do not narrow it automatically.
+- Before comparison freeze endpoint, exclusion/stop criteria and protected groups; target about30 varied anchors with wearing and axis-conflicting cases. Record human rater ID/rubric version and model IDs/versions. Human evaluation time is approved at about30–40 minutes (estimate); paid-model spending is not approved.
+- Add no new research documents or verification JSON. Record each new finding/decision in at most5 lines of the existing docs/SPRINT_REVIEW.md; source photographs and necessary dataset provenance are data, not new audit reports.

@@ -6,8 +6,9 @@ separate. No taste profiling, original-color restoration or app UI.
 
 ## Current handoff
 
-Sprint2 completed: frozen FashionSigLIP regional features and two separately trained
-projection heads. **No development preference-agreement gain.**
+Sprint1/2 technical execution is recorded; **research gate pending**. The frozen
+FashionSigLIP/two-head run is a pipeline check; 3 machine-judged anchors cannot
+resolve the quality hypothesis. The recorded preference-agreement count is unchanged.
 [Experiment](docs/REGIONAL_AXIS_PILOT.md) · [Review003](docs/SPRINT_REVIEW.md) ·
 [Plan](docs/DEVELOPMENT_PLAN.md).
 
@@ -28,6 +29,12 @@ projection heads. **No development preference-agreement gain.**
   [Public result/hash record](docs/verification/sprint2_results_20261105.json).
 
 ## Next execution — revised plan after Sprint 2
+
+B/quality superiority and detailed washing remain the goal. The researcher approved
+about30–40 minutes (estimate) for independent human evaluation only; training labels
+remain delegated. First establish high-resolution wearing-photo feasibility.
+Human-only evaluation truth and pre-fixed stop criteria are required before comparison.
+No paid general-model budget has been approved.
 
 Review snapshot: S2-2026-11-05. The [revised plan](docs/DEVELOPMENT_PLAN.md) replaces
 older forward-work instructions; historical experiments/results stay unchanged.

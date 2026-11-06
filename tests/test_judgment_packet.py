@@ -15,6 +15,25 @@ def asset(identity):
 
 
 class PacketTests(unittest.TestCase):
+    def test_delayed_repeat_budget_and_evaluation_only_packet(self):
+        data=packet([asset('q'+str(i)) for i in range(30)],
+                    [asset('a'),asset('b'),asset('c')],separate_axes=True,
+                    repeat_count=9,batch_size=5,evaluation_only=True)
+        self.assertEqual(len(data['trials']),99)
+        self.assertEqual(sum(t['repeat'] for t in data['trials']),9)
+        self.assertTrue(all(not t['repeat'] for t in data['trials'][:90]))
+        for index,t in enumerate(data['trials'][90:],90):
+            first=next(i for i,x in enumerate(data['trials']) if x['query']==t['query']
+                       and x['candidate']==t['candidate'])
+            self.assertGreaterEqual(index-first,30)
+        html=build_html(data)
+        self.assertIn('function repeatAllowed(',html)
+        self.assertIn('trials.slice(state.page*10,state.page*10+10)',html)
+        with self.assertRaisesRegex(ValueError,'Evaluation-only'):
+            training_triplets(data,{})
+        for count in (-1,31,True):
+            with self.assertRaises(ValueError):packet([asset('q')],[asset('a'),asset('b')],repeat_count=count)
+
     def axis_packet(self):
         data=packet([asset('q')],[asset('a'),asset('b')],
                     packet_id='denim-atlas-two-axis-check-v1',separate_axes=True)

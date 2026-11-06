@@ -4,9 +4,22 @@ A small research project on matching different denim products by photographed
 silhouette, color, tone, washing and fading. 개인 취향 분석이나 앱 제작보다,
 외관 매칭 모델의 적응과 검증에 집중합니다.
 
-**Snapshot: S2-2026-11-05 — Sprints 1 and 2 have execution records; their research gates remain pending.
+**Snapshot: 2026-11-06 — frozen human comparison measured; research gate pending.
 Independent matching-quality improvement and superiority to a strong general model
 have not been demonstrated.**
+
+The fixed-pool, single-rater comparison covers30 wearing anchors,90 pairs and9
+delayed repeats, with no new training. Human preference agreement (silhouette /
+surface;95% anchor-bootstrap CI) is FashionSigLIP69.8%[57.7,82.0] /
+67.5%[53.7,81.5], CLIP62.3%[47.2,76.4] /57.5%[40.0,73.2], and
+DINOv266.0%[51.8,80.0] /65.0%[46.2,81.8]; random agreement is50%.
+Exact repeat agreement is8/9 and3/9 respectively. The approved reliability gate
+fails for surface, so these are descriptive measurements and adaptation is paused.
+Model-to-model nDCG differences are inconclusive. Six high-resolution natural
+wearing anchors and24 low-resolution catalog wearing anchors confound resolution
+and capture setting; all gallery inputs are low-resolution catalog photos.
+Pure catalog query and strong general multimodal comparisons remain unmeasured.
+Raw photos, features and human judgments remain private. [Protocol/results](docs/SPRINT_REVIEW.md).
 
 The [revised development plan](docs/DEVELOPMENT_PLAN.md) puts evaluation coverage
 and an exact strong-model comparator before another adaptation trial. Existing

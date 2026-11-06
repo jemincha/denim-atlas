@@ -7,12 +7,12 @@ from pathlib import Path
 
 try:
     from .evaluate import ndcg_at_5, unique_object
-    from .extract_features import REVISION, WEIGHT_SHA256
+    from .extract_features import frozen_profile
     from .import_judgments import import_ratings
     from .run_baselines import rank_pools, vector
 except ImportError:
     from evaluate import ndcg_at_5, unique_object
-    from extract_features import REVISION, WEIGHT_SHA256
+    from extract_features import frozen_profile
     from import_judgments import import_ratings
     from run_baselines import rank_pools, vector
 
@@ -26,15 +26,12 @@ def analyze(packet, ratings, features, comparison_axis=None):
     elif comparison_axis not in (None, 'overall'):
         raise ValueError('Historical overall grades cannot be interpreted as axis grades')
     provenance = features.get('provenance', {})
-    if (provenance.get('revision') != REVISION
-            or provenance.get('weights_sha256') != WEIGHT_SHA256
-            or provenance.get('training_run') is not False):
-        raise ValueError('Expected pinned frozen Marqo features')
+    profile = frozen_profile(provenance)
     for row in packet['queries'] + packet['candidates']:
         feature = features.get('assets',{}).get(row['id'],{})
         if feature.get('crop_sha256') != row['crop_sha256']:
             raise ValueError('Feature crop checksum mismatch: '+row['id'])
-        vector(feature.get('embedding'), 768)
+        vector(feature.get('embedding'), profile['dimension'])
     pools = {q['id']:packet['candidate_pools'][i] for i,q in enumerate(packet['queries'])}
     # Fixed w=0.5 was used before these labels existed; no search against rater scores.
     rankings = rank_pools(pools, features, 0.5)

@@ -8,7 +8,7 @@
 <h1>청바지 유사도 판정</h1>
 <p>왼쪽 사진의 <b>보이는 바지</b>와 오른쪽 상품이 얼마나 비슷한지 골라줘.</p>
 <p class="muted" id="scope">색·톤, 워싱·페이딩, 보이는 실루엣을 함께 판단. 취향·브랜드·배경은 제외하고 안 보이는 부분은 추측하지 않기. 모델 순위는 표시하지 않아.</p>
-<p class="muted">판정 기준과 추가 학습을 위한 자료야. 일부 반복 문항이 포함돼. 독립적인 최종 성능평가 결과로 사용하지 않아.</p>
+<p class="muted" id="use-scope">판정 기준과 추가 학습을 위한 자료야. 일부 반복 문항이 포함돼. 독립적인 최종 성능평가 결과로 사용하지 않아.</p>
 <p class="muted" id="rubric"><b>0과 1의 구분:</b> 0은 보이는 주요 특징이 달라 유사 상품으로 보기 어려운 경우, 1은 일부 요소는 닮았지만 전체 차이가 큰 경우야. 2는 꽤 비슷함, 3은 관찰 가능한 핵심 특징이 매우 비슷함. 정보가 부족하면 0 대신 ‘판단 불가’를 골라줘.</p>
 <label for="jump">문항</label> <select id="jump"></select> <span id="count"></span>
 <progress id="progress" value="0"></progress>
@@ -26,6 +26,7 @@ const packet=__PACKET_DATA__;
 const key='denim-judgments-'+packet.packet_sha256;
 let index=0,answers={};
 const $=id=>document.getElementById(id),separate=packet.schema_version===2;
+if(packet.evaluation_only)$('use-scope').textContent='사람 판정으로 동결 모델을 비교하는 평가 자료야. 이 사진 그룹과 판정은 학습에 쓰지 않아. 일부 지연 반복 문항이 포함돼. 아직 모델의 개선이나 최종 성능이 입증된 것은 아니야.';
 let fields=[{axis:'overall',label:'전체 외관',buttons:[...document.querySelectorAll('[data-grade]')],why:$('why')}];
 if(separate){
   $('scope').textContent='같은 사진 쌍을 두 축으로 따로 판단해줘. 실루엣 점수에는 색·워싱을, 색·표면 점수에는 핏을 반영하지 않기. 취향·브랜드·배경은 제외하고 보이는 조명은 그대로 비교해. 모델 순위는 표시하지 않아.';
@@ -57,6 +58,7 @@ function render(){
   const n=packet.trials.filter(t=>complete(answers[t.trial_id])).length;
   $('progress').max=packet.trials.length;$('progress').value=n;$('count').textContent=n+' / '+packet.trials.length+(separate?' 두 축 판정 완료':' 판정');
   $('prev').disabled=index===0;$('next').disabled=index===packet.trials.length-1;
+  if(packet.batch_size){$('count').textContent+=' · '+(Math.floor(index/packet.batch_size)+1)+' / '+Math.ceil(packet.trials.length/packet.batch_size)+' 묶음 ('+packet.batch_size+'건씩)';$('next').textContent=(index+1)%packet.batch_size===0?'다음 '+packet.batch_size+'건':'다음'}
   $('status').textContent=fields.map(field=>{const grade=score(a,field.axis)?.grade;return field.label+': '+(grade===undefined?'미판정':grade==='U'?'판단 불가':grade)}).join(' / ');
 }
 for(const field of fields){

@@ -7,7 +7,7 @@ import tempfile
 import unittest
 
 from scripts.analyze_calibration import analyze
-from scripts.extract_features import REVISION, WEIGHT_SHA256
+from scripts.extract_features import REVISION, WEIGHT_SHA256, ENCODERS
 from scripts.run_baselines import rank_pools
 from tests.test_judgment_packet import asset
 from scripts.build_judgment_packet import packet
@@ -24,6 +24,21 @@ def fixture():
 
 
 class CalibrationTests(unittest.TestCase):
+    def test_frozen_encoders_require_their_pinned_weights_and_dimensions(self):
+        p,r,features=fixture()
+        for profile in ENCODERS.values():
+            f=copy.deepcopy(features)
+            f['provenance'].update(encoder=profile['model'],revision=profile['revision'],
+                                   weights_sha256=profile['weights_sha256'])
+            for row in f['assets'].values():
+                row['embedding']=[1.]+[0.]*(profile['dimension']-1)
+            self.assertEqual(analyze(p,r,f)['results'][0]['calibration_ndcg_at_5'],1.)
+            f['provenance']['weights_sha256']='not-the-selected-weights'
+            with self.assertRaises(ValueError):analyze(p,r,f)
+            f['provenance']['weights_sha256']=profile['weights_sha256']
+            f['assets']['q']['embedding'].pop()
+            with self.assertRaises(ValueError):analyze(p,r,f)
+
     def test_axis_metrics_require_explicit_selection_and_do_not_average(self):
         old,_,features=fixture()
         p=packet(old['queries'],old['candidates'],separate_axes=True)

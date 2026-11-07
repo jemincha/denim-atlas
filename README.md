@@ -21,6 +21,13 @@ and capture setting; all gallery inputs are low-resolution catalog photos.
 Pure catalog query and strong general multimodal comparisons remain unmeasured.
 Raw photos, features and human judgments remain private. [Protocol/results](docs/SPRINT_REVIEW.md).
 
+A separate nine-anchor direct-choice diagnostic adds18 axis choices. Strict-choice
+agreement is FashionSigLIP5/7,CLIP2/7,DINOv22/7 for silhouette and1/5,4/5,3/5 for
+surface. Human ties/unknowns are excluded. Six surface anchors were excluded from
+the main analysis, so these small diagnostic counts cannot be compared directly
+with the main rates or used to establish a new model ranking. The original
+reliability gate remains pending; this supplement does not validate retest stability.
+
 The [revised development plan](docs/DEVELOPMENT_PLAN.md) puts evaluation coverage
 and an exact strong-model comparator before another adaptation trial. Existing
 Sprint 2 code and result artifacts are recorded in commit `1bcc00b`; the repository

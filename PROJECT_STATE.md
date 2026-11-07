@@ -6,7 +6,86 @@ separate. No taste profiling, original-color restoration or app UI.
 
 ## Current handoff
 
-Latest update (2026-11-06): **measured; research gate waiting, adaptation paused**.
+Latest update (2026-11-08): **supplement measured; research gate waiting, adaptation paused**.
+Latest Downloads denim-direct-preference-v1.csv validated18/18 rows across9 anchors:
+protocol/packet/rater/axis/query/A-B positions match;immutable source archived privately
+as data/private/frozen_human_20261105/direct_preference_v1.csv. Private analysis script
+runs/analyze_direct_supplement.py validates completeness and transition self-checks.
+Silhouette:7 strict choices+2 ties;FashionSigLIP5/7,CLIP2/7,DINOv22/7 strict agreement.
+Surface:5 strict+3 ties+1 unknown;FashionSigLIP1/5,CLIP4/5,DINOv23/5.
+Versus original first-session pair relations:silhouette8 same+1 tie->strict;
+surface6 same+2 strict->tie+1 unknown;no strict reversal among observed relations.
+Versus partial repeated-score relations:silhouette8 same+1 tie->strict;
+surface6 same+1 strict->tie+2 unknown. Only one candidate was originally repeated.
+Source notes flag reference-photo detail/color readability in2 cases;do not infer
+new hard labels from notes. Model ties receive0.5,human tie/unknown excluded from
+strict concordance denominators. Counts are post-hoc diagnostics,not new endpoints.
+Original pool eligibility differs:8/9 supplement anchors eligible for silhouette,
+only3/9 for surface;6 surface anchors were excluded in main analysis. Thus new
+surface model ordering is not evidence of regression or a protocol-driven gain.
+No combined/revised original scores,metrics or approved3/9 surface reliability gate;
+no repeat direct-choice test or independent new-product/general-VLM superiority.
+Next analyze existing common model disagreements and crop/readability limits;
+no immediate further human task,training,teacher-label promotion,API or GPU run.
+Connection recovery:3 task-owned servers shared8883;verified their command lines,
+stopped only those processes,and launched runs/serve_supplement.py as one hidden
+loopback server with exclusive Windows port binding. Host HTTP200 verified.
+The generated page repeated embedded image data across3 modes(67,171,044 bytes),
+exceeding browser transport framing;replaced UI-only data URIs with68 verified local
+crop paths,reducing HTML to161,070 bytes;generator preserves this fix on rebuild.
+Actual visible IAB tab6 shows9 cases,0/18 choices and CSV control;27 judgment photos
+loaded successfully(the28th image is unused zoom placeholder). Tab marked deliverable.
+No human answers,packet bytes,original scores,protocol or frozen metrics changed.
+Researcher approved direct A/B/tie/unknown supplementary evaluation. Private
+runs/prepare_supplement.py adds ?supplement=1 to existing judge.html, preserving
+original/explanation modes and all frozen data.9 original repeat anchors x2 axes;
+each pair uses the repeated candidate and lowest-gallery-index other pool candidate,
+without scores/models/labels for selection,then order/A-B randomized(seed1108).
+Protocol hash677344ff3eee8b5fdc0db722baee737095065192184d8a5a9cdf7908a3e67317;
+separate browser storage and CSV export denim-direct-preference-v1.csv,optional notes,
+tie/unknown distinction,zoom and storage-failure lock. Synthetic nine-case,selection,
+autosave/reload,CSV and failure-lock checks pass;no real answers filled or collected.
+New workspace local endpoint http://127.0.0.1:8883/judge.html?supplement=1;
+initial browser opening failed;subsequent exclusive-server/payload recovery above
+verified actual right-side visibility and photo loading. Ready for human judging.
+This9-pair familiar-image pilot cannot establish full-pool/retest reliability or
+replace original3/9 failure gate;no training/API/GPU,goal change or new research JSON.
+Existing9-repeat post-hoc analysis (runs/analyze_repeat_diagnostics.py) validates
+99-trial provenance and classifier self-checks; no source grades/metrics edited.
+Silhouette:8 identical numeric repeats,1 one-point change;18 partial candidate
+relations unchanged. Surface:3 identical numeric repeats,4 one-point changes,
+1 U->U,1 numeric->U;no2/3-point changes. U reasons cite color/detail uncertainty.
+Holding the two un-repeated candidates at first-session grades, surface18 partial
+relations comprise8 unchanged,3 tie->strict,3 strict->tie,4 unknown;0 strict reversals.
+Only one candidate per query was repeated, so this is a partial sensitivity check,
+not independently repeated full-pool ordering or proof of stable preference.
+The approved3/9 surface exact-nonunknown gate still fails. Narratives plus this
+diagnosis suggest grade-boundary/observability sensitivity, not proven causal weights
+or demonstrated encoder improvement. Direct A/B/tie/U supplement is now approved
+as above,not replacement of frozen gates/grades;teacher labels,training/API/GPU
+and goal changes remain outside the authorized follow-up.
+Qualitative response received for all4 displayed diagnostic cases;8 axis-specific
+narratives are private data in data/private/frozen_human_20261105/explanations.csv.
+All4 selection-axis preferences preserve original ordering after clarification.
+The previously unassigned surface narrative is now confirmed; private source data
+records shared wash patterns with a closer photographed blue tone as the deciding cue.
+Descriptions identify continuous leg-width profile, spatial whisker/thigh sanding,
+damage/texture absence and flat-vs-worn photo uncertainty. These are observed human
+criteria, not proven encoder failure mechanisms. One weak new surface preference
+was previously an equal-grade pair; preserve this distinction, never revise scores.
+The4 selected examples are not the9 repeat tests and cannot explain or overturn
+the3/9 surface reliability result. Next map human criteria to existing examples;
+no regrading/training/new metrics or goal change.
+Latest qualitative follow-up: researcher volunteered natural-language explanations
+for model-human agreement/disagreement examples. Four distinct-anchor cases were
+selected from valid complete pools:2 axes x(all3 models agree/all3 reverse), with
+human candidate grade gaps2–3. Order/A-B randomized with seed61106; model identities,
+scores, agreement category and prior human grades hidden during initial explanation.
+Private preparation code: runs/prepare_explanation_cases.py; existing judge.html
+has an explanation-only mode at ?explain=1&case=1, leaving packet/rating storage intact.
+Selection assertions and combined JS syntax pass; automatic visibility check failed,
+but researcher subsequently inspected all4 cases and supplied narratives in chat;
+explanations are diagnostic only, no score revision or training.
 User fixed the three decision rules before output interpretation. Frozen Kaggle v2
 completed;68 features/model at768/512/384 dimensions pass model/crop/input-manifest
 provenance and preprocessing checks. V1 recorded the last crop hash as weight hash;

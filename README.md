@@ -28,6 +28,13 @@ the main analysis, so these small diagnostic counts cannot be compared directly
 with the main rates or used to establish a new model ranking. The original
 reliability gate remains pending; this supplement does not validate retest stability.
 
+The current primary endpoint is human preference concordance on matched candidate
+comparisons; historical three-candidate nDCG is retained only as a descriptive
+record. Direction-repeat checks reuse one repeated candidate against two fixed
+first-session candidates, so they do not identify an independent human ceiling.
+A single pinned open-weight general visual-language comparator is prepared for
+free private Kaggle evaluation; execution completed under the approved AB/BA protocol.
+
 The [revised development plan](docs/DEVELOPMENT_PLAN.md) puts evaluation coverage
 and an exact strong-model comparator before another adaptation trial. Existing
 Sprint 2 code and result artifacts are recorded in commit `1bcc00b`; the repository
@@ -133,3 +140,12 @@ remain joint. The 96 rejected Qwen attribute drafts remain outside training.
 GLAMI's publisher card states Apache-2.0; this project has not independently cleared
 every seller image or derived-checkpoint release. Source/model terms apply
 separately. Raw material and model artifacts have not been published.
+
+Qwen3.5-9B at224 input was evaluated with both candidate orders. After order
+disagreement is marked unknown/wrong, silhouette agreement is14/53 versus
+FashionSigLIP37/53;surface4/40 versus27/40. Qwen answered-only agreement is14/15
+and4/10 respectively;these are selected subsets,not overall accuracy. Order
+disagreement occurred on64/90 silhouette and70/90 surface comparisons. Approved
+rule R2 applies:propose one direction-retest block before further decisions,no
+additional training. This is Qwen3.5-9B-relative evidence in this configuration,
+not a claim about strong general multimodal models as a class.

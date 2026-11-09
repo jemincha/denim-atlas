@@ -6,7 +6,19 @@ separate. No taste profiling, original-color restoration or app UI.
 
 ## Current handoff
 
-Latest update (2026-11-08): **supplement measured; research gate waiting, adaptation paused**.
+Latest update (2026-11-09): **Qwen3.5-9B comparison measured,R2; ceiling-block proposal awaiting approval,adaptation paused**.
+Result v2:3 non-evaluation fixtures/6 smoke calls then180 main calls completed,no OOM;parser-only bare-two-line normalization repair,prompt/FP16/224 unchanged;all raw answers revalidated,immutable CSV private.
+Qwen3.5-9B fixed-denominator silhouette14/53(26.4%) vsFashionSigLIP37/53(69.8%);surface4/40(10%) vs27/40(67.5%). Answered-only14/15(93.3%) and4/10(40%);matchedFS12/15 and7/10.
+Order disagreement:64/90 silhouette,70/90 surface;eligible38/53 and30/40.All finalU are order-inconsistent;invalid-format0/180.Paired onlyQwen/onlyFS3/26 and1/24;consistent subset3/1 and1/4;CIs descriptive only.
+R2 selected:global silhouette difference-43.4pp failsR1 althoughconsistent subsetdifference+13.3pp.Propose one12-anchor matched224 A/B/U retest block x2(24screens,48axis choices),active10–15min estimate plus>=30min break;no judging launched,original3/9 gate unchanged,independent C still unmeasured,no training/API/paid/quantized fallback.
+2026-11-09: researcher approved revised Qwen comparison;old pending3 rules replaced by R1/R2 in latest review.180 AB/BA main calls after3 non-evaluation synthetic fixture trios x2 smoke calls,unchanged prompt/FP16/224input,OOM stops;no original-resolution auxiliary,no paid/quantized fallback.
+Canonical order reconciliation and parser self-checks pass;reuse existing kernel metadata to private jemincha/denim-atlas-qwen35-evaluation-comparator with existing approved private crop dataset,label-free requests embedded in launch code;no new JSON created. Private job actual slug jemincha/denim-atlas-qwen35-evaluation-comparator;v1 loaded FP16 but stopped before main on bare U/U smoke format;parser-only fix verified unchanged promptSHA,v2 COMPLETE.
+R1:Qwen silhouette>=FS+10pp with same positive direction on matched order-consistent subset (including U/U as wrong);otherwise R2 minimal ceiling block proposal only,no new judging/training now. CI display only,all claims Qwen3.5-9B-relative;old3/9 gate and human truth unchanged.
+New priority per researcher:direction reliability -> one free general-VLM comparator -> approved decision rules before outputs -> error hypotheses;no new human judging/training/paid API/annotator search,nDCG@3 retired from primary decisions(old results retained).
+Partial direction proxy:including ties silhouette18/18,surface8/14(4 U excluded);strict at BOTH times13/13 and8/8,conditional on excluding tie transitions,not an identified independent human ceiling. Numeric exact repeats8/9 and3/9 remain unchanged.
+Matched model discordances only-first/only-second:FS-CLIP13/9 silhouette,9/5 surface;FS-DINO13/11,10/9;CLIP-DINO9/11,6/9. Model denominators53/40;excluded-pool comparisons3/18 andhuman ties34/32 sum to90 derived comparisons/axis.
+Comparator prepared,NOT run:Qwen/Qwen3.5-9B@c202236235762e1c871ad0ccb60c8ee5ba337b9a,free private Kaggle2xT4 FP16,no API/CPU/offload/quantized fallback;same68 crops/224white squares,90 derived reference/A/B comparisons,seed1108;requests.csv checksum8059492dc74242aabf30a6c9e960d9a2036308e82f72e46c83f45fc193a41ca8,pinned prompt/parser in runs/general_comparator_20261108/run.py;runtime fit/quota/compatibility untested.
+Gate waiting:show protocol/prompt and approve3 review rules before execution;actual full direction ceiling C remains unidentified,so ceiling-dependent decisions2/3 cannot trigger from conditional100% proxies. Model outputs are comparator predictions only,never truth/training labels;no error-analysis detour or goal narrowing now.
 Latest Downloads denim-direct-preference-v1.csv validated18/18 rows across9 anchors:
 protocol/packet/rater/axis/query/A-B positions match;immutable source archived privately
 as data/private/frozen_human_20261105/direct_preference_v1.csv. Private analysis script

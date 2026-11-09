@@ -4,7 +4,7 @@ A small research project on matching different denim products by photographed
 silhouette, color, tone, washing and fading. 개인 취향 분석이나 앱 제작보다,
 외관 매칭 모델의 적응과 검증에 집중합니다.
 
-**Snapshot: 2026-11-06 — frozen human comparison measured; research gate pending.
+**Snapshot: 2026-11-09 — direct-choice retest measured; silhouette closure/write-up proposed, research gate pending.
 Independent matching-quality improvement and superiority to a strong general model
 have not been demonstrated.**
 
@@ -146,3 +146,23 @@ The64/90 silhouette and70/90 surface order-disagreement outcomes invalidate a
 capability ranking from this run. Order-consistent subsets such as14/15 are selected
 samples and are not evidence of superiority. Raw outputs remain execution diagnostics.
 R2 proceeds only to a separately approved direct-direction retest block,with no training.
+
+That separate direct-choice block now has both passes:18 comparisons across16
+known reference source groups,with109 minutes between passes and224 input.
+It is restricted to comparisons whose original scores were non-tied on both axes.
+Human direction-repeat reference C is17/18(94.4%) for silhouette and13/14(92.9%)
+for surface;first/retest unknowns are0/18,0/18 and4/18,4/18 respectively.
+These are conditional reliability references,not universal performance ceilings.
+
+| Direct-choice retest only | Silhouette:first choice | Surface:first choice | Silhouette:stable subset | Surface:stable subset |
+|---|---:|---:|---:|---:|
+| FashionSigLIP |16/18|9/14|15/17|9/13|
+| CLIP |11/18|11/14|10/17|10/13|
+| DINOv2 |12/18|9/14|11/17|8/13|
+
+The fixed silhouette rule triggers a closure/write-up proposal:FashionSigLIP88.9%
+is5.6 percentage points below C,within the10-point margin. This is not an automatic
+project closure or a claim of optimal matching. Surface passes the predeclared
+measurement thresholds(C>=80%,retest unknown<=30%) on this block;no learning is
+automatically authorized. Stable subsets are diagnostic only. Original score-based
+results remain separate,unchanged. No fresh-product or fine-washing quality claim.

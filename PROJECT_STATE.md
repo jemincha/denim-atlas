@@ -6,7 +6,12 @@ separate. No taste profiling, original-color restoration or app UI.
 
 ## Current handoff
 
-Latest update (2026-11-09): **Qwen3.5-9B comparison measured,R2; ceiling-block proposal awaiting approval,adaptation paused**.
+Latest update (2026-11-09): **R2 retest block prepared/workload displayed; not started,adaptation paused**.
+Approved R2 block prepared:18 comparisons,4 high-origin/14 low-origin,16 known reference source groups;eligible BOTH old axes numeric/non-tied(5high+25low comparisons),source short side720 cutoff,seeds20261109(selection)/20261110(first order+positions)/20261111(retest order),rule frozen before sampling.
+36 screens/72 axis choices,estimated15–21 active minutes plus>=30-minute gap,next day recommended;224white-square images only,separate protocol9d6783767b4a777f11fa37a6388fe105c37285a23419e3980f01613897db03ec. Private ceiling_selection.csv+ceiling224 data and runs/prepare_ceiling_block.py;no new research document/JSON.
+Actual visible landing at http://127.0.0.1:8883/judge.html?ceiling=1 says not started;manual start never clicked. Isolated tests pass first-pass lock,30-minute gate,shuffled reversed retest,72-row canonical export;no browser human answer synthesized.
+C uses matching canonical directions/first-direct A-or-B count;secondU wrong,firstU excluded from C AND all3 model denominators,U/U notagreement;tie notoffered/unresolvable usesU,coverage+both-answered conditional rates separate. Cached FS/CLIP/DINO compare same block first DIRECT choices,never mixed with score-derived preferences;point-estimate R2 unchanged,no training/paid API/original-size auxiliary.
+Qwen official conclusion corrected:이 입력 형식에서 순서 불일치 71~78%로 비교 불성립, 범용 모델 대비 우열 미측정. Selected consistent subsets(e.g.14/15) are not superiority evidence;old counts remain diagnostic history only.
 Result v2:3 non-evaluation fixtures/6 smoke calls then180 main calls completed,no OOM;parser-only bare-two-line normalization repair,prompt/FP16/224 unchanged;all raw answers revalidated,immutable CSV private.
 Qwen3.5-9B fixed-denominator silhouette14/53(26.4%) vsFashionSigLIP37/53(69.8%);surface4/40(10%) vs27/40(67.5%). Answered-only14/15(93.3%) and4/10(40%);matchedFS12/15 and7/10.
 Order disagreement:64/90 silhouette,70/90 surface;eligible38/53 and30/40.All finalU are order-inconsistent;invalid-format0/180.Paired onlyQwen/onlyFS3/26 and1/24;consistent subset3/1 and1/4;CIs descriptive only.

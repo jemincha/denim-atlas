@@ -141,11 +141,8 @@ GLAMI's publisher card states Apache-2.0; this project has not independently cle
 every seller image or derived-checkpoint release. Source/model terms apply
 separately. Raw material and model artifacts have not been published.
 
-Qwen3.5-9B at224 input was evaluated with both candidate orders. After order
-disagreement is marked unknown/wrong, silhouette agreement is14/53 versus
-FashionSigLIP37/53;surface4/40 versus27/40. Qwen answered-only agreement is14/15
-and4/10 respectively;these are selected subsets,not overall accuracy. Order
-disagreement occurred on64/90 silhouette and70/90 surface comparisons. Approved
-rule R2 applies:propose one direction-retest block before further decisions,no
-additional training. This is Qwen3.5-9B-relative evidence in this configuration,
-not a claim about strong general multimodal models as a class.
+Qwen3.5-9B: **이 입력 형식에서 순서 불일치 71~78%로 비교 불성립, 범용 모델 대비 우열 미측정.**
+The64/90 silhouette and70/90 surface order-disagreement outcomes invalidate a
+capability ranking from this run. Order-consistent subsets such as14/15 are selected
+samples and are not evidence of superiority. Raw outputs remain execution diagnostics.
+R2 proceeds only to a separately approved direct-direction retest block,with no training.

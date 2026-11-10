@@ -6,6 +6,13 @@ separate. No taste profiling, original-color restoration or app UI.
 
 ## Current handoff
 
+2026-11-10 FINAL RESEARCH STATE: 종료·정리(실루엣 적응 계획 종료, 표면 데이터 병목으로 보류).
+The researcher approved shutdown;do not resume training,new experiments or new hypothesis proposals unless explicitly requested.No automatic project work follows archived next-step instructions.
+README is the one-screen public state;all process documents are preserved in docs/archive,including SPRINT_REVIEW.md.Historical measurements below remain historical,not active execution instructions.
+2026-11-11 option A approved: sanitize the current snapshot and retain published history. Early commits contain individual judgments; rewriting history would not recall existing clones/caches. External backups verified; current snapshot sanitized,local unreferenced JPEG removed via GC,refs unchanged and fsck passed. Existing Kaggle API tokens/legacy key expired and current browser signed out;other-device web-session expiry is unverified. The researcher approved committing and ordinary pushing of this sanitized snapshot;no history rewrite or research resumption is authorized.
+
+## Historical handoffs — inactive after the shutdown above
+
 Latest update (2026-11-09): **both retest passes measured; silhouette closure/write-up proposed,not enacted;training paused**.
 Both locked passes validated72rows/18comparisons/16source groups,109.31min gap,canonical A/B reversal,protocol/timestamps;immutable private direction_retest_v1.csv,metrics only after full validation,no original-score edits.
 C「두 축 모두 비동점이었던 쌍에서의 방향 신뢰성 상한 참고치」:silhouette17/18=94.4%[82.4,100],surface13/14=92.9%[75,100];first/retestU0/18 and0/18 silhouette,4/18 and4/18 surface. C excludes firstU,counts secondU wrong,U/U never match.
@@ -90,13 +97,7 @@ as above,not replacement of frozen gates/grades;teacher labels,training/API/GPU
 and goal changes remain outside the authorized follow-up.
 Qualitative response received for all4 displayed diagnostic cases;8 axis-specific
 narratives are private data in data/private/frozen_human_20261105/explanations.csv.
-All4 selection-axis preferences preserve original ordering after clarification.
-The previously unassigned surface narrative is now confirmed; private source data
-records shared wash patterns with a closer photographed blue tone as the deciding cue.
-Descriptions identify continuous leg-width profile, spatial whisker/thigh sanding,
-damage/texture absence and flat-vs-worn photo uncertainty. These are observed human
-criteria, not proven encoder failure mechanisms. One weak new surface preference
-was previously an equal-grade pair; preserve this distinction, never revise scores.
+Individual preferences and narrative-derived descriptions are omitted from this public snapshot; original source data remains local and ignored.
 The4 selected examples are not the9 repeat tests and cannot explain or overturn
 the3/9 surface reliability result. Next map human criteria to existing examples;
 no regrading/training/new metrics or goal change.
@@ -166,8 +167,8 @@ be preserved. No new research report/verification JSON; use the existing review.
 Sprint1/2 technical execution is recorded; **research gate pending**. The frozen
 FashionSigLIP/two-head run is a pipeline check; 3 machine-judged anchors cannot
 resolve the quality hypothesis. The recorded preference-agreement count is unchanged.
-[Experiment](docs/REGIONAL_AXIS_PILOT.md) · [Review003](docs/SPRINT_REVIEW.md) ·
-[Plan](docs/DEVELOPMENT_PLAN.md).
+[Experiment](docs/archive/REGIONAL_AXIS_PILOT.md) · [Review003](docs/archive/SPRINT_REVIEW.md) ·
+[Plan](docs/archive/DEVELOPMENT_PLAN.md).
 
 - 27 observations /54 views, train18/development9 protected folds;13 train constraints,
   6 development constraints. Labels are the conversational visual assistant's weak
@@ -183,7 +184,7 @@ resolve the quality hypothesis. The recorded preference-agreement count is uncha
   Weights remain remote/private; no pending compute job, paid API or new human labels.
 - Small private results/cache: `data/private/regional_heads_20261105/`.
   Original packet/teacher: `data/private/regional_sprint1_20261105/`.
-  [Public result/hash record](docs/verification/sprint2_results_20261105.json).
+  [Public result/hash record](docs/archive/verification/sprint2_results_20261105.json).
 
 ## Next execution — revised plan after Sprint 2
 
@@ -239,7 +240,7 @@ The original quality-first goal remains; public embedding comparisons do not pro
 superiority over a strong general multimodal model. All evaluation groups are
 excluded from future training; learning-curve size means garment/capture groups.
 
-Review snapshot: S2-2026-11-05. The [revised plan](docs/DEVELOPMENT_PLAN.md) replaces
+Review snapshot: S2-2026-11-05. The [revised plan](docs/archive/DEVELOPMENT_PLAN.md) replaces
 older forward-work instructions; historical experiments/results stay unchanged.
 Sprint 3 now closes evaluation coverage and exact strong-comparator access/version
 before further adaptation. Include axis-conflicting/wearing cases, protected groups,
@@ -260,7 +261,7 @@ unmeasured. Known groups do not certify distinct products. Strong-comparator exa
 version/access and independent evaluation truth remain later gates. Source-image
 and checkpoint release rights are not cleared; raw material stays private.
 
-At each sprint boundary update this state and `docs/SPRINT_REVIEW.md`, compare actual
+At each sprint boundary update this state and `docs/archive/SPRINT_REVIEW.md`, compare actual
 work with the approved flow and brief limits/next investigation in Korean. Continue
 authorized work to a genuine human/access gate. Any later human comparison images
 must be visibly opened in a right-side Codex tab; queued is not visible.

@@ -24,24 +24,10 @@
       "methods": {
         "adapted": {
           "ndcg_at_5": 0.0,
-          "top5_grades": [
-            0,
-            0,
-            0,
-            0,
-            0
-          ],
           "precision_at_5_grade_ge2": 0.0
         },
         "starting": {
           "ndcg_at_5": 0.0,
-          "top5_grades": [
-            0,
-            0,
-            0,
-            0,
-            0
-          ],
           "precision_at_5_grade_ge2": 0.0
         }
       }
@@ -53,24 +39,10 @@
       "methods": {
         "starting": {
           "ndcg_at_5": 0.3672919835537663,
-          "top5_grades": [
-            1,
-            0,
-            0,
-            1,
-            1
-          ],
           "precision_at_5_grade_ge2": 0.0
         },
         "adapted": {
           "ndcg_at_5": 0.3155742573859003,
-          "top5_grades": [
-            0,
-            1,
-            1,
-            1,
-            0
-          ],
           "precision_at_5_grade_ge2": 0.0
         }
       }
@@ -82,24 +54,10 @@
       "methods": {
         "starting": {
           "ndcg_at_5": 0.78506356172312,
-          "top5_grades": [
-            2,
-            0,
-            2,
-            0,
-            2
-          ],
           "precision_at_5_grade_ge2": 0.6
         },
         "adapted": {
           "ndcg_at_5": 0.7383121460922933,
-          "top5_grades": [
-            2,
-            2,
-            0,
-            1,
-            0
-          ],
           "precision_at_5_grade_ge2": 0.4
         }
       }
@@ -131,5 +89,10 @@
     "simulation_only_no_replacement_packet_issued": true
   },
   "metric_scope": "Descriptive nDCG@5 using 2^grade-1 and the entire fully judged fixed 17-candidate pool per query for IDCG. Frozen saved top-5 lists supply DCG; remaining 12 grades affect IDCG only. No unjudged gallery item is imputed as zero. This is not the group-validated benchmark CLI.",
-  "limits": "Three new query images, one rater, partial crops, training gallery and unresolved product/duplicate groups. Lower scores do not establish a statistically general effect or its cause. Query-specific top-5 unions alone would miss two positive pairs discovered in the wider cross-query pool; future evaluation needs coverage audits. No rank-driven relevance filtering of evaluation results."
+  "limits": "Three new query images, one rater, partial crops, training gallery and unresolved product/duplicate groups. Lower scores do not establish a statistically general effect or its cause. Query-specific top-5 unions alone would miss two positive pairs discovered in the wider cross-query pool; future evaluation needs coverage audits. No rank-driven relevance filtering of evaluation results.",
+  "aggregate_top5_grade_counts": {
+    "0": 18,
+    "1": 7,
+    "2": 5
+  }
 }

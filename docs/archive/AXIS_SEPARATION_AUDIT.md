@@ -6,7 +6,7 @@ October 29, 2026. This audit corrects the interpretation and collection protocol
 
 **The two axes were not adequately separated end to end.** Historical human sheets explicitly requested one joint visible-appearance grade. The latest proxy training optimized source-title cut agreement in a single shared image embedding. Neither provides independently measured silhouette and surface similarity.
 
-The researcher clarified that either a large silhouette difference or a large color/surface difference was enough to reject a pair. Those answers are valid under the joint prompt. They do not imply that both axes were poor, that the researcher misunderstood the task, or that an existing overall grade can be split retrospectively. Preserve all original labels and packet hashes.
+Historical answers are valid under the joint prompt, but an overall rejection cannot identify the failed axis or be split retrospectively. Original labels remain in private source data; packet hashes are retained.
 
 | Stage inspected | Actual implementation before this correction | Consequence |
 |---|---|---|
@@ -17,7 +17,7 @@ The researcher clarified that either a large silhouette difference or a large co
 | Retrieval and candidate selection | One FashionSigLIP embedding/cosine per image; selected audit searched 39 validation images | No axis-conditioned distances; title class, viewpoint and candidate coverage can confound interpretation |
 | Surface work | B1 uses mean RGB; VLM appearance pilot was not accepted for training | RGB is not a wash/texture metric. There is no validated surface-supervised model |
 
-In the two rejected spot-audit rows, private source-cut labels were `(skinny, skinny, skinny)` and `(straight, wide, straight)` for reference/A/B. These are weak title labels, not human geometry judgments. The first row alone illustrates why source-cut agreement cannot certify overall resemblance; it does not prove surface is the only cause.
+The selected spot audit uses weak source-title cut labels, not human geometry judgments. Source-cut agreement cannot certify overall resemblance or establish the cause of a mismatch.
 
 ## Operational targets
 

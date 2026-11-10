@@ -28,7 +28,7 @@ Passing this six-image check alone does not approve automatic annotation of all 
 
 ## Human anchor result and coarse-only retry
 
-The user supplied five explicit color-family values and six brightness values. “Raw denim” for image5 does not identify color or certify processing history; that color entry remains unassigned while its dark brightness is recorded. “Very light” for image6 remains verbatim and maps to the existing light bin without inventing an extra interval.
+Five explicit color-family values and six brightness values were supplied. Individual attribute answers and original wording are omitted from this snapshot; missing values were not inferred and no new ordinal interval was invented.
 
 Against the original predictions, color-family agreement is **5/5 comparable**, brightness **2/6**. These selected development-anchor counts are not population accuracy. Original request, raw responses and predictions stay separate. No similarity grades or training eligibility were inferred. [Anchor comparison](verification/attribute_anchor_calibration_20261029.json).
 
@@ -43,13 +43,13 @@ Both bounded retries completed on T4 with unchanged pinned model weights:
 
 The text-only run returned exact JSON code fences despite being asked for bare JSON; the original strict parser rejected all 18. Raw responses/statuses remain unchanged. A separate exact-fence normalization passes the same field/value/duplicate checks on 18/18, with no new inference. This repairs transport parsing, not visual quality. [Text-only execution](verification/coarse_attribute_retry_20261029.json).
 
-Visual references are inference context, not gradient updates. The five anchors have explicit human values for both fields; image5 is excluded because its family was not supplied. Anchors and target IDs are disjoint. Full source-group independence is not asserted. [Reference-image execution](verification/coarse_visual_anchor_probe_20261029.json).
+Visual references are inference context, not gradient updates. Five anchors have explicit human values for both fields; incomplete observations are excluded. Anchors and target IDs are disjoint. Full source-group independence is not asserted. [Reference-image execution](verification/coarse_visual_anchor_probe_20261029.json).
 
 Keep the context variants separate. A private experimental fieldwise draft takes family from the text-only run and brightness from the reference-image run; this source choice was made on development inspection and is not validated or training eligible. No model self-confidence is used. Three deliberately selected unjudged photos now form the next blind human gate: pale appearance, a family-disagreement case, and a mid-level control. Only family and brightness are requested, with model predictions hidden. This still does not establish population accuracy or clear large-scale annotation/training.
 
 ## Follow-up received and bounded expansion
 
-The three blind follow-up responses are now received: blue/light, blue-black/dark, blue/medium. Original wording remains private. The reference-context outputs agree **3/3 per attribute**; text-only outputs agree **2/3 per attribute**. These are selected development cases. The blue-black judgment resolves one context-dependent family change in favor of the reference-context result; the preliminary neutral-looking Codex interpretation was not ground truth. The earlier fieldwise source-choice draft is therefore not adopted. [Recorded follow-up](verification/attribute_followup_result_20261029.json).
+Three blind follow-up responses were received. The reference-context outputs agree **3/3 per attribute**; text-only outputs agree **2/3 per attribute**. These selected development cases do not establish general accuracy. Individual attribute answers and narratives are omitted; the preliminary Codex interpretation was not ground truth, and the fieldwise source-choice draft was not adopted. [Aggregate follow-up](verification/attribute_followup_result_20261029.json).
 
 Proceed to a bounded **96-image unverified weak-label pilot** using the unchanged five reference images, prompt and model. Do not treat the three-case result as general accuracy or training approval. Each of six weak source-tag strata supplies 16 images (five cut classes plus unclassified); those strata are sampling aids, not newly verified shape labels.
 
@@ -63,9 +63,9 @@ The 96-image run completed: all outputs pass the schema, with blue81/neutral15 a
 
 ## Eight-photo audit received
 
-All eight answers are now recorded, separately from the original request and predictions. Family agreement is **7/8**, brightness **5/8**. The pink garment was predicted neutral; brightness disagreed on display1,2,6. This is a small single-rater, source-stratified audit, not a population guarantee. All96 drafts remain outside training. [Human audit](verification/attribute_expansion_human_audit_20261029.json).
+All eight answers were recorded separately from the request and predictions. Family agreement is **7/8**, brightness **5/8**. Per-display decisions and response text are omitted from this snapshot. This small single-rater, source-stratified audit is not a population guarantee. All96 drafts remain outside training. [Aggregate audit](verification/attribute_expansion_human_audit_20261029.json).
 
-The responses include mid-blue/light, light-blue/medium and dark-blue/medium. Preserve named shades and explicitly observed brightness separately; do not rewrite the human brightness from the color name. The apparent typo in display5 remains verbatim and is only mapped to blue-family/dark, without inferring additional properties. Across the three rounds there are 17 distinct attribute-judged photos: 16 explicit family values and17 brightness values. They remain development/calibration evidence, not newly invented overall-relevance grades.
+Named shades and observed brightness are separate fields; brightness must not be inferred from a color name. Individual wording and mappings are omitted from this snapshot. Across three rounds there are 17 distinct attribute-judged photos:16 explicit family values and17 brightness values, serving as development/calibration evidence rather than overall-relevance grades.
 
 Before asking for more human tagging, run one controlled annotation-teacher capacity probe: [Qwen3-VL-4B-Instruct](https://huggingface.co/Qwen/Qwen3-VL-4B-Instruct), official Apache-2.0 ungated model, pinned revision and both weight shards checked remotely. The retrieval backbone remains FashionSigLIP. Keep the 2B prompt, five reference images and preprocessing unchanged; compare on the eight already judged observations, two other-color stress cases and14 seeded unjudged observations, 24 total. Only the annotation model changes. The existing audit labels informed this development decision, so this is not a pristine held-out test even though those labels are not supplied in the target prompts. No local weights or retrieval-model training.
 

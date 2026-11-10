@@ -4,19 +4,11 @@
   "per_attribute": {
     "color_family": {
       "agreements": 7,
-      "comparable": 8,
-      "mismatch_displays": [
-        7
-      ]
+      "comparable": 8
     },
     "lightness": {
       "agreements": 5,
-      "comparable": 8,
-      "mismatch_displays": [
-        1,
-        2,
-        6
-      ]
+      "comparable": 8
     }
   },
   "pre_inference_request_sha256": "5d5c907a0a95082acfa434e56bcb50160c5fbb1acbd6d8410d111795a1c0c171",

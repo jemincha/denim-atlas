@@ -30,7 +30,7 @@ retrieval quality. No personal preference filter was used.
 
 ## Processing and artifacts
 
-[`scripts/audit_screening.py`](../scripts/audit_screening.py) validates image paths,
+[`scripts/audit_screening.py`](../../scripts/audit_screening.py) validates image paths,
 source hashes and decoding, records dimensions/pixel hashes, and generates indexed
 contact sheets. It refuses reuse of an existing output directory. The CLI keeps
 bulk image work on Kaggle; synthetic tests call its function on tiny local images.

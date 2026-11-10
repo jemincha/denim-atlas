@@ -51,19 +51,11 @@
     "2b": {
       "color_family": {
         "agreements": 7,
-        "comparable": 8,
-        "mismatch_displays": [
-          7
-        ]
+        "comparable": 8
       },
       "lightness": {
         "agreements": 5,
-        "comparable": 8,
-        "mismatch_displays": [
-          1,
-          2,
-          6
-        ]
+        "comparable": 8
       },
       "posthoc_lightness_by_presentation": {
         "wearing": {
@@ -79,20 +71,11 @@
     "4b": {
       "color_family": {
         "agreements": 5,
-        "comparable": 8,
-        "mismatch_displays": [
-          4,
-          5,
-          7
-        ]
+        "comparable": 8
       },
       "lightness": {
         "agreements": 6,
-        "comparable": 8,
-        "mismatch_displays": [
-          6,
-          8
-        ]
+        "comparable": 8
       },
       "posthoc_lightness_by_presentation": {
         "wearing": {

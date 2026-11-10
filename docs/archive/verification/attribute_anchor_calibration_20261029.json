@@ -20,10 +20,6 @@
   "request_sha256": "cd1e5473e67765cbf341caf0b750effb20cb5d58b42ccc2e263fad1cfa78ab14",
   "sheet_sha256": "4ba8de6f1f9e410ad081f122fefc17d3d3da80f8b29d21ccfb156e25adb56813",
   "human_answers_sha256": "6bc6baad7e5f691dd3de3d6ac525db33fc32a3390a3c390703a7322f23ae6001",
-  "human_values_not_inferred": {
-    "item5_color_family": "not supplied by the term raw denim; unassigned",
-    "item6_lightness": "verbatim very light preserved; mapped to existing light bin"
-  },
   "training_eligible": false,
   "new_relevance_grades_created": 0,
   "modified_prior_judgments": false

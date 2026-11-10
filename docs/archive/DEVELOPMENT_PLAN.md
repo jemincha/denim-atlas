@@ -124,6 +124,6 @@ delegated. Color/brightness-only work may be a diagnostic, but does not replace 
 two-axis denim objective without approval. Mobile UI and shopping integration remain
 outside this research scope.
 
-Use the existing [sprint review](SPRINT_REVIEW.md) and [state](../PROJECT_STATE.md)
+Use the existing [sprint review](SPRINT_REVIEW.md) and [state](../../PROJECT_STATE.md)
 for brief result/limit/next-decision updates. Do not add another tracker or general
 audit document by default. Tests establish software behavior, not matching quality.

@@ -33,7 +33,7 @@ Attach attributes to an **image/garment observation**, with its crop/hash and vi
 
 For each attribute retain its value or unknown, observability reason, relevant region, source (human / source-title proxy / unverified machine), and annotation/rubric version. No model self-confidence is promoted to a calibrated probability. Source-title `straight` is not automatically a human-observed leg profile. Unknown is not “none,” a negative label, or perfect agreement.
 
-The expansion audit explicitly includes mid-blue/light, light-blue/medium and dark-blue/medium responses. This corrects the initial suggestion that familiar light/mid/dark blue names could be derived directly from photographed brightness. Keep the original color description and the separately supplied lightness; do not overwrite either to force agreement or assume an extra saturation/indigo-depth label that was not measured.
+The expansion audit treats named color and observed brightness as separate fields. Individual response examples are omitted from this snapshot. Preserve the original description and separately supplied lightness without forcing agreement or inferring an unmeasured saturation label.
 
 Compare only mutually readable corresponding evidence. A back view does not establish absent front whiskers. If surface is readable but silhouette is cropped, surface retrieval remains meaningful; full two-axis acceptability is unestablished. A candidate with fewer readable attributes must not receive an artificially perfect distance after dropping every difficult field. Report coverage and limit the claim.
 

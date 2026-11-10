@@ -1,6 +1,6 @@
 # Denim Atlas
 
-Detailed setup narrative recorded October 24, 2026. See the [current README](../README.md) and [dataset acquisition record](DATASET_SEARCH.md) for subsequent real-image acquisition and application status. Older data-availability statements below describe the setup stage, not the current inventory.
+Detailed setup narrative recorded October 24, 2026. See the [current README](../../README.md) and [dataset acquisition record](DATASET_SEARCH.md) for subsequent real-image acquisition and application status. Older data-availability statements below describe the setup stage, not the current inventory.
 
 **Fine-tuning a vision encoder for visible denim appearance similarity across different products.**
 
@@ -96,9 +96,9 @@ These checks ran on Kaggle. Evidence JSON was recovered from saved outputs; mode
 | Backward/update | Synthetic AdamW step through 92,884,224 image-encoder parameters; finite, nonzero gradients | [Backward report](verification/backward_check_20261023.json) |
 | Backward memory | 2.166 GiB peak allocated memory; batch 2, FP32 parameters, FP16 autocast and GradScaler | [Backward report](verification/backward_check_20261023.json) |
 | Checkpoint handling | Saved/reloaded visual weights, optimizer, scaler and Torch RNG in the same kernel; a modified parameter and learning rate were restored | [Backward report](verification/backward_check_20261023.json) |
-| Local importer | Five fixture-based tests passed | [Tests](../tests/test_deepfashion2.py) |
-| Local evaluator | Twelve tests passed, including hand-computed metrics, split leakage and CLI output protection | [Tests](../tests/test_evaluate.py) |
-| Local B0/B1 pipeline | Six tests passed: scoring, grade-independent ordering, crop checks, RGB statistics and CLI-to-evaluation flow | [Tests](../tests/test_baselines.py) |
+| Local importer | Five fixture-based tests passed | [Tests](../../tests/test_deepfashion2.py) |
+| Local evaluator | Twelve tests passed, including hand-computed metrics, split leakage and CLI output protection | [Tests](../../tests/test_evaluate.py) |
+| Local B0/B1 pipeline | Six tests passed: scoring, grade-independent ordering, crop checks, RGB statistics and CLI-to-evaluation flow | [Tests](../../tests/test_baselines.py) |
 
 The model inputs were two synthetic solid-color images. These checks establish execution and gradients only. Peak allocated memory excludes non-PyTorch allocations and does not determine a safe real-data batch size. The checkpoint test does not establish deterministic resumption after an interrupted job. Two GPUs do not provide one pooled VRAM space.
 
@@ -148,11 +148,11 @@ The [B0/B1 runbook](BASELINES.md) connects reviewed crops → remote frozen feat
 
 ### Remote GPU checks
 
-Enable a free CUDA GPU on Kaggle and import [the recovered GPU notebook](../notebooks/recovered_gpu_checks.ipynb). Run cells in order in the same kernel, or paste these scripts as successive cells:
+Enable a free CUDA GPU on Kaggle and import [the recovered GPU notebook](../../notebooks/recovered_gpu_checks.ipynb). Run cells in order in the same kernel, or paste these scripts as successive cells:
 
-1. [check_remote_gpu.py](../scripts/check_remote_gpu.py)
-2. [check_remote_model.py](../scripts/check_remote_model.py)
-3. [check_remote_backward.py](../scripts/check_remote_backward.py)
+1. [check_remote_gpu.py](../../scripts/check_remote_gpu.py)
+2. [check_remote_model.py](../../scripts/check_remote_model.py)
+3. [check_remote_backward.py](../../scripts/check_remote_backward.py)
 
 The model/backward scripts share kernel variables; they are not independent command-line training programs. The model check installs OpenCLIP 3.3.0 remotely and records the actual environment. Model checks guard against laptop execution.
 
@@ -160,9 +160,9 @@ Include working-directory files in a saved Kaggle version to persist beyond the 
 
 ### Remote metadata processing
 
-Run [inspect_fashionpedia.py](../scripts/inspect_fashionpedia.py) on Kaggle CPU for the public validation-annotation audit. It does not fetch source photographs. [The reconstructed data notebook](../notebooks/recovered_data_audit.ipynb) preserves the saved inspection sequence.
+Run [inspect_fashionpedia.py](../../scripts/inspect_fashionpedia.py) on Kaggle CPU for the public validation-annotation audit. It does not fetch source photographs. [The reconstructed data notebook](../../notebooks/recovered_data_audit.ipynb) preserves the saved inspection sequence.
 
-After authorized DeepFashion2 acquisition and usage-scope review, run [prepare_deepfashion2.py](../scripts/prepare_deepfashion2.py) remotely with actual archive paths. Commands and completion/failure semantics are in [NEXT_DATA_RUN.md](NEXT_DATA_RUN.md).
+After authorized DeepFashion2 acquisition and usage-scope review, run [prepare_deepfashion2.py](../../scripts/prepare_deepfashion2.py) remotely with actual archive paths. Commands and completion/failure semantics are in [NEXT_DATA_RUN.md](NEXT_DATA_RUN.md).
 
 ## Roadmap and completion criteria
 
@@ -199,7 +199,7 @@ PROJECT_STATE.md          Current working status
 
 The original local workspace became empty for an unknown reason. Core scripts and recorded results were partially recovered from private Kaggle versions. Notebooks were reconstructed from displayed code and deliberately have empty execution counts/outputs; recorded measurements are separate JSON files.
 
-Earlier planning documents, the original evaluation CLI and a legacy application PoC were not recovered. The current evaluator is a new implementation with its own tests. This repository does not claim to contain or have retested the missing components. See [recovery provenance](RECOVERY.md) for source versions and limits, and [project state](../PROJECT_STATE.md) for current work.
+Earlier planning documents, the original evaluation CLI and a legacy application PoC were not recovered. The current evaluator is a new implementation with its own tests. This repository does not claim to contain or have retested the missing components. See [recovery provenance](RECOVERY.md) for source versions and limits, and [project state](../../PROJECT_STATE.md) for current work.
 
 ## References
 

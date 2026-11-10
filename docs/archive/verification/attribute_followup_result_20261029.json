@@ -23,7 +23,7 @@
       }
     }
   },
-  "interpretation": "The researcher labels the context-disagreement case blue-black. That supports the reference-context family prediction in this selected case; the preliminary neutral-looking Codex interpretation is not human ground truth.",
+  "interpretation": "Selected-case aggregate agreements do not establish population accuracy; individual attribute answers and narratives are omitted from this snapshot.",
   "decision": "Proceed only to a bounded unverified weak-label expansion with the fixed five-anchor setup. Require broader audit before training or claiming accuracy.",
   "limits": "Three deliberately selected development cases, not a population accuracy estimate, independent test or cross-product retrieval result.",
   "request_sha256": "0ed878b70b07de5bc304043cdd2111d06cceeb2025961929b4c9db7d441859cb",

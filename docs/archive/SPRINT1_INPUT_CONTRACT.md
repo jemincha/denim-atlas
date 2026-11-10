@@ -33,7 +33,7 @@ The interface did not expose a verifiable model checkpoint; do not attribute the
 export to a named GPT API model. Frozen outputs and image/rubric hashes support
 audit, but exact inference replay and repeat consistency are unestablished.
 
-[Versioned axis rubric](../prompts/regional_axis_teacher_v1.txt) separates visible
+[Versioned axis rubric](../../prompts/regional_axis_teacher_v1.txt) separates visible
 volume/profile from color/lightness/cast and fade contrast/pattern/location.
 Confidence is ordinal self-assessment. Neither and unknown never become zero
 grades; ties constrain relative distances, not identity. No categorical attribute

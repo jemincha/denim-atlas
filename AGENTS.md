@@ -1,7 +1,15 @@
+# Current closure policy — 2026-11-10
+
+Research state: 종료·정리(실루엣 적응 계획 종료, 표면 데이터 병목으로 보류).
+Additional training,new experiments and new hypothesis proposals are prohibited until explicitly requested by the researcher.
+README and the current closure section of PROJECT_STATE.md are authoritative.Archived plans and next-step instructions are historical only and do not authorize resuming research.
+Keep photographs,individual judgments,narratives,credentials and operational/authentication scripts private;do not push until the requested privacy review and researcher approval.
+The workflow below applies only if the researcher explicitly reopens the corresponding work.
+
 # Project working rules
 
 Use the user's current instructions and the approved research scope in
-`docs/SPRINT_REVIEW.md`. Read `PROJECT_STATE.md` and the latest sprint review
+`docs/archive/SPRINT_REVIEW.md`. Read `PROJECT_STATE.md` and the latest sprint review
 before resuming work. Historical setup documents are not current status.
 
 Present human comparison images in right-side Codex tabs so the researcher can
@@ -19,7 +27,7 @@ At every sprint boundary, including a user-requested safe stop:
   For each material gap name the next investigation, evidence needed, and the
   decision it would change. Investigate within existing authorization; brief the
   user before changing research direction or when human evidence/access is needed.
-- Append a compact review to `docs/SPRINT_REVIEW.md`, update `PROJECT_STATE.md`,
+- Append a compact review to `docs/archive/SPRINT_REVIEW.md`, update `PROJECT_STATE.md`,
   and update README only when its public snapshot changed. Keep raw judgments,
   correspondence, images and operational logs private.
 - Brief the user in Korean: target vs actual progress; evidence and limitations;
@@ -34,4 +42,4 @@ Current quality gates (2026-11-05):
 - Training labels may be machine-generated; development/final quality truth must come from independent human judgment. Machine diagnostics cannot close a research gate; mark it pending even when execution is complete.
 - Follow the latest fixed sequence: saved-output error decomposition -> frozen embedding comparison bundle -> independent human judging -> current visual-assistant supervision after its human-agreement gate -> learning curves by independent garment/capture groups. Do not resume annotator search or reorder these steps. Preserve detailed washing; unreadable inputs do not justify narrowing the goal.
 - Before comparison freeze endpoint, exclusion/stop criteria and protected groups; target about30 varied anchors with wearing and axis-conflicting cases. Record human rater ID/rubric version and model IDs/versions. Human evaluation time is approved at about30–40 minutes (estimate); paid-model spending is not approved.
-- Add no new research documents or verification JSON. Record each new finding/decision in at most5 lines of the existing docs/SPRINT_REVIEW.md; source photographs and necessary dataset provenance are data, not new audit reports.
+- Add no new research documents or verification JSON. Record each new finding/decision in at most5 lines of the existing docs/archive/SPRINT_REVIEW.md; source photographs and necessary dataset provenance are data, not new audit reports.

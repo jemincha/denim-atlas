@@ -1,6 +1,6 @@
 # Observed-appearance annotation feasibility — October 29, 2026
 
-The researcher rejected both recommendations in each of two selected comparisons. These are recorded as **neither / neither**, with no absolute grades, tied preferences or training triplets inferred. Rejection reasons were not supplied. This motivates testing whether reusable surface descriptions are available; it does not establish which facet caused rejection. [Feedback record](verification/glami_fit_spot_audit_results_20261029.json).
+Two selected comparisons supplied qualitative development feedback. Individual responses and narrative wording are omitted from this snapshot. No absolute grades, tied preferences, training triplets or facet-specific causes are inferred. [Aggregate feedback record](verification/glami_fit_spot_audit_results_20261029.json).
 
 ## Public annotation taxonomy audit
 
@@ -28,6 +28,6 @@ The masking rule itself is imperfect: an oblique front view can reveal front det
 
 `annotate_denim_appearance.py` is bounded to 1–24 previously reviewed, hash-pinned images on remote CUDA. It rejects duplicate JSON keys, missing/extra fields, invalid enums, unobserved/unreadable detail assertions and inconsistent ambiguity. Raw response text, unknowns and errors remain explicit; there is no automatic conversion to negatives, numerical confidence or relevance grades. Tests run without downloading the model locally.
 
-The researcher clarified that both displayed comparisons had almost no overall resemblance. No further facet-level explanation is requested, and no specific cause or preference is inferred. A cached-vector gallery diagnosis is recorded in the fit experiment; credible whole-appearance supervision is still missing. Existing fit-only checkpoints remain experimental; the 39-image proxy validation improvement does not establish overall matching quality.
+Follow-up narrative wording is omitted from this snapshot. A cached-vector gallery diagnosis is recorded in the fit experiment; credible whole-appearance supervision was not established. Existing fit-only checkpoints remain experimental; the 39-image proxy validation improvement does not establish overall matching quality.
 
 No pending compute jobs, new image agreement, raw-image publication or model-artifact release. Primary source cards/licenses do not independently clear upstream seller images.

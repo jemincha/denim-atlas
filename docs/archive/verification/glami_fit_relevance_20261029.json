@@ -1,7 +1,7 @@
 {
   "purpose": "reused_human_development_regression_check",
   "baseline": "original frozen Marqo FashionSigLIP, not the weak-text parent",
-  "after_checkpoint_sha256": "7419436f8c61b5cd789816adb2eb652553bee7e04ca42c9c3897e4fc843660fe",
+  "after_checkpoint_sha256": "7b29e64996cf0ce7dda5e1ade6b533a18fbb4a91647e2a5bed4bbedbc621787f",
   "packet_sha256": "235330fe3f5e205dc4e17b5fa116f736a310342a9e9d605825968dfb975984c8",
   "original_ratings_sha256": "55c044d5a3c3d85351d9695c6e7ef86cfb2e80e6e4c3fa939419f35c688efef5",
   "queries": [
@@ -10,25 +10,11 @@
       "methods": {
         "adapted": {
           "ndcg_at_5": 0.04518460592007994,
-          "precision_at_5_grade_ge2": 0.0,
-          "top5_grades": [
-            0,
-            0,
-            0,
-            0,
-            1
-          ]
+          "precision_at_5_grade_ge2": 0.0
         },
         "starting": {
           "ndcg_at_5": 0.0,
-          "precision_at_5_grade_ge2": 0.0,
-          "top5_grades": [
-            0,
-            0,
-            0,
-            0,
-            0
-          ]
+          "precision_at_5_grade_ge2": 0.0
         }
       }
     },
@@ -37,25 +23,11 @@
       "methods": {
         "starting": {
           "ndcg_at_5": 0.38130108017580844,
-          "precision_at_5_grade_ge2": 0.0,
-          "top5_grades": [
-            1,
-            0,
-            1,
-            0,
-            1
-          ]
+          "precision_at_5_grade_ge2": 0.0
         },
         "adapted": {
-          "ndcg_at_5": 0.3672919835537663,
-          "precision_at_5_grade_ge2": 0.0,
-          "top5_grades": [
-            1,
-            0,
-            0,
-            1,
-            1
-          ]
+          "ndcg_at_5": 0.3901571199623462,
+          "precision_at_5_grade_ge2": 0.0
         }
       }
     },
@@ -64,32 +36,18 @@
       "methods": {
         "starting": {
           "ndcg_at_5": 0.78506356172312,
-          "precision_at_5_grade_ge2": 0.6,
-          "top5_grades": [
-            2,
-            0,
-            2,
-            0,
-            2
-          ]
+          "precision_at_5_grade_ge2": 0.6
         },
         "adapted": {
           "ndcg_at_5": 0.8032973263229353,
-          "precision_at_5_grade_ge2": 0.6,
-          "top5_grades": [
-            2,
-            0,
-            2,
-            2,
-            0
-          ]
+          "precision_at_5_grade_ge2": 0.6
         }
       }
     }
   ],
   "macro_ndcg_at_5": {
     "starting": 0.38878821396630947,
-    "adapted": 0.4052579719322605
+    "adapted": 0.4128796840684538
   },
   "gallery_candidates": 17,
   "fully_judged_pairs": 51,
@@ -97,6 +55,11 @@
   "human_labels_used_for_training_or_checkpoint_selection": false,
   "fresh_test": false,
   "limits": "Three reused development query crops and a previously judged fixed pool; gallery overlaps attribute training. Not product-disjoint evaluation or new human evidence. The 120-step checkpoint was fixed before this check.",
-  "job": "jemincha/denim-atlas-fit-expanded-relevance-check",
-  "job_version": 1
+  "job": "jemincha/denim-atlas-fit-human-regression-check",
+  "job_version": 1,
+  "aggregate_top5_grade_counts": {
+    "0": 17,
+    "1": 7,
+    "2": 6
+  }
 }
